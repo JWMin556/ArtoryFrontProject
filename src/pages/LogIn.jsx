@@ -4,7 +4,8 @@ import StyledButton from '../styled-components/StyledButton'
 import { Link } from 'react-router-dom'
 import NaverLogin from '../components/SocialLogin/NaverLogin';
 import KakaoLogin from '../components/SocialLogin/KakaoLogin';
-
+import OPENLOCK from '../Img/Login/openlock.svg'
+import LOCK from '../Img/Login/lock.svg'
 export default function LogIn() {  //주연씨가 작업해주실 LogIn페이지입니다. 
   const [ID,setID] = useState("");
   const [Password,setPassword] = useState("");
@@ -45,6 +46,7 @@ export default function LogIn() {  //주연씨가 작업해주실 LogIn페이지
           placeholder={isIDInputClick ? "" : "아이디를 입력해주세요"} 
           style={isOutLine}
         />
+        <span><S.OpenLockStyle src={OPENLOCK}/></span>
         <S.Input 
           type='password' 
           value={Password}
@@ -53,6 +55,7 @@ export default function LogIn() {  //주연씨가 작업해주실 LogIn페이지
           placeholder={isPWInputClick ? "" : "비밀번호를 입력해주세요"} 
           style={isOutLine}
         />
+        <span><S.LockStyle src={LOCK}/></span>
         <StyledButton height="52px" width="345px" style={{marginTop:'20px'}}>로그인</StyledButton>
         <S.WrapLink>
           <S.LinkStyle style={{color : '#9C9C9C'}}>아이디 찾기</S.LinkStyle>

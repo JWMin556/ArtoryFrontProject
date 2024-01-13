@@ -9,7 +9,7 @@ import LogIn from "./pages/LogIn";
 import MyStory from "./pages/MyStory";
 import SignUp from "./pages/SignUp";
 import Onboarding from "./pages/Onboarding";
-
+import ExhibitionDetail from "./pages/ExhibitionDetail";
 const Root = styled.div`
   position: absolute;
   top: 0;
@@ -25,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />  {/*메인페이지입니다.*/}
             <Route path="/exhibition" element={<Exhibition />} /> {/*주연씨 담당 페이지*/}
+            <Route path="/exhibitiondetail/:title" element={<ExhibitionDetail />} /> {/*주연씨 담당 페이지*/}
             <Route path="/story" element={<Story />} />
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mypage" element={<MyPage />} />
