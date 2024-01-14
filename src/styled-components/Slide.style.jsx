@@ -21,7 +21,7 @@ export const IMG = styled.img`
     box-shadow: 5px 5px 8px #D9D9D9; 
 
 `;
-export const WrapImg = styled.div`
+export const WrapPorter = styled.div`
     display : flex;
     justify-content: center;
     align-items: center;
@@ -38,5 +38,9 @@ export const WrapIcon = styled.div`
     display : flex;
     justify-content: space-between;
     align-items: flex-end;
+
+`;
+
+export const Title = styled.div`
 
 `;

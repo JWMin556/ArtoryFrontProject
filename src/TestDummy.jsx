@@ -1,4 +1,4 @@
-export const EXDummy = {
+export const TestDummy = {
     "dates": {
       "maximum": "2023-09-17",
       "minimum": "2023-07-31"
