@@ -17,11 +17,17 @@ const WrapSlide = styled.div`
     background-color : #F5F5F5;
     text-align : center;
     margin-top : 5%;
+    padding : 2%;
+`;
+const Swiperstyle = styled(Swiper)`
+    .swiper-pagination{
+        width : auto;
+    }
 `;
 export default function AdBanner() {
 return (
     <WrapSlide>
-    <Swiper
+    <Swiperstyle
         spaceBetween={10}
         loop={true} //슬라이드 반복 여부
         effect={'coverflow'}
@@ -36,7 +42,6 @@ return (
         }}
         pagination={{ //페이저 버튼 설정
             clickable:true, //버튼 클릭 여부
-            type:'bullets'
         }}
         modules={[EffectCoverflow, Pagination]}
         className="mySwiper"
@@ -46,7 +51,7 @@ return (
                         <AdImg src={IMG_BASE_URL+item.poster_path}/>
                     </SwiperSlide>
                 ))}
-    </Swiper>
+    </Swiperstyle>
     </WrapSlide>
     );
 }
