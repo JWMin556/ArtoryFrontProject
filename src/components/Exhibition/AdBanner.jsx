@@ -18,29 +18,46 @@ const WrapSlide = styled.div`
     text-align : center;
     margin-top : 5%;
     padding : 2%;
-`;
-const Swiperstyle = styled(Swiper)`
+    .swiper-pagination-bullet-active{
+        background : #000;
+    }
     .swiper-pagination{
-        width : auto;
+        bottom : 9%;
+    }
+    .swiper-pagination-bullet{
+        width : 10px;
+        height : 10px;
     }
 `;
+const Swiperstyle = styled(Swiper)`
+    .swiper-slide-shadow-left{
+        background-color: rgba(0,0,0,0.2);
+        left : 3%;
+    }
+    .swiper-slide-shadow-right{
+        background-color: rgba(0,0,0,0.2);
+    }
+
+`;
+
 export default function AdBanner() {
 return (
     <WrapSlide>
     <Swiperstyle
-        spaceBetween={10}
         loop={true} //슬라이드 반복 여부
         effect={'coverflow'}
         centeredSlides={true} //1번 슬라이드가 가운데 보이기
+        slideToClickedSlide ={true} 
         slidesPerView={5} //한 슬라이드에 보여줄 갯수
         coverflowEffect={{
         rotate: 0,
-        stretch: 400,
+        stretch: 350,
         depth: 150,
         modifier: 1.5,
-        slideShadows: false,
+        slideShadows: true,
         }}
         pagination={{ //페이저 버튼 설정
+            el : '.swiper-pagination',
             clickable:true, //버튼 클릭 여부
         }}
         modules={[EffectCoverflow, Pagination]}
@@ -52,6 +69,7 @@ return (
                     </SwiperSlide>
                 ))}
     </Swiperstyle>
+        <div className='swiper-pagination'></div>
     </WrapSlide>
     );
 }

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import * as S from '../../styled-components/Slide.style';
 import { TestDummy } from '../../TestDummy';
 import "slick-carousel/slick/slick.css";
