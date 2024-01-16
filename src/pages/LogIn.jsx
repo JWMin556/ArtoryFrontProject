@@ -38,15 +38,18 @@ export default function LogIn() {  //주연씨가 작업해주실 LogIn페이지
         <S.ThirdParagraph>ARTORY</S.ThirdParagraph>
       </S.HomeLeftWrap>
       <S.WrapLogin>
-        <S.Input 
-          type='email' 
-          value={ID}
-          onFocus={handleIDInputFocus} //input박스에 들어올 때 
-          onBlur={handleIDInputBlur} //input박스에서 나갔을 때
-          placeholder={isIDInputClick ? "" : "아이디를 입력해주세요"} 
-          style={isOutLine}
-        />
-        <span><S.OpenLockStyle src={OPENLOCK}/></span>
+        <div>
+          <S.Input 
+            type='email' 
+            value={ID}
+            onFocus={handleIDInputFocus} //input박스에 들어올 때 
+            onBlur={handleIDInputBlur} //input박스에서 나갔을 때
+            placeholder={isIDInputClick ? "" : "아이디를 입력해주세요"} 
+            style={isOutLine}
+          />
+          <span><S.LockStyle src={OPENLOCK}/></span>
+        </div>
+        <div>
         <S.Input 
           type='password' 
           value={Password}
@@ -56,6 +59,7 @@ export default function LogIn() {  //주연씨가 작업해주실 LogIn페이지
           style={isOutLine}
         />
         <span><S.LockStyle src={LOCK}/></span>
+        </div>
         <StyledButton height="52px" width="345px" style={{marginTop:'20px'}}>로그인</StyledButton>
         <S.WrapLink>
           <S.LinkStyle style={{color : '#9C9C9C'}}>아이디 찾기</S.LinkStyle>

@@ -6,7 +6,6 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
-import Exhibition from '../../pages/Exhibition';
 
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w1280/";
 const AdImg = styled.img`
@@ -36,6 +35,9 @@ const Swiperstyle = styled(Swiper)`
     }
     .swiper-slide-shadow-right{
         background-color: rgba(0,0,0,0.2);
+    }
+    .swiper-wrapper{
+        transform : translate3d(-110.2px,0,0);
     }
 
 `;

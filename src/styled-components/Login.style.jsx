@@ -94,7 +94,7 @@ export const Input = styled.input`
     height : 50px;
     border: none;
     border-radius: 10px;
-    box-shadow: 1px 2px 8px #D9D9D9; 
+    box-shadow: 1px 2px 8px #f3f3f3; 
     color : #ababab
     @media screen and (max-width: 500px){
         width: 308px;
@@ -123,13 +123,8 @@ export const WrapSocialLogin = styled.div`
     margin-top : 20%;
 `;
 //네이버 로그인 & 카카오톡 로그인 버튼을 감싸는 스타일드 컴포넌트 
-export const OpenLockStyle = styled.img`
-    position: absolute;
-    right : 23.3%;
-    top : 34%;
-`;
 export const LockStyle = styled.img`
-    position: absolute;
-    right : 23.3%;
-    top : 44%;
+    position: relative;
+    bottom : 40%;
+    left : 90%;
 `;

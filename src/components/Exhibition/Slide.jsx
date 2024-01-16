@@ -1,6 +1,5 @@
 import React from 'react';
 import * as S from '../../styled-components/Slide.style';
-import { TestDummy } from '../../TestDummy';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Heart from './Heart';
@@ -12,9 +11,8 @@ import Poster from './Poster';
 export default function Slide(props) {
 
     const setting = {
-        slide: 'div',
         arrows: true,
-        infinite: false,
+        infinite: true,
         speed: 1000,
         slidesToShow: 4,
         slidesToScroll: 4,
@@ -25,7 +23,7 @@ export default function Slide(props) {
         <S.WrapSlider>
             <S.Category>{props.title}</S.Category>
             <S.StyledSlider {...setting}>
-                {TestDummy.results.map((item, index) => (
+                {props.Dummy.results.map((item, index) => (
                     <div key={index}>
                         <S.WrapPorter>
                             <Poster 
