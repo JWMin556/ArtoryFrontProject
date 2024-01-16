@@ -38,7 +38,7 @@ const ListItem = styled.li `
 `;  //상단바의 오른쪽 부분인 EXHIBITION, STORY, MY STORY, MY PAGE 각각을 담당하는 스타일드 컴포넌트입니다. 
 
 export default function Header() {
-  return (
+return (
     <HeaderContainer>
         <HeaderWrap>
             <HeaderLeftWrap> 
@@ -58,5 +58,5 @@ export default function Header() {
             </HeaderLeftWrap>
         </HeaderWrap>
     </HeaderContainer>
-  )
+)
 }
