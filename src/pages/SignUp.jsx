@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import './signup.css'
-import StyledButton from '../styled-components/StyledButton'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import './signup.css';
+import StyledButton from '../styled-components/StyledButton';
 
-const Page = styled.div `
+const Page = styled.div`
   z-index: 900;
   position: relative;
   width: 100%;
@@ -19,11 +19,11 @@ const Page = styled.div `
   flex-direction: column;
 `;
 
-const TitleWrap = styled.div `
+const TitleWrap = styled.div`
   margin-top: 150%; /* 여기부분이 살짝 애매해서 토의가 필요 여기가 회원가입 마진top조절하는 부분*/
   color: black;
   font-size: 30px;
-  font-family: "Pretendard";
+  font-family: 'Pretendard';
   font-weight: 700;
   word-wrap: break-word;
 `;
@@ -39,31 +39,31 @@ const InputTitle = styled.div`
   font-size: 16px;
   font-weight: 500;
   word-wrap: break-word;
-  font-family: "Pretendard";
+  font-family: 'Pretendard';
   margin-top: 13px;
 `;
 
 const InputWrap = styled.div`
   display: flex;
-  background: white; 
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.10); 
-  border-radius: 6px; 
+  background: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
   /* border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid; */
-  box-shadow: 1px 2px 8px #f3f3f3; 
+  box-shadow: 1px 2px 8px #f3f3f3;
   padding: 16px;
-  margin-top: 8px;   
+  margin-top: 8px;
   margin-bottom: 13px;
 `;
 
 const InputStyle = styled.input`
   width: 100%;
-    outline: none;
-    border: none;
-    color: #4D4D4D;
-    font-size: 13px;
-    font-family: "Pretendard";
-    font-weight: 500;
-    word-wrap: break-word;
+  outline: none;
+  border: none;
+  color: #4d4d4d;
+  font-size: 13px;
+  font-family: 'Pretendard';
+  font-weight: 500;
+  word-wrap: break-word;
 `;
 
 const ErrorMessageWrap = styled.div`
@@ -81,11 +81,11 @@ const InputCheckBoxTitle = styled.div`
 export default function SignUp() {
   // 초기값 세팅
   const [email, setEmail] = useState('');
-  const [password, setPassword] = React.useState("");
-  const [passwordConfirm, setPasswordConfirm] = React.useState("");
-  const [name, setName] = React.useState("");
-  const [phone, setPhone] = React.useState("");
-  const [birth, setBirth] = React.useState("");
+  const [password, setPassword] = React.useState('');
+  const [passwordConfirm, setPasswordConfirm] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [phone, setPhone] = React.useState('');
+  const [birth, setBirth] = React.useState('');
 
   // 유효성 검사
   const [emailValid, setEmailValid] = useState(false);
@@ -98,7 +98,8 @@ export default function SignUp() {
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
-    const regex = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+    const regex =
+      /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
     if (regex.test(e.target.value)) {
       setEmailValid(true);
     } else {
@@ -117,13 +118,12 @@ export default function SignUp() {
     }
   };
 
-  const onChangePasswordConfirm  = (e) => {
+  const onChangePasswordConfirm = (e) => {
     setPasswordConfirm(e.target.value);
-    if(password !== e.target.value) {
+    if (password !== e.target.value) {
       // setPasswordConfirmMessage("떼잉~ 비밀번호가 똑같지 않아요!");
       setIsPasswordConfirm(false);
-    }
-    else {
+    } else {
       // setPasswordConfirmMessage("똑같은 비밀번호를 입력했습니다.");
       setIsPasswordConfirm(true);
     }
@@ -135,7 +135,7 @@ export default function SignUp() {
     setIsName(true);
   };
 
-  const onChangePhone = (getNumber) => { 
+  const onChangePhone = (getNumber) => {
     setPhone(getNumber);
     const phoneRegExp = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     if (!phoneRegExp.test(getNumber)) {
@@ -149,8 +149,8 @@ export default function SignUp() {
     const currentNumber = e.target.value;
     setPhone(currentNumber);
     if (currentNumber.length === 3 || currentNumber.length === 8) {
-      setPhone(currentNumber + "-");
-      onChangePhone(currentNumber + "-");
+      setPhone(currentNumber + '-');
+      onChangePhone(currentNumber + '-');
     } else {
       onChangePhone(currentNumber);
     }
@@ -161,14 +161,14 @@ export default function SignUp() {
     setIsBirth(true);
   };
 
-  useEffect(() => { //우선, 인증번호 말고 휴대폰 번호 부분만 useEffect를 주었음(그렇기에 현재는 휴대폰 번호만 입력해도 인증확인 부분이 활성화됨)
-    if(isPhone){
+  useEffect(() => {
+    //우선, 인증번호 말고 휴대폰 번호 부분만 useEffect를 주었음(그렇기에 현재는 휴대폰 번호만 입력해도 인증확인 부분이 활성화됨)
+    if (isPhone) {
       setNotAllow(false);
       return;
     }
     setNotAllow(true);
   }, [isPhone]);
-
 
   //체크박스 전용
   const [allAgreed, setAllAgreed] = useState(false);
@@ -180,8 +180,8 @@ export default function SignUp() {
 
   const onChangeAgreement = (e) => {
     const { name, checked } = e.target;
-    setAgreements((preAgreements) => ({ ...preAgreements, [name]: checked}));
-    const allChecked = Object.values({ ...agreements, [name]: checked}).every(
+    setAgreements((preAgreements) => ({ ...preAgreements, [name]: checked }));
+    const allChecked = Object.values({ ...agreements, [name]: checked }).every(
       (value) => value === true
     );
     setAllAgreed(allChecked);
@@ -189,7 +189,7 @@ export default function SignUp() {
 
   const onChangeAllAgreement = (e) => {
     const { checked } = e.target;
-    setAgreements((preAgreements) => 
+    setAgreements((preAgreements) =>
       Object.keys(preAgreements).reduce(
         (newAgreements, agreementKey) => ({
           ...newAgreements,
@@ -199,110 +199,196 @@ export default function SignUp() {
       )
     );
     setAllAgreed(checked);
-  }; 
+  };
 
   return (
     <Page>
       <TitleWrap>회원가입</TitleWrap>
       <ContentWrap>
-        <InputTitle style={{marginTop:"30px"}}>아이디(이메일)</InputTitle>
+        <InputTitle style={{ marginTop: '30px' }}>아이디(이메일)</InputTitle>
         <InputWrap>
-          <InputStyle placeholder='아이디를 입력해주세요' value={email} onChange={onChangeEmail} />
+          <InputStyle
+            placeholder="아이디를 입력해주세요"
+            value={email}
+            onChange={onChangeEmail}
+          />
           <ErrorMessageWrap>
-            {!emailValid && email.length > 0 && (<div>올바르지 않은 이메일입니다.</div>)}
+            {!emailValid && email.length > 0 && (
+              <div>올바르지 않은 이메일입니다.</div>
+            )}
           </ErrorMessageWrap>
         </InputWrap>
 
         <InputTitle>비밀번호</InputTitle>
         <InputWrap>
-          <InputStyle placeholder='비밀번호를 입력해주세요' type='password' value={password} onChange={onChangePassword} />
+          <InputStyle
+            placeholder="비밀번호를 입력해주세요"
+            type="password"
+            value={password}
+            onChange={onChangePassword}
+          />
         </InputWrap>
 
         <InputTitle>비밀번호 확인</InputTitle>
         <InputWrap>
-          <InputStyle placeholder='비밀번호를 입력해주세요' type='password' value={passwordConfirm} onChange={onChangePasswordConfirm} />
+          <InputStyle
+            placeholder="비밀번호를 입력해주세요"
+            type="password"
+            value={passwordConfirm}
+            onChange={onChangePasswordConfirm}
+          />
           <ErrorMessageWrap>
-            {!isPasswordConfirm && passwordConfirm.length > 0 && (<div>비밀번호가 일치하지 않습니다. </div>)}
+            {!isPasswordConfirm && passwordConfirm.length > 0 && (
+              <div>비밀번호가 일치하지 않습니다. </div>
+            )}
           </ErrorMessageWrap>
         </InputWrap>
 
-        <InputTitle style={{marginTop:"94px"}}>이름</InputTitle>
+        <InputTitle style={{ marginTop: '94px' }}>이름</InputTitle>
         <InputWrap>
-          <InputStyle placeholder='이름을 입력해주세요' value={name} onChange={onChangeName} />
+          <InputStyle
+            placeholder="이름을 입력해주세요"
+            value={name}
+            onChange={onChangeName}
+          />
         </InputWrap>
 
         <InputTitle>휴대폰 번호</InputTitle>
         <InputWrap>
-          <InputStyle type='tel' placeholder='휴대폰 번호를 입력해주세요' value={phone} onChange={addHyphen} />
-          <StyledButton disabled={notAllow} height="25px" width="30%" fontSize="13px">인증번호 받기</StyledButton>
+          <InputStyle
+            type="tel"
+            placeholder="휴대폰 번호를 입력해주세요"
+            value={phone}
+            onChange={addHyphen}
+          />
+          <StyledButton
+            disabled={notAllow}
+            height="25px"
+            width="30%"
+            fontSize="13px"
+          >
+            인증번호 받기
+          </StyledButton>
         </InputWrap>
 
         <InputTitle>인증번호</InputTitle>
         <InputWrap>
-          <InputStyle placeholder='인증번호를 입력해주세요'  /> {/*value와 onchange 추가해야 함*/}
-          <StyledButton disabled={notAllow} height="25px" width="30%" fontSize="13px">인증확인</StyledButton>
+          <InputStyle placeholder="인증번호를 입력해주세요" />{' '}
+          {/*value와 onchange 추가해야 함*/}
+          <StyledButton
+            disabled={notAllow}
+            height="25px"
+            width="30%"
+            fontSize="13px"
+          >
+            인증확인
+          </StyledButton>
         </InputWrap>
 
         <InputTitle>생년월일</InputTitle>
         <InputWrap>
-          <InputStyle type='date' value={birth} onChange={onChangeBirth}  />
+          <InputStyle type="date" value={birth} onChange={onChangeBirth} />
         </InputWrap>
 
         <InputCheckBoxTitle>
           <ul>
             <li>
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 id="agree_check_all"
-                name="agree_check_all" 
+                name="agree_check_all"
                 checked={allAgreed}
-                onChange={onChangeAllAgreement} 
+                onChange={onChangeAllAgreement}
               />
-              <label htmlFor="agree_check_all" style={{color:"black", fontSize:"16px"}}><span>모두 동의합니다.</span></label>
+              <label
+                htmlFor="agree_check_all"
+                style={{ color: 'black', fontSize: '16px' }}
+              >
+                <span>모두 동의합니다.</span>
+              </label>
             </li>
 
-            <li style={{marginTop:"15px"}}>
-              <input 
-                type="checkbox" 
+            <li style={{ marginTop: '15px' }}>
+              <input
+                type="checkbox"
                 id="agree_check_used"
-                name="termsAgreed"  
+                name="termsAgreed"
                 required
                 checked={agreements.termsAgreed}
                 onChange={onChangeAgreement}
               />
-              <label htmlFor="agree_check_used" style={{fontSize:"13px"}}><span>이용약관 동의&nbsp;<img src="/img/check.png" alt="checkimg" style={{width:"12px", height:"6px"}} /></span></label>
+              <label htmlFor="agree_check_used" style={{ fontSize: '13px' }}>
+                <span>
+                  이용약관 동의&nbsp;
+                  <img
+                    src="/img/check.png"
+                    alt="checkimg"
+                    style={{ width: '12px', height: '6px' }}
+                  />
+                </span>
+              </label>
             </li>
 
-            <li style={{marginTop:"9px"}}>
-              <input 
-                type="checkbox" 
+            <li style={{ marginTop: '9px' }}>
+              <input
+                type="checkbox"
                 id="agree_check_info"
-                name="personalInfoAgreed"   
+                name="personalInfoAgreed"
                 required
                 checked={agreements.personalInfoAgreed}
                 onChange={onChangeAgreement}
               />
-              <label htmlFor="agree_check_info" style={{fontSize:"13px"}}><span>개인정보 취급방침 동의 &nbsp;<img src="/img/check.png" alt="checkimg" style={{width:"12px", height:"6px"}} /></span></label>
+              <label htmlFor="agree_check_info" style={{ fontSize: '13px' }}>
+                <span>
+                  개인정보 취급방침 동의 &nbsp;
+                  <img
+                    src="/img/check.png"
+                    alt="checkimg"
+                    style={{ width: '12px', height: '6px' }}
+                  />
+                </span>
+              </label>
             </li>
 
-            <li style={{marginTop:"9px"}}>
-              <input 
-                type="checkbox" 
+            <li style={{ marginTop: '9px' }}>
+              <input
+                type="checkbox"
                 id="agree_check_marketing_receive"
-                name="marketingAlarmAgreed"   
+                name="marketingAlarmAgreed"
                 required
                 checked={agreements.marketingAlarmAgreed}
                 onChange={onChangeAgreement}
               />
-              <label htmlFor="agree_check_marketing_receive" style={{fontSize:"13px"}}><span>마케팅 정보 수신 동의 &nbsp;<img src="/img/check.png" alt="checkimg" style={{width:"12px", height:"6px"}} /></span></label>
+              <label
+                htmlFor="agree_check_marketing_receive"
+                style={{ fontSize: '13px' }}
+              >
+                <span>
+                  마케팅 정보 수신 동의 &nbsp;
+                  <img
+                    src="/img/check.png"
+                    alt="checkimg"
+                    style={{ width: '12px', height: '6px' }}
+                  />
+                </span>
+              </label>
             </li>
           </ul>
         </InputCheckBoxTitle>
 
-        <div style={{textAlign:"center"}}>
-          <Link to="/onboarding"><StyledButton style={{display:"inline-block"}} height="52px" width="80%" fontSize="20px">ARTORY 시작하기</StyledButton></Link>
+        <div style={{ textAlign: 'center' }}>
+          <Link to="/onboarding">
+            <StyledButton
+              style={{ display: 'inline-block' }}
+              height="52px"
+              width="80%"
+              fontSize="20px"
+            >
+              ARTORY 시작하기
+            </StyledButton>
+          </Link>
         </div>
       </ContentWrap>
     </Page>
-  )
+  );
 }
