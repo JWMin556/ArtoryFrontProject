@@ -1,20 +1,19 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const StyledButton = styled.button`
-    height: ${(props) => props.height || '40px'};
-    width: ${(props) => props.width || '123px'};
-    background-color: #121212;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 20px;
-    word-wrap: break-word
-    cursor: pointer;
-    font-family: Pretendard;
-    box-shadow: 0px 2px 8px rgba(0, 58.18, 103.06, 0.40); 
-    border-radius: 10px"
-`; 
+  height: ${(props) => props.height || '40px'};
+  width: ${(props) => props.width || '123px'};
+  background-color: ${(props) => (props.disabled ? '#dadada' : '#121212')};
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  word-wrap: break-word;
+  cursor: pointer;
+  font-family: Pretendard;
+  box-shadow: 0px 2px 8px rgba(0, 58.18, 103.06, 0.4);
+`;
 
 export default StyledButton;
 
