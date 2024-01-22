@@ -100,10 +100,20 @@ nav,
 section {
   display: block;
 }
-
+html {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
 body {
   line-height: 1;
   font-family: 'Pretendard';
+<<<<<<< Updated upstream
+=======
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+>>>>>>> Stashed changes
 }
 ol,
 ul {
@@ -210,4 +220,10 @@ select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+}
+/*profile 실험중*/
+.centering {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
 }

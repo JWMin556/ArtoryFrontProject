@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import StyledButton from '../styled-components/StyledButton';
 import { Link } from 'react-router-dom';
-import CustomSelect from '../components/CustomSelect';
+import CustomSelect from '../components/Onboarding/CustomSelect';
 
 export default function Onboarding2() {
   //은향씨가 작업해주실 Onboarding 페이지입니다
@@ -35,10 +35,12 @@ export default function Onboarding2() {
 
   return (
     <Container>
-      <Title>성별과 연령대를 선택해주세요</Title>
-      <span style={{ color: '#D2D2D2', height: '20px', marginTop: '10px' }}>
-        당신에게 맞는 전시를 추천해드려요
-      </span>
+      <div style={{ height: '120px', textAlign: 'center' }}>
+        <Title>성별과 연령대를 선택해주세요</Title>
+        <div style={{ color: '#D2D2D2', height: '20px', marginTop: '10px' }}>
+          당신에게 맞는 전시를 추천해드려요
+        </div>
+      </div>
       <ContentBox>
         {/*성별 선택*/}
         <div
@@ -72,7 +74,7 @@ export default function Onboarding2() {
       </Link>
 
       {/*하단 바*/}
-      <img src="/Img/slidebar2.svg" alt="bar" style={{ marginTop: '50px' }} />
+      <img src="/Img/slidebar2.svg" alt="bar" style={{ marginTop: '30px' }} />
     </Container>
   );
 }
@@ -111,20 +113,21 @@ const Gender2 = styled.button`
 
 const Container = styled.div`
   margin: 100px auto; /*정확하게 가운데로 정렬시킵니다. */
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 460px;
-  height: 670px;
+  //height: 670px;
 `;
-const Title = styled.p`
+const Title = styled.div`
   font-weight: 800;
   font-size: 180%;
 `;
 
 const ContentBox = styled.div`
-  margin-top: 70px;
-  margin-bottom: 120px;
+  //margin-top: 70px;
+  margin-bottom: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;

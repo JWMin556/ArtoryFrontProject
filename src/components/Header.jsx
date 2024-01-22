@@ -7,11 +7,20 @@ import styled from 'styled-components';
 const HeaderContainer = styled.div`
   background-color: black;
   width: 100%;
+  height: 40px;
 `; //상단바 전체를 감싸주는 스타일드 컴포넌트입니다.
 
 const HeaderWrap = styled.div`
+<<<<<<< Updated upstream
   height: 52px;
   max-width: 1920px;
+=======
+  position: sticky;
+  top: 0;
+  z-index: 1000; //넣어준 이유... 다른 컴포넌트의 이미지와 충돌시 클릭이 안되는 것을 방지하려고..특히 signup.jsx랑...
+  height: 40px;
+  width: 100%;
+>>>>>>> Stashed changes
   margin: 0 auto;
   display: flex;
   align-items: center;

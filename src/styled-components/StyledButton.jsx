@@ -12,7 +12,8 @@ const StyledButton = styled.button`
   word-wrap: break-word;
   cursor: pointer;
   font-family: Pretendard;
-  box-shadow: 0px 2px 8px rgba(0, 58.18, 103.06, 0.4);
+  box-shadow: ${(props) =>
+    props.disabled ? 'none' : '0px 2px 8px rgba(0, 58.18, 103.06, 0.4)'};
 `;
 
 export default StyledButton;
