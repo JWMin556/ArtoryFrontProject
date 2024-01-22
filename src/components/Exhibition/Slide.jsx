@@ -7,9 +7,14 @@ import Save from './Save';
 import Prev from './Prev';
 import Next from './Next';
 import Poster from './Poster';
+import { getPopularity } from '../API/exhibition_API';
 
 export default function Slide(props) {
 
+    // function handleClick()
+    // {
+    //     getPopularity();
+    // }
     const setting = {
         arrows: true,
         infinite: true,
@@ -19,8 +24,13 @@ export default function Slide(props) {
         nextArrow: <Next />,
         prevArrow: <Prev />,
     };
+    function Click()
+    {
+        getPopularity(1);
+    }
     return (
         <S.WrapSlider>
+            <div onClick={Click}> Api 통신 테스트</div>
             <S.Category>{props.title}</S.Category>
             <S.StyledSlider {...setting}>
                 {props.Dummy.results.map((item, index) => (
@@ -29,7 +39,7 @@ export default function Slide(props) {
                             <Poster 
                                 item = {item}/>
                             <S.WrapIcon>
-                                <Heart />
+                                <Heart/>
                                 <Save />
                             </S.WrapIcon>
                         </S.WrapPorter>

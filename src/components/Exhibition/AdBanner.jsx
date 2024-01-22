@@ -53,7 +53,7 @@ return (
         slidesPerView={5} //한 슬라이드에 보여줄 갯수
         coverflowEffect={{
         rotate: 0,
-        stretch: 350,
+        stretch: 410,
         depth: 150,
         modifier: 1.5,
         slideShadows: true,

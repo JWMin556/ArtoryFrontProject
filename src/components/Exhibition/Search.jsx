@@ -1,6 +1,7 @@
 import React, {useState}from 'react'
 import styled from 'styled-components'
 import SEARCH from '../../Img/Search/search.svg'
+
 const SearchStyle = styled.input`
     background-color : #f5f5f5;
     border : none;
@@ -41,6 +42,6 @@ return (
         placeholder={isInputClick ?  "" : "원하는 전시를 검색해보세요" }
         style={isOutLine}/>
     </span>
-   
+
 )
 }
