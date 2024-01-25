@@ -1,6 +1,7 @@
 import React from 'react';
 import KAKAO_BUTTON from '../../Img/Login/kakaobutton.png';
 import SocialLoginButton from '../../styled-components/SocialLoginButton.style';
+import { kakaoUser } from '../API/Login_API';
 
 export default function KakaoLogin() {
   const REST_API_KEY = 'ee35f9bdbb7d489738218a16bc693718';
@@ -8,6 +9,7 @@ export default function KakaoLogin() {
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
   const HandleClickKakaoLogin = () => {
     window.location.href = link;
+    kakaoUser();
   };
   return (
     <SocialLoginButton src={KAKAO_BUTTON} onClick={HandleClickKakaoLogin} />

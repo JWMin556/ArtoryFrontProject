@@ -4,21 +4,25 @@ import styled from 'styled-components';
 import StyledButton from '../styled-components/StyledButton';
 import { Link } from 'react-router-dom';
 import CustomSelect from '../components/Onboarding/CustomSelect';
+//import { postGenderAge } from '../components/API/memberInfo_API';
 
 export default function Onboarding2() {
   //은향씨가 작업해주실 Onboarding 페이지입니다
   const [isButton1Clicked, setIsButton1Clicked] = useState(false);
   const [isButton2Clicked, setIsButton2Clicked] = useState(false);
-
+  //const [gender, setGender] = useState('');
+  //const [age, setAge] = useState(25);
   // 버튼1 클릭 이벤트 핸들러
   const handleButton1Click = () => {
     setIsButton1Clicked(true);
     setIsButton2Clicked(false);
+    // setGender('FEMALE');
   };
   // 버튼2 클릭 이벤트 핸들러
   const handleButton2Click = () => {
     setIsButton2Clicked(true);
     setIsButton1Clicked(false);
+    //setGender('MALE');
   };
 
   //연도 관련 객체 생성

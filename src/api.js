@@ -28,6 +28,7 @@ export const updateUserInfo = async (gender, birthYear) => {
   }
 };
 
+/*test
 const newMember = {
   name: 'Jerry',
   email: 'jerry@codeitmall.kr',
@@ -42,58 +43,59 @@ fetch('https://learn.codeit.kr/api/members', {
   .then((result) => {
     console.log(result);
   });
-
-const newInfo = {
-  gender: 'MALE',
-  age: 22,
-};
-
-fetch('http://3.39.39.6:8080/api/member/save/age-gender', {
-  method: 'POST',
-  body: JSON.stringify(newInfo),
-})
-  .then((response) => response.text())
-  .then((result) => {
-    console.log(result);
-  });
-
-const memberNickname = {
-  nickname: 'dfs',
-  image: 'Dsdf',
-};
-
-fetch('http://3.39.39.6:8080/api/member/save/age-gender', {
-  method: 'POST',
-  body: JSON.stringify(memberNickname),
-})
-  .then((response) => response.text())
-  .then((result) => {
-    console.log(result);
-  });
-
-export const saveGenre = async () => {
-  const apiUrl = 'http://3.39.39.6:8080/api/member/save/genre';
-
-  try {
-    const response = await axios.post(apiUrl, {
-      genre1: 'MEDIA',
-      genre2: 'MEDIA',
-      genre3: 'MEDIA',
-    });
-
-    // 서버 응답에 대한 처리
-    console.log('서버 응답:', response.data);
-  } catch (error) {
-    // 오류 처리
-    console.error('오류 발생:', error);
-  }
-};
+*/
 
 // 함수 호출
-saveGenre();
-
+//saveGenre();
+//test 서버
+//comment대신
+const BASE_URL = 'https://learn.codeit.kr/0915';
 export async function getReviews() {
-  const response = await fetch('https://learn.codeit.kr/0916/film-reviews/');
+  const response = await fetch(`${BASE_URL}/film-reviews`);
+  const body = await response.json();
+  return body;
+}
+
+export async function createReview(formData) {
+  const response = await fetch(`${BASE_URL}/film-reviews`, {
+    method: 'POST',
+    body: formData,
+  });
+  if (!response.ok) {
+    throw new Error('리뷰를 생성하기를 실패했습니다');
+  }
+  const body = await response.json();
+  return body;
+}
+//Reply대신
+export async function getFoods() {
+  const response = await fetch(`${BASE_URL}/foods`);
+  if (!response.ok) {
+    throw new Error('데이터를 불러오는데 실패했습니다');
+  }
+  const body = await response.json();
+  return body;
+}
+
+export async function createFood(formData) {
+  const response = await fetch(`${BASE_URL}/foods`, {
+    method: 'POST',
+    body: formData,
+  });
+  if (!response.ok) {
+    throw new Error('데이터를 생성하는데 실패했습니다');
+  }
+  const body = await response.json();
+  return body;
+}
+
+export async function deleteFood(id) {
+  const response = await fetch(`${BASE_URL}/foods/${id}`, {
+    method: 'DELETE',
+  });
+  if (!response.ok) {
+    throw new Error('데이터를 삭제하는데 실패했습니다');
+  }
   const body = await response.json();
   return body;
 }

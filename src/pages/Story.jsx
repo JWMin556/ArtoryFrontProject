@@ -6,7 +6,6 @@ import UserSlide from '../components/Story/UserSlide';
 import { TestDummy } from '../TestDummy';
 
 export default function Story(props) {
-  //주연씨가 작업해주실 EXHIBITION페이지입니다.
   return (
     <S.Container>
       <S.WrapSearch style={{ width: '885px', right: '0' }}>
@@ -24,10 +23,3 @@ export default function Story(props) {
     </S.Container>
   );
 }
-/* export const WrapSearch = styled.div`
-    position : relative;
-    right : 15.5%;
-    margin-bottom : 7%;
-    margin-top : 7%
-
-`;*/

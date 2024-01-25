@@ -100,20 +100,12 @@ nav,
 section {
   display: block;
 }
-html {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-}
+
 body {
+  width: 100vw;
+  margin-right: 0;
   line-height: 1;
   font-family: 'Pretendard';
-<<<<<<< Updated upstream
-=======
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
->>>>>>> Stashed changes
 }
 ol,
 ul {

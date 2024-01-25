@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import styled from 'styled-components';
 
-export default function CustomSelect({ options, onFocus }) {
+export default function CustomSelect({ options, onSelect }) {
   return (
     <SelectStyled
       className="basic-single"
@@ -16,7 +16,7 @@ export default function CustomSelect({ options, onFocus }) {
       closeMenuOnScroll={true}
       menuShouldBlockScroll={true}
       menuShouldScrollIntoView={false}
-      Scroll
+      //Scroll
     />
   );
 }

@@ -15,7 +15,7 @@ export default function Poster(props) {
   const [isShowTitle, setIsShowTitle] = useState(false);
   const onClickDetail = (item) => {
     props.source === 'story'
-      ? navigate(`/story/${item.title}`, { state: { item } })
+      ? navigate(`/story/${item.id}`, { state: { item } })
       : navigate(`/exhibitiondetail/${item.title}`, { state: { item } });
   };
   const handleMouseOverImg = () => {

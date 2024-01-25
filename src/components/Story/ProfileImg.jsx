@@ -8,7 +8,7 @@ const PosterStyle = styled.img`
   box-shadow: 5px 5px 8px #d9d9d9;
 `;
 export default function ProfileImg(props) {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const onClickDetail = (item) => {
     //navigate(`/story/${item.title}`, { state: { item } });
   };
