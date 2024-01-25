@@ -1,6 +1,8 @@
 import React, {useState}from 'react'
 import styled from 'styled-components'
 import SEARCH from '../../Img/Search/search.svg'
+import { useNavigate } from 'react-router-dom';
+import { searchExhibition } from '../API/search_API';
 const SearchStyle = styled.input`
     background-color : #f5f5f5;
     border : none;
@@ -11,7 +13,6 @@ const SearchStyle = styled.input`
     padding-left :14%;
     font-family: Pretendard;
     color : #ababab;
-
 `;
 const SearchImg = styled.img`
     position: absolute;
@@ -20,8 +21,11 @@ const SearchImg = styled.img`
 
 `;
 export default function Search() {
+    const navigate = useNavigate();
     const [isOutLine,setOutLine] = useState(); //input 박스 클릭 시 outline의 상태를 관리하기 위한 변수
     const [isInputClick,setIsInputClick] = useState(false); //ID input 박스 클릭 여부에 따라 placeholder의 상태를 관리하기 위한 변수
+    const [keyword,setKeyWord] = useState(); 
+
     function handleInputFocus() 
     { //ID input박스에 들어오면 true(placeholder 텍스트 안보임), outline이 안보이도록 바꿔줌
         setIsInputClick(true); 
@@ -31,16 +35,31 @@ export default function Search() {
     { //ID input박스에 나가면 false (placeholder 텍스트 보임)
         setIsInputClick(false);
     } 
+const handleKeyPress = async(e) => {
+    if(e.key === "Enter"){
+        try{
+            const result = await searchExhibition(keyword);
+            //console.log(result);
+            navigate(`/exhibitionsearch/${keyword}`, { state: { result } });
+        }
+        catch (error){
+            console.error('Error fetching weather data:', error);
+        }
+    }
+}
 return (
-    <span>
-    <SearchImg src={SEARCH}/>
-    <SearchStyle 
-        type="text" 
-        onFocus={handleInputFocus} 
-        onBlur={handleInputBlur} 
-        placeholder={isInputClick ?  "" : "원하는 전시를 검색해보세요" }
-        style={isOutLine}/>
-    </span>
-   
+    <div>
+        <SearchStyle 
+            type="text" 
+            onFocus={handleInputFocus} 
+            onBlur={handleInputBlur} 
+            placeholder={isInputClick ?  "" : "원하는 전시를 검색해보세요" }
+            style={isOutLine}
+            value={keyword}
+            onChange={(e)=>setKeyWord(e.target.value)}
+            onKeyPress={handleKeyPress}
+            />
+        <span><SearchImg src={SEARCH}/></span>
+    </div>
 )
 }

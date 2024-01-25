@@ -21,24 +21,23 @@ export const IMG = styled.img`
     box-shadow: 5px 5px 8px #D9D9D9; 
 
 `;
-export const WrapPorter = styled.div`
+export const WrapPorterAndIcon = styled.div`
     display : flex;
     justify-content: center;
     align-items: center;
     height: 350px;
-
 `;
+export const WrapPoster = styled.div``;
 export const StyledSlider = styled(Slider)`
 
 `;
 export const WrapIcon = styled.div`
     width : 175px;
     position: absolute;
-    top : 90%;
+    top : 320px;
     display : flex;
     justify-content: space-between;
     align-items: flex-end;
-
 `;
 
 export const Title = styled.div`

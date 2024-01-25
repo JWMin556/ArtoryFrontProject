@@ -14,7 +14,10 @@ import SplashScreen from './components/SplashScreen';
 import ExhibitionDetail from './pages/ExhibitionDetail';
 import Onboarding2 from './pages/Onboarding2';
 import Onboarding3 from './pages/Onboarding3';
-
+import ExhibitionSearch from './pages/ExhibitionSearch';
+import Popularity from'./pages/Popularity';
+import Recent from './pages/Recent';
+import Recommend from './pages/Recommend';
 const Root = styled.div`
   position: absolute;
   top: 0;
@@ -44,13 +47,12 @@ function App() {
           {/*Header컴포넌트입니다. 즉, 맨 위의 검은색 상단 바입니다.*/}
           <Routes>
             <Route path="/" element={<Home />} /> {/*메인페이지입니다.*/}
-            <Route path="/exhibition" element={<Exhibition />} />{' '}
-            {/*주연씨 담당 페이지*/}
-            <Route
-              path="/exhibitiondetail/:title"
-              element={<ExhibitionDetail />}
-            />{' '}
-            {/*주연씨 담당 페이지*/}
+            <Route path="/exhibition" element={<Exhibition />} />
+            <Route path="/exhibitiondetail/:title" element={<ExhibitionDetail/>}/>
+            <Route path="/exhibitionsearch/:keyword" element={<ExhibitionSearch/>}/>
+            <Route path="/exhibition/popularity" element={<Popularity/>}/>
+            <Route path="/exhibition/recent" element={<Recent/>}/>
+            <Route path="/exhibition/recommend" element={<Recommend/>}/>
             <Route path="/story" element={<Story />} />
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mypage" element={<MyPage />} />

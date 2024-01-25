@@ -30,7 +30,7 @@ export default function Detail(props) {
 return (
     <Container>
         <WrapDetail>
-            <IMG src={`${IMG_BASE_URL}${props.img}`}></IMG>
+            <IMG src={props.img}></IMG>
             <WrapInfo>
                 <Title>{props.title}</Title>
                 <p>장소</p>

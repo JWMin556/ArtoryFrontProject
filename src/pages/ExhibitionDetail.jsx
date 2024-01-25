@@ -7,7 +7,8 @@ export default function ExhibitionDetail(props) {
     console.log(state.item);
 return (
     <Detail
-        img = {state.item.poster_path}
-        title = {state.item.title}/>
+        img = {state.item.exhibitionImage}
+        title = {state.item.exhibitionTitle}
+    />
 )
 }

@@ -4,7 +4,7 @@ export const Arrow = styled.div`
     width : 20px;
     height : 34px;
     position: absolute;
-    top: 50%;
+    top: 180px;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
