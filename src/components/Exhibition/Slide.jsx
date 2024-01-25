@@ -41,7 +41,7 @@ export default function Slide(props) {
                     <div key={index}>
                         <S.WrapPorterAndIcon>
                             {/* <S.WrapPoster onMouseEnter={handleMouseEnter}  onMouseLeave={handleMouseLeave}>  */}
-                            <Poster item={item}/>
+                            <Poster source={props.source} item={item} />
                             {/* </S.WrapPoster> */}
                             {/* <WrapTitle>
                                 {isShowTitle && <Title title = {item.exhibitionTitle}/>}

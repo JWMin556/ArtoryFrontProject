@@ -20,6 +20,7 @@ import Popularity from './pages/Popularity';
 import Recent from './pages/Recent';
 import Recommend from './pages/Recommend';
 
+import StoryDetail from './pages/StoryDetail';
 
 const Root = styled.div`
   position: absolute;
@@ -60,6 +61,17 @@ function App() {
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/mypagemodify" element={<MyPageModify />} />
+            <Route path="/exhibition" element={<Exhibition />} />{' '}
+            {/*주연씨 담당 페이지*/}
+            <Route
+              path="/exhibitiondetail/:title"
+              element={<ExhibitionDetail />}
+            />{' '}
+            {/*주연씨 담당 페이지*/}
+            <Route path="/story" element={<Story />} />
+            <Route path="/story/:id" element={<StoryDetail />} />
+            <Route path="/mystory" element={<MyStory />} />
+            <Route path="/mypage" element={<MyPage />} />
             <Route path="/login" element={<LogIn />} /> {/*주연씨 담당 페이지*/}
             <Route path="/signup" element={<SignUp />} /> {/*중원 담당 페이지*/}
             <Route path="/onboarding" element={<Onboarding />} />{' '}
@@ -69,6 +81,7 @@ function App() {
             <Route path="/onboarding3" element={<Onboarding3 />} />{' '}
             {/*은향씨 담당 페이지*/}
             {/* <Route path="/splashscreen" element={<SplashScreen />} /> */}
+            <Route path="/splashscreen" element={<SplashScreen />} />
           </Routes>
         </BrowserRouter>
       )}

@@ -2,7 +2,6 @@ import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Title from './Title';
-import { WrapPoster } from '../../styled-components/Slide.style';
 const PosterStyle = styled.img`
     width : 186px;
     height: 268px;
@@ -16,7 +15,9 @@ const WrapTitle = styled.div`
 export default function Poster(props) {
     const navigate = useNavigate();
     const onClickDetail = (item) => {
-        navigate(`/exhibitiondetail/${item.title}`, { state: { item } });
+      props.source === 'story'
+        ? navigate(`/story/${item.id}`, { state: { item } })
+        : navigate(`/exhibitiondetail/${item.title}`, { state: { item } });
     };
     // 상태 초기값을 true로 설정
     const [isShowTitle, setIsShowTitle] = useState(false);
@@ -38,5 +39,7 @@ return (
         <PosterStyle src={props.item.exhibitionImage}/>
         <WrapTitle>{isShowTitle && <Title title = {props.item.exhibitionTitle}/>}</WrapTitle>
     </div>
-)
+);
 }
+
+
