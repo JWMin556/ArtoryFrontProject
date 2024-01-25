@@ -3,7 +3,6 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import StyledButton from '../styled-components/StyledButton';
 import { Link } from 'react-router-dom';
-import { InterestDummy } from '../Interestdummy';
 import Topic from '../components/Onboarding/Topic';
 import { getMemberInfo, saveGenre } from '../components/API/member_API';
 
@@ -62,11 +61,10 @@ export default function Onboarding3() {
       genres[selectedIndex[2]]
     );
   };
+  //<button onClick={getMemberInfo}>API 테스트</button>
   return (
     <Container>
       <div style={{ height: '120px' }}>
-        <button onClick={getMemberInfo}>API 테스트</button>
-
         <Title>관심있는 주제를 모두 선택해주세요</Title>
         <div style={divStyle}>
           관심있는 주제를{' '}

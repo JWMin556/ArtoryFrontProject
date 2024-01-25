@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w1280/';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,7 +17,7 @@ export const IMG = styled.img`
   height: 450px;
 `;
 export const WrapInfo = styled.div`
-  margin-left: ;
+  margin-left: auto;
 `;
 export const Title = styled.p`
   font-size: 24px;

@@ -1,3 +1,4 @@
+//이건 그대로 사용하기 (통과)
 import styled from 'styled-components';
 import Slider from 'react-slick';
 export const WrapSlider = styled.div`
@@ -26,7 +27,13 @@ export const WrapPorterAndIcon = styled.div`
   align-items: center;
   height: 350px;
 `;
-export const WrapPoster = styled.div``;
+export const WrapPoster = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+`;
+
 export const StyledSlider = styled(Slider)``;
 export const WrapIcon = styled.div`
   width: 175px;

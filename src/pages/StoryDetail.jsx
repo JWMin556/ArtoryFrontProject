@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import profile_img from '../Img/input_pic.png';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import poster from '../Img/imagearbitary.png';
 import CommentInput from '../components/Story/CommentInput';
 
 export default function StoryDetail() {
-  const { state } = useLocation();
+  //const { state } = useLocation();
   //console.log(state.item);
 
   return (
@@ -32,7 +32,7 @@ export default function StoryDetail() {
 
       <Right>
         <div className="story_content" style={{ paddingLeft: '10%' }}>
-          <h3>제목</h3>
+          <h3 style={{ marginLeft: '30px' }}>제목</h3>
           <BoxStyle
             style={{
               display: 'flex',
@@ -43,7 +43,7 @@ export default function StoryDetail() {
             <span>선택 스토리 제목</span>
           </BoxStyle>
 
-          <h3>스토리 기록</h3>
+          <h3 style={{ marginLeft: '30px' }}>스토리 기록</h3>
           <BoxStyle style={{ height: '800px' }}>
             <ExhbnInfo id="오늘의 전시">
               <H5>오늘의 전시</H5>
