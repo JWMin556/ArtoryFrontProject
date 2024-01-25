@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+
 import styled from 'styled-components';
 
 const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w1280/';

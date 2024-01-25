@@ -25,13 +25,13 @@ export default function Slide(props) {
       <S.StyledSlider {...setting}>
         {props.Dummy.results.map((item, index) => (
           <div key={index}>
-            <S.WrapPorter>
+            <S.WrapPoster>
               <Poster source={props.source} item={item} />
               <S.WrapIcon>
                 <Heart />
                 <Save />
               </S.WrapIcon>
-            </S.WrapPorter>
+            </S.WrapPoster>
           </div>
         ))}
       </S.StyledSlider>

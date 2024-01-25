@@ -1,3 +1,4 @@
+//check
 import React, { useState } from 'react';
 import PREV_ARROW from '../../Img/Slider/prev.svg';
 import ON_PREV_ARROW from '../../Img/Slider/onprev.svg';
