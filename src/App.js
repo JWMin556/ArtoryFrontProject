@@ -14,10 +14,13 @@ import SplashScreen from './components/SplashScreen';
 import ExhibitionDetail from './pages/ExhibitionDetail';
 import Onboarding2 from './pages/Onboarding2';
 import Onboarding3 from './pages/Onboarding3';
+import MyPageModify from './pages/MyPageModify';
 import ExhibitionSearch from './pages/ExhibitionSearch';
-import Popularity from'./pages/Popularity';
+import Popularity from './pages/Popularity';
 import Recent from './pages/Recent';
 import Recommend from './pages/Recommend';
+
+
 const Root = styled.div`
   position: absolute;
   top: 0;
@@ -56,6 +59,7 @@ function App() {
             <Route path="/story" element={<Story />} />
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mypage" element={<MyPage />} />
+            <Route path="/mypagemodify" element={<MyPageModify />} />
             <Route path="/login" element={<LogIn />} /> {/*주연씨 담당 페이지*/}
             <Route path="/signup" element={<SignUp />} /> {/*중원 담당 페이지*/}
             <Route path="/onboarding" element={<Onboarding />} />{' '}

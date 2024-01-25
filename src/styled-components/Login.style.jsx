@@ -28,7 +28,7 @@ export const HomeLeftWrap = styled.div `
 export const FirstParagraph = styled.p `
     color: #595959;
     font-size: 14px;
-    font-family: Pretendard;
+    font-family: 'Pretendard';
     font-weight: 500;
     line-height: 18.63px; 
     letter-spacing: 0.49px;
@@ -39,14 +39,13 @@ export const FirstParagraph = styled.p `
         width: 76.37px;
         height: 8px;
         font-size: 8px;
-
     }
 `;  // Story community
 
 export const SecondParagraph = styled.h2 `
     color: #5D5D5D;
     font-size: 40px;
-    font-family: Pretendard;
+    font-family: 'Pretendard';
     font-weight: 500;
     line-height: 53.23px;
     word-wrap: break-word;
@@ -63,7 +62,7 @@ export const SecondParagraph = styled.h2 `
 export const ThirdParagraph = styled.h1 `
     color: black;
     font-size: 80px;
-    font-family: Pretendard;
+    font-family: 'Pretendard';
     font-weight: 700;
     line-height: 106.46px;
     letter-spacing: 2.80px;
@@ -88,14 +87,14 @@ export const WrapLogin = styled.div`
 
 export const Input = styled.input`
     padding-left : 5%;
-    font-family: Pretendard;
+    font-family: 'Pretendard';
     margin-top : 15px;
     width : 325px;
     height : 50px;
     border: none;
     border-radius: 10px;
     box-shadow: 1px 2px 8px #f3f3f3; 
-    color : #ababab
+    color : #ababab;
     @media screen and (max-width: 500px){
         width: 308px;
         height: 47.24px;
@@ -111,7 +110,7 @@ export const WrapLink = styled.div`
 //아이디찾기 & 비밀번호 찾기 & 회원가입 링크를 감싸는 스타일드 컴포넌트
 
 export const LinkStyle = styled.span`
-    font-family: Pretendard;
+    font-family: 'Pretendard';
     font-size : 13px;
     width :100px;
 `;

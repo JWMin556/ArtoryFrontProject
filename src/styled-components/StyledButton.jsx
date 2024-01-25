@@ -11,7 +11,7 @@ const StyledButton = styled.button`
   font-size: 20px;
   word-wrap: break-word;
   cursor: pointer;
-  font-family: Pretendard;
+  font-family: 'Pretendard';
   box-shadow: 0px 2px 8px rgba(0, 58.18, 103.06, 0.4);
 `;
 
