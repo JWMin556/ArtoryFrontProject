@@ -1,34 +1,14 @@
 import React from 'react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import StyledButton from '../styled-components/StyledButton';
 import { Link } from 'react-router-dom';
+import Profile from '../components/Onboarding/Profile';
 
 export default function Onboarding() {
   //은향씨가 작업해주실 Onboarding 페이지입니다
-  const fileInputRef = useRef(null);
-  const [imageSrc, setImageSrc] = useState('/Img/input_pic.png');
   const [length, setLength] = useState(0);
 
-  const handleImageClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // 파일 선택 후의 로직을 추가할 수 있습니다.
-      console.log('Selected file:', file.name);
-
-      // FileReader를 사용하여 파일의 내용을 읽어옵니다.
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        // 이미지의 src를 선택한 파일의 내용으로 대체합니다.
-        setImageSrc(event.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
   const handleNicknameChange = (e) => {
     const value = e.target.value;
     value.length > 10 ? setLength(10) : setLength(value.length);
@@ -36,16 +16,11 @@ export default function Onboarding() {
 
   return (
     <Container>
-      <Title>사용할 이름과 프로필을 설정해주세요</Title>
+      <div style={{ height: '120px' }}>
+        <Title>사용할 이름과 프로필을 설정해주세요</Title>
+      </div>
       <ContentBox>
-        <ImgStyled src={imageSrc} alt="사진첨부" onClick={handleImageClick} />
-        <input
-          type="file"
-          accept="image/*"
-          ref={fileInputRef}
-          style={{ display: 'none' }}
-          onChange={handleFileChange}
-        />
+        <Profile></Profile>
         <Nickname
           maxLength="10"
           type="text"
@@ -65,7 +40,7 @@ export default function Onboarding() {
           다음
         </StyledButton>
       </Link>
-      <img src="/Img/slidebar.svg" alt="bar" style={{ marginTop: '50px' }} />
+      <img src="/Img/slidebar.svg" alt="bar" style={{ marginTop: '30px' }} />
     </Container>
   );
 }
@@ -79,35 +54,32 @@ const Count = styled.p`
 `;
 const Container = styled.div`
   margin: 100px auto;
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 460px;
-  height: 670px;
 `;
 const Title = styled.p`
   font-weight: 800;
   font-size: 180%;
 `;
-const ImgStyled = styled.img`
-  width: 150px;
-  cursor: 'pointer';
-`;
+
 const Nickname = styled.input`
-  margin-top: 70px;
+  margin-top: 40px;
   padding-left: 20px;
   border-radius: 10px;
   border: none;
   box-shadow: 1px 2px 8px #f3f3f3;
-  width: 304px;
+  width: 60%;
   height: 50px;
   color: #ababab; //닉네임 입력 후 글자 색
   font-weight: 500;
   font-family: 'Pretendard';
+  outline: none; //border가 아니라 outline을 없애야 클릭 시에도 border(or outline이 안보임)
 `;
 const ContentBox = styled.div`
-  margin-top: 100px;
-  margin-bottom: 120px;
+  margin-bottom: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;

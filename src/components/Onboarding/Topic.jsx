@@ -6,12 +6,12 @@ export default function Topic(props) {
   const [isClicked, setIsClicked] = useState(false);
   // 클릭 이벤트 핸들러
   const handleClick = () => {
-    props.onClick(props.topic); //props로 받아온 onClick함수 실행
+    props.onClick(props.genre, props.index); //props로 받아온 onClick함수 실행
     setIsClicked(!isClicked);
   };
   return (
     <Button className={isClicked ? 'clicked' : ''} onClick={handleClick}>
-      {props.topic}
+      {props.genre}
     </Button>
   );
 }

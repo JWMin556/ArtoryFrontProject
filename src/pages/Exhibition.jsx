@@ -1,9 +1,9 @@
-import React,{useState, useEffect} from 'react'
-import * as S from '../styled-components/Exhibition.style'
-import Slide from '../components/Exhibition/Slide'
-import Search from '../components/Exhibition/Search'
-import AdBanner from '../components/Exhibition/AdBanner'
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import * as S from '../styled-components/Exhibition.style';
+import Slide from '../components/Exhibition/Slide';
+import Search from '../components/Exhibition/Search';
+import AdBanner from '../components/Exhibition/AdBanner';
+import axios from 'axios';
 import { TestDummy } from '../TestDummy';
 
 const url = 'http://3.39.39.6:8080/api/exhibitions/'
@@ -105,6 +105,6 @@ export default function Exhibition(props) { //주연씨가 작업해주실 EXHIB
             <Slide title = {"근처 추천 전시"} Dummy = {TestDummy}/>
             <Slide title = {"작가 추천 전시"} Dummy = {TestDummy}/>
             <Slide title = {"최근 본 전시와 비슷한 전시"} Dummy = {TestDummy}/> */}
-        </S.Container>
-  )
+    </S.Container>
+  );
 }
