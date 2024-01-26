@@ -48,19 +48,25 @@ const Swiperstyle = styled(Swiper)`
 
 export default function AdBanner() {
     const [randomExhibitionData, setRandomExhibitionData] = useState([]);
-
+    const token = localStorage.getItem('Token');
     useEffect(() => {
-        (async() => { //랜덤 전시회 API
+        (async() => { // 추천 전시회 API
             try{
-                const response = await axios.get(`${url}random?memberId=1&page=1`,
-                    {
-                    headers : {
-                        'Accept' : '*/*',
-                        'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDYwOTY3MjksImV4cCI6MTcwNjE4NjcyOSwibWVtYmVySWQiOjMsInJvbGUiOiJVU0VSIn0.hnDGFcwa2aln0sAlnWmF_9-HgvR8HXDxlROz7xWIVjFz9_CzKw9N_J1gAF9qi5sDJ7jfnd4S9BXr3ow5tH7rxA',
-                        'content-type' : "application/json"
-                    }
+                const response = await axios.post(`${url}all?page=1`,
+                {
+                    "latitude": "90",
+                    "longitude": "90"
+                },
+                {
+                headers: {
+                            'Accept': '*/*',
+                            'Authorization': `Bearer ${token}`,
+                            'content-type': 'application/json',
+                }
                 });
-                setRandomExhibitionData(response.data);
+                console.log(response.randomExhibitionDtoList);
+                setRandomExhibitionData(response.data.randomExhibitionDtoList);
+    
             }catch(error)
             {
                 console.error('Error fetching data:', error);

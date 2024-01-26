@@ -10,6 +10,7 @@ import Poster from './Poster';
 import Title from './Title';
 import styled from 'styled-components';
 export default function Slide(props) {
+        console.log(props.Dummy.popluarExhibitionDtoList);
         const setting = {
         arrows: true,
         infinite: true,
@@ -40,12 +41,7 @@ export default function Slide(props) {
                 {props.Dummy.map((item, index) => (
                     <div key={index}>
                         <S.WrapPorterAndIcon>
-                            {/* <S.WrapPoster onMouseEnter={handleMouseEnter}  onMouseLeave={handleMouseLeave}>  */}
                             <Poster item={item}/>
-                            {/* </S.WrapPoster> */}
-                            {/* <WrapTitle>
-                                {isShowTitle && <Title title = {item.exhibitionTitle}/>}
-                            </WrapTitle> */}
                             <S.WrapIcon>
                                 <Heart />
                                 <Save />

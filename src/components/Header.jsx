@@ -111,19 +111,19 @@ export default function Header2() {
                     </ListItem>
 
                     <ListItem>
-                    <NavLink to="/story" selected={location.pathname === '/story'}>
+                    <NavLink to="/story" onMouseOver={handleMouseOutExhibition} selected={location.pathname === '/story'}>
                         STORY
                     </NavLink>
                     </ListItem>
 
                     <ListItem>
-                    <NavLink to="/mystory" selected={location.pathname === '/mystory'}>
+                    <NavLink to="/mystory" onMouseOver={handleMouseOutExhibition} selected={location.pathname === '/mystory'}>
                         MY STORY
                     </NavLink>
                     </ListItem>
                     
                     <ListItem>
-                    <NavLink to="/mypage" selected={location.pathname === '/mypage'}>
+                    <NavLink to="/mypage" onMouseOver={handleMouseOutExhibition} selected={location.pathname === '/mypage'}>
                         MY PAGE
                     </NavLink>
                     </ListItem>
@@ -132,7 +132,7 @@ export default function Header2() {
             </HeaderRightWrap>
 
         </HeaderWrap>
-          {isMouseOverExhibition && <Navigation/>} {/*isMouseOverExhibition가 true이면 <Navigation/>이 뜸 */}
+          {isMouseOverExhibition && <Navigation onmouseover={handleMouseOverExhibition} onmouseout={handleMouseOutExhibition} />} {/*isMouseOverExhibition가 true이면 <Navigation/>이 뜸 */}
       </HeaderContainer>
     );  
 }

@@ -23,9 +23,9 @@ const Navigation2 = styled.span`
     font-size : 19px;
 
 `;
-export default function Navigation() {
+export default function Navigation(props) {
     return (
-        <WrapNavigation>
+        <WrapNavigation onMouseOver={props.onmouseover} onMouseOut={props.onmouseout}>
             <Link to="/exhibition/popularity" style={{textDecoration: 'none' }}><Navigation1>인기 전시</Navigation1></Link>
             <Navigation2>|</Navigation2>
             <Link to="/exhibition/recent" style={{textDecoration: 'none' }}><Navigation1>최근 전시</Navigation1></Link>

@@ -122,6 +122,7 @@ import ONE2 from '../../Img/Calendar/one2.svg'
 import Memo from './Memo';
 import Event from './Event';
 import Week from './Week';
+//import TodoMadal from '../MyStory/TodoModal'
 const CalendarStyle = styled(Calendar)`
 
     &.rbc-calendar {
@@ -258,6 +259,8 @@ export default function MyCalendar(props) {
                     <WrapMark1><img src={ONE1} style={{width:'17px',height:'17px'}}/><Mark1>작성한 전시</Mark1></WrapMark1>
                     <WrapMark2><img src={ONE2} style={{width:'17px',height:'17px'}}/><Mark2>예정 전시</Mark2></WrapMark2>
                 </WrapMark>
+                {/* <TodoMadal/> */}
+
         </div>
 
 );

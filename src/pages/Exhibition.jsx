@@ -12,41 +12,50 @@ export default function Exhibition(props) { //주연씨가 작업해주실 EXHIB
     const [popularityExhibitionData, setPopularityExhibitionData] = useState([]);
     const [recentExhibitionData, setRecentExhibitionData] = useState([]);
     const [recommendExhibitionData, setRecommedExhibitionData] = useState([]);
+    const token = localStorage.getItem('Token');
 
-  useEffect(() => {
-      (async() => { //인기 전시회 API
-        try{
-                const response = await axios.get(`${url}popularity?page=1`,
-                {
-                    headers : {
-                        'Accept' : '*/*',
-                        'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDYxMDQ2MzMsImV4cCI6MTcwNjE5NDYzMywibWVtYmVySWQiOjMsInJvbGUiOiJVU0VSIn0.C_9o0FBHk1FQiJJxKq10A82f3esm-LrpH7Zgvwnxd1UzE-NlJkmcrT3neu-QeufY0IVWpxJNmHaeMTQt3Qv6Bg',
-                        'content-type' : "application/json"
-                    }
-                });
-                setPopularityExhibitionData(response.data);
-                console.log(response);
-
-        }catch(error)
+    useEffect(() => {
+        (async () => {
+          //인기 전시회 API
+            try {
+            const response = await axios.post(`${url}all?page=1`,
             {
-                console.error('Error fetching data:', error);
-            }
-      //fetchData();
-})();
-},[]);
+                    "latitude": "90",
+                    "longitude": "90"
+            },
+                {
+                    headers: {
+                        'Accept': '*/*',
+                        'Authorization': `Bearer ${token}`,
+                        'content-type': 'application/json',
+                }
+                }
+            );
+            setPopularityExhibitionData(response.data.popluarExhibitionDtoList);
+            console.log(response.data.popluarExhibitionDtoList);
+            } catch (error) {
+            console.error('Error fetching data:', error.response.data);
+        }
+          //fetchData();
+        })();
+      }, []);
   useEffect(() => {
     (async() => { //최근 전시회 API
         try{
-            const response = await axios.get(`${url}recent?page=1`,
-                {
-                headers : {
-                    'Accept' : '*/*',
-                    'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDYxMDQ2MzMsImV4cCI6MTcwNjE5NDYzMywibWVtYmVySWQiOjMsInJvbGUiOiJVU0VSIn0.C_9o0FBHk1FQiJJxKq10A82f3esm-LrpH7Zgvwnxd1UzE-NlJkmcrT3neu-QeufY0IVWpxJNmHaeMTQt3Qv6Bg',
-                    'content-type' : "application/json"
-                }
+            const response = await axios.post(`${url}all?page=1`,
+            {
+                "latitude": "90",
+                "longitude": "90"
+            },
+            {
+            headers: {
+                        'Accept': '*/*',
+                        'Authorization': `Bearer ${token}`,
+                        'content-type': 'application/json',
+            }
             });
-            setRecentExhibitionData(response.data);
-            console.log(response);
+            setRecentExhibitionData(response.data.recentExhibitionDtoList);
+            console.log(response.recentExhibitionDtoList);
 
         }catch(error)
         {
@@ -58,16 +67,21 @@ export default function Exhibition(props) { //주연씨가 작업해주실 EXHIB
   useEffect(() => {
     (async() => { // 추천 전시회 API
         try{
-            const response = await axios.get(`${url}recommend?page=1`,
-                {
-                headers : {
-                    'Accept' : '*/*',
-                    'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDYxMDQ2MzMsImV4cCI6MTcwNjE5NDYzMywibWVtYmVySWQiOjMsInJvbGUiOiJVU0VSIn0.C_9o0FBHk1FQiJJxKq10A82f3esm-LrpH7Zgvwnxd1UzE-NlJkmcrT3neu-QeufY0IVWpxJNmHaeMTQt3Qv6Bg',
-                    'content-type' : "application/json"
-                }
+            const response = await axios.post(`${url}all?page=1`,
+            {
+                "latitude": "90",
+                "longitude": "90"
+            },
+            {
+            headers: {
+                        'Accept': '*/*',
+                        'Authorization': `Bearer ${token}`,
+                        'content-type': 'application/json',
+            }
             });
-            setRecommedExhibitionData(response.data);
-            console.log(response);
+            console.log(response.recommendExhibitionDtoList);
+            setRecommedExhibitionData(response.data.recommendExhibitionDtoList);
+
         }catch(error)
         {
             console.error('Error fetching data:', error);
@@ -86,7 +100,7 @@ export default function Exhibition(props) { //주연씨가 작업해주실 EXHIB
         </S.WrapSearch>
             <Slide title = {"인기 전시"} Dummy = {popularityExhibitionData} />
             <Slide title = {"최근 전시"} Dummy = {recentExhibitionData}/>
-            {<Slide title = {"추천 전시"} Dummy = {recommendExhibitionData}/>}
+            <Slide title = {"추천 전시"} Dummy = {recommendExhibitionData}/>
             {/* <Slide title = {"이번 달 추천 전시"} Dummy = {TestDummy}/>
             <Slide title = {"근처 추천 전시"} Dummy = {TestDummy}/>
             <Slide title = {"작가 추천 전시"} Dummy = {TestDummy}/>

@@ -34,7 +34,6 @@ const Day = styled.div`
     font-family: Pretendard;
     margin-left : 10%;
     margin-top : 10%;
-
 `;
 const AddImg = styled.img`
     display: ${(props) => props.show ? 'flex' : 'none'};
@@ -43,11 +42,15 @@ const AddImg = styled.img`
     margin-right : 10%;
     margin-top : 10%;
 `;
+const WrapModal = styled.div`
+    Z-index : 1;
+`;
 
 export default function DayTile(props) {
     const [isHovered, setIsHovered] = useState(false);
     const [isClicked1, setIsClicked1] = useState(false);
     const [isClicked2, setIsClicked2] = useState(true);
+    const [isAddClicked, setIsAddClicked] = useState(false);
 
     function clickTile1()
     {
@@ -59,32 +62,51 @@ export default function DayTile(props) {
         setIsClicked1(true);
         setIsClicked2(false);
     }
+    const addButtonClick = () =>{
+        setIsAddClicked(true);
+    }
     const {
         date,
     } = props;
 
     return (
-        <WrapTile 
-            className='rbc-tile'
+        <div>
+        <WrapTile className='rbc-month-row'
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <Tile  onClick={clickTile2}>
-                    <Day>{moment(date).format('D')}</Day>
-                    <AddImg src={ADD} show={isHovered} />
+            <Tile className='rbc-row-bg' style={{position : 'relative'}}>
+                    <Day className='rbc-day-bg'>
+                        {moment(date).format('D')}
+                    </Day>
+                    <AddImg src={ADD} show={isHovered} onClick={addButtonClick} />
             </Tile>
-            {/* {
-                isClicked1&&isClicked2 ?
-                (<ClickedTile onClick={clickTile1}>
-                    <Day>{moment(date).format('D')}</Day>
-                    <AddImg src={ADD} show={isHovered} />
-                </ClickedTile>)
-                :
-                <Tile  onClick={clickTile2}>
-                    <Day>{moment(date).format('D')}</Day>
-                    <AddImg src={ADD} show={isHovered} />
-                </Tile>
-            } */}
         </WrapTile>
+        {/* {isAddClicked && <TodoModal/> } */}
+        </div>
     );
 }
+
+                        {/* <WrapTile 
+                            className='rbc-dar-bg'
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                        >
+                        <Tile className='rbc-date-cell'  onClick={clickTile2}>
+                                <Day>{moment(date).format('D')}</Day>
+                               
+                        </Tile>
+                        {isAddClicked && <TodoModal/>}
+                        {/* {
+                            isClicked1&&isClicked2 ?
+                            (<ClickedTile onClick={clickTile1}>
+                                <Day>{moment(date).format('D')}</Day>
+                                <AddImg src={ADD} show={isHovered} />
+                            </ClickedTile>)
+                            :
+                            <Tile  onClick={clickTile2}>
+                                <Day>{moment(date).format('D')}</Day>
+                                <AddImg src={ADD} show={isHovered} />
+                            </Tile>
+                        } */}
+                    {/* </WrapTile> */}

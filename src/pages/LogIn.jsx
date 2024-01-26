@@ -70,7 +70,7 @@ export default function LogIn() {
         <div>
           <S.Input 
             type='email' 
-            value={ID}
+            //value={ID}
             onFocus={handleIDInputFocus} //input박스에 들어올 때 
             onBlur={handleIDInputBlur} //input박스에서 나갔을 때
             placeholder={isIDInputClick ? "" : "아이디를 입력해주세요"} 
@@ -81,7 +81,7 @@ export default function LogIn() {
         <div>
         <S.Input 
           type='password' 
-          value={Password}
+          //value={Password}
           onFocus={handlePWInputFocus} //input박스에 들어올 때 
           onBlur={handlePWInputBlur} //input박스에서 나갔을 때
           placeholder={isPWInputClick ? "" : "비밀번호를 입력해주세요"} 

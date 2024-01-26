@@ -19,7 +19,8 @@ import ExhibitionSearch from './pages/ExhibitionSearch';
 import Popularity from './pages/Popularity';
 import Recent from './pages/Recent';
 import Recommend from './pages/Recommend';
-
+import KakaoLoginLoading from './pages/KakaoLoginLoading';
+import TokenPage from "./pages/TokenPage";
 
 const Root = styled.div`
   position: absolute;
@@ -61,6 +62,7 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/mypagemodify" element={<MyPageModify />} />
             <Route path="/login" element={<LogIn />} /> {/*주연씨 담당 페이지*/}
+            <Route path='/oauth/kakao/callback'element={<KakaoLoginLoading/>} />
             <Route path="/signup" element={<SignUp />} /> {/*중원 담당 페이지*/}
             <Route path="/onboarding" element={<Onboarding />} />{' '}
             {/*은향씨 담당 페이지*/}
@@ -69,6 +71,7 @@ function App() {
             <Route path="/onboarding3" element={<Onboarding3 />} />{' '}
             {/*은향씨 담당 페이지*/}
             {/* <Route path="/splashscreen" element={<SplashScreen />} /> */}
+            <Route path="/signup/token" element={<TokenPage />} /> {/*승우 담당 페이지*/}
           </Routes>
         </BrowserRouter>
       )}
