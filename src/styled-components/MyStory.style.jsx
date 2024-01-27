@@ -20,13 +20,33 @@ export const WrapRecord = styled.div`
 export const WrapCalendar = styled.div`
     display : flex;
     justify-content: center;
-    margin-top : 15%;
+    margin-top : 5%;
 `;
 
 export const RecordName = styled.div`
     font-size : 30px;
     font-family: Pretendard;
     font-weight : bold;
-    position : relative;
-    left : 18%;
+    margin-top : 10%;
+    //position : relative;
+    //left : 18%;
+`;
+
+export const WrapProfile = styled.div`
+    display : flex;
+    flex-direction : column;
+    justify-content: space-evenly;
+    //position : relative;
+    //left : 20%;
+`;
+
+export const ProfileIMG = styled.img`
+    border-radius : 10px;
+`;
+
+export const WrapProfileAndButton = styled.div`
+    width : 100%;
+    display : flex;
+    justify-content: space-around;
+
 `;

@@ -32,6 +32,7 @@ export default function Exhibition(props) { //주연씨가 작업해주실 EXHIB
                 }
             );
             setPopularityExhibitionData(response.data.popluarExhibitionDtoList);
+           // console.log("인기전시")
             console.log(response.data.popluarExhibitionDtoList);
             } catch (error) {
             console.error('Error fetching data:', error.response.data);
@@ -55,6 +56,7 @@ export default function Exhibition(props) { //주연씨가 작업해주실 EXHIB
             }
             });
             setRecentExhibitionData(response.data.recentExhibitionDtoList);
+            //console.log("최근전시")
             console.log(response.recentExhibitionDtoList);
 
         }catch(error)
@@ -79,6 +81,7 @@ export default function Exhibition(props) { //주연씨가 작업해주실 EXHIB
                         'content-type': 'application/json',
             }
             });
+            //console.log("추천전시")
             console.log(response.recommendExhibitionDtoList);
             setRecommedExhibitionData(response.data.recommendExhibitionDtoList);
 

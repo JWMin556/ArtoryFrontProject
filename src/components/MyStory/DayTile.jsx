@@ -43,7 +43,7 @@ const AddImg = styled.img`
     margin-top : 10%;
 `;
 const WrapModal = styled.div`
-    Z-index : 1;
+    
 `;
 
 export default function DayTile(props) {
@@ -51,7 +51,9 @@ export default function DayTile(props) {
     const [isClicked1, setIsClicked1] = useState(false);
     const [isClicked2, setIsClicked2] = useState(true);
     const [isAddClicked, setIsAddClicked] = useState(false);
-
+    const {
+        date,
+    } = props;
     function clickTile1()
     {
         setIsClicked1(false);
@@ -65,11 +67,9 @@ export default function DayTile(props) {
     const addButtonClick = () =>{
         setIsAddClicked(true);
     }
-    const {
-        date,
-    } = props;
-
     return (
+        <div>
+        {isAddClicked && <WrapModal><TodoModal/></WrapModal>}
         <div>
         <WrapTile className='rbc-month-row'
             onMouseEnter={() => setIsHovered(true)}
@@ -82,7 +82,7 @@ export default function DayTile(props) {
                     <AddImg src={ADD} show={isHovered} onClick={addButtonClick} />
             </Tile>
         </WrapTile>
-        {/* {isAddClicked && <TodoModal/> } */}
+        </div>
         </div>
     );
 }
@@ -94,7 +94,6 @@ export default function DayTile(props) {
                         >
                         <Tile className='rbc-date-cell'  onClick={clickTile2}>
                                 <Day>{moment(date).format('D')}</Day>
-                               
                         </Tile>
                         {isAddClicked && <TodoModal/>}
                         {/* {

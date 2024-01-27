@@ -7,7 +7,6 @@ const TokenPage = () => {
     const queryParams = new URLSearchParams(location.search);
     const access_token = queryParams.get('access_token');
     const provider = queryParams.get('provider');
-
     const [tokenData, setTokenData] = useState(null);
     useEffect(() => {
         // access_token을 사용하여 서버에 요청
@@ -18,14 +17,16 @@ const TokenPage = () => {
                     setTokenData(response.data);
                     console.log( "data : ", response.data);
                     console.log("access Token : ", response.data.accessToken);
-                    localStorage.setItem("Token" , response.data.accessToken)
+                    localStorage.setItem("Token" , response.data.accessToken);
+                    window.location.href = '/exhibition'
                 }
                 else if (provider === 'kakao'){
                     const response = await axios.get(`http://3.39.39.6:8080/kakaologin?accessToken=${access_token}`);
                     setTokenData(response.data);
                     console.log( "data : ", response.data);
                     console.log("access Token : ", response.data.accessToken);
-                    localStorage.setItem("Token" , response.data.accessToken)
+                    localStorage.setItem("Token" , response.data.accessToken);
+                    window.location.href = '/exhibition'
                 }
                 else console.log( "소셜 제공자가 없습니다.");
 
@@ -42,8 +43,7 @@ const TokenPage = () => {
 
     return (
         <div>
-            <h2>Token Page</h2>
-            <p>Access Token: {access_token}</p>
+            로그인 중 입니다.
         </div>
     );
 };

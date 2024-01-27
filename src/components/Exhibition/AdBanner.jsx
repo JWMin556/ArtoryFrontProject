@@ -8,8 +8,6 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 import axios from 'axios';
 
 const url = 'http://3.39.39.6:8080/api/exhibitions/';
-const token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDYxNzI2MzIsImV4cCI6MTcwNjI2MjYzMiwibWVtYmVySWQiOjQsInJvbGUiOiJVU0VSIn0.utWBgIlkM-je684zEEM83zKlPRNNlAaov-1sRj53AiLMB-Aked78AxOYwuoKadiaQZ6RTQY6d-BkXprqzd41oA';
 const AdImg = styled.img`
   width: 300px;
   height: 450px;

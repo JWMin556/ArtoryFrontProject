@@ -10,7 +10,7 @@ import ONE2 from '../../Img/Calendar/one2.svg'
 import Memo from './Memo';
 import Event from './Event';
 import Week from './Week';
-//import TodoMadal from '../MyStory/TodoModal'
+import MarkExhibition from './MarkExhibition';
 const CalendarStyle = styled(Calendar)`
 
     &.rbc-calendar {
@@ -67,6 +67,16 @@ const CalendarStyle = styled(Calendar)`
     .rbc-today{
         background : none;
     }
+    
+    .rbc-time-view,
+    .rbc-time-content, 
+    .rbc-timeslot-group,
+    .rbc-time-header,
+    .rbc-events-container, 
+    .rbc-time-header-content{
+        border : none;
+    }
+
 `;
 
 const WrapMemoAndCalendar = styled.div`
@@ -136,10 +146,12 @@ export default function MyCalendar(props) {
                     components={{
                         toolbar: Toolbar,
                         header : Week,
+                        //dateCellWrapper : TodoModal,
+                        //timeSlotWrapper : MarkExhibition,
                         month:{
                             dateHeader : DayTile,
                             event: (events) => <Event event={events}/>,   
-                        }                
+                        }      
                         }}
                 />
             </WrapMemoAndCalendar>

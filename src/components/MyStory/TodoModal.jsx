@@ -5,9 +5,9 @@ const WrapModal = styled.div`
     width : 313px;
     height : 516px;
     background-color : #D9D9D9;
-    position : absolute;
-    top : 10%;
-    left : 30%;
+    // position : absolute;
+    // top : 10%;
+    // left : 30%;
 `;
 export default function modal() {
 return (
