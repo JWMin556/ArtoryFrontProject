@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import './signup.css';
 import StyledButton from '../styled-components/StyledButton';
+import axios from 'axios';
 
 const Page = styled.div`
   z-index: 900;
@@ -201,6 +202,24 @@ export default function SignUp() {
     setAllAgreed(checked);
   };
 
+  /*
+  //회원가입 폼 제출 함수
+  const url = 'http://3.39.39.6:8080/api/member/'
+  // const token = localStorage.getItem('Token');
+  const handleSubmit = async() => {
+    try {
+      const response = await axios.post(`${url}info`, 
+      {
+        email: email,
+        //필요한 다른 변수들은 추가해야 함
+      });
+      console.log(response.data);
+    }catch(error) {
+      console.error('Error fetching data:', error.response.data);
+    }
+  };
+  */
+ 
   return (
     <Page>
       <TitleWrap>회원가입</TitleWrap>
@@ -383,6 +402,7 @@ export default function SignUp() {
               height="52px"
               width="80%"
               fontSize="20px"
+              // onClick={handleSubmit} 후에 회원가입 페이지가 완료되면 얘를 보내면 됨
             >
               ARTORY 시작하기
             </StyledButton>

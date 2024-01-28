@@ -1,17 +1,58 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import StyledButton from '../styled-components/StyledButton';
 import { Link } from 'react-router-dom';
 import Profile from '../components/Onboarding/Profile';
+import axios from 'axios';
 
 export default function Onboarding() {
   //은향씨가 작업해주실 Onboarding 페이지입니다
   const [length, setLength] = useState(0);
 
+  //서버에 닉네임과 이미지를 제출하기 위한 변수 및 함수입니다.
+  const [nickname, setNickname] = useState('');
+  const [image, setImage] = useState('');
+
   const handleNicknameChange = (e) => {
     const value = e.target.value;
     value.length > 10 ? setLength(10) : setLength(value.length);
+    setNickname(value);
+  };
+
+  // 이미지 업로드 시 처리하는 함수
+  const handleImageChange = (imageData) => {
+    setImage(imageData);
+  };
+
+  const token = localStorage.getItem('Token');
+
+  const saveNicknameAndImage = async() => {
+    try{
+      const baseUrl = 'http://3.39.39.6:8080/api/member/save/nickname';
+      const Cnickname = "String-nickname";
+      const Cimage = "String-image";
+			const response = await axios.post(
+        baseUrl, 
+        {
+          nickname: Cnickname,
+          image: Cimage,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          }
+        },
+      );
+      console.log('사용자 정보가 성공적으로 저장되었습니다.');
+			console.log(response);
+			console.log(Cnickname);
+			console.log(Cimage);
+
+    } catch (error) {
+      console.error('사용자 정보 저장 중 오류가 발생했습니다:', error);
+			console.log(error.response.date);
+    }
   };
 
   return (
@@ -20,7 +61,7 @@ export default function Onboarding() {
         <Title>사용할 이름과 프로필을 설정해주세요</Title>
       </div>
       <ContentBox>
-        <Profile></Profile>
+        <Profile onImageChange={handleImageChange} />
         <Nickname
           maxLength="10"
           type="text"
@@ -36,6 +77,7 @@ export default function Onboarding() {
             height: '52px',
             width: '333px',
           }}
+          onClick={saveNicknameAndImage}
         >
           다음
         </StyledButton>

@@ -8,7 +8,7 @@ import { TestDummy } from '../TestDummy';
 
 const url = 'http://3.39.39.6:8080/api/exhibitions/'
 
-export default function Exhibition(props) { //주연씨가 작업해주실 EXHIBITION페이지입니다.
+export default function Exhibition() { //주연씨가 작업해주실 EXHIBITION페이지입니다.
     const [popularityExhibitionData, setPopularityExhibitionData] = useState([]);
     const [recentExhibitionData, setRecentExhibitionData] = useState([]);
     const [recommendExhibitionData, setRecommedExhibitionData] = useState([]);
