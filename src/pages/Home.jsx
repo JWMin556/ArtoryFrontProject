@@ -22,27 +22,26 @@ const LogInBtn = styled.img`
   height: 48px;
 `; //My Story라는 버튼을 위한 스타일드 컴포넌트입니다.
 
+const HomeRightWrap = styled.div`
+  display: block;
+`;
+
 const ExhibitImg = styled.img`
   width: 438px;
   height: 288px;
   border-radius: 10px;
 `; //메인화면의  오른쪽 부분 즉, 전시회 사진이 나오는 부분을 감싸주기 위한 스타일드 컴포넌트입니다.
 
-const url = 'http://3.39.39.6:8080/api/exhibitions/all'
+const url = 'http://3.39.39.6:8080/api/exhibitions/main'
 
 export default function Home() {
-  const [allExhibitionData, setAllExhibitionData] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null); 
   const token = localStorage.getItem('Token');
 
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.post(`${url}?page=1`, 
-        {
-          "latitude": "90",
-          "longitude": "90"
-        }, 
+        const response = await axios.get(url, 
           {
             headers : {
               'Accept': '*/*',
@@ -51,16 +50,10 @@ export default function Home() {
             }
           }
         );
-        setAllExhibitionData(response.data.randomExhibitionDtoList);
-        console.log(response.data.randomExhibition);
-
-        // allExhibitionData 배열에서 첫 번째 이미지 URL 가져옵니다. 
-        if (response.data.randomExhibitionDtoList.length > 0) {
-          setSelectedImage(response.data.randomExhibitionDtoList[0].exhibitionImage);
-        }
-
+        console.log(response.data);
+        setSelectedImage(response.data.exhibitionImage);
       } catch (error) {
-        console.error('Error fetching data:', error.response.data);
+        console.log(error.response.data);
       }
     })();
   }, []);
@@ -76,7 +69,9 @@ export default function Home() {
         </Link>{' '}
         {/*현재는 이 버튼을 누르면 로그인 페이지로 넘어가도록 만들었습니다. 주연씨는 LogIn.jsx에서 바로 로그인 화면을 작업해주시면 될 것 같습니다. */}
       </HomeLeftWrap>
-      {selectedImage && <ExhibitImg src={selectedImage}></ExhibitImg>}
+      <HomeRightWrap>
+        {selectedImage && <ExhibitImg src={selectedImage}></ExhibitImg>}
+      </HomeRightWrap>
     </HomeWrap>
   );
 }

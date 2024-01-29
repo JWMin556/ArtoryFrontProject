@@ -3,6 +3,10 @@ import Select from 'react-select';
 import styled from 'styled-components';
 
 export default function CustomSelect({ options, onSelect }) {
+  const handleSelectChange = (selectedOption) => {
+    onSelect(selectedOption.value); // 연도 값만 전달하도록 수정
+  };
+
   return (
     <SelectStyled
       className="basic-single"
@@ -16,7 +20,7 @@ export default function CustomSelect({ options, onSelect }) {
       closeMenuOnScroll={true}
       menuShouldBlockScroll={true}
       menuShouldScrollIntoView={false}
-      //Scroll
+      onChange={handleSelectChange} 
     />
   );
 }

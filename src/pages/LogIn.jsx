@@ -35,6 +35,13 @@ export default function LogIn() {
     //Password input박스에 들어오면 false (placeholder 텍스트 안보임)
     setIsPWInputClick(false);
   }
+
+  function handleLoginArbitary() {
+    localStorage.setItem('arbitaryLoginForHeader2',true);
+    window.location.href = '/'; // Home 페이지로 이동
+  }
+
+
   function handleClick()
   {
     getUserInfo();
@@ -89,7 +96,7 @@ export default function LogIn() {
         />
         <span><S.LockStyle src={LOCK}/></span>
         </div>
-        <StyledButton height="52px" width="345px" style={{marginTop:'20px'}}>로그인</StyledButton>
+        <Link to="/"><StyledButton height="52px" width="345px" style={{marginTop:'20px'}} onClick={handleLoginArbitary}>로그인</StyledButton></Link>
         <S.WrapLink>
           <S.LinkStyle style={{ color: '#9C9C9C' }} onClick={handleClick}>아이디 찾기</S.LinkStyle>
           <S.LinkStyle style={{ color: '#9C9C9C' }}>비밀번호 찾기</S.LinkStyle>

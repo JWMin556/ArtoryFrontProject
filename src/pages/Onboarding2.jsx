@@ -4,31 +4,34 @@ import styled from 'styled-components';
 import StyledButton from '../styled-components/StyledButton';
 import { Link } from 'react-router-dom';
 import CustomSelect from '../components/Onboarding/CustomSelect';
+import axios from 'axios';
 //import { postGenderAge } from '../components/API/memberInfo_API';
 
 export default function Onboarding2() {
   //은향씨가 작업해주실 Onboarding 페이지입니다
   const [isButton1Clicked, setIsButton1Clicked] = useState(false);
   const [isButton2Clicked, setIsButton2Clicked] = useState(false);
-  //const [gender, setGender] = useState('');
-  //const [age, setAge] = useState(25);
+  const [gender, setGender] = useState('');
+  const [age, setAge] = useState(25); 
+
   // 버튼1 클릭 이벤트 핸들러
   const handleButton1Click = () => {
     setIsButton1Clicked(true);
     setIsButton2Clicked(false);
-    // setGender('FEMALE');
+    setGender('MALE');
+    // console.log(gender);
   };
   // 버튼2 클릭 이벤트 핸들러
   const handleButton2Click = () => {
     setIsButton2Clicked(true);
     setIsButton1Clicked(false);
-    //setGender('MALE');
+    setGender('FEMALE');
+    // console.log(gender);
   };
 
   //연도 관련 객체 생성
   const startYear = 1940;
-  const endYear = 2024;
-
+  const endYear = new Date().getFullYear(); //기존 은향씨 내용2024;
   const yearArray = Array.from(
     { length: endYear - startYear + 1 },
     (_, index) => ({
@@ -36,6 +39,51 @@ export default function Onboarding2() {
       label: (startYear + index).toString(),
     })
   );
+
+  const token = localStorage.getItem('Token');
+  //api관련 함수
+  const saveAgeAndGender = async() => {
+    try{
+      const baseUrl = `http://3.39.39.6:8080/api/member/save/age-gender?gender=${gender}&age=${age}`;
+      const response = await axios.post(
+        baseUrl,
+        {
+          // "gender": gender,
+          // "age": age
+        },
+        {
+          headers: {
+            'Accept': '*/*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          }
+        },
+      );
+      console.log('사용자 정보가 성공적으로 저장되었습니다.');
+			console.log(response);
+    } catch(error) {
+      console.log(error.response.data);
+    }
+  }
+  // const saveAgeAndGender = async() => {
+  //   try {
+  //     const response = await axios.post(
+  //       `http://3.39.39.6:8080/api/member/save/age-gender`,
+  //     {
+  //       age: age,
+  //       gender: gender,
+  //     },
+  //     {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     console.log(response);
+  //   } catch(error) {
+  //     console.error('나이, 성별 보내는 에러발생', error);
+  //   }
+  // };
 
   return (
     <Container>
@@ -67,12 +115,12 @@ export default function Onboarding2() {
           )}
         </div>
         {/*태어난 년도 선택*/}
-        <CustomSelect options={yearArray} />
+        <CustomSelect options={yearArray} onSelect={(selectedYear) => setAge(new Date().getFullYear() - selectedYear + 1)}/>
       </ContentBox>
 
       {/*다음 버튼*/}
       <Link to="/onboarding3">
-        <StyledButton style={{ height: '52px', width: '333px' }}>
+        <StyledButton onClick={saveAgeAndGender} style={{ height: '52px', width: '333px' }}>
           다음
         </StyledButton>
       </Link>

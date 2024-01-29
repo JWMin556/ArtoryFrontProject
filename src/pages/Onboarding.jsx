@@ -22,23 +22,23 @@ export default function Onboarding() {
   // 이미지 업로드 시 처리하는 함수
   const handleImageChange = (imageData) => {
     setImage(imageData);
+    //console.log(imageData);
   };
 
   const token = localStorage.getItem('Token');
 
   const saveNicknameAndImage = async() => {
     try{
-      const baseUrl = 'http://3.39.39.6:8080/api/member/save/nickname';
-      const Cnickname = "String-nickname";
-      const Cimage = "String-image";
+      const baseUrl = `http://3.39.39.6:8080/api/member/save/nickname?nickname=${nickname}&image=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFEWRA_sxlYgXUFgHNCQDIb4J9rEFpWtUR5g&usqp=CAU`;
 			const response = await axios.post(
         baseUrl, 
         {
-          nickname: Cnickname,
-          image: Cimage,
+          // nickname: Cnickname,
+          // image: Cimage,
         },
         {
           headers: {
+            'Accept': '*/*',
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
           }
@@ -46,12 +46,8 @@ export default function Onboarding() {
       );
       console.log('사용자 정보가 성공적으로 저장되었습니다.');
 			console.log(response);
-			console.log(Cnickname);
-			console.log(Cimage);
-
     } catch (error) {
-      console.error('사용자 정보 저장 중 오류가 발생했습니다:', error);
-			console.log(error.response.date);
+			console.log(error.response.data);
     }
   };
 

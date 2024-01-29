@@ -5,6 +5,7 @@ import Search from '../components/Exhibition/Search';
 import AdBanner from '../components/Exhibition/AdBanner';
 import axios from 'axios';
 import { TestDummy } from '../TestDummy';
+import Genre from '../components/Exhibition/Genre';
 
 const url = 'http://3.39.39.6:8080/api/exhibitions/'
 
@@ -98,13 +99,11 @@ export default function Exhibition() { //주연씨가 작업해주실 EXHIBITION
         <S.WrapSearch>
             <Search/>
         </S.WrapSearch>
-            <Slide title = {"인기 전시"} Dummy = {popularityExhibitionData} />
-            <Slide title = {"최근 전시"} Dummy = {recentExhibitionData}/>
-            <Slide title = {"추천 전시"} Dummy = {recommendExhibitionData}/>
-            {/* <Slide title = {"이번 달 추천 전시"} Dummy = {TestDummy}/>
-            <Slide title = {"근처 추천 전시"} Dummy = {TestDummy}/>
-            <Slide title = {"작가 추천 전시"} Dummy = {TestDummy}/>
-            <Slide title = {"최근 본 전시와 비슷한 전시"} Dummy = {TestDummy}/> */}
+        
+        <Slide title = {"인기 전시"} Dummy = {popularityExhibitionData} />
+        <Slide title = {"최근 전시"} Dummy = {recentExhibitionData}/>
+        <Slide title = {"추천 전시"} Dummy = {recommendExhibitionData}/>
+        <Genre title = {"전시 카테고리"} />
     </S.Container>
   );
 }
