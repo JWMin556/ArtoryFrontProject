@@ -62,17 +62,15 @@ export default function AdBanner() {
                             'content-type': 'application/json',
                 }
                 });
-                console.log(response.randomExhibitionDtoList);
-                setRandomExhibitionData(response.data.randomExhibitionDtoList);
+                console.log("exhibition 배너",response?.data.randomExhibitionDtoList);
+                setRandomExhibitionData(response?.data.randomExhibitionDtoList);
     
             }catch(error)
             {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching data:', error.response.data);
             }
-        //fetchData();
     })();
   }, []);
-  //console.log(randomExhibitionData);
   return (
     <WrapSlide>
       <Swiperstyle

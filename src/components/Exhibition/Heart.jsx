@@ -3,25 +3,24 @@ import React, { useState } from 'react';
 import HEART from '../../Img/Slider/heart.svg';
 import ON_HEART from '../../Img/Slider/onheart.svg';
 import styled from 'styled-components';
-import { heartApi } from '../API/Heart_Save_Api';
+import { heartApi, heartCancelApi } from '../API/Heart_Save_Api';
 export const HeartImg = styled.img`
   width: 20px;
   height: 18px;
 `;
-export default function Heart(props) {
-  const [isClickHeart, setIsClickHeart] = useState(false);
-  const [colorHeart, setColorHeart] = useState(HEART);
-  function handleClickHeart(exhibitionId) {
-    setIsClickHeart((prevIsClickHeart) => !prevIsClickHeart);
-    setColorHeart((prevColorHeart) => (prevColorHeart === HEART ? ON_HEART : HEART));
-    console.log("전시회 좋아요 : " );
-    console.log(exhibitionId);
+export default function Heart(props) { //props.item.~~ 으로 불러오기
+  const [isClickHeart, setIsClickHeart] = useState(props.item.liked); // 좋아요 누름 = true / 좋아요 안누름 = false
 
-    heartApi(exhibitionId)
+  function handleClickHeart(exhibitionId) { //Save 이미지를 누르면
+    setIsClickHeart((prevIsClickHeart) => !prevIsClickHeart); //isClickSave false <-> true
+    console.log("전시회 좋아요 : ",exhibitionId);
+    //api 호출
+    if(isClickHeart){heartCancelApi(exhibitionId)} //좋아요 취소
+    else {heartApi(exhibitionId)} //좋아요
   }
   return (
     <div>
-      <HeartImg src={colorHeart} onClick={() => handleClickHeart(props)} />
+      <HeartImg src={isClickHeart?ON_HEART:HEART} onClick={() => handleClickHeart(props.item.exhibitionId)} />
     </div>
   );
 }

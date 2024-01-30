@@ -13,11 +13,13 @@ const WrapTitle = styled.div`
     bottom : 270px;
 `;
 export default function Poster(props) {
+    //console.log('전시명:',props.item.exhibitionTitle)
     const navigate = useNavigate();
     const onClickDetail = (item) => {
-      props.source === 'story'
-        ? navigate(`/story/${item.id}`, { state: { item } })
-        : navigate(`/exhibitiondetail/${item.title}`, { state: { item } });
+        console.log(item.title)
+        props.source=="record" ?
+        navigate(`/mystory/${item.exhibitionTitle}`, { state: { item } }) :
+        navigate(`/exhibitiondetail/${item.exhibitionTitle}`, { state: { item } });
     };
     // 상태 초기값을 true로 설정
     const [isShowTitle, setIsShowTitle] = useState(false);

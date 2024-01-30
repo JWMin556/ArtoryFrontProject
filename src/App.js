@@ -21,7 +21,7 @@ import Recent from './pages/Recent';
 import Recommend from './pages/Recommend';
 import TokenPage from "./pages/TokenPage";
 import StoryDetail from './pages/StoryDetail';
-
+import Record from './pages/Record';
 const Root = styled.div`
   position: absolute;
   top: 0;
@@ -59,6 +59,7 @@ function App() {
             <Route path="/exhibition/recommend" element={<Recommend/>}/>
             <Route path="/story" element={<Story />} />
             <Route path="/mystory" element={<MyStory />} />
+            <Route path="/mystory/:record" element={<Record />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/mypagemodify" element={<MyPageModify />} />
             <Route path="/exhibition" element={<Exhibition />} />{' '}

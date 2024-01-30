@@ -6,7 +6,7 @@ import Poster from '../Exhibition/Poster';
 import SEARCH from '../../Img/Search/search.svg'
 const StyledModal = {
     overlay: {
-        backgroundColor: " rgba(0, 0, 0, 0.8)",
+        backgroundColor: " rgba(0, 0, 0, 0)",
         width: "100%",
         height: "100vh",
         zIndex: "10",
@@ -15,8 +15,8 @@ const StyledModal = {
         left: "0",
     },
     content: {
-        width: "850px",
-        height: "350px",
+        width: "413px",
+        height: "516px",
         zIndex: "150",
         position: "absolute",
         top: "50%",
@@ -26,6 +26,8 @@ const StyledModal = {
         backgroundColor: "#ffff",
         justifyContent: "center",
         overflow: "auto",
+        border : 'none',
+        boxShadow: '2px 2px 5px #f3f3f3',
     },
 }
 const Container = styled.div`
@@ -43,7 +45,7 @@ const SearchStyle = styled.input`
     background-color : #f5f5f5;
     border : none;
     border-radius : 5px;
-    width : 100%;
+    width : 283px;
     height : 100%;
     padding : 0;
     padding-left :14%;
@@ -52,8 +54,8 @@ const SearchStyle = styled.input`
 `;
 const SearchImg = styled.img`
     position: relative;
-    bottom : 73%;
-    left : 4%;
+    top : 9%;
+    right : 87%;
 `;
 const WrapResult = styled.div`
     display: flex;
@@ -74,7 +76,7 @@ export default function SearchModal(props) {
     const [isInputClick,setIsInputClick] = useState(false); //ID input 박스 클릭 여부에 따라 placeholder의 상태를 관리하기 위한 변수
     const [keyword,setKeyWord] = useState(); 
     const [result,setResult] = useState([]);
-    const [isOpenModal,setIsOpenModal] = useState(props.isButtonClick);
+    const [isOpenModal,setIsOpenModal] = useState(props.isModalOpen);
     function handleInputFocus() 
     { //ID input박스에 들어오면 true(placeholder 텍스트 안보임), outline이 안보이도록 바꿔줌
         setIsInputClick(true); 
@@ -106,14 +108,15 @@ return (
         <Container>
             <WrapSearch>
             <SearchStyle 
-            type="text" 
-            onFocus={handleInputFocus} 
-            onBlur={handleInputBlur} 
-            placeholder={isInputClick ?  "" : "원하는 전시를 검색해보세요" }
-            style={isOutLine}
-            value={keyword}
-            onChange={(e)=>setKeyWord(e.target.value)}
-            onKeyPress={handleKeyPress}
+                type="text" 
+                onFocus={handleInputFocus} 
+                onBlur={handleInputBlur} 
+                placeholder={isInputClick ?  "" : "원하는 전시를 검색해보세요" }
+                style={isOutLine}
+                value={keyword}
+                onChange={(e)=>setKeyWord(e.target.value)}
+                onKeyPress={handleKeyPress}
+            
             />
             <SearchImg src={SEARCH}/>
             </WrapSearch>
@@ -121,7 +124,7 @@ return (
         {result.map((item, index) => (
             <WrapPoster key={index}>
                 <div>
-                    <Poster item={item}/>
+                    <Poster item={item} source={props.source}/>
                 </div>
             </WrapPoster>
         ))}

@@ -28,8 +28,8 @@ export default function Slide(props) {
             <S.WrapPorterAndIcon>
               <Poster item={item} />
               <S.WrapIcon>
-                <Heart item={item.exhibitionId}/>
-                <Save item={item.exhibitionId}/>
+                <Heart item={item}/>
+                <Save item={item}/>
               </S.WrapIcon>
             </S.WrapPorterAndIcon>
           </div>

@@ -59,7 +59,7 @@ return (
             onChange={(e)=>setKeyWord(e.target.value)}
             onKeyPress={handleKeyPress}
             />
-        <span><SearchImg src={SEARCH}/></span>
+        <SearchImg src={SEARCH}/>
     </div>
 )
 }

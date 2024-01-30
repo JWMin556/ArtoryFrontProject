@@ -4,25 +4,35 @@ export const Container = styled.div`
     display : flex;
     flex-direction : column;
     justify-content: center;
-    align-item: center;
+    align-items: center;
 `;
 
-export const WrapRecord = styled.div`
+export const WrapSaveExhibition = styled.div`
+    //border : 1px solid red;
     display : flex;
     flex-wrap : wrap;
     margin-top : 2%;
-    margin-left : 10%;
+    margin-left : 17%;
     margin-right : 15%;
     justify-content: center;
+    align-items: center;
+
 
 `;
-
+export const WrapPoster = styled.div`
+    margin-right  : 3%;
+`;
 export const WrapCalendar = styled.div`
+    width : 100%;
+    //border : 1px solid red;
     display : flex;
-    justify-content: center;
+    justify-content: space-evenly;
     margin-top : 5%;
 `;
-
+export const WrapCalendar2 = styled.div`
+    //border : 1px solid #f7f7;
+    margin-right : 10%;
+`;
 export const RecordName = styled.div`
     font-size : 30px;
     font-family: Pretendard;
@@ -49,4 +59,8 @@ export const WrapProfileAndButton = styled.div`
     display : flex;
     justify-content: space-around;
 
+`;
+
+export const WrapMemo = styled.div`
+    //margin-right : 2%;
 `;
