@@ -49,7 +49,7 @@ const SearchStyle = styled.input`
     height : 100%;
     padding : 0;
     padding-left :14%;
-    font-family: Pretendard;
+    font-family: 'Pretendard';
     color : #ababab;
 `;
 const SearchImg = styled.img`

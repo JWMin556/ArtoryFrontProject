@@ -77,8 +77,8 @@ export default function Recommend() {
               <Poster item={item} />
             </div>
             <WrapIcon>
-              <Heart />
-              <Save />
+              <Heart item={item}/>
+              <Save item={item}/>
             </WrapIcon>
           </WrapPoster>
         ))}

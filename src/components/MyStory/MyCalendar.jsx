@@ -41,7 +41,7 @@ const Days = styled.div`
   margin: 0;
   border-radius: 5px;
   font-size: 16px;
-  font-family: Pretendard;
+  font-family: 'Pretendard';
   &span{
     margin : 10px;
   }
@@ -78,67 +78,37 @@ const MonthSelect = styled.select`
   border : none;
   font-size: 25px;
   font-weight: bold;
-  font-family: Pretendard;
+  font-family: 'Pretendard';
   width : 112px;
 
 `;
 const OptionStyle = styled.option`
   font-size : 14px;
   text-align:center;
-  font-family: Pretendard;
+  font-family: 'Pretendard';
   color : #616161;
   :hover{
     background-color : #121212;
     color : #fff;
   }
 `;
-const FloatBtn1 = styled.button`
-  box-shadow: 0 1px 2px 0 #777;
-  position: fixed;
-  z-index: 999;
-  right: 6%;
-  bottom: 18%;
-  width: 18%;
-  min-width: 80px;
-  max-width: 130px;
-  height: 30px;
-  margin: auto 0px;
-  background-color: #fff;
-  border: none;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 0.7em;
-  color: #4d4887;
-  cursor: pointer;
-  outline: none;
+const WrapYearSelect = styled.div`
+  //border : 1px solid red;
+  width : 110%;
+  display : flex;
+  justify-content : end;
 `;
-const FloatBtn2 = styled.button`
-  box-shadow: 0 1px 2px 0 #777;
-  position: fixed;
-  z-index: 999;
-  right: 6%;
-  bottom: 10%;
-  width: 18%;
-  min-width: 80px;
-  max-width: 130px;
-  height: 30px;
-  margin: auto 0px;
-  background-color: #fff;
-  border: none;
-  border-radius: 20px;
-  font-weight: 600;
-  color: #4d4887;
-  font-size: 0.7em;
-  cursor: pointer;
-  outline: none;
-  & img {
-    margin-top: 2px;
-    max-height: 70%;
-    width: auto;
-    color: #bebddb;
-  }
+const YearSelect = styled.select`
+  width : 2.5em;
+  height : 1.5em;
+  text-align : end;
+  border : none;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Pretendard';
+  margin-bottom : 3%;
+  margin-right : 5%;
 `;
-
 const MyCalendar = (props) => {
 
   const {
@@ -247,6 +217,17 @@ const MyCalendar = (props) => {
   }
   return (
     <div>
+      <WrapYearSelect>
+          <YearSelect>
+            <option value='2024'>{year}년</option>
+            <option value='1'>{year+1}년</option>
+            <option value='1'>{year+2}년</option>
+            <option value='1'>{year+3}년</option>
+            <option value='1'>{year+4}년</option>
+            <option value='1'>{year+5}년</option>
+            <option value='1'>{year+6}년</option>
+          </YearSelect>
+        </WrapYearSelect>
       <Container>
         <Header>
           <img src={PREV_BUTTON} onClick={prevMonth}></img>

@@ -21,8 +21,8 @@ export const IMG = styled.img`
 `;
 
 export const WrapInfo = styled.div`
-  font-family: Pretendard;
-  //border : 1px solid green;
+font-family: 'Pretendard';
+//border : 1px solid green;
   width : 398px;
   height : 100%;
   display : flex;

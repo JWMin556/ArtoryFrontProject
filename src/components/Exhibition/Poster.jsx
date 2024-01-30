@@ -5,7 +5,7 @@ import Title from './Title';
 const PosterStyle = styled.img`
     width : 186px;
     height: 268px;
-    border-radius : 10px; 
+    //border-radius : 10px; 
     box-shadow: 5px 5px 8px #D9D9D9; 
 `;
 const WrapTitle = styled.div`

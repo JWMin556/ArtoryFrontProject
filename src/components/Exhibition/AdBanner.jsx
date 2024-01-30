@@ -42,6 +42,10 @@ const Swiperstyle = styled(Swiper)`
   .swiper-wrapper {
     transform: translate3d(-110.2px, 0, 0);
   }
+  .swiper-3d {
+    //width : 100%;
+    //perspective : 100px;
+  }
 `;
 
 export default function AdBanner() {

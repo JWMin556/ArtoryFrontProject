@@ -27,15 +27,17 @@ export const WrapCalendar = styled.div`
     //border : 1px solid red;
     display : flex;
     justify-content: space-evenly;
-    margin-top : 5%;
+    //margin-top : 5%;
 `;
 export const WrapCalendar2 = styled.div`
     //border : 1px solid #f7f7;
     margin-right : 10%;
+    position : relative;
+    //bottom : 50px;
 `;
 export const RecordName = styled.div`
     font-size : 30px;
-    font-family: Pretendard;
+    font-family: 'Pretendard';
     font-weight : bold;
     margin-top : 10%;
     //position : relative;
@@ -63,4 +65,6 @@ export const WrapProfileAndButton = styled.div`
 
 export const WrapMemo = styled.div`
     //margin-right : 2%;
+    //border : 1px solid red;
+
 `;

@@ -10,7 +10,7 @@ const MemoStyle = styled.textarea`
     width: 100%;
     height: 100%;
     color: #ababab;
-    font-family: Pretendard;
+    font-family: 'Pretendard';
     background-color: #F5F5F5;
     border: none;
     border-radius: 10px;
@@ -18,9 +18,10 @@ const MemoStyle = styled.textarea`
     padding-top : 3%;
     resize: none;
     margin-left : 30%;
+    margin-top : 23%;
     &::placeholder {
         color: #ababab;
-        font-family: Pretendard;
+        font-family: 'Pretendard';
     }
     &:focus {
         outline: none;
@@ -36,7 +37,7 @@ const SaveButton = styled.button`
     position : relative;
     bottom : 10%;
     left : 105%;
-    font-family: Pretendard;
+    font-family: 'Pretendard';
     font-size : 12px;
 `;
 

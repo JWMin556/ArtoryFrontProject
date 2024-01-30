@@ -2,7 +2,7 @@ import React ,{useEffect, useState}from 'react'
 import axios from 'axios';
 import MyCalendar from '../components/MyStory/MyCalendar'
 import * as S from '../styled-components/MyStory.style'
-import Recrod from '../components/MyStory/Recrod';
+import SaveExhibition from '../components/MyStory/SaveExhibition';
 import StyledButton from '../styled-components/StyledButton';
 import SearchModal from '../components/MyStory/SearchModal1';
 import Memo from '../components/MyStory/Memo'
@@ -61,7 +61,14 @@ export default function MyStory() {
             <MyCalendar/>
           </S.WrapCalendar2>
       </S.WrapCalendar>
-      <div style={{ margin: '5%' }}>
+      <div style={{ margin: '5%'}}>
+        <div style={{
+          fontSize:'30px',
+          fontWeight:'bold',
+          fontFamily:'Pretendard',
+          width : '50%',
+          textAlign:'center'
+          }}>저장한 전시</div>
       <S.WrapSaveExhibition>
         {userData.exhibitions===undefined ? (
           <p>Loading...</p>
@@ -69,7 +76,7 @@ export default function MyStory() {
           //<p>있음</p>
           userData.exhibitions.map((item, index) => (
             <S.WrapPoster className='hi' key={index}>
-              <Recrod
+              <SaveExhibition
                 item={item}
               />
             </S.WrapPoster>

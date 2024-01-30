@@ -11,7 +11,7 @@ const WrapPoster = styled.div`
 const PosterStyle = styled.img`
     width : 186px;
     height : 268px;
-    border-radius : 10px;
+    //border-radius : 10px;
 `;
 const WrapIcon = styled.div`
     width : 175px;
@@ -23,7 +23,7 @@ const WrapIcon = styled.div`
     margin-top : 5%;
 `;
 
-export default function Recrod(props) {
+export default function SaveExhibition(props) {
     //console.log("record에서 찍힘",props.id)
 return (
     <WrapPoster>

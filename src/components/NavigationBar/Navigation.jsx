@@ -11,7 +11,7 @@ const WrapNavigation = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  font-family: Pretendard;
+  font-family: 'Pretendard';
 `;
 const Navigation1 = styled.span`
   color: #595959;
