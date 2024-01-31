@@ -22,6 +22,16 @@ import Recommend from './pages/Recommend';
 import KakaoLoginLoading from './pages/KakaoLoginLoading';
 import TokenPage from "./pages/TokenPage";
 import StoryDetail from './pages/StoryDetail';
+import GenreMedia from './pages/GenreMedia';
+import GenreCraft from './pages/GenreCraft';
+import GenreDesign from './pages/GenreDesign';
+import GenreSculpture from './pages/GenreSculpture';
+import GenrePlanExhibition from './pages/GenrePlanExhibition';
+import GenreInstallationArt from './pages/GenreInstallationArt'
+import GenrePainting from './pages/GenrePainting';
+import GenreArtistExhibition from './pages/GenreArtistExhibition';
+import GenrePicture from './pages/GenrePicture';
+import GenreSpecialExhibition from './pages/GenreSpecialExhibition';
 
 const Root = styled.div`
   position: absolute;
@@ -63,6 +73,18 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/mypagemodify" element={<MyPageModify />} />
             <Route path="/exhibition" element={<Exhibition />} />{' '}
+
+            <Route path='/exhibition/genremedia' element={<GenreMedia />}/>
+            <Route path='/exhibition/genrecraft' element={<GenreCraft />} />
+            <Route path='/exhibition/genredesign' element={<GenreDesign />}/>
+            <Route path='/exhibition/genresculpture' element={<GenreSculpture />} />
+            <Route path='/exhibition/genreplanexhibition' element={<GenrePlanExhibition />} />
+            <Route path='/exhibition/genreinstallationart' element={<GenreInstallationArt />} />
+            <Route path='/exhibition/genrepainting' element={<GenrePainting />} />
+            <Route path='/exhibition/genreartistexhibition' element={<GenreArtistExhibition />} />
+            <Route path='/exhibition/genrepicture' element={<GenrePicture />} />
+            <Route path='/exhibition/genrespecialexhibition' element={<GenreSpecialExhibition />} />
+
             {/*주연씨 담당 페이지*/}
             <Route
               path="/exhibitiondetail/:title"

@@ -22,7 +22,7 @@ export default function Onboarding() {
   // 이미지 업로드 시 처리하는 함수
   const handleImageChange = (imageData) => {
     setImage(imageData);
-    //console.log(imageData);
+    console.log(imageData);
   };
 
   const token = localStorage.getItem('Token');

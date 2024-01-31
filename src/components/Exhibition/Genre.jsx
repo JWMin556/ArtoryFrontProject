@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Poster from './Poster';
 
 const GenreWrap = styled.div`
     width: 61%;
@@ -22,11 +23,24 @@ const Content = styled.div`
 `;
 
 const ContentFirstColumn = styled.div`
-    display: flex;
+    width: auto;
+    height: auto;
 `;
 
 const ContentSecondColumn = styled.div`
+    width: auto;
+    height: auto;
+`;
+
+const ContentArea = styled.div`
     
+`;
+
+const WrapPorterAndIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
 `;
 
 export default function Genre(props) {
@@ -34,6 +48,47 @@ export default function Genre(props) {
     <GenreWrap>
         <Title>{props.title}</Title>
         <Content>
+            <ContentFirstColumn>
+                <ContentArea>
+                    {props.Dummy.results.slice(0, 4).map((item, index) => (
+                        <div key={index}>
+                            <WrapPorterAndIcon>
+                                <Poster source={props.source} item={item} />
+                            </WrapPorterAndIcon>
+                        </div>
+                    ))}
+                </ContentArea>
+            </ContentFirstColumn>
+            <ContentSecondColumn>
+            <ContentArea>
+                    {props.Dummy.results.slice(0, 2).map((item, index) => (
+                        <div key={index}>
+                            <WrapPorterAndIcon>
+                                <Poster source={props.source} item={item} />
+                            </WrapPorterAndIcon>
+                        </div>
+                    ))}
+                </ContentArea>
+            </ContentSecondColumn>
+            <ContentFirstColumn>
+            <ContentArea>
+                    {props.Dummy.results.slice(0, 4).map((item, index) => (
+                        <div key={index}>
+                            <WrapPorterAndIcon>
+                                <Poster source={props.source} item={item} />
+                            </WrapPorterAndIcon>
+                        </div>
+                    ))}
+                </ContentArea>
+            </ContentFirstColumn>
+            <ContentSecondColumn>
+                {props.Dummy.results.slice(0, 2).map((item, index) => (
+                    <div key={index}>
+                        <WrapPorterAndIcon>
+                            <Poster source={props.source} item={item} />
+                        </WrapPorterAndIcon>
+                    </div>
+                ))}</ContentSecondColumn>
         </Content>
     </GenreWrap>
   )
