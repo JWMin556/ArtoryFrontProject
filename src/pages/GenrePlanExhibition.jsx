@@ -68,8 +68,8 @@ export default function GenrePlanExhibition() {
               <Poster item={item} />
             </div>
             <WrapIcon>
-              <Heart />
-              <Save />
+              <Heart item={item}/>
+              <Save item={item}/>
             </WrapIcon>
           </WrapPoster>
         ))}

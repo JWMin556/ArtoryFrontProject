@@ -28,8 +28,8 @@ export default function StorySlide(props) {
             <S.WrapPoster>
               <StoryPoster source={props.source} item={item} />
               <S.WrapIcon>
-                <Heart />
-                <Save />
+                <Heart item={item} />
+                <Save item={item}/>
               </S.WrapIcon>
             </S.WrapPoster>
           </div>

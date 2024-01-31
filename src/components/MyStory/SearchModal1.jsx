@@ -73,7 +73,7 @@ export default function SearchModal(props) {
     const [isOutLine,setOutLine] = useState(); //input 박스 클릭 시 outline의 상태를 관리하기 위한 변수
     const [isInputClick,setIsInputClick] = useState(false); //ID input 박스 클릭 여부에 따라 placeholder의 상태를 관리하기 위한 변수
     const [keyword,setKeyWord] = useState(); 
-    const [result,setResult] = useState([]);
+    const [resultData,setResultData] = useState([]);
     const [isOpenModal,setIsOpenModal] = useState(props.isButtonClick);
     function handleInputFocus() 
     { //ID input박스에 들어오면 true(placeholder 텍스트 안보임), outline이 안보이도록 바꿔줌
@@ -86,14 +86,15 @@ export default function SearchModal(props) {
     } 
 
 const handleKeyPress = async(e) => {
+    console.log('검색 키워드', keyword)
     if(e.key === "Enter"){
         try{
             const result = await searchExhibition(keyword);
-            setResult(result);
+            setResultData(result);
             console.log(result);
         }
         catch (error){
-            console.error('Error fetching weather data:', error);
+            console.error('Error fetching weather data:', error.response.data);
         }
     }
 }
@@ -118,7 +119,7 @@ return (
             <SearchImg src={SEARCH}/>
             </WrapSearch>
         <WrapResult>
-        {result.map((item, index) => (
+        {resultData.map((item, index) => (
             <WrapPoster key={index}>
                 <div>
                     <Poster item={item} source={props.source}/>

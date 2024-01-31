@@ -10,6 +10,7 @@ import Poster from './Poster';
 import Title from './Title';
 import styled from 'styled-components';
 export default function Slide(props) {
+  console.log("슬라이드 페이지", props.Dummy)
   const setting = {
     arrows: true,
     infinite: true,

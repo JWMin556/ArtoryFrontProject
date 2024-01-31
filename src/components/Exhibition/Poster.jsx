@@ -13,7 +13,7 @@ const WrapTitle = styled.div`
     bottom : 270px;
 `;
 export default function Poster(props) {
-    //console.log('전시명:',props.item.exhibitionTitle)
+    console.log('전시명:',props.item.exhibitionTitle)
     const navigate = useNavigate();
     const onClickDetail = (item) => {
         console.log(item.title)

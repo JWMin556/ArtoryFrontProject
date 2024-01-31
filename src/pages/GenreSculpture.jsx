@@ -66,8 +66,8 @@ export default function GenreSculpture() {
               <Poster item={item} />
             </div>
             <WrapIcon>
-              <Heart />
-              <Save />
+              <Heart item={item} />
+              <Save item={item}/>
             </WrapIcon>
           </WrapPoster>
         ))}

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 //import Genre from '../components/Exhibition/Genre'; //여기 이 Genre.jsx는 잠시 사용하지 말아주세요
 
 const url = 'http://3.39.39.6:8080/api/exhibitions/'
-
+const distanceRecommendUrl = "http://3.39.39.6:8080/api/exhibitions/distanceRecommend?page=1"
 export default function Exhibition() { //주연씨가 작업해주실 EXHIBITION페이지입니다.
     const [popularityExhibitionData, setPopularityExhibitionData] = useState([]);
     const [recentExhibitionData, setRecentExhibitionData] = useState([]);
@@ -21,9 +21,42 @@ export default function Exhibition() { //주연씨가 작업해주실 EXHIBITION
 
     useEffect(() => {
         (async () => {
-          //인기 전시회 API
+          //인기, 최근, 추천, 유사 전시회 API
             try {
             const response = await axios.post(`${url}all?page=1`,
+            {
+                    //"latitude": "90",
+                    //"longitude": "90"
+            },
+                {
+                    headers: {
+                        'Accept': '*/*',
+                        'Authorization': `Bearer ${token}`,
+                        'content-type': 'application/json',
+                }
+                }
+            );
+            //console.log(response.data);
+            console.log("인기전시",response?.data.popluarExhibitionDtoList);
+            setPopularityExhibitionData(response?.data.popluarExhibitionDtoList);
+            console.log("최근전시",response?.data.recentExhibitionDtoList);
+            setRecentExhibitionData(response?.data.recentExhibitionDtoList);
+            console.log("추천전시",response?.data.recommendExhibitionDtoList);
+            setRecommedExhibitionData(response?.data.recommendExhibitionDtoList);
+            //console.log("거리 추천 전시",response.data.distanceRecommendExhibitionDtoList);
+            //setDistanceRecommedExhibitionData(response?.data.distanceRecommendExhibitionDtoList);
+            console.log("최근 본 전시와 유사한 전시",response?.data.similarExhibitionDtoList);
+            setSimlarExhibitionData(response?.data.similarExhibitionDtoList);
+            } catch (error) {
+                console.log(error.response.data);
+        }
+        })();
+      }, []);
+      useEffect(() => {
+        (async () => {
+          //거리 추천 전시회 API
+            try {
+            const response = await axios.post(distanceRecommendUrl,
             {
                     "latitude": "90",
                     "longitude": "90"
@@ -36,17 +69,10 @@ export default function Exhibition() { //주연씨가 작업해주실 EXHIBITION
                 }
                 }
             );
-            console.log("인기전시",response?.data.popluarExhibitionDtoList);
-            setPopularityExhibitionData(response?.data.popluarExhibitionDtoList);
-            console.log("최근전시",response?.data.recentExhibitionDtoList);
-            setRecentExhibitionData(response?.data.recentExhibitionDtoList);
-            console.log("추천전시",response.data.recommendExhibitionDtoList);
-            setRecommedExhibitionData(response?.data.recommendExhibitionDtoList);
-            console.log("거리 추천 전시",response.data.distanceRecommendExhibitionDtoList);
-            setDistanceRecommedExhibitionData(response?.data.distanceRecommendExhibitionDtoList);
-            console.log("최근 본 전시와 유사한 전시",response.data.similarExhibitionDtoList);
-            setSimlarExhibitionData(response?.data.similarExhibitionDtoList);
-            
+            //console.log(response.data);
+            console.log("거리추천전시",response?.data);
+            setDistanceRecommedExhibitionData(response?.data);
+
             } catch (error) {
                 console.log(error.response.data);
         }
