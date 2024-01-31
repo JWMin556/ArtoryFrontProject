@@ -1,25 +1,62 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import close from '../../Img/Vector.png';
 import open from '../../Img/Vector (1).png';
 import styled from 'styled-components';
 import { useState } from 'react';
-import { createReview, getReviews } from '../../api';
-import Comment from './Comment';
 import Emoticon from './Emoticon';
-const INITIAL_VALUES = {
-  title: '조아',
-  content: '',
-  imgUrl: '',
-};
+import { createComment, getComments } from '../API/story_API';
+import face_g1 from '../../Img/Story/face_g1.svg';
+import face_g2 from '../../Img/Story/face_g2.svg';
+import face_g3 from '../../Img/Story/face_g3.svg';
+import face_g4 from '../../Img/Story/face_g4.svg';
+import face_g5 from '../../Img/Story/face_g5.svg';
+import face_g6 from '../../Img/Story/face_g6.svg';
+import face_g7 from '../../Img/Story/face_g7.svg';
+import face_g8 from '../../Img/Story/face_g8.svg';
+import face_g9 from '../../Img/Story/face_g9.svg';
+import CommentList from './CommentList';
 
-export default function CommentInput() {
+const INITIAL_VALUES = {
+  content: '',
+};
+const greyEmoticons = [
+  face_g1,
+  face_g2,
+  face_g3,
+  face_g4,
+  face_g5,
+  face_g6,
+  face_g7,
+  face_g8,
+  face_g9,
+];
+export default function CommentInput(props) {
   const [isSubmitting, setIsSubmitting] = useState(false); //로딩처리
   const [submittingError, setSubmittingError] = useState(null); //에러처리
-  const [commentIsOpen, setCommentIsOpen] = useState(true);
+  const [commentIsOpen, setCommentIsOpen] = useState(false);
   const [items, setItems] = useState([]);
   const [values, setValues] = useState(INITIAL_VALUES); //form태그 submit value값들 useState하나로 관리
-  const [prevIdx, setPrevIdx] = useState(0);
+  const [selectedEmoticonIndex, setSelectedEmoticonIndex] = useState(null);
+  const [emoticons, setEmoticons] = useState(greyEmoticons);
+  //코멘트 리스트를 다시 불러오는 함수를 정의
+  const loadComments = async () => {
+    try {
+      const response = await getComments(props.storyId); // 댓글 리스트를 가져오는 API 호출
+      setItems(response); // 서버에서 받아온 코멘트 리스트로 state 업데이트
+      console.log(response);
+    } catch (error) {
+      console.error('Error loading comments:', error.response.data);
+    }
+  };
+  useEffect(() => {
+    loadComments();
+  }, []); // 빈 배열을 전달하여 컴포넌트가 처음 마운트될 때만 실행
 
+  // 이 함수를 Emoticon 컴포넌트에 전달하여 선택된 인덱스를 받아옵니다.
+  const handleEmoticonSelection = (selectedIdx) => {
+    setSelectedEmoticonIndex(selectedIdx);
+  };
+  //content저장 함수.
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((prevValues) => ({
@@ -30,115 +67,120 @@ export default function CommentInput() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('content', values.content);
-    formData.append('title', values.title);
-    formData.append('imgUrl', values.imgUrl);
-    let result;
+
     try {
       setSubmittingError(null);
       setIsSubmitting(true);
-      console.log(values);
-      result = await createReview(formData);
+      await createComment(
+        props.storyId,
+        `${selectedEmoticonIndex + 1}`,
+        values.content
+      );
+
+      // 댓글 작성 후 최신 코멘트 리스트를 다시 불러와서 렌더링
+      await loadComments();
     } catch (error) {
       setSubmittingError(error);
       return;
     } finally {
       setIsSubmitting(false);
     }
-    const { review } = result; //response로 post 데이터를 보내주기 때문에 가능한 것.
-    onSubmitSuccess(review);
-    setValues(INITIAL_VALUES);
-  };
 
-  //request 이후 비동기로 실행(반드시 callback형태로 실행)
-  const onSubmitSuccess = (review) => {
-    setItems((prevItems) => [review, ...prevItems]);
+    setValues(INITIAL_VALUES);
+    // 선택된 이모티콘을 다시 초기화 (회색으로 설정)
+    setEmoticons(greyEmoticons);
   };
 
   function openComment() {
     setCommentIsOpen(!commentIsOpen);
   }
 
-  const handleLoadClick = async () => {
-    setCommentIsOpen(!commentIsOpen);
-    const { reviews } = await getReviews();
-    setItems(reviews);
-  };
-
   //나중에 form태그는 따로 컴포넌트로 빼는 걸로
   return (
     <CommentWrap>
       <div className="댓글작성">
-        {commentIsOpen ? (
-          <OpenBtn onClick={handleLoadClick}>
+        {!commentIsOpen ? (
+          <OpenBtn onClick={openComment}>
             댓글 작성{'  '}
             <img style={{ width: '12px' }} src={close} alt="화살표" />
           </OpenBtn>
         ) : (
-          <>
-            <OpenedComment>
-              <div style={{ paddingLeft: '10px' }}>
-                <div style={{ cursor: 'pointer' }} onClick={openComment}>
-                  <span> 댓글 작성{'  '}</span>
-                  <img style={{ width: '12px' }} src={open} alt="아래화살표" />
-                </div>
-                <p
-                  style={{
-                    color: '#ababab',
-                    fontSize: 'smaller',
-                    margin: '5px 0 10px',
-                  }}
-                >
-                  전시에 대한 공감 표시를 선택해주세요
-                </p>
-                <Emoticon prevIdx={prevIdx} setPrevIdx={setPrevIdx} />
+          <OpenedComment>
+            <div style={{ paddingLeft: '10px' }}>
+              <div style={{ cursor: 'pointer' }} onClick={openComment}>
+                <span> 댓글 작성{'  '}</span>
+                <img style={{ width: '12px' }} src={open} alt="아래화살표" />
               </div>
+              <p
+                style={{
+                  color: '#ababab',
+                  fontSize: 'smaller',
+                  margin: '5px 0 10px',
+                }}
+              >
+                전시에 대한 공감 표시를 선택해주세요
+              </p>
+            </div>
 
-              <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
+              <Emoticon
+                onSelect={handleEmoticonSelection}
+                greyEmoticons={greyEmoticons}
+                emoticons={emoticons}
+                setEmoticons={setEmoticons}
+              />
+              <InputDiv>
                 <CommentText
                   name="content"
                   value={values.content}
-                  className="CommentForm"
                   onChange={handleChange}
                 ></CommentText>
                 <Submit type="submit" disabled={isSubmitting}>
-                  저장
+                  확인
                 </Submit>
-                {submittingError?.message && (
-                  <div>{submittingError.message}</div>
-                )}
-              </Form>
-            </OpenedComment>
-            <Comment items={items} />
-          </>
+              </InputDiv>
+
+              {submittingError?.message && <div>{submittingError.message}</div>}
+            </Form>
+          </OpenedComment>
         )}
       </div>
       <div className="댓글 보기"></div>
+      <CommentList
+        storyId={props.storyId}
+        items={items}
+        greyEmoticons={greyEmoticons}
+        loadComments={loadComments}
+      />
     </CommentWrap>
   );
 }
 
 const Form = styled.form`
   display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  width: 100%;
+`;
+const InputDiv = styled.div`
+  display: flex;
   justify-content: center;
   position: relative;
   padding: 10px;
-  background-color: #f0f0f0;
-  border-radius: 20px;
-  height: 150px;
+  background-color: #f4f5f7; //border-radius: 14px;
+  height: 100px;
   margin-top: 10px;
 `;
 const CommentText = styled.textarea`
   resize: none;
   color: #616161;
-  background-color: #f0f0f0;
-  //padding-inline-start: 2%;
+  background-color: #f4f5f7;
   font-family: 'Pretendard';
-  width: 99%;
+  width: 100%;
   height: 80%;
   border: none;
   outline: none;
+  padding-right: 85px;
 
   //스크롤 관련
   overflow: auto;
@@ -161,19 +203,20 @@ const Submit = styled.button`
   border: none;
   background-color: black;
   color: white;
-  border-radius: 7px;
+  //border-radius: 7px;
   padding: 5px 30px;
 `;
 
 const CommentWrap = styled.div`
   margin-left: 10%;
+  padding-left: 10px;
 `;
 const OpenBtn = styled.button`
-  width: 100%;
+  width: 99%;
   //height: 60px;
   //border: 1px solid black;
   border: none;
-  border-radius: 20px 0 0 20px;
+  border-radius: 14px;
   box-shadow: 1px 2px 8px #00000025;
 
   text-align: start;
@@ -186,7 +229,7 @@ const OpenBtn = styled.button`
 `;
 const OpenedComment = styled.div`
   border: none;
-  border-radius: 20px;
+  border-radius: 14px;
   box-shadow: 1px 2px 8px #00000025;
   padding: 20px;
   text-align: start;

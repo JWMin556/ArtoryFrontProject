@@ -7,8 +7,7 @@ import axios from 'axios';
 import { TestDummy } from '../TestDummy';
 
 const url = 'http://3.39.39.6:8080/api/exhibitions/';
-const token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDYxNzI2MzIsImV4cCI6MTcwNjI2MjYzMiwibWVtYmVySWQiOjQsInJvbGUiOiJVU0VSIn0.utWBgIlkM-je684zEEM83zKlPRNNlAaov-1sRj53AiLMB-Aked78AxOYwuoKadiaQZ6RTQY6d-BkXprqzd41oA';
+const token = localStorage.getItem('Token');
 export default function Exhibition(props) {
   //주연씨가 작업해주실 EXHIBITION페이지입니다.
   const [popularityExhibitionData, setPopularityExhibitionData] = useState([]);

@@ -2,12 +2,11 @@ import React from 'react';
 import * as S from '../../styled-components/Slide.style';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Heart from '../Exhibition/Heart';
-import Save from '../Exhibition/Save';
+import Heart from '../Story/Heart';
 import Prev from '../Exhibition/Prev';
 import Next from '../Exhibition/Next';
 import StoryPoster from './StoryPoster';
-
+import Scrap from './Scrap';
 export default function StorySlide(props) {
   const setting = {
     arrows: true,
@@ -23,13 +22,21 @@ export default function StorySlide(props) {
     <S.WrapSlider>
       <S.Category>{props.title}</S.Category>
       <S.StyledSlider {...setting}>
-        {props.Dummy.results.map((item, index) => (
-          <div key={index}>
+        {props.Dummy.map((item) => (
+          <div key={item.storyId}>
             <S.WrapPoster>
-              <StoryPoster source={props.source} item={item} />
+              <StoryPoster item={item} />
               <S.WrapIcon>
-                <Heart />
-                <Save />
+                <Heart
+                  loadStories={props.loadStories}
+                  id={item.storyId}
+                  isLiked={item.isLiked}
+                />
+                <Scrap
+                  loadStories={props.loadStories}
+                  id={item.storyId}
+                  isScrapped={item.isScrapped}
+                />
               </S.WrapIcon>
             </S.WrapPoster>
           </div>
