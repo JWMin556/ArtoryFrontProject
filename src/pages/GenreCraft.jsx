@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Heart from '../components/Exhibition/Heart';
 import Save from '../components/Exhibition/Save';
@@ -35,25 +35,23 @@ const WrapIcon = styled.div`
 `;
 
 export default function GenreCraft() {
-  const url = 'http://3.39.39.6:8080/api/cagegory/craft?page=1'
+  const url = 'http://3.39.39.6:8080/api/cagegory/craft?page=1';
   const [craftData, setCraftData] = useState([]);
   const token = localStorage.getItem('Token');
 
   useEffect(() => {
     (async () => {
-      try{
-        const response = await axios.get(url,
-          {
-            headers : {
-              'Accept': '*/*',
-              'Authorization': `Bearer ${token}`,
-              'content-type': 'application/json',
-            }
-          }
-        );
+      try {
+        const response = await axios.get(url, {
+          headers: {
+            Accept: '*/*',
+            Authorization: `Bearer ${token}`,
+            'content-type': 'application/json',
+          },
+        });
         console.log(response.data);
         setCraftData(response.data);
-      } catch(error) {
+      } catch (error) {
         console.log(error.response.data);
       }
     })();
@@ -68,12 +66,12 @@ export default function GenreCraft() {
               <Poster item={item} />
             </div>
             <WrapIcon>
-              <Heart item={item}/>
-              <Save item={item}/>
+              <Heart item={item} />
+              <Save item={item} />
             </WrapIcon>
           </WrapPoster>
         ))}
       </WrapResult>
     </Container>
-  )
+  );
 }

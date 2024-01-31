@@ -5,11 +5,17 @@ import StyledButton from '../styled-components/StyledButton';
 import { Link } from 'react-router-dom';
 import Topic from '../components/Onboarding/Topic';
 import { getMemberInfo, saveGenre } from '../components/API/member_API';
-
+import { useNavigate } from 'react-router-dom';
+import SplashScreen from '../components/SplashScreen';
 export default function Onboarding3() {
   //은향씨가 작업해주실 Onboarding 페이지입니다
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState([]);
+
+  // 스플래시 화면 상태 추가
+  const [showSplash, setShowSplash] = useState(false);
+  const navigate = useNavigate();
+
   const genres = [
     'MEDIA',
     'CRAFT',
@@ -43,10 +49,14 @@ export default function Onboarding3() {
       const index = updatedTopics.indexOf(topic);
       updatedIndex.splice(index, 1);
       updatedTopics.splice(index, 1);
-    } else {
-      // 주제가 선택되어 있지 않으면 추가합니다.
+    } else if (updatedTopics.length < 3) {
+      // 주제가 선택되어 있지 않고, 선택된 주제의 개수가 3개 미만이면 추가합니다.
       updatedTopics.push(topic);
       updatedIndex.push(props_index);
+    } else {
+      // 이미 3개의 주제가 선택되었으면 추가하지 않습니다.
+      alert('최대 3개의 주제만 선택할 수 있습니다.');
+      return;
     }
     console.log(updatedTopics.length);
     // 현재 최종 선택된 주제를 업데이트합니다.
@@ -60,6 +70,14 @@ export default function Onboarding3() {
       genres[selectedIndex[1]],
       genres[selectedIndex[2]]
     );
+    // 스플래시 화면을 표시
+    setShowSplash(true);
+    // 1.5초 후 스플래시 화면 숨기기 및 페이지 이동
+    setTimeout(() => {
+      setShowSplash(false);
+      // 페이지 이동 로직 추가
+      navigate(`/exhibition`);
+    }, 1500);
   };
   //<button onClick={getMemberInfo}>API 테스트</button>
   return (
@@ -68,9 +86,11 @@ export default function Onboarding3() {
         <Title>관심있는 주제를 모두 선택해주세요</Title>
         <div style={divStyle}>
           관심있는 주제를{' '}
-          <span style={{ color: '#616161', fontWeight: 'bold' }}>3가지</span>{' '}
+          <span style={{ color: '#616161', fontWeight: 'bold' }}>1가지</span>{' '}
           이상 선택해주세요 <br />
           당신에게 맞는 전시를 추천해 드릴게요
+          <br />
+          <span style={{ fontSize: 'small' }}>*최대 3가지 선택 가능</span>
         </div>
       </div>
       <ContentBox>
@@ -79,25 +99,28 @@ export default function Onboarding3() {
             <Topic
               key={index}
               genre={genre}
+              selectable={
+                selectedTopics.length < 3 || selectedTopics.includes(genre)
+              }
               onClick={() => handleTopicClick(genre, index)}
             />
           );
         })}
       </ContentBox>
 
-      <Link to="/" disabled={'true'}>
-        <StyledButton
-          style={{
-            height: '52px',
-            width: '482px',
-          }}
-          disabled={selectedTopics.length < 3} // 3개 미만의 주제가 선택되었을 때 버튼을 비활성화합니다.
-          onClick={handleSubmit}
-        >
-          ARTORY 시작하기
-        </StyledButton>
-      </Link>
+      <StyledButton
+        style={{
+          height: '52px',
+          width: '482px',
+        }}
+        disabled={selectedTopics.length < 1} // 1개 이상의 주제가 선택되었을 때 버튼을 비활성화합니다.
+        onClick={handleSubmit}
+      >
+        ARTORY 시작하기
+      </StyledButton>
+
       <img src="/Img/slidebar3.svg" alt="bar" style={{ marginTop: '30px' }} />
+      {showSplash && <SplashScreen />}
     </Container>
   );
 }

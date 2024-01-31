@@ -49,30 +49,31 @@ const Swiperstyle = styled(Swiper)`
 `;
 
 export default function AdBanner() {
-    const [randomExhibitionData, setRandomExhibitionData] = useState([]);
-    const token = localStorage.getItem('Token');
-    useEffect(() => {
-        (async() => { // 추천 전시회 API
-            try{
-                const response = await axios.post(`${url}all?page=1`,
-                {
-                    "latitude": "90",
-                    "longitude": "90"
-                },
-                {
-                headers: {
-                            'Accept': '*/*',
-                            'Authorization': `Bearer ${token}`,
-                            'content-type': 'application/json',
-                }
-                });
-                console.log("exhibition 배너",response?.data.randomExhibitionDtoList);
-                setRandomExhibitionData(response?.data.randomExhibitionDtoList);
-    
-            }catch(error)
-            {
-                console.error('Error fetching data:', error.response.data);
-            }
+  const [randomExhibitionData, setRandomExhibitionData] = useState([]);
+  const token = localStorage.getItem('Token');
+  useEffect(() => {
+    (async () => {
+      // 추천 전시회 API
+      try {
+        const response = await axios.post(
+          `${url}all?page=1`,
+          {
+            latitude: '90',
+            longitude: '90',
+          },
+          {
+            headers: {
+              Accept: '*/*',
+              Authorization: `Bearer ${token}`,
+              'content-type': 'application/json',
+            },
+          }
+        );
+        console.log('exhibition 배너', response?.data.randomExhibitionDtoList);
+        setRandomExhibitionData(response?.data.randomExhibitionDtoList);
+      } catch (error) {
+        console.error('Error fetching data:', error.response.data);
+      }
     })();
   }, []);
   return (

@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { CgCornerDownRight } from 'react-icons/cg';
 
-export default function Reply({ items }) {
+export default function Reply({ memberProfile, items }) {
   return (
     <Comments>
       {items.map((item, index) => {
         return (
           <CommentStyled key={index}>
-            <CommentListItem item={item}></CommentListItem>
+            <CommentListItem
+              memberProfile={memberProfile}
+              item={item}
+            ></CommentListItem>
           </CommentStyled>
         );
       })}
@@ -16,7 +19,7 @@ export default function Reply({ items }) {
   );
 }
 
-function CommentListItem({ item }) {
+function CommentListItem({ memberProfile, item }) {
   return (
     <div>
       <CgCornerDownRight
@@ -25,8 +28,8 @@ function CommentListItem({ item }) {
         color="#ababab"
       />
       <img
-        src={item.imgUrl}
-        alt={item.id}
+        src={memberProfile}
+        alt={item.memberNickname}
         style={{
           verticalAlign: 'middle',
           width: '35px',
@@ -35,7 +38,7 @@ function CommentListItem({ item }) {
           margin: '0 5px',
         }}
       />
-      <span style={{ verticalAlign: 'middle' }}>{item.content}</span>
+      <span style={{ verticalAlign: 'middle' }}>{item.subCommentContext}</span>
     </div>
   );
 }

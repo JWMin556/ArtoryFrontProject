@@ -23,8 +23,8 @@ export default function UserSlide(props) {
     <S.WrapSlider>
       <S.Category>{props.title}</S.Category>
       <S.StyledSlider {...setting}>
-        {props.Dummy.results.map((item, index) => (
-          <div key={index}>
+        {props.Dummy.map((item) => (
+          <div key={item.storyId}>
             <S.WrapPoster style={{ height: '200px' }}>
               <ProfileImg item={item} w={props.width} h={props.height} />
               <S.WrapIcon style={{ width: '126px', marginTop: '-10px' }}>

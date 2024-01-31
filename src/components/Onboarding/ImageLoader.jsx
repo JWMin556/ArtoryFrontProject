@@ -172,6 +172,7 @@ function ImageLoader({ image, callback, size }) {
             setImage(newImage);
             toogleCrop();
             callback(newImage);
+            //console.log(imageState);
           }}
         />
       ) : (

@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import * as S from '../styled-components/Login.style'
-import StyledButton from '../styled-components/StyledButton'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import * as S from '../styled-components/Login.style';
+import StyledButton from '../styled-components/StyledButton';
+import { Link } from 'react-router-dom';
 import NaverLogin from '../components/SocialLogin/NaverLogin';
 import KakaoLogin from '../components/SocialLogin/KakaoLogin';
 import OPENLOCK from '../Img/Login/openlock.svg';
 import LOCK from '../Img/Login/lock.svg';
 import { getUserInfo } from '../components/API/Logout_API';
-import axios from "axios";
+import axios from 'axios';
 
-const UserInfoURL = 'http://3.39.39.6:8080/api/member/info'
+const UserInfoURL = 'http://3.39.39.6:8080/api/member/info';
 export default function LogIn() {
   //주연씨가 작업해주실 LogIn페이지입니다.
   const [ID, setID] = useState('');
@@ -37,16 +37,14 @@ export default function LogIn() {
   }
 
   function handleLoginArbitary() {
-    localStorage.setItem('arbitaryLoginForHeader2',true);
+    localStorage.setItem('arbitaryLoginForHeader2', true);
     window.location.href = '/'; // Home 페이지로 이동
   }
 
-
-  function handleClick()
-  {
+  function handleClick() {
     //getUserInfo();
   }
- 
+
   return (
     <S.HomeWrap>
       <S.HomeLeftWrap>
@@ -56,28 +54,41 @@ export default function LogIn() {
       </S.HomeLeftWrap>
       <S.WrapLogin>
         <div>
-          <S.Input 
-            type='email' 
+          <S.Input
+            type="email"
             //value={ID}
-            onFocus={handleIDInputFocus} //input박스에 들어올 때 
+            onFocus={handleIDInputFocus} //input박스에 들어올 때
             onBlur={handleIDInputBlur} //input박스에서 나갔을 때
-            placeholder={isIDInputClick ? "" : "아이디를 입력해주세요"} 
+            placeholder={isIDInputClick ? '' : '아이디를 입력해주세요'}
             style={isOutLine}
           />
-          <span><S.LockStyle src={OPENLOCK}/></span>
+          <span>
+            <S.LockStyle src={OPENLOCK} />
+          </span>
         </div>
         <div>
-        <S.Input 
-          type='password' 
-          //value={Password}
-          onFocus={handlePWInputFocus} //input박스에 들어올 때 
-          onBlur={handlePWInputBlur} //input박스에서 나갔을 때
-          placeholder={isPWInputClick ? "" : "비밀번호를 입력해주세요"} 
-          style={isOutLine}
-        />
-        <span><S.LockStyle src={LOCK}/></span>
+          <S.Input
+            type="password"
+            //value={Password}
+            onFocus={handlePWInputFocus} //input박스에 들어올 때
+            onBlur={handlePWInputBlur} //input박스에서 나갔을 때
+            placeholder={isPWInputClick ? '' : '비밀번호를 입력해주세요'}
+            style={isOutLine}
+          />
+          <span>
+            <S.LockStyle src={LOCK} />
+          </span>
         </div>
-        <Link to="/"><StyledButton height="52px" width="345px" style={{marginTop:'20px'}} onClick={handleLoginArbitary}>로그인</StyledButton></Link>
+        <Link to="/">
+          <StyledButton
+            height="52px"
+            width="345px"
+            style={{ marginTop: '20px' }}
+            onClick={handleLoginArbitary}
+          >
+            로그인
+          </StyledButton>
+        </Link>
         <S.WrapLink>
           <S.LinkStyle style={{ color: '#9C9C9C' }}>아이디 찾기</S.LinkStyle>
           <S.LinkStyle style={{ color: '#9C9C9C' }}>비밀번호 찾기</S.LinkStyle>
@@ -89,10 +100,10 @@ export default function LogIn() {
           </Link>
         </S.WrapLink>
         <S.WrapSocialLogin>
-          <NaverLogin/>
-          <KakaoLogin/>
+          <NaverLogin />
+          <KakaoLogin />
         </S.WrapSocialLogin>
       </S.WrapLogin>
     </S.HomeWrap>
-  )
+  );
 }

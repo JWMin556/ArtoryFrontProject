@@ -38,47 +38,49 @@ export const WrapIcon = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
-export default function Popularity() {
-    const url = 'http://3.39.39.6:8080/api/exhibitions/'
-    const [popularityExhibitionData, setPopularityExhibitionData] = useState([]);
-    const token = localStorage.getItem('Token');
 
-    useEffect(() => {
-        (async () => {
-          //인기 전시회 API
-            try {
-            const response = await axios.post(`${url}all?page=1`,
-            {
-                    "latitude": "90",
-                    "longitude": "90"
+export default function Popularity() {
+  const url = 'http://3.39.39.6:8080/api/exhibitions/';
+  const [popularityExhibitionData, setPopularityExhibitionData] = useState([]);
+  const token = localStorage.getItem('Token');
+
+  useEffect(() => {
+    (async () => {
+      //인기 전시회 API
+      try {
+        const response = await axios.post(
+          `${url}all?page=1`,
+          {
+            latitude: '90',
+            longitude: '90',
+          },
+          {
+            headers: {
+              Accept: '*/*',
+              Authorization: `Bearer ${token}`,
+              'content-type': 'application/json',
             },
-                {
-                    headers: {
-                        'Accept': '*/*',
-                        'Authorization': `Bearer ${token}`,
-                        'content-type': 'application/json',
-                }
-                }
-            );
-            setPopularityExhibitionData(response.data.popluarExhibitionDtoList);
-            console.log(response.data.popluarExhibitionDtoList);
-            } catch (error) {
-            console.error('Error fetching data:', error.response.data);
-        }
-          //fetchData();
-        })();
-    }, []);
-    return (
-        <Container>
-        <WrapResult>
+          }
+        );
+        setPopularityExhibitionData(response.data.popluarExhibitionDtoList);
+        console.log(response.data.popluarExhibitionDtoList);
+      } catch (error) {
+        console.error('Error fetching data:', error.response.data);
+      }
+      //fetchData();
+    })();
+  }, []);
+  return (
+    <Container>
+      <WrapResult>
         {popularityExhibitionData.map((item, index) => (
           <WrapPoster key={index}>
             <div>
               <Poster item={item} />
             </div>
             <WrapIcon>
-              <Heart item={item}/>
-              <Save item={item}/>
+              <Heart item={item} />
+              <Save item={item} />
             </WrapIcon>
           </WrapPoster>
         ))}

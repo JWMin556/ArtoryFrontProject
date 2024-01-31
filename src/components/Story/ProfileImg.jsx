@@ -10,7 +10,7 @@ const PosterStyle = styled.img`
 export default function ProfileImg(props) {
   //const navigate = useNavigate();
   const onClickDetail = (item) => {
-    //navigate(`/story/${item.title}`, { state: { item } });
+    //navigate(`/user/${item.title}`, { state: { item } });
   };
   //나중에 item.title부분 유저 페이지로 변경
 
@@ -18,7 +18,8 @@ export default function ProfileImg(props) {
     <div onClick={() => onClickDetail(props.item)}>
       <PosterStyle
         style={{ height: props.h, width: props.w }}
-        src={IMG_BASE_URL + props.item.poster_path}
+        src={props.item.memberProfile}
+        alt={props.item.storyId}
       />
     </div>
   );

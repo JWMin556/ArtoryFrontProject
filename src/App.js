@@ -19,14 +19,15 @@ import ExhibitionSearch from './pages/ExhibitionSearch';
 import Popularity from './pages/Popularity';
 import Recent from './pages/Recent';
 import Recommend from './pages/Recommend';
-import TokenPage from "./pages/TokenPage";
+import TokenPage from './pages/TokenPage';
 import StoryDetail from './pages/StoryDetail';
+import StorySearch from './pages/StorySearch';
 import GenreMedia from './pages/GenreMedia';
 import GenreCraft from './pages/GenreCraft';
 import GenreDesign from './pages/GenreDesign';
 import GenreSculpture from './pages/GenreSculpture';
 import GenrePlanExhibition from './pages/GenrePlanExhibition';
-import GenreInstallationArt from './pages/GenreInstallationArt'
+import GenreInstallationArt from './pages/GenreInstallationArt';
 import GenrePainting from './pages/GenrePainting';
 import GenreArtistExhibition from './pages/GenreArtistExhibition';
 import GenrePicture from './pages/GenrePicture';
@@ -62,49 +63,72 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} /> {/*메인페이지입니다.*/}
             <Route path="/exhibition" element={<Exhibition />} />
-            <Route path="/exhibitiondetail/:title" element={<ExhibitionDetail/>}/>
-            <Route path="/exhibitionsearch/:keyword" element={<ExhibitionSearch/>}/>
-            <Route path="/exhibition/popularity" element={<Popularity/>}/>
-            <Route path="/exhibition/recent" element={<Recent/>}/>
-            <Route path="/exhibition/recommend" element={<Recommend/>}/>
-            <Route path="/story" element={<Story />} />
+            <Route
+              path="/exhibitiondetail/:title"
+              element={<ExhibitionDetail />}
+            />
+            <Route
+              path="/exhibitionsearch/:keyword"
+              element={<ExhibitionSearch />}
+            />
+            <Route path="/exhibition/popularity" element={<Popularity />} />
+            <Route path="/exhibition/recent" element={<Recent />} />
+            <Route path="/exhibition/recommend" element={<Recommend />} />
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mystory/:record" element={<Record />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/mypagemodify" element={<MyPageModify />} />
             <Route path="/exhibition" element={<Exhibition />} />{' '}
-
-            <Route path='/exhibition/genremedia' element={<GenreMedia />}/>
-            <Route path='/exhibition/genrecraft' element={<GenreCraft />} />
-            <Route path='/exhibition/genredesign' element={<GenreDesign />}/>
-            <Route path='/exhibition/genresculpture' element={<GenreSculpture />} />
-            <Route path='/exhibition/genreplanexhibition' element={<GenrePlanExhibition />} />
-            <Route path='/exhibition/genreinstallationart' element={<GenreInstallationArt />} />
-            <Route path='/exhibition/genrepainting' element={<GenrePainting />} />
-            <Route path='/exhibition/genreartistexhibition' element={<GenreArtistExhibition />} />
-            <Route path='/exhibition/genrepicture' element={<GenrePicture />} />
-            <Route path='/exhibition/genrespecialexhibition' element={<GenreSpecialExhibition />} />
-
+            <Route path="/exhibition/genremedia" element={<GenreMedia />} />
+            <Route path="/exhibition/genrecraft" element={<GenreCraft />} />
+            <Route path="/exhibition/genredesign" element={<GenreDesign />} />
+            <Route
+              path="/exhibition/genresculpture"
+              element={<GenreSculpture />}
+            />
+            <Route
+              path="/exhibition/genreplanexhibition"
+              element={<GenrePlanExhibition />}
+            />
+            <Route
+              path="/exhibition/genreinstallationart"
+              element={<GenreInstallationArt />}
+            />
+            <Route
+              path="/exhibition/genrepainting"
+              element={<GenrePainting />}
+            />
+            <Route
+              path="/exhibition/genreartistexhibition"
+              element={<GenreArtistExhibition />}
+            />
+            <Route path="/exhibition/genrepicture" element={<GenrePicture />} />
+            <Route
+              path="/exhibition/genrespecialexhibition"
+              element={<GenreSpecialExhibition />}
+            />
             {/*주연씨 담당 페이지*/}
             <Route
               path="/exhibitiondetail/:title"
               element={<ExhibitionDetail />}
-            />{' '}
-            {/*주연씨 담당 페이지*/}
-            <Route path="/story" element={<Story />} />
-            <Route path="/story/:id" element={<StoryDetail />} />
+            />
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/login" element={<LogIn />} /> {/*주연씨 담당 페이지*/}
             <Route path="/signup" element={<SignUp />} /> {/*중원 담당 페이지*/}
+            {/*은향씨 담당 페이지*/}
+            <Route path="/story" element={<Story />} />
+            <Route path="/story/:id" element={<StoryDetail />} />
+            <Route path="/storysearch/:keyword" element={<StorySearch />} />
             <Route path="/onboarding" element={<Onboarding />} />{' '}
-            {/*은향씨 담당 페이지*/}
             <Route path="/onboarding2" element={<Onboarding2 />} />{' '}
-            {/*은향씨 담당 페이지*/}
             <Route path="/onboarding3" element={<Onboarding3 />} />{' '}
+            <Route path="/signup/token" element={<TokenPage />} />{' '}
+            {/*승우 담당 페이지*/}
             {/*은향씨 담당 페이지*/}
             {/* <Route path="/splashscreen" element={<SplashScreen />} /> */}
-            <Route path="/signup/token" element={<TokenPage />} /> {/*승우 담당 페이지*/}
+            <Route path="/signup/token" element={<TokenPage />} />{' '}
+            {/*승우 담당 페이지*/}
             <Route path="/splashscreen" element={<SplashScreen />} />
           </Routes>
         </BrowserRouter>

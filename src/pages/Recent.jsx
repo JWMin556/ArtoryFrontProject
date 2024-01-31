@@ -38,8 +38,7 @@ export const WrapIcon = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
-const token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDYxNzI2MzIsImV4cCI6MTcwNjI2MjYzMiwibWVtYmVySWQiOjQsInJvbGUiOiJVU0VSIn0.utWBgIlkM-je684zEEM83zKlPRNNlAaov-1sRj53AiLMB-Aked78AxOYwuoKadiaQZ6RTQY6d-BkXprqzd41oA';
+const token = localStorage.getItem('Token');
 export default function Popularity() {
     const url = 'http://3.39.39.6:8080/api/exhibitions/'
     const [recentExhibitionData, setRecentExhibitionData] = useState([]);

@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'http://3.39.39.6:8080/api/member';
-const token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDYxNzI2MzIsImV4cCI6MTcwNjI2MjYzMiwibWVtYmVySWQiOjQsInJvbGUiOiJVU0VSIn0.utWBgIlkM-je684zEEM83zKlPRNNlAaov-1sRj53AiLMB-Aked78AxOYwuoKadiaQZ6RTQY6d-BkXprqzd41oA';
+const token = localStorage.getItem('Token');
 
 export const getMemberInfo = async () => {
   //사용자 전체 정보
@@ -15,11 +14,10 @@ export const getMemberInfo = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    const body = response.data.json();
 
-    console.log(response);
+    console.log(response.data);
 
-    return body;
+    return response.data;
     //const data = response.json();
 
     //alert(data);

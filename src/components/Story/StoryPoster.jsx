@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { getStoryInfo } from '../API/story_API';
 
 const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w1280/';
 const PosterStyle = styled.img`
+  display: block;
   width: 186px;
   height: 268px;
   border-radius: 10px;
@@ -16,7 +18,7 @@ const WrapTitle = styled.div`
   color: #ffff;
   z-index: 1;
   position: absolute;
-  top: 12%;
+  top: 0;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -27,10 +29,15 @@ const WrapTitle = styled.div`
 export default function StoryPoster(props) {
   const navigate = useNavigate();
   const [isShowTitle, setIsShowTitle] = useState(false);
-  const onClickDetail = (item) => {
-    props.source === 'story'
-      ? navigate(`/story/${item.id}`, { state: { item } })
-      : navigate(`/exhibitiondetail/${item.title}`, { state: { item } });
+
+  const onClickDetail = async (id) => {
+    try {
+      const item = await getStoryInfo(id);
+      navigate(`/story/${id}`, { state: { item } });
+    } catch (error) {
+      // 오류 처리
+      console.error('Story data fetching failed', error);
+    }
   };
   const handleMouseOverImg = () => {
     setIsShowTitle(true);
@@ -38,17 +45,21 @@ export default function StoryPoster(props) {
   const handleMouseOutImg = () => {
     setIsShowTitle(false);
   };
+
   return (
     <div
+      style={{ height: '268px', position: 'relative' }}
       onMouseOver={handleMouseOverImg}
       onMouseOut={handleMouseOutImg}
-      onClick={() => onClickDetail(props.item)}
+      onClick={() => onClickDetail(props.item.storyId)}
     >
-      <PosterStyle
-        style={{ height: props.h, width: props.w }}
-        src={IMG_BASE_URL + props.item.poster_path}
-      />
-      {isShowTitle && <WrapTitle>{props.item.title}</WrapTitle>}
+      <PosterStyle src={props.item.storyImage} alt={props.item.storyId} />
+      {isShowTitle && <WrapTitle>{props.item.storyId}</WrapTitle>}
     </div>
   );
 }
+/* <div
+      onMouseOver={handleMouseOverImg}
+      onMouseOut={handleMouseOutImg}
+      onClick={() => onClickDetail(props.item.storyId)}
+    >*/
