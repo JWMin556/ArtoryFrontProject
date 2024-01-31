@@ -40,25 +40,33 @@ export const WrapIcon = styled.div`
 `;
 const token = localStorage.getItem('Token');
 export default function Popularity() {
-  const url = 'http://3.39.39.6:8080/api/exhibitions/';
-  const [recentExhibitionData, setRecentExhibitionData] = useState([]);
+    const url = 'http://3.39.39.6:8080/api/exhibitions/'
+    const [recentExhibitionData, setRecentExhibitionData] = useState([]);
+    const token = localStorage.getItem('Token');
 
-  useEffect(() => {
-    (async () => {
-      //최근 전시회 API
-      try {
-        const response = await axios.get(`${url}recent?memberId=1&page=1`, {
-          headers: {
-            Accept: '*/*',
-            Authorization: `Bearer ${token}`,
-            'content-type': 'application/json',
-          },
-        });
-        setRecentExhibitionData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-      //fetchData();
+    useEffect(() => {
+        (async() => { //최근 전시회 API
+            try{
+                const response = await axios.post(`${url}all?page=1`,
+                {
+                    "latitude": "90",
+                    "longitude": "90"
+                },
+                {
+                headers: {
+                            'Accept': '*/*',
+                            'Authorization': `Bearer ${token}`,
+                            'content-type': 'application/json',
+                }
+                });
+                setRecentExhibitionData(response.data.recentExhibitionDtoList);
+                console.log(response.recentExhibitionDtoList);
+    
+            }catch(error)
+            {
+                console.error('Error fetching data:', error);
+            }
+        //fetchData();
     })();
   }, []);
   return (
@@ -70,8 +78,8 @@ export default function Popularity() {
               <Poster item={item} />
             </div>
             <WrapIcon>
-              <Heart />
-              <Save />
+              <Heart item={item}/>
+              <Save item={item}/>
             </WrapIcon>
           </WrapPoster>
         ))}

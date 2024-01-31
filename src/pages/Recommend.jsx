@@ -38,23 +38,31 @@ export const WrapIcon = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
-const token = localStorage.getItem('Token');
 export default function Recommend() {
   const url = 'http://3.39.39.6:8080/api/exhibitions/';
   const [recommendExhibitionData, setRecommedExhibitionData] = useState([]);
+  const token = localStorage.getItem('Token');
+
   useEffect(() => {
     (async () => {
       // 추천 전시회 API
       try {
-        const response = await axios.get(`${url}recommend?page=1`, {
-          headers: {
-            Accept: '*/*',
-            Authorization: `Bearer ${token}`,
-            'content-type': 'application/json',
+        const response = await axios.post(
+          `${url}all?page=1`,
+          {
+            latitude: '90',
+            longitude: '90',
           },
-        });
-        setRecommedExhibitionData(response.data);
-        console.log(response);
+          {
+            headers: {
+              Accept: '*/*',
+              Authorization: `Bearer ${token}`,
+              'content-type': 'application/json',
+            },
+          }
+        );
+        console.log(response.recommendExhibitionDtoList);
+        setRecommedExhibitionData(response.data.recommendExhibitionDtoList);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -70,8 +78,8 @@ export default function Recommend() {
               <Poster item={item} />
             </div>
             <WrapIcon>
-              <Heart />
-              <Save />
+              <Heart item={item} />
+              <Save item={item} />
             </WrapIcon>
           </WrapPoster>
         ))}

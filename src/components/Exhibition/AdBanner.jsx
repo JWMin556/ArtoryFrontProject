@@ -8,7 +8,6 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 import axios from 'axios';
 
 const url = 'http://3.39.39.6:8080/api/exhibitions/';
-const token = localStorage.getItem('Token');
 const AdImg = styled.img`
   width: 300px;
   height: 450px;
@@ -43,30 +42,40 @@ const Swiperstyle = styled(Swiper)`
   .swiper-wrapper {
     transform: translate3d(-110.2px, 0, 0);
   }
+  .swiper-3d {
+    //width : 100%;
+    //perspective : 100px;
+  }
 `;
 
 export default function AdBanner() {
   const [randomExhibitionData, setRandomExhibitionData] = useState([]);
-
+  const token = localStorage.getItem('Token');
   useEffect(() => {
     (async () => {
-      //랜덤 전시회 API
+      // 추천 전시회 API
       try {
-        const response = await axios.get(`${url}random?memberId=1&page=1`, {
-          headers: {
-            Accept: '*/*',
-            Authorization: `Bearer ${token}`,
-            'content-type': 'application/json',
+        const response = await axios.post(
+          `${url}all?page=1`,
+          {
+            latitude: '90',
+            longitude: '90',
           },
-        });
-        setRandomExhibitionData(response.data);
+          {
+            headers: {
+              Accept: '*/*',
+              Authorization: `Bearer ${token}`,
+              'content-type': 'application/json',
+            },
+          }
+        );
+        console.log('exhibition 배너', response?.data.randomExhibitionDtoList);
+        setRandomExhibitionData(response?.data.randomExhibitionDtoList);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error.response.data);
       }
-      //fetchData();
     })();
   }, []);
-  //console.log(randomExhibitionData);
   return (
     <WrapSlide>
       <Swiperstyle

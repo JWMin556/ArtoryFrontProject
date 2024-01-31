@@ -8,7 +8,7 @@ export const SaveImg = styled.img`
   width: 20px;
   height: 18px;
 `;
-export default function Scrap({ loadStories, id, isScrapped }) {
+export default function Scrap({ id, isScrapped }) {
   const [colorSave, setColorSave] = useState(isScrapped ? ON_SAVE : SAVE);
   async function handleClickScrap() {
     if (colorSave === SAVE) {
@@ -18,7 +18,6 @@ export default function Scrap({ loadStories, id, isScrapped }) {
       setColorSave(SAVE);
       await storyUnScrpped(id);
     }
-    await loadStories();
   }
   return <SaveImg src={colorSave} onClick={handleClickScrap}></SaveImg>;
 }

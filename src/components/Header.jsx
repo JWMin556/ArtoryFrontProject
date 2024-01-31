@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Navigation from './NavigationBar/Navigation';
+import { LogoutApi } from './API/Logout_API'
 //Header.jsx는 검은색 상단바를 위한 컴포넌트입니다.
 
 const HeaderContainer = styled.div`
@@ -29,7 +30,7 @@ const HeaderLeftWrap = styled.div`
 `;
 
 const HeaderRightWrap = styled.div`
-  display: flex;
+  display: ${(props) => (props.isLoggedIn ? 'flex' : 'none')};
   align-items: center;
   margin-right: 7%;
 `;
@@ -55,8 +56,24 @@ const NavLink = styled(Link)`
   color: ${(props) => (props.selected ? '#F5F5F5' : '#ABABAB')};
   text-decoration: none;
 `;
+const LogoutButton = styled.button`
+  width : 71px;
+  height : 25px;
+  background-color : #262626;
+  border : none;
+  color : #F5F5F5;
+  font-size : 10px;
+  font-family: 'Pretendard';
+
+`;
+
 
 export default function Header2() {
+
+  const logoutButtonClick = () =>
+  {
+    LogoutApi();
+  }
   const [isMouseOverExhibition, setMouseOverExhibition] = useState(false); //마우스가 Exhibition위에 올라는지 아닌지 상태를 관리하는 변수
   const handleMouseOverExhibition = () => {
     //마우스가 Exhibition에 올라갔을 때 호출되는 함수 -> setMouseOverExhibition를 이용하여 isMouseOverExhibition가 false->true로 바뀜
@@ -67,6 +84,7 @@ export default function Header2() {
     setMouseOverExhibition(false);
   };
   const location = useLocation();
+  const isLoggedIn = localStorage.getItem('arbitaryLoginForHeader2');
   return (
     <HeaderContainer>
       <HeaderWrap>
@@ -101,7 +119,7 @@ export default function Header2() {
           </Link>
         </HeaderLeftWrap>
 
-        <HeaderRightWrap>
+        <HeaderRightWrap isLoggedIn={isLoggedIn}>
           {/* 상단바의 오른쪽 부분인 EXHIBITION, STORY, MY STORY, MY PAGE를 urorderedlist형식의 스타일드 컴포넌트 */}
           <UnorderedList>
             {' '}
@@ -142,6 +160,7 @@ export default function Header2() {
                 MY PAGE
               </NavLink>
             </ListItem>
+            <LogoutButton onClick={logoutButtonClick}>LOGOUT</LogoutButton>
           </UnorderedList>
         </HeaderRightWrap>
       </HeaderWrap>

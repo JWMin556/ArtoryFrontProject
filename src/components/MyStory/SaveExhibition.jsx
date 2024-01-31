@@ -5,11 +5,13 @@ import Save from '../Exhibition/Save';
 const WrapPoster = styled.div`
     margin-right: 2%;
     padding-bottom : 5%;
+    margin-bottom : 15%;
+
 `;
 const PosterStyle = styled.img`
     width : 186px;
     height : 268px;
-    border-radius : 10px;
+    //border-radius : 10px;
 `;
 const WrapIcon = styled.div`
     width : 175px;
@@ -20,15 +22,15 @@ const WrapIcon = styled.div`
     align-items: flex-end;
     margin-top : 5%;
 `;
-const IMG_BASE_URL = "https://image.tmdb.org/t/p/w1280/";
 
-export default function Recrod(props) {
+export default function SaveExhibition(props) {
+    //console.log("record에서 찍힘",props.id)
 return (
     <WrapPoster>
-        <PosterStyle src={IMG_BASE_URL+props.poster}/>
+        <PosterStyle src={props.item.exhibitionImage}/>
         <WrapIcon>
-            <Heart/>
-            <Save/>
+            <Heart item={props.item}/>
+            <Save item={props.item}/>
         </WrapIcon>
     </WrapPoster>
 )

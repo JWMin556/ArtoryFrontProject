@@ -1,265 +1,274 @@
-// import React, { useState } from 'react'
-// import Calendar from 'react-calendar'
-// import styled from 'styled-components';
-// import moment from 'moment';
-// import 'react-calendar/dist/Calendar.css';
-// import ADD from '../../Img/Calendar/add.svg'
-// const CalendarStyle = styled(Calendar)`
-//     margin-top : 10%;
-//     &.react-calendar {
-//         width : 684px;
-//         border : none;
-//         border-radius : px;
-//         box-shadow: 1px 1px 10px 10px #f3f3f3; 
-//         font-family: Pretendard;
-//     }
-//     .react-calendar__navigation__label{
-//         color :#262626;
-//         font-size : 24px;
-//         font-weight : bold;
-//         font-family: Pretendard;
-//     }
-//     .react-calendar__navigation__next-button{
-//         color :#ABABAB;
-//     }
-//     .react-calendar__navigation button:hover,
-//     .react-calendar__navigation button:focus {
-//         background-color : #ffff;
-//     }
-//     .react-calendar__navigation__prev-button{
-//         color :#ABABAB;
-//     }
-//     .react-calendar__navigation__next2-button{
-//         display : none;
-//     }
-//     .react-calendar__navigation__prev2-button{
-//         display : none;
-//     }
-//     .react-calendar__month-view__days__day{
-//         font-family: Pretendard;
-//         color : #262626;
-//     }
-//     .react-calendar__viewContainer{
-//         padding-left : 10%;
-//         padding-right : 10%;
-//     }
-//     .react-calendar__month-view__days__day--neighboringMonth{
-//         color : #D9D9D9;
-//     }
-//     .react-calendar__tile{
-//         height : 60px;
-//         font-size : 13px;
-//         display : flex;
-//         padding-top : 5px;
+import React, { useState, useEffect } from "react";
+import styled, { keyframes, css } from "styled-components";
+import moment from "moment";
+import { Tile } from "./Tile";
+import PREV_BUTTON from '../../Img/MyStory/prev.svg';
+import NEXT_BUTTON from '../../Img/MyStory/next.svg';
 
-//     }
-//     .react-calendar__month-view__weekdays{
-//         text-align : start;
-//         margin-bottom : 2%;
-//         font-size : 16px;
-//         color : #ABABAB;
-//     }
-//     .react-calendar__month-view__weekdays abbr{
-//         text-decoration : none;
-//     }
-//     .react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"]{
-//         color :#F85835;
-//     }
-//     .react-calendar__tile:enabled:hover{
-//         background: #EFEEEE;
-//         border-radius : 10px;
-//     }
-//     .react-calendar__tile:enabled:focus,
-//     .react-calendar__tile--active
-//     {
-//         background-color: #EFEEEE;
-//         border-radius : 10px;
-//         background-image:url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.7 3.5H6.3V6.3H3.5V7.7H6.3V10.5H7.7V7.7H10.5V6.3H7.7V3.5ZM7 0C3.136 0 0 3.136 0 7C0 10.864 3.136 14 7 14C10.864 14 14 10.864 14 7C14 3.136 10.864 0 7 0ZM7 12.6C3.913 12.6 1.4 10.087 1.4 7C1.4 3.913 3.913 1.4 7 1.4C10.087 1.4 12.6 3.913 12.6 7C12.6 10.087 10.087 12.6 7 12.6Z' fill='%23999999'/%3E%3C/svg%3E%0A");
-//         background-repeat : no-repeat;
-//         background-position : 85% 13%;
-//     }
-//     .react-calendar__tile--now {
-//         background : none;
-//     }
-// `;
-// const AddImg = styled.img``;
-
-// export default function MyCalendar() {
-//     const [value, onChange] =  useState(new Date());
-//     const [mark, setMark] = useState([]); //날짜를 저장하고 관리하기 위한 변수
-//     const tile = document.getElementsByClassName("react-calendar__tile")
-//     function handleDateClick(value)
-//     {
-//         tile.innerHTML="<span>하이</span>";
-//         console.log(value);
-//     }
-// return (
-//     <div>
-//         <CalendarStyle
-//             onChange={onChange}
-//             value={value}
-//             onClick={handleDateClick(value)}
-//             showNeighboringMonth={true} 
-//             formatDay={(locale, date) => moment(date).format("D")}
-//             formatYear={(locale, date) => moment(date).format("YYYY")}
-//             formatMonthYear={(locale, date) => moment(date).format("M월")}
-//             calendarType='gregory'
-//         />
-//         <AddImg src={ADD}/>
-//     </div>
-// )
-// }
-
-import React from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-import Toolbar from './Toolbar';
-import styled from 'styled-components';
-import DayTile from './DayTile'
-import ONE1 from '../../Img/Calendar/one1.svg'
-import ONE2 from '../../Img/Calendar/one2.svg'
-import Memo from './Memo';
-import Event from './Event';
-import Week from './Week';
-const CalendarStyle = styled(Calendar)`
-
-    &.rbc-calendar {
-        margin-left :3%;
-        box-shadow: 1px 1px 70px  #f3f3f3;
-    }
-    .rbc-month-view{
-            position : relative;
-            left : 10%;
-            width : 80%;
-            border : none;
-            border-radius : px;
-            font-family: Pretendard;
-    }
-    .rbc-toolbar {
-        margin-bottom : 0;
-        padding : 2%;
-    }
-    .rbc-month-header{
-        width : 100%;
-        text-align : start;
-        margin-bottom : 5%;
-        font-size : 16px;
-        color : #ABABAB;
-    }
-    .rbc-header {
-        text-align : start;
-        border : none;
-    }
-    .rbc-month-row{
-        border : none;
-    }
-    .rbc-day-bg{
-        border : none;
-    }
-    .rbc-date-cell{
-        text-align : start;
-        font-size : 13px;
-        font-family: Pretendard;
-        color : #262626;
-    }
-    .rbc-off-range-bg{
-        background-color : #ffff;
-    }
-    .rbc-off-range{
-        color : #d9d9d9;
-    }
-    .rbc-now{
-        background-color : #FFFFFF;
-    }
-    .rbc-event{
-        background : none;
-    }
-    .rbc-today{
-        background : none;
-    }
+const Container = styled.div`
+    //border : 1px solid blue;
+    box-shadow: 1px 1px 70px  #f3f3f3;
+    border-radius : 10px;
+    width: 684px;
+    height: 400px;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    font-size: 20px;
+    padding : 0 5% 0 5%;
 `;
-
-const WrapMemoAndCalendar = styled.div`
-    display : flex;
-    //justify-content: space-evenly;
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 14%;
+  & img {
+      width : 12px;
+      height : 19px;
+  }
 `;
-const WrapMark = styled.div`
-    width : 15em;
-    display : flex;
-    justify-content : space-around;
-    position : relative;
-    left : 32%;
-    top : 3%;
-`;
-const WrapMark1 = styled.span`
-    display : flex;
-    flex-direction : row;
-    align-item : center;
-    width : 7em;
-`;
-const Mark1 = styled.span`
-    font-family: Pretendard;
-    color : #ababab;
-    margin-left : 5%;
-    margin-top : 2%;
-    font-size : 12px;
+const Days = styled.div`
+  background-color: #fff;
+  width: 93%;
+  height: 81%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  color : #ABABAB;
+  margin: 0;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'Pretendard';
+  &span{
+    margin : 10px;
+  }
 
 `;
-const WrapMark2 = styled.span`
-    display : flex;
-    flex-direction : row;
-    align-item : center;
-    width : 6em;
-`;
-const Mark2 = styled.span`
-    font-family: Pretendard;
-    color : #121212;
-    margin-left : 5%;
-    margin-top : 2%;
-    font-size : 12px;
-`;
-const localizer = momentLocalizer(moment);
+const Day = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  position : relative;
+  right : 4.3%;
+  margin-bottom : 2%;
 
-export default function MyCalendar(props) {
-    const weekend =['일','월','화','수','목','금','토']
-    const events = [
-    {
-        start: new Date("2024-1-22"),
-        end: new Date("2024-1-22"),
-        title: "황성욱 개인전",
-        eventDay : 22,
+  & div {
+    min-width: 13%;
+    max-height: 5%;
+    text-align: center;
+    font-weight: 600;
+    box-sizing: border-box;
+  }
+`;
+
+const Row = styled.div`
+  //border :1px solid blue;
+  position : relative;
+  top : 2%;
+  width: 100%;
+  height: 18%;
+  display: flex;
+  justify-content: space-between;
+`;
+const MonthSelect = styled.select`
+  border : none;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'Pretendard';
+  width : 112px;
+
+`;
+const OptionStyle = styled.option`
+  font-size : 14px;
+  text-align:center;
+  font-family: 'Pretendard';
+  color : #616161;
+  :hover{
+    background-color : #121212;
+    color : #fff;
+  }
+`;
+const WrapYearSelect = styled.div`
+  //border : 1px solid red;
+  width : 110%;
+  display : flex;
+  justify-content : end;
+`;
+const YearSelect = styled.select`
+  width : 2.5em;
+  height : 1.5em;
+  text-align : end;
+  border : none;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Pretendard';
+  margin-bottom : 3%;
+  margin-right : 5%;
+`;
+const MyCalendar = (props) => {
+
+  const {
+    date,
+} = props;
+
+  const monList = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+  ];
+
+  let calendarDays = [];
+  let new_month = [];
+
+  const makeCalendar = (year, month) => {
+    let firstDayOfMonth = new Date(year, month,1).getDay();
+    let endDateOfMonth = new Date(year, month+1, 0).getDate();
+    //console.log("firstDayOfMonth",firstDayOfMonth);
+    //console.log("endDateOfMonth",endDateOfMonth);
+
+    calendarDays = [];
+    new_month = [];
+
+    let cnt = 1;
+    for (let i = 0; i < 5; i++) {
+      var _days = [];
+      for (let j = 0; j < 7; j++) {
+        if (cnt > endDateOfMonth) {
+          _days.push("");
+        } else if (firstDayOfMonth > j && i === 0) {
+          _days.push("");
+        } else {
+          _days.push(cnt);
+          cnt++;
+        }
+      }
+      calendarDays.push(_days);
     }
-];
+    new_month = calendarDays.map((week) => {
+      return (
+        <Row key={week}>
+          {week.map((day, index) => {
+            let dateKey =
+              year +
+              "-" +
+              (month < 9 ? "0" + (month + 1) : month + 1) +
+              "-" +
+              (day < 10 ? "0" + day : day);
+            return (
+              <Tile key={index} day={day} />
+            );
+          })}
+        </Row>
+      );
+    });
+    return new_month;
+  };
 
-    return (
-        <div>
-            <WrapMemoAndCalendar>
-                <Memo/>
-                <CalendarStyle
-                    localizer={localizer}
-                    defaultDate={new Date()}
-                    defaultView="month"
-                    events={events} 
-                    /* events 배열은 달력에 표시될 이벤트 목록이다. 
-                    배열의 각 객체는 start, end, 그리고 title 속성을 가져야 한다. */
-                    style={{ width : '684px' ,height: "400px" }}
-                    components={{
-                        toolbar: Toolbar,
-                        header : Week,
-                        month:{
-                            dateHeader : DayTile,
-                            event: (events) => <Event event={events}/>,   
-                        }                
-                        }}
-                />
-            </WrapMemoAndCalendar>
-                <WrapMark>
-                    <WrapMark1><img src={ONE1} style={{width:'17px',height:'17px'}}/><Mark1>작성한 전시</Mark1></WrapMark1>
-                    <WrapMark2><img src={ONE2} style={{width:'17px',height:'17px'}}/><Mark2>예정 전시</Mark2></WrapMark2>
-                </WrapMark>
-        </div>
+  window.addEventListener(
+    "DOMContentLoaded",
+    () => {
+      if (calendarDays.length === 0) {
+        //makeCalendar(thisyear, thismonth);
+      }
+      //console.log("첫 로딩 시 현재 월 출력", thisyear, thismonth);
+    },
+    { once: true }
+  );
 
-);
+  const [month, changeMonth] = useState(Number(moment(date).format("M")));
+  //console.log("month",month);
+  const [year, changeYear] = useState(Number(moment(date).format("YYYY")));
+  const [isButtonOpen, setIsButtonOpen] = useState(false);
+
+  const nextMonth = () => {
+    if (month != 11) {
+      changeMonth((month) => month + 1);
+    } else {
+      changeMonth((month) => month - 11);
+      changeYear((year) => year + 1);
+    }
+    makeCalendar(year, month);
+    console.log("next!", year, month, new_month);
+  };
+  const prevMonth = () => {
+    if (month != 0) {
+      changeMonth((month) => month - 1);
+    } else {
+      changeMonth((month) => month + 11);
+      changeYear((year) => year - 1);
+    }
+    makeCalendar(year, month);
+  };
+  const handleChangeMonth=(month)=>{
+    changeMonth(month)
+  }
+  return (
+    <div>
+      <WrapYearSelect>
+          <YearSelect>
+            <option value='2024'>{year}년</option>
+            <option value='1'>{year+1}년</option>
+            <option value='1'>{year+2}년</option>
+            <option value='1'>{year+3}년</option>
+            <option value='1'>{year+4}년</option>
+            <option value='1'>{year+5}년</option>
+            <option value='1'>{year+6}년</option>
+          </YearSelect>
+        </WrapYearSelect>
+      <Container>
+        <Header>
+          <img src={PREV_BUTTON} onClick={prevMonth}></img>
+          <span>
+              <MonthSelect name="month" onChange={(e) => handleChangeMonth(Number(e.target.value))}>
+                <OptionStyle value='1'><span>{month}월</span></OptionStyle>
+                <OptionStyle value='2'>{month-month+2}월</OptionStyle>
+                <OptionStyle value='3'>{month-month+3}월</OptionStyle>
+                <OptionStyle value='4'>{month-month+4}월</OptionStyle>
+                <OptionStyle value='5'>{month-month+5}월</OptionStyle>
+                <OptionStyle value='6'>{month-month+6}월</OptionStyle>
+                <OptionStyle value='7'>{month-month+7}월</OptionStyle>
+                <OptionStyle value='8'>{month-month+8}월</OptionStyle>
+                <OptionStyle value='9'>{month-month+9}월</OptionStyle>
+                <OptionStyle value='10'>{month-month+10}월</OptionStyle>
+                <OptionStyle value='11'>{month-month+11}월</OptionStyle>
+                <OptionStyle value='12'>{month-month+12}월</OptionStyle>
+              </MonthSelect>
+          </span>
+          <img src={NEXT_BUTTON} onClick={nextMonth}></img>
+        </Header>
+        <Days>
+          <Day>
+            <div style={{color:'#f85835'}}>일</div>
+            <div>월</div>
+            <div>화</div>
+            <div>수</div>
+            <div>목</div>
+            <div>금</div>
+            <div>토</div>
+          </Day>
+          {makeCalendar(year, month-1)}
+        </Days>
+      </Container>
+    </div>
+
+  );
 };
+export default MyCalendar;
+
+
+
+
 

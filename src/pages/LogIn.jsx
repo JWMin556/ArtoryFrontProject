@@ -6,7 +6,7 @@ import NaverLogin from '../components/SocialLogin/NaverLogin';
 import KakaoLogin from '../components/SocialLogin/KakaoLogin';
 import OPENLOCK from '../Img/Login/openlock.svg';
 import LOCK from '../Img/Login/lock.svg';
-import { getUserInfo, kakaoUser } from '../components/API/Login_API';
+import { getUserInfo } from '../components/API/Logout_API';
 import axios from 'axios';
 
 const UserInfoURL = 'http://3.39.39.6:8080/api/member/info';
@@ -35,29 +35,16 @@ export default function LogIn() {
     //Password input박스에 들어오면 false (placeholder 텍스트 안보임)
     setIsPWInputClick(false);
   }
-  function handleClick() {
-    getUserInfo();
+
+  function handleLoginArbitary() {
+    localStorage.setItem('arbitaryLoginForHeader2', true);
+    window.location.href = '/'; // Home 페이지로 이동
   }
-  useEffect(() => {
-    (async () => {
-      //사용자 전체 정보
-      try {
-        const response = await axios.get(UserInfoURL, {
-          headers: {
-            Accept: '*/*',
-            Authorization:
-              'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDU5OTUzNDMsImV4cCI6MTcwNjA4NTM0MywibWVtYmVySWQiOjMsInJvbGUiOiJVU0VSIn0.EcKTNMWLHNdKVRXDJzNzHZWv6y6MBBc3DX2zvf_LepaLt05rVTFTgo9b7lwU9PAzrmwiSr6v-l9LH2Ky4k4pKQ',
-            'content-type': 'application/json',
-          },
-        });
-        //setPopularityExhibitionData(response.data);
-        console.log(response);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-      //fetchData();
-    })();
-  }, []);
+
+  function handleClick() {
+    //getUserInfo();
+  }
+
   return (
     <S.HomeWrap>
       <S.HomeLeftWrap>
@@ -69,7 +56,7 @@ export default function LogIn() {
         <div>
           <S.Input
             type="email"
-            value={ID}
+            //value={ID}
             onFocus={handleIDInputFocus} //input박스에 들어올 때
             onBlur={handleIDInputBlur} //input박스에서 나갔을 때
             placeholder={isIDInputClick ? '' : '아이디를 입력해주세요'}
@@ -82,7 +69,7 @@ export default function LogIn() {
         <div>
           <S.Input
             type="password"
-            value={Password}
+            //value={Password}
             onFocus={handlePWInputFocus} //input박스에 들어올 때
             onBlur={handlePWInputBlur} //input박스에서 나갔을 때
             placeholder={isPWInputClick ? '' : '비밀번호를 입력해주세요'}
@@ -92,13 +79,18 @@ export default function LogIn() {
             <S.LockStyle src={LOCK} />
           </span>
         </div>
-        <StyledButton height="52px" width="345px" style={{ marginTop: '20px' }}>
-          로그인
-        </StyledButton>
+        <Link to="/">
+          <StyledButton
+            height="52px"
+            width="345px"
+            style={{ marginTop: '20px' }}
+            onClick={handleLoginArbitary}
+          >
+            로그인
+          </StyledButton>
+        </Link>
         <S.WrapLink>
-          <S.LinkStyle style={{ color: '#9C9C9C' }} onClick={handleClick}>
-            아이디 찾기
-          </S.LinkStyle>
+          <S.LinkStyle style={{ color: '#9C9C9C' }}>아이디 찾기</S.LinkStyle>
           <S.LinkStyle style={{ color: '#9C9C9C' }}>비밀번호 찾기</S.LinkStyle>
           <Link
             to="/signup"

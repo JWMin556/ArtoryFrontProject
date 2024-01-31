@@ -20,7 +20,6 @@ export default function Heart(props) {
       setColorHeart(HEART);
       await storyUnLiked(props.id);
     }
-    await props.loadStories();
   }
   return <HeartImg src={colorHeart} onClick={handleClickHeart} />;
 }

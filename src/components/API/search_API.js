@@ -1,7 +1,7 @@
 import axios from 'axios';
 const url = 'http://3.39.39.6:8080/api/exhibitions/search';
-const token = localStorage.getItem('Token');
 export const searchExhibition = async (keyword) => {
+  const token = localStorage.getItem('Token');
   try {
     const response = await axios.get(`${url}?title=${keyword}&page=1`, {
       headers: {

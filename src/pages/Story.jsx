@@ -42,21 +42,9 @@ export default function Story(props) {
       <S.WrapSearch style={{ width: '885px', right: '0' }}>
         <Search />
       </S.WrapSearch>
-      <StorySlide
-        loadStories={loadStories}
-        title={'인기 Story'}
-        Dummy={popularityStoryData}
-      />
-      <StorySlide
-        loadStories={loadStories}
-        title={'추천 Story'}
-        Dummy={recommendStoryData}
-      />
-      <StorySlide
-        loadStories={loadStories}
-        title={'최근 Story'}
-        Dummy={recentStoryData}
-      />
+      <StorySlide title={'인기 Story'} Dummy={popularityStoryData} />
+      <StorySlide title={'추천 Story'} Dummy={recommendStoryData} />
+      <StorySlide title={'최근 Story'} Dummy={recentStoryData} />
       <UserSlide
         width={126}
         height={126}

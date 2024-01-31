@@ -11,7 +11,7 @@ const SearchStyle = styled.input`
     height : 39px;
     padding : 0;
     padding-left :14%;
-    font-family: Pretendard;
+    font-family: 'Pretendard';
     color : #ababab;
 `;
 const SearchImg = styled.img`
@@ -59,7 +59,7 @@ return (
             onChange={(e)=>setKeyWord(e.target.value)}
             onKeyPress={handleKeyPress}
             />
-        <span><SearchImg src={SEARCH}/></span>
+        <SearchImg src={SEARCH}/>
     </div>
 )
 }

@@ -22,6 +22,17 @@ import Recommend from './pages/Recommend';
 import TokenPage from './pages/TokenPage';
 import StoryDetail from './pages/StoryDetail';
 import StorySearch from './pages/StorySearch';
+import GenreMedia from './pages/GenreMedia';
+import GenreCraft from './pages/GenreCraft';
+import GenreDesign from './pages/GenreDesign';
+import GenreSculpture from './pages/GenreSculpture';
+import GenrePlanExhibition from './pages/GenrePlanExhibition';
+import GenreInstallationArt from './pages/GenreInstallationArt';
+import GenrePainting from './pages/GenrePainting';
+import GenreArtistExhibition from './pages/GenreArtistExhibition';
+import GenrePicture from './pages/GenrePicture';
+import GenreSpecialExhibition from './pages/GenreSpecialExhibition';
+import Record from './pages/Record';
 const Root = styled.div`
   position: absolute;
   top: 0;
@@ -64,9 +75,38 @@ function App() {
             <Route path="/exhibition/recent" element={<Recent />} />
             <Route path="/exhibition/recommend" element={<Recommend />} />
             <Route path="/mystory" element={<MyStory />} />
+            <Route path="/mystory/:record" element={<Record />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/mypagemodify" element={<MyPageModify />} />
             <Route path="/exhibition" element={<Exhibition />} />{' '}
+            <Route path="/exhibition/genremedia" element={<GenreMedia />} />
+            <Route path="/exhibition/genrecraft" element={<GenreCraft />} />
+            <Route path="/exhibition/genredesign" element={<GenreDesign />} />
+            <Route
+              path="/exhibition/genresculpture"
+              element={<GenreSculpture />}
+            />
+            <Route
+              path="/exhibition/genreplanexhibition"
+              element={<GenrePlanExhibition />}
+            />
+            <Route
+              path="/exhibition/genreinstallationart"
+              element={<GenreInstallationArt />}
+            />
+            <Route
+              path="/exhibition/genrepainting"
+              element={<GenrePainting />}
+            />
+            <Route
+              path="/exhibition/genreartistexhibition"
+              element={<GenreArtistExhibition />}
+            />
+            <Route path="/exhibition/genrepicture" element={<GenrePicture />} />
+            <Route
+              path="/exhibition/genrespecialexhibition"
+              element={<GenreSpecialExhibition />}
+            />
             {/*주연씨 담당 페이지*/}
             <Route
               path="/exhibitiondetail/:title"
@@ -83,6 +123,10 @@ function App() {
             <Route path="/onboarding" element={<Onboarding />} />{' '}
             <Route path="/onboarding2" element={<Onboarding2 />} />{' '}
             <Route path="/onboarding3" element={<Onboarding3 />} />{' '}
+            <Route path="/signup/token" element={<TokenPage />} />{' '}
+            {/*승우 담당 페이지*/}
+            {/*은향씨 담당 페이지*/}
+            {/* <Route path="/splashscreen" element={<SplashScreen />} /> */}
             <Route path="/signup/token" element={<TokenPage />} />{' '}
             {/*승우 담당 페이지*/}
             <Route path="/splashscreen" element={<SplashScreen />} />
