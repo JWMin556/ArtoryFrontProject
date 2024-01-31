@@ -19,7 +19,7 @@ const WrapTitle = styled.div`
     justify-content : center;
     align-items : center;
     font-size : small;
-    font-family: Pretendard;
+    font-family: 'Pretendard';
     padding-left: 15px;
     padding-right: 15px;
     text-align : center;

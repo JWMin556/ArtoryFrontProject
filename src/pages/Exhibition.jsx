@@ -14,6 +14,9 @@ export default function Exhibition() { //주연씨가 작업해주실 EXHIBITION
     const [popularityExhibitionData, setPopularityExhibitionData] = useState([]);
     const [recentExhibitionData, setRecentExhibitionData] = useState([]);
     const [recommendExhibitionData, setRecommedExhibitionData] = useState([]);
+    const [distanceRecommendExhibitionData, setDistanceRecommedExhibitionData] = useState([]);
+    const [simailarExhibitionData, setSimlarExhibitionData] = useState([]);
+
     const token = localStorage.getItem('Token');
 
     useEffect(() => {
@@ -33,65 +36,22 @@ export default function Exhibition() { //주연씨가 작업해주실 EXHIBITION
                 }
                 }
             );
-            setPopularityExhibitionData(response.data.popluarExhibitionDtoList);
-            console.log(response.data.popluarExhibitionDtoList);
+            console.log("인기전시",response?.data.popluarExhibitionDtoList);
+            setPopularityExhibitionData(response?.data.popluarExhibitionDtoList);
+            console.log("최근전시",response?.data.recentExhibitionDtoList);
+            setRecentExhibitionData(response?.data.recentExhibitionDtoList);
+            console.log("추천전시",response.data.recommendExhibitionDtoList);
+            setRecommedExhibitionData(response?.data.recommendExhibitionDtoList);
+            console.log("거리 추천 전시",response.data.distanceRecommendExhibitionDtoList);
+            setDistanceRecommedExhibitionData(response?.data.distanceRecommendExhibitionDtoList);
+            console.log("최근 본 전시와 유사한 전시",response.data.similarExhibitionDtoList);
+            setSimlarExhibitionData(response?.data.similarExhibitionDtoList);
+            
             } catch (error) {
                 console.log(error.response.data);
         }
-          //fetchData();
         })();
       }, []);
-  useEffect(() => {
-    (async() => { //최근 전시회 API
-        try{
-            const response = await axios.post(`${url}all?page=1`,
-            {
-                "latitude": "90",
-                "longitude": "90"
-            },
-            {
-            headers: {
-                        'Accept': '*/*',
-                        'Authorization': `Bearer ${token}`,
-                        'content-type': 'application/json',
-            }
-            });
-            setRecentExhibitionData(response.data.recentExhibitionDtoList);
-            console.log(response.recentExhibitionDtoList);
-
-        }catch(error)
-        {
-            console.log(error.response.data);
-        }
-    //fetchData();
-})();
-},[]);
-  useEffect(() => {
-    (async() => { // 추천 전시회 API
-        try{
-            const response = await axios.post(`${url}all?page=1`,
-            {
-                "latitude": "90",
-                "longitude": "90"
-            },
-            {
-            headers: {
-                        'Accept': '*/*',
-                        'Authorization': `Bearer ${token}`,
-                        'content-type': 'application/json',
-            }
-            });
-            console.log(response.recommendExhibitionDtoList);
-            setRecommedExhibitionData(response.data.recommendExhibitionDtoList);
-
-        }catch(error)
-        {
-            console.log(error.response.data);
-        }
-    //fetchData();
-  })();
-  },[]);
-
   return (
         <S.Container>
         <S.WrapAdBanner>
@@ -102,9 +62,10 @@ export default function Exhibition() { //주연씨가 작업해주실 EXHIBITION
         </S.WrapSearch>
         
         <Slide title = {"인기 전시"} Dummy = {popularityExhibitionData} />
-        <Slide title = {"최근 전시"} Dummy = {recentExhibitionData}/>
-        <Slide title = {"추천 전시"} Dummy = {recommendExhibitionData}/>
-        {/* <Genre title = {"전시 카테고리"} Dummy={TestDummy} /> */}
+            <Slide title = {"최근 전시"} Dummy = {recentExhibitionData}/>
+            <Slide title = {"추천 전시"} Dummy = {recommendExhibitionData}/>
+            <Slide title = {"근처 추천 전시"} Dummy = {distanceRecommendExhibitionData}/>
+            <Slide title = {"최근 본 전시와 비슷한 전시"} Dummy = {simailarExhibitionData}/>
 
         <div style={{width:"885px", height:"100%", marginBottom:"10%"}}>
             <div style={{position:"relative", fontFamily:"Pretendard", fontWeight:"900", fontSize:"1.6em", wordSpacing:"1px"}}>전시 카테고리</div>
@@ -133,6 +94,7 @@ export default function Exhibition() { //주연씨가 작업해주실 EXHIBITION
                 
             </div>
         </div>
+
     </S.Container>
   );
 }

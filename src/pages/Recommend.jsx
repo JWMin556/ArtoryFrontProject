@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Poster from '../components/Exhibition/Poster';
@@ -38,8 +38,6 @@ export const WrapIcon = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
-const token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDYxNzI2MzIsImV4cCI6MTcwNjI2MjYzMiwibWVtYmVySWQiOjQsInJvbGUiOiJVU0VSIn0.utWBgIlkM-je684zEEM83zKlPRNNlAaov-1sRj53AiLMB-Aked78AxOYwuoKadiaQZ6RTQY6d-BkXprqzd41oA';
 export default function Recommend() {
     const url = 'http://3.39.39.6:8080/api/exhibitions/'
     const [recommendExhibitionData, setRecommedExhibitionData] = useState([]);
@@ -79,8 +77,8 @@ export default function Recommend() {
               <Poster item={item} />
             </div>
             <WrapIcon>
-              <Heart />
-              <Save />
+              <Heart item={item}/>
+              <Save item={item}/>
             </WrapIcon>
           </WrapPoster>
         ))}

@@ -8,8 +8,6 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 import axios from 'axios';
 
 const url = 'http://3.39.39.6:8080/api/exhibitions/';
-const token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDYxNzI2MzIsImV4cCI6MTcwNjI2MjYzMiwibWVtYmVySWQiOjQsInJvbGUiOiJVU0VSIn0.utWBgIlkM-je684zEEM83zKlPRNNlAaov-1sRj53AiLMB-Aked78AxOYwuoKadiaQZ6RTQY6d-BkXprqzd41oA';
 const AdImg = styled.img`
   width: 300px;
   height: 450px;
@@ -44,6 +42,10 @@ const Swiperstyle = styled(Swiper)`
   .swiper-wrapper {
     transform: translate3d(-110.2px, 0, 0);
   }
+  .swiper-3d {
+    //width : 100%;
+    //perspective : 100px;
+  }
 `;
 
 export default function AdBanner() {
@@ -64,17 +66,15 @@ export default function AdBanner() {
                             'content-type': 'application/json',
                 }
                 });
-                console.log(response.randomExhibitionDtoList);
-                setRandomExhibitionData(response.data.randomExhibitionDtoList);
+                console.log("exhibition 배너",response?.data.randomExhibitionDtoList);
+                setRandomExhibitionData(response?.data.randomExhibitionDtoList);
     
             }catch(error)
             {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching data:', error.response.data);
             }
-        //fetchData();
     })();
   }, []);
-  //console.log(randomExhibitionData);
   return (
     <WrapSlide>
       <Swiperstyle

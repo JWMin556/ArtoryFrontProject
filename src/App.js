@@ -19,7 +19,6 @@ import ExhibitionSearch from './pages/ExhibitionSearch';
 import Popularity from './pages/Popularity';
 import Recent from './pages/Recent';
 import Recommend from './pages/Recommend';
-import KakaoLoginLoading from './pages/KakaoLoginLoading';
 import TokenPage from "./pages/TokenPage";
 import StoryDetail from './pages/StoryDetail';
 import GenreMedia from './pages/GenreMedia';
@@ -32,7 +31,7 @@ import GenrePainting from './pages/GenrePainting';
 import GenreArtistExhibition from './pages/GenreArtistExhibition';
 import GenrePicture from './pages/GenrePicture';
 import GenreSpecialExhibition from './pages/GenreSpecialExhibition';
-
+import Record from './pages/Record';
 const Root = styled.div`
   position: absolute;
   top: 0;
@@ -70,6 +69,7 @@ function App() {
             <Route path="/exhibition/recommend" element={<Recommend/>}/>
             <Route path="/story" element={<Story />} />
             <Route path="/mystory" element={<MyStory />} />
+            <Route path="/mystory/:record" element={<Record />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/mypagemodify" element={<MyPageModify />} />
             <Route path="/exhibition" element={<Exhibition />} />{' '}
@@ -96,7 +96,6 @@ function App() {
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/login" element={<LogIn />} /> {/*주연씨 담당 페이지*/}
-            <Route path='/oauth/kakao/callback'element={<KakaoLoginLoading/>} />
             <Route path="/signup" element={<SignUp />} /> {/*중원 담당 페이지*/}
             <Route path="/onboarding" element={<Onboarding />} />{' '}
             {/*은향씨 담당 페이지*/}

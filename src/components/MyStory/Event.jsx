@@ -32,8 +32,8 @@ const EventTitleStyle = styled.span`
 
 `;
 const Event = (data) => {
-    console.log(data.event.event.eventDay);
-    console.log(data.event.title);
+    //console.log(data.event.event.eventDay);
+    //console.log(data.event.title);
     // const {
     //     date,
     // } = props;

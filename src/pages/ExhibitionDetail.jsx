@@ -7,6 +7,7 @@ export default function ExhibitionDetail(props) {
     console.log(state.item);
 return (
     <Detail
+        id={state.item.exhibitionId}
         img = {state.item.exhibitionImage}
         title = {state.item.exhibitionTitle}
     />
