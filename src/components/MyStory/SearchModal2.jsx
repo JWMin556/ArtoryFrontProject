@@ -71,12 +71,13 @@ const WrapPoster = styled.div`
     margin-bottom : 3%;
 `;
 
-export default function SearchModal(props) {
+export default function SearchModal({isModalOpen,setIsModalOpen,year,month,day}) {
     const [isOutLine,setOutLine] = useState(); //input 박스 클릭 시 outline의 상태를 관리하기 위한 변수
     const [isInputClick,setIsInputClick] = useState(false); //ID input 박스 클릭 여부에 따라 placeholder의 상태를 관리하기 위한 변수
     const [keyword,setKeyWord] = useState(); 
     const [result,setResult] = useState([]);
-    const [isOpenModal,setIsOpenModal] = useState(props.isModalOpen);
+    const [isOpenModal,setIsOpenModal] = useState(isModalOpen);
+
     function handleInputFocus() 
     { //ID input박스에 들어오면 true(placeholder 텍스트 안보임), outline이 안보이도록 바꿔줌
         setIsInputClick(true); 
@@ -124,7 +125,14 @@ return (
         {result.map((item, index) => (
             <WrapPoster key={index}>
                 <div>
-                    <Poster item={item} source={props.source}/>
+                    <Poster 
+                        item={item} 
+                        year={year}
+                        month={month}
+                        day={day}
+                        source={"before"}
+                        setIsModalOpen={setIsModalOpen}
+                        />
                 </div>
             </WrapPoster>
         ))}

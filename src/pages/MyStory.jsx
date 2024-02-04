@@ -1,4 +1,5 @@
 import React ,{useEffect, useState}from 'react'
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import MyCalendar from '../components/MyStory/MyCalendar'
 import * as S from '../styled-components/MyStory.style'
@@ -11,8 +12,11 @@ const token = localStorage.getItem('Token');
 
 export default function MyStory() {
   const [userData, setUserData] = useState([]);
+  const [userStoryData,setUserStoryData] = useState([]);
   const [isButtonClick,setIsButtonClick] = useState(false);
   const profileIMG = userData.image;
+  const { state } = useLocation();
+  console.log(state);
   const handleClickStoryBotton = () =>{
     if(isButtonClick)
     {
@@ -36,13 +40,17 @@ export default function MyStory() {
             }
         );
         setUserData(response.data);
+        setUserStoryData(response.data.stories)
         console.log("유저정보",response.data);
+        //console.log("스토리정보",response.data.stories);
+
         } catch (error) {
         console.error('Error fetching data:', error.response.data);
     } 
       //fetchData();
     })();
   }, []);
+  //console.log("스토리정보",userStoryData);
   return (
     <S.Container>
       {isButtonClick && <SearchModal isButtonClick={isButtonClick} source={'record'}/>}
@@ -58,7 +66,7 @@ export default function MyStory() {
           <Memo content={userData.memo}/>
           </S.WrapMemo>
           <S.WrapCalendar2>
-            <MyCalendar/>
+            <MyCalendar userStoryData={userStoryData}/>
           </S.WrapCalendar2>
       </S.WrapCalendar>
       <div style={{ margin: '5%'}}>

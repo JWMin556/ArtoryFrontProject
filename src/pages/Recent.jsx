@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Poster from '../components/Exhibition/Poster';
 import Heart from '../components/Exhibition/Heart';
 import Save from '../components/Exhibition/Save';
+import Search2 from '../components/Exhibition/Search2'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,6 +17,7 @@ const WrapResult = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-top : 4%;
   // justify-content : center;
   // align-items : center;
 `;
@@ -40,27 +42,23 @@ export const WrapIcon = styled.div`
 `;
 const token = localStorage.getItem('Token');
 export default function Popularity() {
-    const url = 'http://3.39.39.6:8080/api/exhibitions/'
+    const url = 'http://3.39.39.6:8080/api/exhibitions/ParticularRecent?page=1'
     const [recentExhibitionData, setRecentExhibitionData] = useState([]);
     const token = localStorage.getItem('Token');
 
     useEffect(() => {
         (async() => { //최근 전시회 API
             try{
-                const response = await axios.post(`${url}all?page=1`,
+                const response = await axios.get(url,
                 {
-                    "latitude": "90",
-                    "longitude": "90"
-                },
-                {
-                headers: {
-                            'Accept': '*/*',
-                            'Authorization': `Bearer ${token}`,
-                            'content-type': 'application/json',
+                  headers: {
+                              'Accept': '*/*',
+                              'Authorization': `Bearer ${token}`,
+                              'content-type': 'application/json',
                 }
                 });
-                setRecentExhibitionData(response.data.recentExhibitionDtoList);
-                console.log(response.recentExhibitionDtoList);
+                setRecentExhibitionData(response.data);
+                console.log(response.data);
     
             }catch(error)
             {
@@ -71,6 +69,7 @@ export default function Popularity() {
   }, []);
   return (
     <Container>
+      <Search2/>
       <WrapResult>
         {recentExhibitionData.map((item, index) => (
           <WrapPoster key={index}>

@@ -8,25 +8,23 @@ export const SaveImg = styled.img`
   width: 20px;
   height: 18px;
 `;
-export default function Save(props) {
-  // const [isClickSave, setIsClickSave] = useState(props.item.scrapped);
-  // function handleClickSave(exhibitionId) {
-  //   //Save 이미지를 누르면
-  //   setIsClickSave((prevIsClickSave) => !prevIsClickSave); //isClickSave false <-> true
-  //   console.log('전시회 저장', exhibitionId); //api 호출
-  //   if (isClickSave) {
-  //     saveCancelApi(exhibitionId);
-  //   } else {
-  //     saveApi(exhibitionId);
-  //   }
-  // }
-  // return (
-  //   <div>
-  //     <SaveImg
-  //       src={isClickSave ? ON_SAVE : SAVE}
-  //       onClick={() => handleClickSave(props.item.exhibitionId)}
-  //       alt="저장 아이콘"
-  //     />
-  //   </div>
-  // );
+export default function Save(props) { //props.item.~~ 으로 호출
+  const [isClickSave, setIsClickSave] = useState(props.item.scrapped); // 좋아요 누름 = true / 좋아요 안누름 = false
+
+  function handleClickSave(exhibitionId) { //Save 이미지를 누르면
+    setIsClickSave((prevIsClickSave) => !prevIsClickSave); 
+    console.log("전시회 저장",exhibitionId); 
+    //api 호출
+    if(isClickSave){saveCancelApi(exhibitionId) } //저장 취소
+    else {saveApi(exhibitionId)} //저장
+  }
+  return (
+    <div>
+      <SaveImg
+        src={isClickSave?ON_SAVE:SAVE}
+        onClick={() => handleClickSave(props.item.exhibitionId)}
+        alt="저장 아이콘"
+      />
+    </div>
+  );
 }

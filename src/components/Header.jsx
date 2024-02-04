@@ -30,7 +30,7 @@ const HeaderLeftWrap = styled.div`
 `;
 
 const HeaderRightWrap = styled.div`
-  display: ${(props) => (props.isLoggedIn ? 'flex' : 'none')};
+  display: flex;
   align-items: center;
   margin-right: 7%;
 `;
@@ -64,7 +64,6 @@ const LogoutButton = styled.button`
   color : #F5F5F5;
   font-size : 10px;
   font-family: 'Pretendard';
-
 `;
 
 
@@ -84,7 +83,6 @@ export default function Header2() {
     setMouseOverExhibition(false);
   };
   const location = useLocation();
-  const isLoggedIn = localStorage.getItem('arbitaryLoginForHeader2');
   return (
     <HeaderContainer>
       <HeaderWrap>
@@ -119,7 +117,7 @@ export default function Header2() {
           </Link>
         </HeaderLeftWrap>
 
-        <HeaderRightWrap isLoggedIn={isLoggedIn}>
+        <HeaderRightWrap>
           {/* 상단바의 오른쪽 부분인 EXHIBITION, STORY, MY STORY, MY PAGE를 urorderedlist형식의 스타일드 컴포넌트 */}
           <UnorderedList>
             {' '}

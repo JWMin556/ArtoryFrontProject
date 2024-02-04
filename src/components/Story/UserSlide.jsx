@@ -2,8 +2,8 @@ import React from 'react';
 import * as S from '../../styled-components/Slide.style';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Heart from '../Exhibition/Heart';
-import Save from '../Exhibition/Save';
+import Heart from './Heart';
+import Save from './Scrap';
 import Prev from '../Exhibition/Prev';
 import Next from '../Exhibition/Next';
 

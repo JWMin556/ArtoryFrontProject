@@ -6,14 +6,16 @@ export const WrapSlider = styled.div`
   height: 350px;
   margin-bottom: 10%;
 `;
-export const Category = styled.span`
+export const Category = styled.button`
   position: relative;
   top: 5%;
   left: 2.5%;
-  font-family: Pretendard;
+  font-family: 'Pretendard';
   font-weight: 900;
   font-size: 1.6em;
   word-spacing: 1px;
+  border: none;
+  background-color : #fff;
 `;
 export const IMG = styled.img`
   width: 186px;

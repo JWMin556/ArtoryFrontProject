@@ -45,8 +45,6 @@ export default function Exhibition() {
             setRecentExhibitionData(response?.data.recentExhibitionDtoList);
             console.log("추천전시",response?.data.recommendExhibitionDtoList);
             setRecommedExhibitionData(response?.data.recommendExhibitionDtoList);
-            //console.log("거리 추천 전시",response.data.distanceRecommendExhibitionDtoList);
-            //setDistanceRecommedExhibitionData(response?.data.distanceRecommendExhibitionDtoList);
             console.log("최근 본 전시와 유사한 전시",response?.data.similarExhibitionDtoList);
             setSimlarExhibitionData(response?.data.similarExhibitionDtoList);
             } catch (error) {
@@ -88,14 +86,11 @@ export default function Exhibition() {
       <S.WrapSearch>
         <Search />
       </S.WrapSearch>
-      <Slide title={'인기 전시'} Dummy={popularityExhibitionData} />
-      <Slide title={'최근 전시'} Dummy={recentExhibitionData} />
-      <Slide title={'추천 전시'} Dummy={recommendExhibitionData} />
-      {/* <Slide title={'근처 추천 전시'} Dummy={distanceRecommendExhibitionData} /> */}
-      <Slide
-        title={'최근 본 전시와 비슷한 전시'}
-        Dummy={simailarExhibitionData}
-      />
+      <Slide title={'인기 전시'} Dummy={popularityExhibitionData} source={'popularity'} />
+      <Slide title={'최근 전시'} Dummy={recentExhibitionData} source={'recent'} />
+      <Slide title={'추천 전시'} Dummy={recommendExhibitionData} source={'recommend'}/>
+      <Slide title={'근처 추천 전시'} Dummy={distanceRecommendExhibitionData} source={'distanceRecommend'} />
+      <Slide title={'최근 본 전시와 비슷한 전시'} Dummy={simailarExhibitionData} source={'simailar'}/>
       <div style={{ width: '885px', height: '100%', marginBottom: '10%' }}>
         <div
           style={{

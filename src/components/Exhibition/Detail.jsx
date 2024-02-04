@@ -88,7 +88,8 @@ export default function Detail(props) {
             'content-type': 'application/json',
           }
         });
-        setInfo(response.data);
+        console.log(response?.data)
+        setInfo(response?.data);
       } catch (error) {
         console.error('Error fetching data:', error.response.data);
       }
@@ -97,7 +98,7 @@ export default function Detail(props) {
     fetchData();
   }, [props.id, token]);
 
-  console.log(info);
+  console.log("전시정보",info);
 
   return (
     //<Container>
@@ -110,7 +111,7 @@ export default function Detail(props) {
             <Title>{props.title}</Title>
             <DetailInfo><Key>장소</Key><Value>{info?.exhibitionPlace}</Value></DetailInfo>
             <DetailInfo><Key>주소</Key><Value>{info?.exhibitionAddress}</Value></DetailInfo>
-            <DetailInfo><Key>휴관</Key><Value></Value></DetailInfo>
+            <DetailInfo><Key>휴관</Key><Value>제공되지 않음</Value></DetailInfo>
             <DetailInfo><Key>기간</Key><Value>{info?.exhibitionDuration}</Value></DetailInfo>
             <DetailInfo><Key>시간</Key><Value>{info?.exhibitionViewingTime}</Value></DetailInfo>
             <DetailInfo><Key>관람연령</Key><Value>{info?.exhibitionViewingAge}</Value></DetailInfo>

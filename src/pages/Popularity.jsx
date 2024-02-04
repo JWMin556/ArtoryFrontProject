@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Poster from '../components/Exhibition/Poster';
 import Heart from '../components/Exhibition/Heart';
 import Save from '../components/Exhibition/Save';
+import Search2 from '../components/Exhibition/Search2'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,6 +17,7 @@ const WrapResult = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-top : 4%;
   // justify-content : center;
   // align-items : center;
 `;
@@ -40,7 +42,7 @@ export const WrapIcon = styled.div`
 `;
 
 export default function Popularity() {
-  const url = 'http://3.39.39.6:8080/api/exhibitions/';
+  const url = 'http://3.39.39.6:8080/api/exhibitions/ParticularPopularity?page=1';
   const [popularityExhibitionData, setPopularityExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
 
@@ -48,22 +50,16 @@ export default function Popularity() {
     (async () => {
       //인기 전시회 API
       try {
-        const response = await axios.post(
-          `${url}all?page=1`,
-          {
-            latitude: '90',
-            longitude: '90',
-          },
+        const response = await axios.get(url,
           {
             headers: {
               Accept: '*/*',
               Authorization: `Bearer ${token}`,
-              'content-type': 'application/json',
             },
           }
         );
-        setPopularityExhibitionData(response.data.popluarExhibitionDtoList);
-        console.log(response.data.popluarExhibitionDtoList);
+        setPopularityExhibitionData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching data:', error.response.data);
       }
@@ -72,19 +68,20 @@ export default function Popularity() {
   }, []);
   return (
     <Container>
-      <WrapResult>
-        {popularityExhibitionData.map((item, index) => (
-          <WrapPoster key={index}>
-            <div>
-              <Poster item={item} />
-            </div>
-            <WrapIcon>
-              <Heart item={item} />
-              <Save item={item} />
-            </WrapIcon>
-          </WrapPoster>
-        ))}
-      </WrapResult>
+      <Search2/>
+        <WrapResult>
+          {popularityExhibitionData.map((item, index) => (
+            <WrapPoster key={index}>
+              <div>
+                <Poster item={item} />
+              </div>
+              <WrapIcon>
+                <Heart item={item} />
+                <Save item={item} />
+              </WrapIcon>
+            </WrapPoster>
+          ))}
+        </WrapResult>
     </Container>
   );
 }

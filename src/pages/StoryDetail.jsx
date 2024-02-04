@@ -1,8 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Heart from '../components/Story/Heart';
-import Scrap from '../components/Story/Scrap';
+
 import CommentInput from '../components/Story/CommentInput';
 
 export default function StoryDetail() {
@@ -10,14 +9,13 @@ export default function StoryDetail() {
   console.log(state.item);
   const item = state.item;
   const satisfactionSrc = `/Img/Story/face_g${item.storySatisfactionLevel}.svg`;
-  console.log(satisfactionSrc);
-
+  const weatherSrc = `/Img/MyStory/weather_g${item.storyWeather}.svg`;
+  console.log("스토리 정보",item)
   return (
     <WrapStory>
       <Left>
         <div>
           <Profile src={item.memberProfile} alt="프로필 이미지" />
-
           <h3 style={{ marginTop: '10px' }}>{item.memberNickname}</h3>
         </div>
         <div>
@@ -67,7 +65,10 @@ export default function StoryDetail() {
                   <tr>
                     <th>날씨</th>
                     <td>
-                      <img src="" alt={item.storyWeather} />
+                      <img 
+                        src={weatherSrc}
+                        alt={item.storyWeather}
+                        style={{ height: '25px' }} />
                     </td>
                   </tr>
                   <tr>
@@ -80,7 +81,7 @@ export default function StoryDetail() {
                     <th>카테고리</th>
                     <td>
                       <Keyword>{item.storyGenre1}</Keyword>
-                      <Keyword>{item.storyGenre1}</Keyword>
+                      <Keyword>{item.storyGenre2}</Keyword>
                       <Keyword>{item.storyGenre3}</Keyword>
                     </td>
                   </tr>
@@ -95,8 +96,12 @@ export default function StoryDetail() {
             </ExhbnKeyword>
             <ExhbnContent id="전시 내용">
               <H5>오늘의 전시 내용</H5>
-              <div style={{ color: '#616161' }}>
-                찐 전시 내용들{item.storyContext}
+
+              <div className="ck ck-editor__main" style={{ width: '100%' }}>
+                <div
+                  className="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
+                  dangerouslySetInnerHTML={{ __html: item.storyContext }} // 결과 확인
+                />
               </div>
             </ExhbnContent>
           </BoxStyle>

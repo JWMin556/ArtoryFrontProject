@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Poster from '../components/Exhibition/Poster';
 import Heart from '../components/Exhibition/Heart';
 import Save from '../components/Exhibition/Save';
+import Search2 from '../components/Exhibition/Search2'
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -13,6 +15,7 @@ const Container = styled.div`
   margin-left: 19%;
 `;
 const WrapResult = styled.div`
+  margin-top : 4%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -39,7 +42,7 @@ export const WrapIcon = styled.div`
   align-items: flex-end;
 `;
 export default function Recommend() {
-  const url = 'http://3.39.39.6:8080/api/exhibitions/';
+  const url = 'http://3.39.39.6:8080/api/exhibitions/ParticularRecommend?page=1';
   const [recommendExhibitionData, setRecommedExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
 
@@ -47,22 +50,16 @@ export default function Recommend() {
     (async () => {
       // 추천 전시회 API
       try {
-        const response = await axios.post(
-          `${url}all?page=1`,
-          {
-            latitude: '90',
-            longitude: '90',
-          },
+        const response = await axios.get(url,
           {
             headers: {
               Accept: '*/*',
               Authorization: `Bearer ${token}`,
-              'content-type': 'application/json',
             },
           }
         );
-        console.log(response.recommendExhibitionDtoList);
-        setRecommedExhibitionData(response.data.recommendExhibitionDtoList);
+        console.log(response.data);
+        setRecommedExhibitionData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -71,6 +68,7 @@ export default function Recommend() {
   }, []);
   return (
     <Container>
+      <Search2/>
       <WrapResult>
         {recommendExhibitionData.map((item, index) => (
           <WrapPoster key={index}>
