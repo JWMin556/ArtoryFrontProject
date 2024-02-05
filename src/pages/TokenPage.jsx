@@ -20,7 +20,8 @@ const TokenPage = () => {
           console.log('data : ', response.data);
           console.log('access Token : ', response.data.accessToken);
           localStorage.setItem('Token', response.data.accessToken);
-          window.location.href = '/exhibition';
+          // window.location.href = '/exhibition'; //기존의 코드
+          window.location.href = '/onboarding';
         } else if (provider === 'kakao') {
           const response = await axios.get(
             `http://3.39.39.6:8080/kakaologin?accessToken=${access_token}`
@@ -29,7 +30,8 @@ const TokenPage = () => {
           console.log('data : ', response.data);
           console.log('access Token : ', response.data.accessToken);
           localStorage.setItem('Token', response.data.accessToken);
-          window.location.href = '/exhibition';
+          // window.location.href = '/exhibition'; //기존의 코드
+          window.location.href = '/onboarding';
         } else console.log('소셜 제공자가 없습니다.');
 
         // 처리 로직 추가

@@ -33,6 +33,7 @@ import GenreArtistExhibition from './pages/GenreArtistExhibition';
 import GenrePicture from './pages/GenrePicture';
 import GenreSpecialExhibition from './pages/GenreSpecialExhibition';
 import Record from './pages/Record';
+
 const Root = styled.div`
   position: absolute;
   top: 0;
