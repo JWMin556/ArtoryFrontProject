@@ -53,7 +53,7 @@ export default function MyStory() {
   //console.log("스토리정보",userStoryData);
   return (
     <S.Container>
-      {isButtonClick && <SearchModal isButtonClick={isButtonClick} source={'record'}/>}
+      {isButtonClick && <SearchModal isButtonClick={isButtonClick} source={'record'} userStoryData={userStoryData}/>}
       <S.WrapProfileAndButton>
       <S.WrapProfile>
         <S.ProfileIMG src={profileIMG} style={{width : '100px', height: '100px'}}></S.ProfileIMG>

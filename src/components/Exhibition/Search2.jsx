@@ -6,7 +6,7 @@ import { searchExhibition } from '../API/search_API';
 const WrapSearch= styled.div`
     width : 370px;
     height : 39px;
-
+    margin-top : 7%;
 `;
 const SearchStyle = styled.input`
     background-color : #f5f5f5;

@@ -5,6 +5,7 @@ import Poster from '../components/Exhibition/Poster';
 import Heart from '../components/Exhibition/Heart';
 import Save from '../components/Exhibition/Save';
 import Search2 from '../components/Exhibition/Search2'
+import CustomPagination from '../components/Exhibition/CustomPagination'
 
 const Container = styled.div`
   display: flex;
@@ -45,7 +46,11 @@ export default function Recommend() {
   const url = 'http://3.39.39.6:8080/api/exhibitions/ParticularRecommend?page=1';
   const [recommendExhibitionData, setRecommedExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
-
+  const [page, setPage] = useState(1);
+  const [exhibition , setExhibition] = useState(20);
+  const handlePageChange = (page) => {
+    setPage(page);
+};
   useEffect(() => {
     (async () => {
       // 추천 전시회 API
@@ -70,7 +75,10 @@ export default function Recommend() {
     <Container>
       <Search2/>
       <WrapResult>
-        {recommendExhibitionData.map((item, index) => (
+        {recommendExhibitionData.slice(
+            exhibition*(page-1),
+            exhibition*(page-1)+exhibition
+          ).map((item, index) => (
           <WrapPoster key={index}>
             <div>
               <Poster item={item} />
@@ -82,6 +90,12 @@ export default function Recommend() {
           </WrapPoster>
         ))}
       </WrapResult>
+      <CustomPagination
+          page={page}
+          exhibition={exhibition}
+          data={recommendExhibitionData}
+          handlePageChange={handlePageChange}
+        />
     </Container>
   );
 }

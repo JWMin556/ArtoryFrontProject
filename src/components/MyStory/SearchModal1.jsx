@@ -4,6 +4,7 @@ import Modal  from 'react-modal';
 import { searchExhibition } from '../API/search_API';
 import Poster from '../Exhibition/Poster';
 import SEARCH from '../../Img/Search/search.svg'
+import SEARCH_IMG from '../../Img/Search/search.svg'
 const StyledModal = {
     overlay: {
         backgroundColor: " rgba(0, 0, 0, 0.8)",
@@ -68,13 +69,20 @@ const WrapPoster = styled.div`
     padding : 0;
     margin-bottom : 3%;
 `;
-
-export default function SearchModal(props) {
+const IMG = styled.img`
+    width : 60px;
+    height : 60px;
+    position : relative;
+    top : 100px;
+`;
+export default function SearchModal({userStoryData,...props}) {
     const [isOutLine,setOutLine] = useState(); //input 박스 클릭 시 outline의 상태를 관리하기 위한 변수
     const [isInputClick,setIsInputClick] = useState(false); //ID input 박스 클릭 여부에 따라 placeholder의 상태를 관리하기 위한 변수
     const [keyword,setKeyWord] = useState(); 
     const [resultData,setResultData] = useState([]);
     const [isOpenModal,setIsOpenModal] = useState(props.isButtonClick);
+    const [isShowResult,setIsShowResult] = useState();
+
     function handleInputFocus() 
     { //ID input박스에 들어오면 true(placeholder 텍스트 안보임), outline이 안보이도록 바꿔줌
         setIsInputClick(true); 
@@ -89,6 +97,7 @@ const handleKeyPress = async(e) => {
     console.log('검색 키워드', keyword)
     if(e.key === "Enter"){
         try{
+            isShowResult ? setIsShowResult(false) : setIsShowResult(true)
             const result = await searchExhibition(keyword);
             setResultData(result);
             console.log(result);
@@ -118,16 +127,21 @@ return (
             />
             <SearchImg src={SEARCH}/>
             </WrapSearch>
-        <WrapResult>
-        {resultData.map((item, index) => (
-            <WrapPoster key={index}>
-                <div>
-                    <Poster item={item} source={props.source}/>
-                </div>
-            </WrapPoster>
-        ))}
-        </WrapResult>
+            {isShowResult ? 
+            <WrapResult>
+                {resultData.map((item, index) => (
+                    <WrapPoster key={index}>
+                        <div>
+                            <Poster item={item} source={props.source} userStoryData={userStoryData}/>
+                        </div>
+                    </WrapPoster>
+                ))}
+            </WrapResult> :
+        <IMG src={SEARCH_IMG}/> }
         </Container>
     </Modal>
 )
 }
+
+
+

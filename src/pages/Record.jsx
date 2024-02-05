@@ -115,6 +115,9 @@ export default function Record(props) {
     const getDate = moment(today).format('DD')
 
     const { state } = useLocation();
+    console.log("레코드 페이지 ",state.userStoryData);
+    const userStoryData = state.userStoryData
+    //console.log("userStoryData",userStoryData)
     const [data, setData] = useState(''); //스토리 내용
     const [title,setTitle] = useState(''); //제목
     const [viewingTime, setViewingTime] = useState(''); //시간
@@ -130,44 +133,59 @@ export default function Record(props) {
     const [date,setDate] = useState(getDate); //일
 
     const id = state.item.exhibitionId
-    console.log("제목: ",title)
-    console.log("시간: ",viewingTime)
-    console.log("동반인: ",companion)
-    console.log("장르1: ",genre1)
-    console.log("장르2: ",genre2)
-    console.log("장르3: ",genre3)
-    console.log("만족도",satisfactionLevel)
-    console.log("날씨",weather)
-    console.log("내용",data)
-    console.log("공개여부",isOpen)
-    console.log("년",year)
-    console.log("월",month)
-    console.log("일",date)
+    const exhibitionTitle = state.item.exhibitionTitle
+    // console.log("제목: ",title)
+    // console.log("시간: ",viewingTime)
+    // console.log("동반인: ",companion)
+    // console.log("장르1: ",genre1)
+    // console.log("장르2: ",genre2)
+    // console.log("장르3: ",genre3)
+    // console.log("만족도",satisfactionLevel)
+    // console.log("날씨",weather)
+    // console.log("내용",data)
+    // console.log("공개여부",isOpen)
+    // console.log("년",year)
+    // console.log("월",month)
+    // console.log("일",date)
     const markEvent=[
         state.item.exhibitionTitle,
         year,
         month,
         date
     ]
-
-    const handleSubmit = async () => {
-        try {
-          await createStory(id,data,title,viewingTime,companion,genre1,genre2,genre3,satisfactionLevel,weather,isOpen,year,month,date);
-          alert("스토리가 저장되었습니다")
-          navigate(`/mystory`, { state: { markEvent } }) 
-        } catch (error) {
-          console.log(error.response.data);
+    //저장 버튼 클릭 
+    const handleSubmit = async () =>{
+        console.log("data.exhibitionTitle",userStoryData[0].exhibitionTitle)
+        console.log("exhibitionTitle",exhibitionTitle)
+        for (let i=0 ; i<userStoryData.length ; i++){
+            if(userStoryData[i].exhibitionTitle === exhibitionTitle)
+            {
+                alert("동일한 전시가 있습니다.")
+                break;
+            }
         }
-      };
+            //await createStory(id,data,title,viewingTime,companion,genre1,genre2,genre3,satisfactionLevel,weather,isOpen,year,month,date);
+            alert("스토리가 저장되었습니다")
+            //navigate(`/mystory`, { state: { markEvent } 
+    }
+       
+        // try {
+        //     await createStory(id,data,title,viewingTime,companion,genre1,genre2,genre3,satisfactionLevel,weather,isOpen,year,month,date);
+        //     alert("스토리가 저장되었습니다")
+        //     navigate(`/mystory`, { state: { markEvent } }) 
+        // } catch (error) {
+        //     console.log(error.response.data);
+        // }
+
+      //임시저장 버튼 클릭 
     const handleProgressSubmit = async() =>{
-        console.log("임시저장 버튼 클릭")
         try{
             await progressSaveApi(id,data,title,viewingTime,companion,genre1,genre2,genre3,satisfactionLevel,weather,isOpen,year,month,date);
             alert("스토리가 임시저장 되었습니다")
             //navigate(`/mystory`, { state: { markEvent } }) 
         }catch (error) {
             console.log(error.response.data);
-          }
+        }
     }
     //   const ClickSaveButton =()=>{
     //     //alert("스토리가 저장되었습니다")
@@ -227,3 +245,4 @@ return (
 
 )
 }
+

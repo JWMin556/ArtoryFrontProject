@@ -7,7 +7,7 @@ import { LogoutApi } from './API/Logout_API'
 
 const HeaderContainer = styled.div`
   width: 100%;
-  height: 60px; //전체를 감싸주는 div태그를 60xp로 바꿈
+  height: 30px; //전체를 감싸주는 div태그를 60xp로 바꿈
 `; //상단바 전체를 감싸주는 스타일드 컴포넌트입니다.
 
 const HeaderWrap = styled.div`
@@ -15,7 +15,7 @@ const HeaderWrap = styled.div`
   position: sticky;
   top: 0;
   z-index: 1000; //넣어준 이유... 다른 컴포넌트의 이미지와 충돌시 클릭이 안되는 것을 방지하려고..특히 signup.jsx랑...
-  height: 50%; //상단바 div태그를 부모의 높이 30%로 바꿈 => height : 30px입니다.
+  height: 100%; //상단바 div태그를 부모의 높이 30%로 바꿈 => height : 30px입니다.
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -67,12 +67,8 @@ const LogoutButton = styled.button`
 `;
 
 
-export default function Header2() {
+export default function Header() {
 
-  const logoutButtonClick = () =>
-  {
-    LogoutApi();
-  }
   const [isMouseOverExhibition, setMouseOverExhibition] = useState(false); //마우스가 Exhibition위에 올라는지 아닌지 상태를 관리하는 변수
   const handleMouseOverExhibition = () => {
     //마우스가 Exhibition에 올라갔을 때 호출되는 함수 -> setMouseOverExhibition를 이용하여 isMouseOverExhibition가 false->true로 바뀜
@@ -82,6 +78,11 @@ export default function Header2() {
     //마우스가 Exhibition에서 나갔을 때 호출되는 함수 -> setMouseOverExhibition를 이용하여 isMouseOverExhibition가 true->false로 바뀜
     setMouseOverExhibition(false);
   };
+  const logoutButtonClick = () =>
+  {
+    LogoutApi();
+  }
+
   const location = useLocation();
   return (
     <HeaderContainer>
@@ -162,13 +163,14 @@ export default function Header2() {
           </UnorderedList>
         </HeaderRightWrap>
       </HeaderWrap>
-      {isMouseOverExhibition && (
-        <Navigation
-          onmouseover={handleMouseOverExhibition}
-          onmouseout={handleMouseOutExhibition}
-        />
-      )}{' '}
+{' '}
       {/*isMouseOverExhibition가 true이면 <Navigation/>이 뜸 */}
+      {isMouseOverExhibition && (
+            <Navigation
+            onmouseover = {handleMouseOverExhibition}
+            onmouseout={handleMouseOutExhibition}
+            />
+          )}
     </HeaderContainer>
   );
 }

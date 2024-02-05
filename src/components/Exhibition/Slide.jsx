@@ -7,8 +7,6 @@ import Save from './Save';
 import Prev from './Prev';
 import Next from './Next';
 import Poster from './Poster';
-import Title from './Title';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 export default function Slide(props) {
@@ -35,7 +33,7 @@ export default function Slide(props) {
     source==="recommend" ?
     navigate(`/exhibition/recommend`) :
     props.source==="distanceRecommend" ?
-    console.log(1): 
+    navigate(`/exhibition/distancerecommend`) :
     props.source==="simailar" ?
     navigate(`/exhibition/simailar`) :
     console.log(2)

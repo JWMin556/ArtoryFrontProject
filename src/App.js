@@ -35,6 +35,30 @@ import GenreArtistExhibition from './pages/GenreArtistExhibition';
 import GenrePicture from './pages/GenrePicture';
 import GenreSpecialExhibition from './pages/GenreSpecialExhibition';
 import Record from './pages/Record';
+import Navigation from './components/NavigationBar/Navigation'
+import { Link } from 'react-router-dom';
+
+const WrapNavigation = styled.div`
+  box-shadow: 1px 2px 8px #f3f3f3;
+  border:1px solid green;
+  position: relative;
+  left: 55%;
+  width: 338px;
+  height: 44px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-family: 'Pretendard';
+  z-index : 1;
+`;
+const Navigation1 = styled.span`
+  color: #595959;
+  font-size: 13px;
+`;
+const Navigation2 = styled.span`
+  color: #d9d9d9;
+  font-size: 19px;
+`;
 const Root = styled.div`
   position: absolute;
   top: 0;

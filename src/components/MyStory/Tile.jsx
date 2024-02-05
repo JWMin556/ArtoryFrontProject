@@ -4,6 +4,8 @@ import moment from "moment";
 import ADD from '../../Img/Calendar/add.svg';
 import SearchModa2 from "./SearchModal2";  // 주석 해제
 import axios from "axios";
+import StoryTitle from "./StoryTitle";
+import StoryList from "./StoryList";
 const url = "http://3.39.39.6:8080/api/mystory/bySavedDate?";
 const token = localStorage.getItem('Token');
 
@@ -19,9 +21,9 @@ const TileWrapper = styled.div`
   justify-content : space-between;
   font-size : 12px;
   font-family: Pretendard;
-  &:hover{
-    background-color : #EFEEEE;
-  }
+  // &:hover{
+  //   background-color : #EFEEEE;
+  // }
 `;
 
 const DateStyle = styled.span`
@@ -54,11 +56,16 @@ const Mark = styled.div`
 `;
 export const Tile = ({ key,year,month,day, userStoryData }) => {
   const [isButtonOpen, setIsButtonOpen] = useState(false);
+  const [mouseOverStyle,setMouseOverStyle] = useState();
   const [mark, setMark] = useState(null);
   const [story,setStory] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMarkStyle,setIsStyleStyle]=useState();
+  const [isClickTile, setIsClickTile] = useState(false);
   //const result=
+  useEffect(()=>{
+    //console.log(`${day}일`);
+  })
   useEffect(() => {
     const checkStoryData = async () => {
       try {
@@ -100,32 +107,39 @@ export const Tile = ({ key,year,month,day, userStoryData }) => {
     }
 
   const handleOnMouseOverTile = () => {
-    setIsButtonOpen(true);
+    if(day>0)
+    {
+      setIsButtonOpen(true)
+      setMouseOverStyle({backgroundColor:"#EFEEEE"})
+    }
+    else {
+      setIsButtonOpen(false)
+      setMouseOverStyle({backgroundColor:"#ffffff"})
+    }
   };
 
   const handleOnMouseOutTile = () => {
     setIsButtonOpen(false);
+    setMouseOverStyle({backgroundColor:"#ffffff"})
   };
   const handleClickAddButton = (day) => {
     setIsModalOpen(true);
-
-  }
-  const handleCloseModal = () => {
-    setIsButtonOpen(false); // 모달이 닫힐 때 AddImg도 사라지도록 설정
-    setIsModalOpen(false);
   }
 
+  const onClickTile = () =>{
+    isClickTile ? setIsClickTile(false) : setIsClickTile(true)
+  }
 
   return (
     <TileWrapper
       onMouseOver={() => {
         handleOnMouseOverTile(day);
-        setIsButtonOpen(true);
       }}
       onMouseOut={() => {
         handleOnMouseOutTile(day);
-        setIsButtonOpen(false);
       }}
+      onClick={onClickTile}
+      style={mouseOverStyle}
     >
       <DateStyle style={mark}>{day}</DateStyle>
       {isButtonOpen && <AddImg src={ADD} onClick={() => handleClickAddButton(day)} />}
@@ -133,13 +147,17 @@ export const Tile = ({ key,year,month,day, userStoryData }) => {
           <SearchModa2 
             isModalOpen={isModalOpen} 
             setIsModalOpen={setIsModalOpen}
-            handleCloseModal={handleCloseModal} 
             year={year}
             month={month}
             day={day}
             />}
-
       <Mark style={isMarkStyle}>{result2}</Mark>
+      {isClickTile && <StoryList 
+      userStoryData={userStoryData}
+      year={year}
+      month={month}
+      day={day}
+      />}
     </TileWrapper>
   );
 };

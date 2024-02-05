@@ -5,6 +5,7 @@ import Poster from '../components/Exhibition/Poster';
 import Heart from '../components/Exhibition/Heart';
 import Save from '../components/Exhibition/Save';
 import Search2 from '../components/Exhibition/Search2'
+import CustomPagination from '../components/Exhibition/CustomPagination'
 
 const Container = styled.div`
   display: flex;
@@ -45,22 +46,33 @@ export default function DistanceRecommend() {
   const url = 'http://3.39.39.6:8080/api/exhibitions/ParticularDistanceRecommend?page=1';
   const [distanceRecommendExhibitionData, setDistanceRecommedExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
-
+  const [page, setPage] = useState(1);
+  const [exhibition , setExhibition] = useState(20);
+  const handlePageChange = (page) => {
+    setPage(page);
+};
   useEffect(() => {
     (async () => {
-      // 추천 전시회 API
+      // 근처 추천 전시회 API
       try {
         const response = await axios.post(url,
-          {
-            headers: {
-              Accept: '*/*',
-              Authorization: `Bearer ${token}`,
-            },
-          }
+        {
+                "latitude": "90",
+                "longitude": "90"
+        },
+            {
+                headers: {
+                    'Accept': '*/*',
+                    'Authorization': `Bearer ${token}`,
+                    'content-type': 'application/json',
+            }
+            }
         );
-        console.log(response.data);
-        setDistanceRecommedExhibitionData(response.data);
-      } catch (error) {
+        //console.log(response.data);
+        console.log("거리추천전시",response?.data);
+        setDistanceRecommedExhibitionData(response?.data);
+
+        } catch (error) {
         console.error('Error fetching data:', error);
       }
       //fetchData();
@@ -70,7 +82,10 @@ export default function DistanceRecommend() {
     <Container>
       <Search2/>
       <WrapResult>
-        {distanceRecommendExhibitionData.map((item, index) => (
+        {distanceRecommendExhibitionData.slice(
+            exhibition*(page-1),
+            exhibition*(page-1)+exhibition
+          ).map((item, index) => (
           <WrapPoster key={index}>
             <div>
               <Poster item={item} />
@@ -82,6 +97,12 @@ export default function DistanceRecommend() {
           </WrapPoster>
         ))}
       </WrapResult>
+      <CustomPagination
+          page={page}
+          exhibition={exhibition}
+          data={distanceRecommendExhibitionData}
+          handlePageChange={handlePageChange}
+        />
     </Container>
   );
 }
