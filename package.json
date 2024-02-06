@@ -6,6 +6,7 @@
     "@ckeditor/ckeditor5-basic-styles": "^41.0.0",
     "@ckeditor/ckeditor5-build-classic": "^41.0.0",
     "@ckeditor/ckeditor5-react": "^6.2.0",
+    "@joeattardi/emoji-button": "^4.6.4",
     "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/stack": "^6.3.20",
