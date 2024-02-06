@@ -18,7 +18,7 @@ export default function StorySlide(props) {
     prevArrow: <Prev />,
   };
   useEffect(() => {
-    console.log('props받아옴ㄴ', props);
+    //console.log('props받아옴ㄴ', props);
   }, []);
   return (
     <S.WrapSlider>

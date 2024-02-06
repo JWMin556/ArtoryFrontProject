@@ -9,7 +9,7 @@ export const FirstParagraph = styled.p `
   line-height: 18.63px; 
   letter-spacing: 0.49px;
   word-wrap: break-word;
-  width: 116px;
+  //width: 116px;
   height: 19px;
 `;  //첫 문장인 Story community를 위한 스타일드 컴포넌트입니다. 
 

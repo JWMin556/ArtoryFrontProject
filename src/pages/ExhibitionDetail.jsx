@@ -4,7 +4,7 @@ import Detail from '../components/Exhibition/Detail';
 
 export default function ExhibitionDetail(props) {
     const {state} = useLocation();
-    console.log(state.item);
+    //console.log(state.item);
 return (
     <Detail
         id={state.item.exhibitionId}

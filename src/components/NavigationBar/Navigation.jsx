@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const WrapNavigation = styled.div`
-  box-shadow: 1px 2px 8px #f3f3f3;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  background-color : #ffffff;
   position: relative;
   left: 55%;
   width: 338px;
@@ -12,6 +13,7 @@ const WrapNavigation = styled.div`
   justify-content: space-evenly;
   align-items: center;
   font-family: 'Pretendard';
+  z-index : 1;
 `;
 const Navigation1 = styled.span`
   color: #595959;

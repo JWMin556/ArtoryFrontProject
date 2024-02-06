@@ -9,9 +9,9 @@ export const HeartImg = styled.img`
   height: 18px;
 `;
 export default function Heart(props) {
+  console.log(props.isLiked)
   const [colorHeart, setColorHeart] = useState(
-    props.isLiked ? ON_HEART : HEART
-  );
+    props.isLiked);
   async function handleClickHeart() {
     if (colorHeart === HEART) {
       setColorHeart(ON_HEART);

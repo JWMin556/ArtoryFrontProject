@@ -1,80 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertToRaw } from 'draft-js';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import draftjsToHtml from "draftjs-to-html";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+import TextEditor from './TextEditor';
 const WriteBox = styled.div`
   width: 767px;
-  height: 713px;
-  margin-bottom : 10%;
-  border: 1px solid green;
+  //height: 713px;
+  width: 767px;
+  height: 359px;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10%;
+  /* border: 1px solid yellow; */
+  border: none;
+  font-family: 'Pretendard';
 `;
 
-export default function WritingStory() {
-  const [form, setForm] = useState({});
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-    const [htmlString, setHtmlString] = useState("");
-
-  const updateTextDescription = async (state) => {
-    await setEditorState(state);
-    const html = draftjsToHtml(convertToRaw(editorState.getCurrentContent()));
-    setHtmlString(html);
-  };
-  const uploadCallback = () => {
-    console.log('이미지 업로드');
-  };
-
-  const onChangeContent = (editorState) => {
-    setEditorState(editorState);
-    const content = convertToRaw(editorState.getCurrentContent());
-    setForm({
-      ...form,
-      content: content,
-    });
-  };
-
+export default function WritingStory({ setData, data }) {
   return (
     <div>
-    <WriteBox>
-      <Editor
-        editorState={editorState}
-        onEditorStateChange={updateTextDescription}
-        toolbar={{
-          image: { uploadCallback: uploadCallback },
-        }}
-        localization={{ locale: 'ko' }}
-        editorStyle={{
-            height: "100%",
-            width: "100%",
-            //border: "3px solid lightgray",
-            padding: "20px",
-          }}
-      />
-    </WriteBox>
-    <WriteBox>
-    <CKEditor
-                    editor={ ClassicEditor }
-                    data="<p>Hello from CKEditor 5!</p>"
-                    onReady={ editor => {
-                        // You can store the "editor" and use when it is needed.
-                        console.log( 'Editor is ready to use!', editor );
-                    } }
-                    onChange={ ( event, editor ) => {
-                        const data = editor.getData();
-                        console.log( { event, editor, data } );
-                    } }
-                    onBlur={ ( event, editor ) => {
-                        console.log( 'Blur.', editor );
-                    } }
-                    onFocus={ ( event, editor ) => {
-                        console.log( 'Focus.', editor );
-                    } }
-                />
-    </WriteBox>
-    </div>
+      <WriteBox>
+        <TextEditor setData={setData} />
 
+        <div style={{ display: 'flex' }}>
+          <div className="ck ck-editor__main" style={{ width: '100%' }}>
+            <div
+              className="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
+              dangerouslySetInnerHTML={{ __html: data }} // 결과 확인
+            />
+          </div>
+        </div>
+      </WriteBox>
+    </div>
   );
 }
