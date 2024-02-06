@@ -18,7 +18,6 @@ export default function StorySlide(props) {
     nextArrow: <Next />,
     prevArrow: <Prev />,
   };
-
   return (
     <S.WrapSlider>
       <S.Category>{props.title}</S.Category>

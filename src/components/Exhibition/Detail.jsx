@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import KakaoMap from './KakaoMap'
+import { Link } from 'react-router-dom';
 const url = 'http://3.39.39.6:8080/api/exhibitions/';
 
 export const WrapDetail = styled.div`
@@ -88,7 +89,8 @@ export default function Detail(props) {
             'content-type': 'application/json',
           }
         });
-        setInfo(response.data);
+        console.log(response?.data)
+        setInfo(response?.data);
       } catch (error) {
         console.error('Error fetching data:', error.response.data);
       }
@@ -96,8 +98,8 @@ export default function Detail(props) {
 
     fetchData();
   }, [props.id, token]);
-
-  console.log(info);
+  const link = info?.exhibitionUrl;
+  console.log("링크정보",link);
 
   return (
     //<Container>
@@ -108,13 +110,14 @@ export default function Detail(props) {
           </WrapImg>
           <WrapInfo>
             <Title>{props.title}</Title>
-            <DetailInfo><Key>장소</Key><Value>{info?.exhibitionPlace}</Value></DetailInfo>
+            <DetailInfo><Key>장소</Key><Value>{info?.exhibitionPlace===""?"정보가 제공되지 않음" : info?.exhibitionPlace }</Value></DetailInfo>
             <DetailInfo><Key>주소</Key><Value>{info?.exhibitionAddress}</Value></DetailInfo>
-            <DetailInfo><Key>휴관</Key><Value></Value></DetailInfo>
             <DetailInfo><Key>기간</Key><Value>{info?.exhibitionDuration}</Value></DetailInfo>
             <DetailInfo><Key>시간</Key><Value>{info?.exhibitionViewingTime}</Value></DetailInfo>
             <DetailInfo><Key>관람연령</Key><Value>{info?.exhibitionViewingAge}</Value></DetailInfo>
             <DetailInfo><Key>가격</Key><Value>{info?.exhibitionPrice}</Value></DetailInfo>
+            <DetailInfo><Key>사이트</Key><Value style={{width : '53%'}}><Link to={link}>{info?.exhibitionUrl}</Link></Value></DetailInfo>
+
           </WrapInfo>
         </ImgAndInfo>
           <KakaoMap 

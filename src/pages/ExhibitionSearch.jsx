@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Heart from '../components/Exhibition/Heart';
 import Save from '../components/Exhibition/Save';
 import Title from '../components/Exhibition/Title';
-import Search from '../components/Exhibition/Search';
+import Search2 from '../components/Exhibition/Search2';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@ export default function ExhibitionSearch(props) {
   return (
     <Container>
       <WrapSearch>
-        <Search />
+        <Search2/>
       </WrapSearch>
       <WrapResult>
         {state.result.map((item, index) => (
@@ -55,8 +55,8 @@ export default function ExhibitionSearch(props) {
               <Poster item={item} />
             </div>
             <WrapIcon>
-              <Heart />
-              <Save />
+              <Heart item={item}/>
+              <Save item={item}/>
             </WrapIcon>
           </WrapPoster>
         ))}

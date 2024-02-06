@@ -38,8 +38,9 @@ export default function Search() {
 const handleKeyPress = async(e) => {
     if(e.key === "Enter"){
         try{
+            console.log("키워드",keyword);
             const result = await searchExhibition(keyword);
-            //console.log(result);
+            console.log("결과",result);
             navigate(`/exhibitionsearch/${keyword}`, { state: { result } });
         }
         catch (error){

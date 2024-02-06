@@ -95,7 +95,7 @@
 // };
 
 // export default EmojiPicker;
-
+//d이 위에 주석처리는 일단 놔둬주세요. 설명이 써있는데 정리를 못해서..ㅜ
 import React, { useEffect, useRef } from 'react';
 import { EmojiButton } from '@joeattardi/emoji-button';
 import styled from 'styled-components';

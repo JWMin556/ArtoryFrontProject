@@ -86,7 +86,7 @@ const TextEditor = ({ setData, data }) => {
   };
 
   return (
-    <Wrap>
+    <div style={{ width: '100%' }}>
       <CKEditor
         id="ckeditor"
         editor={Editor}
@@ -101,16 +101,9 @@ const TextEditor = ({ setData, data }) => {
           }
         }}
       />
-      {/* <EmojiPicker setData={setData} data={data} className="이모티콘" /> */}
-    </Wrap>
+      <EmojiPicker setData={setData} data={data} className="이모티콘" />
+    </div>
   );
 };
-
-const Wrap = styled.div`
-  width: 100%;
-  #ckeditor {
-    color: red;
-  }
-`;
 
 export default TextEditor;

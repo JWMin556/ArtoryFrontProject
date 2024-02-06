@@ -33,7 +33,7 @@ export const FirstParagraph = styled.p `
     line-height: 18.63px; 
     letter-spacing: 0.49px;
     word-wrap: break-word;
-    width: 116px;
+    //width: 116px;
     height: 19px;
     @media screen and (max-width: 500px){
         width: 76.37px;

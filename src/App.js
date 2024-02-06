@@ -19,6 +19,8 @@ import ExhibitionSearch from './pages/ExhibitionSearch';
 import Popularity from './pages/Popularity';
 import Recent from './pages/Recent';
 import Recommend from './pages/Recommend';
+import DistanceRecommend from './pages/DistanceRecommend';
+import Simailar from './pages/Simailar'
 import TokenPage from './pages/TokenPage';
 import StoryDetail from './pages/StoryDetail';
 import StorySearch from './pages/StorySearch';
@@ -74,6 +76,8 @@ function App() {
             <Route path="/exhibition/popularity" element={<Popularity />} />
             <Route path="/exhibition/recent" element={<Recent />} />
             <Route path="/exhibition/recommend" element={<Recommend />} />
+            <Route path="/exhibition/distancerecommend" element={<DistanceRecommend/>} />
+            <Route path="/exhibition/simailar" element={<Simailar />} />
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mystory/:record" element={<Record />} />
             <Route path="/mypage" element={<MyPage />} />

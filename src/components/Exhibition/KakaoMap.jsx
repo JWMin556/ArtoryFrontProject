@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react'
 
 const { kakao } = window; //함수형 컴포넌트에 인지시킴
-function Kakao(props) {
-    console.log("경도",props.Longitude);
-    console.log("위도",props.Latitude);
+function Kakao({Longitude,Latitude}) {
+    console.log("경도",Longitude);
+    console.log("위도",Latitude);
     useEffect(() => {
         const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
         const options = {
-            center : new kakao.maps.LatLng(props.Longitude, props.Latitude), //지도의 중심 좌표
+            center : new kakao.maps.LatLng(Longitude,Latitude), //지도의 중심 좌표
             level : 3
         };
         const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
          //마커가 표시 될 위치
     let markerPosition = new kakao.maps.LatLng(
-        props.Longitude,
-        props.Latitude
+        Longitude,
+        Latitude
     );
         // 마커를 생성
         let marker = new kakao.maps.Marker({

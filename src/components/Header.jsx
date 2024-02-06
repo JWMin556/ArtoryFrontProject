@@ -30,7 +30,7 @@ const HeaderLeftWrap = styled.div`
 `;
 
 const HeaderRightWrap = styled.div`
-  display: ${(props) => (props.isLoggedIn ? 'flex' : 'none')};
+  display: flex;
   align-items: center;
   margin-right: 7%;
 `;
@@ -66,10 +66,9 @@ const LogoutButton = styled.button`
   font-family: 'Pretendard';
 `;
 
-export default function Header2() {
-  const logoutButtonClick = () => {
-    LogoutApi();
-  };
+
+export default function Header() {
+
   const [isMouseOverExhibition, setMouseOverExhibition] = useState(false); //마우스가 Exhibition위에 올라는지 아닌지 상태를 관리하는 변수
   const handleMouseOverExhibition = () => {
     //마우스가 Exhibition에 올라갔을 때 호출되는 함수 -> setMouseOverExhibition를 이용하여 isMouseOverExhibition가 false->true로 바뀜
@@ -79,8 +78,12 @@ export default function Header2() {
     //마우스가 Exhibition에서 나갔을 때 호출되는 함수 -> setMouseOverExhibition를 이용하여 isMouseOverExhibition가 true->false로 바뀜
     setMouseOverExhibition(false);
   };
+  const logoutButtonClick = () =>
+  {
+    LogoutApi();
+  }
+
   const location = useLocation();
-  const isLoggedIn = localStorage.getItem('arbitaryLoginForHeader2');
   return (
     <HeaderContainer>
       <HeaderWrap>
@@ -115,7 +118,7 @@ export default function Header2() {
           </Link>
         </HeaderLeftWrap>
 
-        <HeaderRightWrap isLoggedIn={isLoggedIn}>
+        <HeaderRightWrap>
           {/* 상단바의 오른쪽 부분인 EXHIBITION, STORY, MY STORY, MY PAGE를 urorderedlist형식의 스타일드 컴포넌트 */}
           <UnorderedList>
             {' '}
@@ -160,13 +163,14 @@ export default function Header2() {
           </UnorderedList>
         </HeaderRightWrap>
       </HeaderWrap>
-      {isMouseOverExhibition && (
-        <Navigation
-          onmouseover={handleMouseOverExhibition}
-          onmouseout={handleMouseOutExhibition}
-        />
-      )}{' '}
+{' '}
       {/*isMouseOverExhibition가 true이면 <Navigation/>이 뜸 */}
+      {isMouseOverExhibition && (
+            <Navigation
+            onmouseover = {handleMouseOverExhibition}
+            onmouseout={handleMouseOutExhibition}
+            />
+          )}
     </HeaderContainer>
   );
 }

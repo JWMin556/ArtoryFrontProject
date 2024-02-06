@@ -1,17 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import StyledButton from '../styled-components/StyledButton';
 import { Link } from 'react-router-dom';
-import Profile from '../components/Onboarding/Profile';
 import axios from 'axios';
+import AWS from "aws-sdk";
 
 export default function Onboarding() {
-  //은향씨가 작업해주실 Onboarding 페이지입니다
   const [length, setLength] = useState(0);
+  const fileInputRef = useRef(null);
 
   //서버에 닉네임과 이미지를 제출하기 위한 변수 및 함수입니다.
   const [nickname, setNickname] = useState('');
-  const [image, setImage] = useState('');
+  const [imageSrc, setImageSrc] = useState('/Img/input_pic.png');
+  const [imageSrcReal, setImageSrcReal] = useState('');
+  const [imgUrl, setImgUrl] = useState('');
+
+  const handleImageClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    // setImageSrc(file);
+    setImageSrcReal(file);
+    if (file) {
+      // 파일 선택 후의 로직을 추가할 수 있습니다.
+      //console.log('Selected file:', file.name);
+
+      // FileReader를 사용하여 파일의 내용을 읽어옵니다.
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        // 이미지의 src를 선택한 파일의 내용으로 대체합니다.
+        setImageSrc(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleNicknameChange = (e) => {
     const value = e.target.value;
@@ -19,17 +43,54 @@ export default function Onboarding() {
     setNickname(value);
   };
 
-  // 이미지 업로드 시 처리하는 함수
-  const handleImageChange = (imageData) => {
-    setImage(imageData);
-    console.log(imageData);
-  };
+  //aws용
+  const [myBucket, setMyBucket] = useState(null);
+  useEffect(() => {
+    //1. AWS 키 설정
+    AWS.config.update({
+      accessKeyId: "AKIA4FTBI4U6A6W6RRPK",
+      secretAccessKey: "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"
+    })
+    //2. AWS S3 객체 생성
+    const myBucket = new AWS.S3({
+      params: { Bucket: "artory-s3-arbitary" },
+      region: "ap-northeast-2"  //서울에서 생성
+    })
+    
+    setMyBucket(myBucket);
+  }, []);
+
+  //2. 장착한 그 파일을 S3로 전송
+  const uploadFileAWS = (file) => {
+    //2-1. aws에서 시킨 양식 그대로 따름
+    const param = {
+      ACL: "public-read", //일단 public으로 누구나 다 읽을 수 있다...임시로 이렇게 함(나중에 바꿔야)
+      //ContentType: "image/png",  //일단 주석처리함
+      Body: file,
+      Bucket: "artory-s3-arbitary",
+      Key: `upload/${imageSrcReal.name}`,
+    }
+
+    //2-2. AWS가 정한 양식대로 보내기
+    myBucket
+      .putObject(param)
+      .send((error) => {
+        if(error) {
+          console.log(error);
+        } else {
+          //const url = myBucket.getSignedUrl("getObject", {Key: param.Key}); 기존의 코드..그런데 이렇게 하면 짤림
+          const signedUrl = myBucket.getSignedUrl("getObject", { Key: param.Key });
+          const pureUrl = signedUrl.match(/^(https:\/\/[^?]+)/)[1];
+          console.log("awsurl: ", pureUrl);
+          setImgUrl(pureUrl);
+        }
+      })
+  }
 
   const token = localStorage.getItem('Token');
-
   const saveNicknameAndImage = async() => {
     try{
-      const baseUrl = `http://3.39.39.6:8080/api/member/save/nickname?nickname=${nickname}&image=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFEWRA_sxlYgXUFgHNCQDIb4J9rEFpWtUR5g&usqp=CAU`;
+      const baseUrl = `http://3.39.39.6:8080/api/member/save/nickname?nickname=${nickname}&image=${imgUrl}`;
 			const response = await axios.post(
         baseUrl, 
         {
@@ -57,7 +118,10 @@ export default function Onboarding() {
         <Title>사용할 이름과 프로필을 설정해주세요</Title>
       </div>
       <ContentBox>
-        <Profile onImageChange={handleImageChange} />
+        <ImgStyled src={imageSrc} alt='사진첨부' onClick={handleImageClick} />
+        <input type='file' accept='image/*' ref={fileInputRef} style={{display:"none"}} onChange={handleFileChange} />
+        <button onClick={() => uploadFileAWS(imageSrcReal)}>aws전송</button> {/*그 파일을 s3로 전송*/}
+        
         <Nickname
           maxLength="10"
           type="text"
@@ -123,4 +187,9 @@ const ContentBox = styled.div`
   align-items: center;
   width: 100%;
   height: 295px;
+`;
+
+const ImgStyled = styled.img`
+  width: 150px;
+  cursor: 'pointer';
 `;

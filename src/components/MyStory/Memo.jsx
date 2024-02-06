@@ -67,6 +67,7 @@ export default function Memo(props) {
     function clickSaveButton()
     {
         console.log("메모내용",content)
+        alert("메모가 저장되었습니다.")
         memoSaveApi(content);
     }
     return (

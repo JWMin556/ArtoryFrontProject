@@ -4,7 +4,9 @@ import moment from "moment";
 import { Tile } from "./Tile";
 import PREV_BUTTON from '../../Img/MyStory/prev.svg';
 import NEXT_BUTTON from '../../Img/MyStory/next.svg';
-
+import one1 from '../../Img/Calendar/one1.svg' //작성 전 원
+import one2 from '../../Img/Calendar/one2.svg' //작성 완료 원
+import one3 from '../../Img/Calendar/one3.svg' //임시저장 원
 const Container = styled.div`
     //border : 1px solid blue;
     box-shadow: 1px 1px 70px  #f3f3f3;
@@ -109,7 +111,38 @@ const YearSelect = styled.select`
   margin-bottom : 3%;
   margin-right : 5%;
 `;
-const MyCalendar = (props) => {
+const WrapMark = styled.div`
+  width : 100%;
+  height : 20px;
+  display : flex;
+  justify-content : end;
+  color : #ABABAB;
+  font-family: 'Pretendard';
+  font-size : 14px;
+  margin-top : 2%;
+  & .before {
+    width : 9%;
+    margin-right : 5%;
+    display : flex;
+    align-items : center;
+    justify-content : space-between;
+  }
+  & .progress {
+    width : 10.5%;
+    margin-right : 5%;
+    display : flex;
+    align-items : center;
+    justify-content : space-between;
+
+  }  
+  & .after {
+    width : 10.5%;
+    display : flex;
+    align-items : center;
+    justify-content : space-between;
+  }
+`;
+const MyCalendar = ({userStoryData,...props}) => {
 
   const {
     date,
@@ -138,8 +171,8 @@ const MyCalendar = (props) => {
     let endDateOfMonth = new Date(year, month+1, 0).getDate();
     //console.log("firstDayOfMonth",firstDayOfMonth);
     //console.log("endDateOfMonth",endDateOfMonth);
-
-    calendarDays = [];
+    //console.log('마이캘린더 달',month);
+    calendarDays = [];  
     new_month = [];
 
     let cnt = 1;
@@ -168,7 +201,12 @@ const MyCalendar = (props) => {
               "-" +
               (day < 10 ? "0" + day : day);
             return (
-              <Tile key={index} day={day} />
+              <Tile 
+                key={index}
+                year={year}
+                month = {month+1}
+                day={day} 
+                userStoryData={userStoryData} />
             );
           })}
         </Row>
@@ -216,7 +254,7 @@ const MyCalendar = (props) => {
     changeMonth(month)
   }
   return (
-    <div>
+    <div style={{width : "735px", height : "522px"}}>
       <WrapYearSelect>
           <YearSelect>
             <option value='2024'>{year}년</option>
@@ -262,6 +300,11 @@ const MyCalendar = (props) => {
           {makeCalendar(year, month-1)}
         </Days>
       </Container>
+      <WrapMark>
+        <span className="before"><img src={one1}/><span>작성 전</span></span>
+        <span className="progress"><img src={one3}/><span>임시저장</span></span>
+        <span className="after"><img src={one2}/><span>작성 완료</span></span>
+      </WrapMark>
     </div>
 
   );

@@ -17,7 +17,7 @@ const WriteBox = styled.div`
 `;
 const Bottom = styled.span`
   z-index: 1000;
-  height: 20px;
+  height: 40px;
   width: 130px;
   background: white;
   position: absolute;
@@ -25,32 +25,7 @@ const Bottom = styled.span`
   bottom: 10px;
   right: 0;
 `;
-const Right = styled.div`
-  z-index: 100;
-  background: none;
-  border-left: 1px solid white;
-  height: 100%;
-  position: absolute;
-  top: 37.86px;
-  right: 0;
-`;
-const Left = styled.div`
-  z-index: 100;
-  background: none;
-  border-left: 7px solid white;
-  height: 100%;
-  position: absolute;
-  top: 38.86px;
-  left: 0;
-`;
-const Top = styled.div`
-  z-index: 100;
-  width: 100%;
-  background: none;
-  border-bottom: 5px solid white;
-  position: absolute;
-  top: 237.86px;
-`;
+
 const Keyword = styled.div`
   padding: 30px 40px;
   border: none;
@@ -89,9 +64,6 @@ export default function WritingStory({ setData, data }) {
           </div>
         </div> */}
         <Bottom />
-        {/* <Top /> */}
-        {/* <Right />
-        <Left /> */}
         <Keyword>
           <p>오늘의 전시 키워드</p>
           <KeywordInput
