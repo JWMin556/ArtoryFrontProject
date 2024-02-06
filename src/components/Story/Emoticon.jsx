@@ -64,12 +64,13 @@ export default function Emoticon({
 }
 
 const EmoticonImg = styled.img`
-  margin-right: 15px;
-  height: 25px;
+  margin-right: 20px;
+  height: 32px;
   cursor: pointer;
 `;
 
 const Emoticons = styled.div`
   //margin-top: 20px;
   display: flex;
+  margin-bottom: 20px;
 `;

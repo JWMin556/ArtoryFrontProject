@@ -2,8 +2,9 @@ import React from 'react';
 import * as S from '../../styled-components/Slide.style';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Heart from '../Exhibition/Heart';
-import Save from '../Exhibition/Save';
+import StoryHeart from './StoryHeart';
+
+import StoryScrap from './StoryScrap';
 import Prev from '../Exhibition/Prev';
 import Next from '../Exhibition/Next';
 
@@ -28,8 +29,8 @@ export default function UserSlide(props) {
             <S.WrapPoster style={{ height: '200px' }}>
               <ProfileImg item={item} w={props.width} h={props.height} />
               <S.WrapIcon style={{ width: '126px', marginTop: '-10px' }}>
-                <Heart />
-                <Save />
+                {/* <StoryHeart /> */}
+                {/* <StoryScrap /> */}
               </S.WrapIcon>
             </S.WrapPoster>
           </div>

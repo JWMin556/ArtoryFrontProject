@@ -1,13 +1,13 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Navigation from './NavigationBar/Navigation';
-import { LogoutApi } from './API/Logout_API'
+import { LogoutApi } from './API/Logout_API';
 //Header.jsx는 검은색 상단바를 위한 컴포넌트입니다.
 
 const HeaderContainer = styled.div`
   width: 100%;
-  height: 60px; //전체를 감싸주는 div태그를 60xp로 바꿈
+  height: 30px; //전체를 감싸주는 div태그를 60xp로 바꿈
 `; //상단바 전체를 감싸주는 스타일드 컴포넌트입니다.
 
 const HeaderWrap = styled.div`
@@ -15,7 +15,7 @@ const HeaderWrap = styled.div`
   position: sticky;
   top: 0;
   z-index: 1000; //넣어준 이유... 다른 컴포넌트의 이미지와 충돌시 클릭이 안되는 것을 방지하려고..특히 signup.jsx랑...
-  height: 50%; //상단바 div태그를 부모의 높이 30%로 바꿈 => height : 30px입니다.
+  height: 100%; //상단바 div태그를 부모의 높이 30%로 바꿈 => height : 30px입니다.
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -57,23 +57,19 @@ const NavLink = styled(Link)`
   text-decoration: none;
 `;
 const LogoutButton = styled.button`
-  width : 71px;
-  height : 25px;
-  background-color : #262626;
-  border : none;
-  color : #F5F5F5;
-  font-size : 10px;
+  width: 71px;
+  height: 25px;
+  background-color: #262626;
+  border: none;
+  color: #f5f5f5;
+  font-size: 10px;
   font-family: 'Pretendard';
-
 `;
 
-
 export default function Header2() {
-
-  const logoutButtonClick = () =>
-  {
+  const logoutButtonClick = () => {
     LogoutApi();
-  }
+  };
   const [isMouseOverExhibition, setMouseOverExhibition] = useState(false); //마우스가 Exhibition위에 올라는지 아닌지 상태를 관리하는 변수
   const handleMouseOverExhibition = () => {
     //마우스가 Exhibition에 올라갔을 때 호출되는 함수 -> setMouseOverExhibition를 이용하여 isMouseOverExhibition가 false->true로 바뀜

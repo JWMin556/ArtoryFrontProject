@@ -39,7 +39,7 @@ export const searchStory = async (keyword) => {
   }
 };
 //스토리 스크랩 관리
-export const storyScrpped = async (id) => {
+export const storyScrapped = async (id) => {
   try {
     const response = await axios.get(
       `${BASE_URL}/scrap-story/story-scrapped?storyId=${id}`,
@@ -56,7 +56,7 @@ export const storyScrpped = async (id) => {
     console.error('Error fetching data:', error.response.data);
   }
 };
-export const storyUnScrpped = async (id) => {
+export const storyUnScrapped = async (id) => {
   try {
     const response = await axios.get(
       `${BASE_URL}/scrap-story/story-unscrapped?storyId=${id}`,
@@ -222,10 +222,32 @@ export const createReply = async (commentId, commentContext) => {
 export const deleteReply = async (commentId, subCommentId) => {
   try {
     const response = await axios.delete(
-      `${BASE_URL}subcomments/delete/{comment-id}?commentId=${commentId}`,
+      `${BASE_URL}subcomments/delete/${commentId}?subCommentId=${subCommentId}`,
       {
         headers: {
           accept: '*/*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response);
+    //return response;
+  } catch (error) {
+    console.error('Error fetching data:', error.response.data);
+  }
+};
+//대댓글 수정
+export const patchReply = async (commentId, subCommentId, commentContext) => {
+  try {
+    const response = await axios.patch(
+      `${BASE_URL}subcomments/update/${commentId}`,
+      {
+        subCommentId: subCommentId,
+        commentContext: commentContext,
+      },
+      {
+        headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Poster from '../components/Story/StoryPoster';
 import styled from 'styled-components';
-import Heart from '../components/Story/Heart';
-import Scrap from '../components/Story/Scrap';
+import StoryHeart from '../components/Story/StoryHeart';
+import StoryScrap from '../components/Story/StoryScrap';
 import Search from '../components/Story/Search';
 const Container = styled.div`
   display: flex;
@@ -54,8 +54,8 @@ export default function StorySearch(props) {
               <Poster item={item} />
             </div>
             <WrapIcon>
-              <Heart id={item.storyId} isLiked={item.isLiked} />
-              <Scrap id={item.storyId} isScrapped={item.isScrapped} />
+              <StoryHeart id={item.storyId} isLiked={item.isLiked} />
+              <StoryScrap id={item.storyId} isScrapped={item.isScrapped} />
             </WrapIcon>
           </WrapPoster>
         ))}

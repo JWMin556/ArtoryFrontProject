@@ -4,6 +4,8 @@ import ReplyInput from './ReplyInput';
 import { getMemberInfo } from '../API/member_API';
 import Emoticon from './Emoticon';
 import { deleteComment, patchComment } from '../API/story_API';
+import { Modal } from 'bootstrap';
+import DeleteModal from './DeleteModal';
 
 export default function CommentList({
   storyId,
@@ -56,11 +58,13 @@ function CommentListItem({
   const INITIAL_VALUES = {
     content: item.commentContext,
   };
-  const satisfactionSrc = `/Img/Story/face_g${item.satisfactionLevel}.svg`;
+  const satisfactionSrc = `/Img/Story/face_b${item.satisfactionLevel}.svg`;
   const [isPatch, setIsPatch] = useState(false);
   const [emoticons, setEmoticons] = useState(greyEmoticons);
   const [selectedEmoticonIndex, setSelectedEmoticonIndex] = useState(null);
   const [values, setValues] = useState(INITIAL_VALUES); //form태그 submit value값들 useState하나로 관리
+  const [modal, setModal] = useState(false);
+
   //상위 컴포에서 가지고 오면 로직 깨짐.
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,6 +85,7 @@ function CommentListItem({
         values.content
       );
       await loadComments(); // 댓글 수정 후 최신 코멘트 리스트를 다시 불러와서 렌더링
+      setEmoticons(greyEmoticons);
     } catch (error) {
       console.error('Error fetcing data:', error.response);
     }
@@ -100,48 +105,54 @@ function CommentListItem({
     setSelectedEmoticonIndex(selectedIdx);
   };
   return (
-    <div style={{ display: 'flex' }}>
-      <ProfileImg src={item.memberProfile} alt={item.memberId}></ProfileImg>
+    <>
+      {' '}
+      <div style={{ display: 'flex' }}>
+        <ProfileImg src={item.memberProfile} alt={item.memberId}></ProfileImg>
 
-      <RightComment>
-        <UserNickName>{item.memberNickname}</UserNickName>
-        {isPatch ? (
-          <Form onSubmit={handlePatch}>
-            <Emoticon
-              onSelect={handleEmoticonSelection}
-              greyEmoticons={greyEmoticons}
-              emoticons={emoticons}
-              setEmoticons={setEmoticons}
-            />
-            <InputDiv>
-              <CommentText
-                name="content"
-                className="CommentForm"
-                value={values.content}
-                onChange={handleChange}
-              ></CommentText>
-              <Submit type="submit">확인</Submit>
-            </InputDiv>
-          </Form>
-        ) : (
-          <div>
-            <img
-              style={{ height: '25px', verticalAlign: 'middle' }}
-              src={satisfactionSrc}
-              alt={item.satisfactionLevel}
-            />
-            <CommentContent>{item.commentContext}</CommentContent>
-            {userId === item.memberId && (
-              <ChangeWrap>
-                <ChangeBtn onClick={() => setIsPatch(true)}>수정</ChangeBtn>|
-                <ChangeBtn onClick={handleDelete}>삭제</ChangeBtn>
-              </ChangeWrap>
-            )}
-          </div>
-        )}
-        <ReplyInput item={item} storyId={storyId} loadComments={loadComments} />
-      </RightComment>
-    </div>
+        <RightComment>
+          <UserNickName>{item.memberNickname}</UserNickName>
+          {isPatch ? (
+            <Form onSubmit={handlePatch}>
+              <Emoticon
+                onSelect={handleEmoticonSelection}
+                greyEmoticons={greyEmoticons}
+                emoticons={emoticons}
+                setEmoticons={setEmoticons}
+              />
+              <InputDiv>
+                <CommentText
+                  name="content"
+                  className="CommentForm"
+                  value={values.content}
+                  onChange={handleChange}
+                ></CommentText>
+                <Submit type="submit">확인</Submit>
+              </InputDiv>
+            </Form>
+          ) : (
+            <div>
+              <img
+                style={{ height: '25px', verticalAlign: 'middle' }}
+                src={satisfactionSrc}
+                alt={item.satisfactionLevel}
+              />
+              <CommentContent>{item.commentContext}</CommentContent>
+              {userId === item.memberId && (
+                <ChangeWrap>
+                  <ChangeBtn onClick={() => setIsPatch(true)}>수정</ChangeBtn>|
+                  <ChangeBtn onClick={() => setModal(true)}>삭제</ChangeBtn>
+                </ChangeWrap>
+              )}
+            </div>
+          )}
+          <ReplyInput userId={userId} item={item} loadComments={loadComments} />
+        </RightComment>
+      </div>
+      {modal === true ? (
+        <DeleteModal setModal={setModal} handleDelete={handleDelete} />
+      ) : null}
+    </>
   );
 }
 //;
@@ -201,9 +212,8 @@ const ChangeBtn = styled.button`
 
 const Wrap = styled.div`
   border: none;
-  border-radius: 20px;
   box-shadow: 1px 2px 8px #00000025;
-  padding: 10px 0 10px 30px;
+  padding: 10px 0 10px 40px;
   //text-align: start;
   background-color: white;
   //  margin-bottom: 80px;
@@ -259,5 +269,5 @@ const Comments = styled.div`
 const ProfileImg = styled.img`
   width: 55px;
   height: 55px;
-  border-radius: 8px;
+  /* border-radius: 8px; */
 `;

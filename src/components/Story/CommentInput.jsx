@@ -101,21 +101,22 @@ export default function CommentInput(props) {
       <div className="댓글작성">
         {!commentIsOpen ? (
           <OpenBtn onClick={openComment}>
-            댓글 작성{'  '}
-            <img style={{ width: '12px' }} src={close} alt="화살표" />
+            <H5>댓글 작성</H5>{' '}
+            <img style={{ width: '17px' }} src={close} alt="화살표" />
           </OpenBtn>
         ) : (
           <OpenedComment>
-            <div style={{ paddingLeft: '10px' }}>
+            <div>
               <div style={{ cursor: 'pointer' }} onClick={openComment}>
-                <span> 댓글 작성{'  '}</span>
-                <img style={{ width: '12px' }} src={open} alt="아래화살표" />
+                <H5>댓글 작성</H5>{' '}
+                <img style={{ width: '17px' }} src={open} alt="아래화살표" />
               </div>
               <p
                 style={{
-                  color: '#ababab',
+                  color: '#5A5C62',
                   fontSize: 'smaller',
-                  margin: '5px 0 10px',
+                  margin: '10px 0 15px',
+                  fontWeight: '500',
                 }}
               >
                 전시에 대한 공감 표시를 선택해주세요
@@ -136,7 +137,7 @@ export default function CommentInput(props) {
                   onChange={handleChange}
                 ></CommentText>
                 <Submit type="submit" disabled={isSubmitting}>
-                  확인
+                  완료
                 </Submit>
               </InputDiv>
 
@@ -155,11 +156,16 @@ export default function CommentInput(props) {
     </CommentWrap>
   );
 }
-
+const H5 = styled.span`
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  margin-top: 0;
+`;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   width: 100%;
 `;
 const InputDiv = styled.div`
@@ -168,7 +174,7 @@ const InputDiv = styled.div`
   position: relative;
   padding: 10px;
   background-color: #f4f5f7; //border-radius: 14px;
-  height: 100px;
+  height: 120px;
   margin-top: 10px;
 `;
 const CommentText = styled.textarea`
@@ -216,7 +222,6 @@ const OpenBtn = styled.button`
   //height: 60px;
   //border: 1px solid black;
   border: none;
-  border-radius: 14px;
   box-shadow: 1px 2px 8px #00000025;
 
   text-align: start;
@@ -225,13 +230,12 @@ const OpenBtn = styled.button`
   font-weight: bold;
   font-size: 15px;
   margin-bottom: 30px;
-  padding: 20px 30px;
+  padding: 20px 30px 20px 40px;
 `;
 const OpenedComment = styled.div`
   border: none;
-  border-radius: 14px;
   box-shadow: 1px 2px 8px #00000025;
-  padding: 20px;
+  padding: 30px 40px;
   text-align: start;
   background-color: white;
   font-family: 'Pretendard';

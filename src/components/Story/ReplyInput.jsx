@@ -51,12 +51,15 @@ export default function ReplyInput(props) {
   return (
     <>
       <Reply
+        userId={props.userId}
         memberProfile={props.item.memberProfile}
         items={props.item.subCommentResponseDtoList}
+        commentId={props.item.commentId}
+        loadComments={props.loadComments}
       />
       <ReplyButton onClick={handleClick}>
         <img src={src} alt={src} />
-        <span>답글 달기</span>
+        <span>댓글 달기</span>
       </ReplyButton>
       {isReplyOpen && (
         <>
@@ -65,7 +68,7 @@ export default function ReplyInput(props) {
               name="content"
               value={values.content}
               onChange={handleChange}
-              placeholder="답글을 입력하세요"
+              placeholder="댓글을 입력하세요"
             ></ReplyText>
             <Submit type="submit" disabled={isSubmitting}>
               완료
@@ -86,7 +89,7 @@ const Submit = styled.button`
   border: none;
   background-color: black;
   color: white;
-  border-radius: 7px;
+
   padding: 5px 15px;
   z-index: 4;
 `;
@@ -96,13 +99,13 @@ const Form = styled.form`
   position: relative;
   padding: 10px;
   background-color: #f4f5f7;
-  border-radius: 7px;
+
   height: 20px;
   margin-top: 10px;
   //margin-right: 10px;
-  box-shadow: 1px 2px 8px #00000025;
+  /* box-shadow: 1px 2px 8px #00000025; */
   z-index: 10;
-
+  width: 90%;
   //width: 100%;
 `;
 const ReplyText = styled.textarea`
@@ -127,7 +130,7 @@ const ReplyButton = styled.button`
   font-family: 'Pretendard';
   font-size: bigger;
   font-weight: 600;
-
+  margin-top: 15px;
   span {
     vertical-align: middle; /* span의 기준선을 중앙에 맞춤 */
   }

@@ -1,92 +1,149 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Heart from '../components/Story/Heart';
-import Scrap from '../components/Story/Scrap';
-import CommentInput from '../components/Story/CommentInput';
 
+import CommentInput from '../components/Story/CommentInput';
+import Banner from '../components/Story/Banner';
+const genres = [
+  'MEDIA',
+  'CRAFT',
+  'DESIGN',
+  'PICTURE',
+  'SPECIAL_EXHIBITION',
+  'SCULPTURE',
+  'PLANEXHIBITION',
+  'INSTALLATION_ART',
+  'PAINTING',
+  'ARTIST_EXHIBITION',
+];
+const genres__kor = [
+  '미디어',
+  '공예',
+  '디자인',
+  '사진',
+  '특별전시',
+  '조각',
+  '기획전',
+  '설치미술',
+  '회화',
+  '작가전',
+];
 export default function StoryDetail() {
   const { state } = useLocation();
   console.log(state.item);
   const item = state.item;
-  const satisfactionSrc = `/Img/Story/face_g${item.storySatisfactionLevel}.svg`;
-  console.log(satisfactionSrc);
+  const selectedIndex = [];
+
+  for (var i = 0; i < genres.length; i++) {
+    if (
+      genres[i] === item.storyGenre1 ||
+      genres[i] === item.storyGenre2 ||
+      genres[i] === item.storyGenre3
+    ) {
+      selectedIndex.push(i);
+    }
+  }
+
+  const satisfactionSrc = `/Img/Story/face_b${item.storySatisfactionLevel}.svg`;
+  const weatherSrc = `/Img/MyStory/weather.b${item.storyWeather}.svg`;
 
   return (
     <WrapStory>
-      <Left>
-        <div>
-          <Profile src={item.memberProfile} alt="프로필 이미지" />
-
-          <h3 style={{ marginTop: '10px' }}>{item.memberNickname}</h3>
-        </div>
-        <div>
-          <Poster src={item.exhibitionImage} alt={item.exhibitionTitle} />
-          <h3 style={{ marginTop: '20px' }}>{item.exhibitionTitle} </h3>
-        </div>
-      </Left>
+      <Banner
+        image={item.exhibitionImage}
+        title={item.exhibitionTitle}
+      ></Banner>
 
       <Right>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'end',
+            paddingLeft: '10%',
+            marginLeft: '10px',
+            marginBottom: '40px',
+          }}
+        >
+          <Profile src={item.memberProfile} alt="프로필 이미지" />
+          <div>
+            <span
+              style={{ fontSize: 'small', fontWeight: '300', color: '#9BA0AE' }}
+            >
+              작성자
+            </span>
+            <p style={{ color: '#717276', marginTop: '3px' }}>
+              {item.memberNickname}
+            </p>
+          </div>
+        </div>
         <div className="story_content" style={{ paddingLeft: '10%' }}>
-          <h3 style={{ marginLeft: '30px' }}>제목</h3>
           <BoxStyle
             style={{
               display: 'flex',
               alignItems: 'center',
               padding: '10px 20px',
+              height: '40px',
+              fontSize: '1.3rem',
             }}
           >
             <span>{item.storyTitle}</span>
           </BoxStyle>
-
-          <h3 style={{ marginLeft: '30px' }}>스토리 기록</h3>
-          <BoxStyle style={{}}>
+          <BoxStyle>
             <ExhbnInfo id="오늘의 전시">
               <H5>오늘의 전시</H5>
-              <Keyword>
-                {item.year}.{item.month}.{item.day}
-              </Keyword>
               <Table>
                 <tbody>
                   <tr>
+                    <th>방문일</th>
                     <th>관람소요시간</th>
-                    <td>
-                      <Keyword>{item.storyViewingTime}</Keyword>
-                    </td>
+                    <th>만족도</th>
+                    <th style={{ paddingLeft: '6px' }}>날씨</th>
+                    <th>동행인</th>
+                    <th>카테고리</th>
                   </tr>
                   <tr>
-                    <th>만족도</th>
                     <td>
+                      {' '}
+                      <Keyword>
+                        {item.year}.{item.month}.{item.day}
+                      </Keyword>
+                    </td>
+                    <td>
+                      <Keyword style={{ padding: '2px 10px' }}>
+                        {item.storyViewingTime}
+                      </Keyword>
+                    </td>
+                    <td>
+                      {' '}
                       <img
                         src={satisfactionSrc}
                         alt="response 표정 임티"
-                        style={{ height: '25px' }}
+                        style={{ height: '35px' }}
                       />
                     </td>
-                  </tr>
-                  <tr>
-                    <th>날씨</th>
                     <td>
-                      <img src="" alt={item.storyWeather} />
+                      <img
+                        src={weatherSrc}
+                        alt="response 날씨 임티"
+                        style={{ height: '37px' }}
+                      />
                     </td>
-                  </tr>
-                  <tr>
-                    <th>동행인</th>
                     <td>
-                      <Keyword>{item.storyCompanion}</Keyword>
+                      <Keyword style={{ padding: '2px 10px' }}>
+                        {item.storyCompanion}
+                      </Keyword>
                     </td>
-                  </tr>
-                  <tr>
-                    <th>카테고리</th>
                     <td>
-                      <Keyword>{item.storyGenre1}</Keyword>
-                      <Keyword>{item.storyGenre1}</Keyword>
-                      <Keyword>{item.storyGenre3}</Keyword>
+                      <Keyword>{genres__kor[selectedIndex[0]]}</Keyword>
+                      <Keyword>{genres__kor[selectedIndex[1]]}</Keyword>
+                      <Keyword>{genres__kor[selectedIndex[2]]}</Keyword>
                     </td>
                   </tr>
                 </tbody>
               </Table>
             </ExhbnInfo>
+          </BoxStyle>
+          <BoxStyle style={{}}>
             <ExhbnKeyword id="전시 키워드">
               <H5>오늘의 전시 키워드</H5>
               <p style={{ color: '#616161' }}>
@@ -95,8 +152,12 @@ export default function StoryDetail() {
             </ExhbnKeyword>
             <ExhbnContent id="전시 내용">
               <H5>오늘의 전시 내용</H5>
-              <div style={{ color: '#616161' }}>
-                찐 전시 내용들{item.storyContext}
+
+              <div className="ck ck-editor__main" style={{ width: '100%' }}>
+                <div
+                  // className="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
+                  dangerouslySetInnerHTML={{ __html: item.storyContext }} // 결과 확인
+                />
               </div>
             </ExhbnContent>
           </BoxStyle>
@@ -112,63 +173,57 @@ export default function StoryDetail() {
 
 const Table = styled.table`
   width: 100%;
-  margin-top: 15px;
-  color: #616161;
-  tr {
-    height: 30px;
-  }
+  margin-top: 20px;
+
   td {
+    padding-top: 5px;
     vertical-align: middle;
   }
   th {
     text-align: start;
-    font-weight: bold;
+    //font-weight: bold;
     vertical-align: middle;
+    color: #9ba0ae;
+    font-weight: 400;
+    min-width: 30px;
   }
 `;
 const ExhbnInfo = styled.div``;
 const ExhbnKeyword = styled.div`
-  margin: 20px 0 50px;
+  margin: 10px 0 50px;
 `;
 const ExhbnContent = styled.div``;
 const H5 = styled.h5`
-  font-size: medium;
-  font-weight: bold;
+  font-size: 1.35rem;
+  font-weight: 800;
   margin-bottom: 15px;
+  margin-top: 0;
 `;
 const Keyword = styled.span`
-  background-color: #d9d9d9;
-  color: #616161;
+  background-color: #28292a;
+  color: white;
   padding: 2px 25px;
   margin-right: 5px;
-  border-radius: 6px;
-  font-size: 90%;
+  font-weight: 400;
 `;
-const Left = styled.div`
-  font-size: 1.4rem;
-  color: #595959;
-  width: 80%;
-  display: flex;
-  //flex-direction: column;
-  //align-items: center;
-  justify-content: center;
-`;
+
 const Right = styled.div`
   font-size: 1.4rem;
   color: black;
-  width: 80%;
-  //overflow: auto;
+  width: 1000px;
   height: 90vh;
 `;
 const BoxStyle = styled.div`
-  background-color: #f0f0f0;
+  //background-color: white;
+  //box-shadow: 1px 2px 8px #f3f3f3;
+  box-shadow: 1px 2px 8px #00000025;
+
   border: none;
-  border-radius: 10px;
-  height: 20px;
+  // border-radius: 10px;
   font-size: small;
   font-weight: 600;
-  margin: 10px 10px 30px;
-  padding: 20px;
+  margin: 10px 10px 20px;
+  padding: 30px 10px 40px 40px;
   height: fit-content;
   //max-height: 800px;
 `;
@@ -180,25 +235,11 @@ const WrapStory = styled.div`
   font-family: 'Pretendard';
   font-weight: bold;
   font-size: 1.4rem;
-  padding-top: 10px;
   //margin-right: 20px;
   margin-bottom: 80px;
 `;
 const Profile = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-`;
-const WrapIcon = styled.div`
-  width: 100px;
-  margin-top: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
-const Poster = styled.img`
-  width: 130px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
 `;

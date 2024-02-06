@@ -8,7 +8,7 @@ export const HeartImg = styled.img`
   width: 20px;
   height: 18px;
 `;
-export default function Heart(props) {
+export default function StoryHeart(props) {
   const [colorHeart, setColorHeart] = useState(
     props.isLiked ? ON_HEART : HEART
   );
