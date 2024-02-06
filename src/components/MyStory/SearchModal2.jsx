@@ -48,7 +48,7 @@ const Container = styled.div`
     //padding : 15%;
     boxShadow: '2px 2px 5px #f3f3f3',
     & img {
-        width : 15px
+        width : 15px;
         height : 15px;
     }
 `;

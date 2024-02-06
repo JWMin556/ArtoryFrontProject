@@ -1,39 +1,62 @@
 import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-const PosterStyle = styled.img`
-    width : 186px;
-    height: 268px;
-    //border-radius : 10px; 
-    box-shadow: 5px 5px 8px #D9D9D9; 
-`;
+import { getStoryInfo } from '../API/story_API';
 
+const PosterStyle = styled.img`
+    display: block;
+    width: 186px;
+    height: 268px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 8px #d9d9d9;
+`;
+const WrapTitle = styled.div`
+  width: 186px;
+  height: 268px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffff;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: small;
+  font-family: Pretendard;
+`;
 export default function PosterMyPage(props) {
     const navigate = useNavigate();
-    const onClickDetail = (item) => { //수정필요
-        console.log(item.storyTitle)
-        // props.source=="record" ?
-        // navigate(`/mypage/${item.storyTitle}`, { state: { item } }) :
-        // navigate(`/mypage/${item.storyTitle}`, { state: { item } });
-    };
-    // 상태 초기값을 true로 설정
     const [isShowTitle, setIsShowTitle] = useState(false);
-    // 마우스가 Poster 위에 올라가면 Title을 보여주도록 변경
-    const handleMouseEnter = () => {
+
+    const onClickDetail = async (id) => {
+        try {
+          const item = await getStoryInfo(id);
+          navigate(`/story/${id}`, { state: { item } });
+        } catch (error) {
+          // 오류 처리
+          console.error('Story data fetching failed', error);
+        }
+      };
+
+    const handleMouseOverImg = () => {
         setIsShowTitle(true);
     };
 
-    // 마우스가 Poster에서 벗어나면 Title을 숨기도록 변경
-    const handleMouseLeave = () => {
+    const handleMouseOutImg = () => {
         setIsShowTitle(false);
     };
   return (
-    <div style={{height:'268px' }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={() => onClickDetail(props.item)}
+    <div style={{ height: '268px', position: 'relative' }}
+        //onMouseEnter={handleMouseEnter}
+        //onMouseLeave={handleMouseLeave}
+        onMouseOver={handleMouseOverImg}
+        onMouseOut={handleMouseOutImg}
+        onClick={() => onClickDetail(props.item.storyId)}
     >
-        <PosterStyle src={props.item.exhibitionImage}/>
+        {/* <PosterStyle src={props.item.exhibitionImage}/> */}
+        <PosterStyle src={props.item.storyImage} alt={props.item.storyId} />
+        {isShowTitle && <WrapTitle>{props.item.storyId}</WrapTitle>}
     </div>
   )
 }

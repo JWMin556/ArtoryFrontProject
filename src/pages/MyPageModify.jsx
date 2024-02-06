@@ -360,7 +360,7 @@ export default function MyPageModify() {
       <TitleWrap> 
         <TitleLeftWrap>
           <TitleLeftWrapParagraph>
-            {myNickname +" "}님, <br />  
+            {myNickname}<br />  
             마이페이지
           </TitleLeftWrapParagraph>
           <TitleLeftWrapImgArea>

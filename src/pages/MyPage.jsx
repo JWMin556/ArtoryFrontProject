@@ -249,7 +249,7 @@ export default function MyPage() {
             <TitleWrap>
                 <TitleLeftWrap>
                     <TitleLeftWrapParagraph>
-                        {userData.nickname +" "}님, <br />  
+                        {userData.nickname}님<br />  
                         마이페이지
                     </TitleLeftWrapParagraph>
                     <ImgStyled src={userData.image} alt="사진첨부" />
