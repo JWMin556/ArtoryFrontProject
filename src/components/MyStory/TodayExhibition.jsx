@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
 import styled from 'styled-components';
-import moment from 'moment';
 import Emoticon from '../Story/Emoticon';
 import face_g1 from '../../Img/Story/face_g1.svg';
 import face_g2 from '../../Img/Story/face_g2.svg';
@@ -295,16 +294,18 @@ export default function TodayExhibition ({
   return (
     <SelectExhibition>
             <div style={{marginBottom:'4%'}}>오늘의 전시</div>
-                <DateDiv onClick={ClickedModalOpen} style={dateBoxColor}>{year}.{month}.{date}</DateDiv>
-                {isModalOpen && <MiniCalendar
-                  setYear={setYear}
-                  setMonth={setMonth}
-                  setDate={setDate}
-                  Date1={date}
-                  isModalOpen={isModalOpen}
-                  setIsModalOpen={setIsModalOpen}
-                  setDateBoxColor={setDateBoxColor}
-                />}
+                <DateDiv onClick={ClickedModalOpen} style={dateBoxColor}>
+                  {year}.{month}.{date}
+                  {isModalOpen && <MiniCalendar
+                    setYear={setYear}
+                    setMonth={setMonth}
+                    setDate={setDate}
+                    Date1={date}
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    setDateBoxColor={setDateBoxColor}
+                  />}
+                </DateDiv>
             <WrapSelect>
               <WrapKey>
                 <div>관람소요시간</div>
@@ -330,11 +331,11 @@ export default function TodayExhibition ({
                   setEmoticons={setEmotion}  
                   />
                 <WeatherEmoticons
-                onSelect={handleWeatherSelection}
-                greyEmoticons={greyWeather}
-                emoticons={Weather}
-                setEmoticons={setWeather}
-                selectweather={selectweather}
+                  onSelect={handleWeatherSelection}
+                  greyEmoticons={greyWeather}
+                  emoticons={Weather}
+                  setEmoticons={setWeather}
+                  selectweather={selectweather}
               />
                 <WrapWho>
                 <Select

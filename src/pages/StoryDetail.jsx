@@ -153,12 +153,10 @@ export default function StoryDetail() {
             <ExhbnContent id="전시 내용">
               <H5>오늘의 전시 내용</H5>
 
-              <div className="ck ck-editor__main" style={{ width: '100%' }}>
-                <div
-                  // className="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
-                  dangerouslySetInnerHTML={{ __html: item.storyContext }} // 결과 확인
-                />
-              </div>
+              <div
+                className="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
+                dangerouslySetInnerHTML={{ __html: item.storyContext }} // 결과 확인
+              />
             </ExhbnContent>
           </BoxStyle>
         </div>

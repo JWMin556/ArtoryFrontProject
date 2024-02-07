@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import moment from "moment";
 import ADD from '../../Img/Calendar/add.svg';
-import SearchModa2 from "./SearchModal2";  // 주석 해제
-import axios from "axios";
-import StoryTitle from "./StoryTitle";
+import SearchModa2 from "./SearchModal2"; 
 import StoryList from "./StoryList";
-const url = "http://3.39.39.6:8080/api/mystory/bySavedDate?";
-const token = localStorage.getItem('Token');
 
 const TileWrapper = styled.div`
   position : relative;
@@ -85,9 +80,9 @@ export const Tile = ({ key,year,month,day, userStoryData }) => {
                 setIsStyleStyle({color:"#D9D9D9"})
 
               }
-              else if(item.storyState === " IN_PROGRESS")
+              else if(item.storyState === "IN_PROGRESS")
               {
-                setMark({backgroundColor:"none",border:"2px solid #000",borderRadius:"50px" }); //블랙 동그라미 스타일 
+                setMark({backgroundColor:"none",border:"3px solid #000",borderRadius:"50px",width:"13px", height:"13px" }); //블랙 동그라미 스타일 
                 setStory(item.exhibitionTitle)
               }
             throw new Error("Stop!");

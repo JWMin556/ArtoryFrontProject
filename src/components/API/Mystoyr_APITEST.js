@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = 'http://3.39.39.6:8080/api/';
+const BASE_URL = 'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/';
 const token = localStorage.getItem('Token');
 
 export const createStory = async (

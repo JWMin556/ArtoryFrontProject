@@ -7,6 +7,8 @@ import NEXT_BUTTON from '../../Img/MyStory/next.svg';
 import one1 from '../../Img/Calendar/one1.svg' //작성 전 원
 import one2 from '../../Img/Calendar/one2.svg' //작성 완료 원
 import one3 from '../../Img/Calendar/one3.svg' //임시저장 원
+import SelectMonth from "./SelectMonth";
+import SelectYear from './SelectYear'
 const Container = styled.div`
     //border : 1px solid blue;
     box-shadow: 1px 1px 70px  #f3f3f3;
@@ -149,18 +151,18 @@ const MyCalendar = ({userStoryData,...props}) => {
 } = props;
 
   const monList = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
   ];
 
   let calendarDays = [];
@@ -169,9 +171,7 @@ const MyCalendar = ({userStoryData,...props}) => {
   const makeCalendar = (year, month) => {
     let firstDayOfMonth = new Date(year, month,1).getDay();
     let endDateOfMonth = new Date(year, month+1, 0).getDate();
-    //console.log("firstDayOfMonth",firstDayOfMonth);
-    //console.log("endDateOfMonth",endDateOfMonth);
-    //console.log('마이캘린더 달',month);
+
     calendarDays = [];  
     new_month = [];
 
@@ -230,6 +230,44 @@ const MyCalendar = ({userStoryData,...props}) => {
   //console.log("month",month);
   const [year, changeYear] = useState(Number(moment(date).format("YYYY")));
   const [isButtonOpen, setIsButtonOpen] = useState(false);
+    console.log("년도",year);
+    console.log("월",month);
+
+  //연도 관련 객체 생성
+    const startYear = 2020;
+    const endYear = 2030; 
+    const yearArray = Array.from(
+      { length: endYear - startYear + 1 },
+      (_, index) => ({
+        value: startYear + index,
+        label: startYear + index,
+      })
+    );
+    //월 관련 객체 생성
+      const startMonth = 1;
+      const endMonth = 12; 
+      const MonthArray = Array.from(
+        { length: endMonth - startMonth + 1 },
+        (_, index) => ({
+          value: startMonth + index,
+          label: startMonth + index,
+        })
+      )
+      // const MonthArray = [
+      //   "1월",
+      //   "2월",
+      //   "3월",
+      //   "4월",
+      //   "5월",
+      //   "6월",
+      //   "7월",
+      //   "8월",
+      //   "9월",
+      //   "10월",
+      //   "11월",
+      //   "12월",
+      // ];
+
 
   const nextMonth = () => {
     if (month != 11) {
@@ -256,34 +294,13 @@ const MyCalendar = ({userStoryData,...props}) => {
   return (
     <div style={{width : "735px", height : "522px"}}>
       <WrapYearSelect>
-          <YearSelect>
-            <option value='2024'>{year}년</option>
-            <option value='1'>{year+1}년</option>
-            <option value='1'>{year+2}년</option>
-            <option value='1'>{year+3}년</option>
-            <option value='1'>{year+4}년</option>
-            <option value='1'>{year+5}년</option>
-            <option value='1'>{year+6}년</option>
-          </YearSelect>
+          <SelectYear options={yearArray} defaultValue={year} onSelect={changeYear}/>
         </WrapYearSelect>
       <Container>
         <Header>
           <img src={PREV_BUTTON} onClick={prevMonth}></img>
           <span>
-              <MonthSelect name="month" onChange={(e) => handleChangeMonth(Number(e.target.value))}>
-                <OptionStyle value='1'><span>{month}월</span></OptionStyle>
-                <OptionStyle value='2'>{month-month+2}월</OptionStyle>
-                <OptionStyle value='3'>{month-month+3}월</OptionStyle>
-                <OptionStyle value='4'>{month-month+4}월</OptionStyle>
-                <OptionStyle value='5'>{month-month+5}월</OptionStyle>
-                <OptionStyle value='6'>{month-month+6}월</OptionStyle>
-                <OptionStyle value='7'>{month-month+7}월</OptionStyle>
-                <OptionStyle value='8'>{month-month+8}월</OptionStyle>
-                <OptionStyle value='9'>{month-month+9}월</OptionStyle>
-                <OptionStyle value='10'>{month-month+10}월</OptionStyle>
-                <OptionStyle value='11'>{month-month+11}월</OptionStyle>
-                <OptionStyle value='12'>{month-month+12}월</OptionStyle>
-              </MonthSelect>
+              <SelectMonth options={MonthArray} defaultValue={month} onSelect={changeMonth}/>
           </span>
           <img src={NEXT_BUTTON} onClick={nextMonth}></img>
         </Header>

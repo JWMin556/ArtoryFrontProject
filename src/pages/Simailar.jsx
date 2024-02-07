@@ -44,7 +44,7 @@ export const WrapIcon = styled.div`
   //background-color : red;
 `;
 export default function Simailar() {
-  const url = 'http://3.39.39.6:8080/api/exhibitions/ParticularSimilar?page=1';
+  const url = 'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/exhibitions/ParticularSimilar?page=1';
   const [simailarExhibitionData, setSimailarExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
   const [page, setPage] = useState(1);

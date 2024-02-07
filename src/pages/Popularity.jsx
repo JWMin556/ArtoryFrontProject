@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 //import './Pagination.css';
-import Pagination from 'react-js-pagination';
 import axios from 'axios';
 import styled from 'styled-components';
 import Poster from '../components/Exhibition/Poster';
@@ -45,7 +44,7 @@ export const WrapIcon = styled.div`
 `;
 
 export default function Popularity() {
-  const url = 'http://3.39.39.6:8080/api/exhibitions/ParticularPopularity?page=1';
+  const url = 'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/exhibitions/ParticularPopularity?page=1';
   const [popularityExhibitionData, setPopularityExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
   const [page, setPage] = useState(1);

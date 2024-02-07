@@ -7,13 +7,14 @@ import SaveExhibition from '../components/MyStory/SaveExhibition';
 import StyledButton from '../styled-components/StyledButton';
 import SearchModal from '../components/MyStory/SearchModal1';
 import Memo from '../components/MyStory/Memo'
-const url = 'http://3.39.39.6:8080/api/mystory/all?page=1';
+const url = 'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/mystory/all?page=1';
 const token = localStorage.getItem('Token');
 
 export default function MyStory() {
   const [userData, setUserData] = useState([]);
   const [userStoryData,setUserStoryData] = useState([]);
   const [isButtonClick,setIsButtonClick] = useState(false);
+
   const profileIMG = userData.image;
   const { state } = useLocation();
   console.log(state);
@@ -42,15 +43,12 @@ export default function MyStory() {
         setUserData(response.data);
         setUserStoryData(response.data.stories)
         console.log("유저정보",response.data);
-        //console.log("스토리정보",response.data.stories);
 
         } catch (error) {
         console.error('Error fetching data:', error.response.data);
     } 
-      //fetchData();
     })();
   }, []);
-  //console.log("스토리정보",userStoryData);
   return (
     <S.Container>
       {isButtonClick && <SearchModal isButtonClick={isButtonClick} source={'record'} userStoryData={userStoryData}/>}

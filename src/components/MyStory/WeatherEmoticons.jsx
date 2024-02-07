@@ -1,20 +1,7 @@
-// import weather_b1 from '../../Img/MyStory/weather.b1.svg'
-// import weather_b2 from '../../Img/MyStory/weather.b2.svg'
-// import weather_b3 from '../../Img/MyStory/weather.b3.svg'
-// import weather_b4 from '../../Img/MyStory/weather.b4.svg'
-// import weather_b5 from '../../Img/MyStory/weather.b5.svg'
-
-
 import styled from 'styled-components';
 import React from 'react';
 import { useState } from 'react';
-// const blackEmoticons = [
-//     weather_b1,
-//     weather_b2,
-//     weather_b3,
-//     weather_b4,
-//     weather_b5
-// ];
+
 
 export default function Emoticon({
   onSelect,

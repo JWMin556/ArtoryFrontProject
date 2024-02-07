@@ -3,8 +3,10 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Line from '../../Img/Calendar/line.svg';
 import { useNavigate } from 'react-router-dom';
-
-const url = "http://3.39.39.6:8080/api/mystory/bySavedDate?";
+import Delete from '../../Img/Calendar/close.svg'
+import { StoryDeleteApi } from '../API/Delete_API';
+import MyStoryDeleteModal from './MyStoryDeleteModal'
+const url = "http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/mystory/bySavedDate?";
 const token = localStorage.getItem('Token');
 
 const WrapList = styled.div`
@@ -38,7 +40,7 @@ const List = styled.div`
 export default function StoryList({ year, month, day }) {
     const navigate = useNavigate();
     const [storyByDate, setStoryByDate] = useState([]);
-
+    const [isModal,setIsModal] = useState(false)
     useEffect(() => {
     const fetchData = async () => {
         try {
@@ -57,7 +59,6 @@ export default function StoryList({ year, month, day }) {
             console.error('Error fetching data:', error);
         }
     };
-
     fetchData();
     }, [year, month, day]);
 
@@ -68,18 +69,34 @@ export default function StoryList({ year, month, day }) {
             navigate(`/mystory/${item.exhibitionTitle}`, { state: { item}}) 
         }
     }
+    const ClickedDelete = (item) => {
+        console.log(isModal);
+        setIsModal(true);
+        //setIsModal((prevModal) => !prevModal);
+        console.log(isModal);
+    }
+    const handleDelete = () =>{
+        //StoryDeleteApi(item.storyId)
+        alert(`번 스토리가 삭제되었습니다`)
+    }
     return (
         <WrapList dynamicHeight={dynamicHeight}>
         {storyByDate.length > 0 ? (
             storyByDate.map((item, index) => (
             <div key={index}>
-                <List onClick={()=>clickedList(item)}>• {item.exhibitionTitle}</List>
+                <List onClick={()=>clickedList(item)}>• {item.exhibitionTitle} <img src={Delete} onClick={ () => ClickedDelete(item) }/></List>
                 {index != storyByDate.length-1 ? (<img src={Line} alt="Line"/>) : <span></span> }
+                {isModal && <MyStoryDeleteModal 
+                title={item.exhibitionTitle}
+                modal = {isModal}
+                setModal = {setIsModal}
+                />}
             </div>
             ))
         ) : (
             <List></List>
-        )}
+        )
+        }
         </WrapList>
     );
     }

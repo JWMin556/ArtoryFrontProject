@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'http://3.39.39.6:8080/api/';
+const url = 'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/';
 const token = localStorage.getItem('Token');
 
 
@@ -44,8 +44,9 @@ catch (error)
 }
     //fetchData();
 };
-    //스토리 수정 api (임시저장)
-    export const progressSaveApi =async (exhibitionId,data,title,viewingTime,companion,genre1,genre2,genre3,satisfactionLevel,weather,isOpen,year,month,date)=>{
+    //임시저장
+    export const progressSaveApi =async (storyId,exhibitionId,data,title,viewingTime,companion,genre1,genre2,genre3,satisfactionLevel,weather,isOpen,year,month,date)=>{
+            console.log("스토리 아이디 : ", storyId)
             console.log(exhibitionId)
             console.log(data)
             console.log(title)
@@ -59,7 +60,7 @@ catch (error)
             console.log(month)
             console.log(date)
         try {
-            const response = await axios.patch(`${url}stories/upadte/{story-id}?storyId=${exhibitionId}`,
+            const response = await axios.post(`${url}mystory/draft-save?storyId=${storyId}`,
                 {
                     exhibitionId: exhibitionId,
                     storyTitle: title,
@@ -89,7 +90,7 @@ catch (error)
     } 
     catch (error) 
     {
-        console.error('Error fetching data:', error.response);
+        console.error('Error fetching data:', error.response.data);
     }
         //fetchData();
     };
@@ -124,3 +125,4 @@ catch (error)
 }
     //fetchData();
 };
+

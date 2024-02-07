@@ -44,7 +44,7 @@ export const WrapIcon = styled.div`
 `;
 const token = localStorage.getItem('Token');
 export default function Popularity() {
-    const url = 'http://3.39.39.6:8080/api/exhibitions/ParticularRecent?page=1'
+    const url = 'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/exhibitions/ParticularRecent?page=1'
     const [recentExhibitionData, setRecentExhibitionData] = useState([]);
     const token = localStorage.getItem('Token');
     const [page, setPage] = useState(1);

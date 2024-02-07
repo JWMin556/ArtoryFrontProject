@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 const token = localStorage.getItem('Token');
-const SaveUrl = 'http://3.39.39.6:8080/api/scrap-exhibition/';
-const HeartUrl = 'http://3.39.39.6:8080/api/like-exhibition/';
+const SaveUrl = 'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/scrap-exhibition/';
+const HeartUrl = 'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/like-exhibition/';
 //전시회 스크랩
 export const saveApi =async (exhibitionId)=>{
         console.log("saveApi 함수로 들어옴 ",exhibitionId);

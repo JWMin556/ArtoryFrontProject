@@ -32,7 +32,11 @@ const StyledModal = {
 }
 const Container = styled.div`
     //border : 1px solid blue;
-    //box-shadow: 1px 1px 70px  #f3f3f3;
+    box-shadow: 1px 1px 2px  rgba(0,0,0,0.3);
+    position : absolute;
+    //right : 10%;
+    background-color : #fff;
+    padding : 1%;
     border-radius : 10px;
     width: 213px;
     height: 159px;
@@ -148,18 +152,18 @@ const MiniCalendar = ({
     setDateBoxColor,
     ...props
 }) => {
-  useEffect(() => {
-    document.body.style.cssText = `
-      position: fixed; 
-      top: -${window.scrollY}px;
-      overflow-y: scroll;
-      width: 100%;`;
-    return () => {
-      const scrollY = document.body.style.top;
-      document.body.style.cssText = '';
-      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.body.style.cssText = `
+  //     position: fixed; 
+  //     top: -${window.scrollY}px;
+  //     overflow-y: scroll;
+  //     width: 100%;`;
+  //   return () => {
+  //     const scrollY = document.body.style.top;
+  //     document.body.style.cssText = '';
+  //     window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+  //   };
+  // }, []);
   const {
     date,
 } = props;
@@ -280,12 +284,12 @@ const MiniCalendar = ({
   setYear(year);
   setMonth(month);
   return (
-    <Modal
-        isOpen={isModalOpen}
-        onRequestClose={()=>setIsModalOpen(false)}
-        style={StyledModal}
-        shouldCloseOnOverlayClick={true}
-    >
+    // <Modal
+    //     isOpen={isModalOpen}
+    //     onRequestClose={()=>setIsModalOpen(false)}
+    //     style={StyledModal}
+    //     shouldCloseOnOverlayClick={true}
+    // >
       <Container>
         <Header>
           <img src={PREV_BUTTON} onClick={prevMonth}></img>
@@ -303,8 +307,7 @@ const MiniCalendar = ({
           {makeCalendar(year, month-1)}
         </Days>
       </Container>
-    </Modal>
-
+    // </Modal>
   );
 };
 export default MiniCalendar;

@@ -52,7 +52,6 @@ export default function CategorySelect({
         }
         //주제가 선택되어 있지 않고, 선택된 주제의 개수가 3개 미만일 때
         else if (selectedTopics.length < 3) {
-          //console.log(2);
           setPrevIdx(index); // 누른 박스의 인덱스로 변경
           newBox[index] = // 누른 박스의 색깔 변경 (그레이 -> 블랙)
             newBox[index] === greyBox[index]
@@ -74,7 +73,6 @@ export default function CategorySelect({
       });
   };
 }
-console.log("선택된 주제들 인덱스",selectedIndex);
 setGenre1(genres[selectedIndex[0]]);
 setGenre2(genres[selectedIndex[1]]);
 setGenre3(genres[selectedIndex[2]]);

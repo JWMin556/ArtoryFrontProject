@@ -1,4 +1,3 @@
-//check
 import React, { useState } from 'react';
 import HEART from '../../Img/Slider/heart.svg';
 import ON_HEART from '../../Img/Slider/onheart.svg';

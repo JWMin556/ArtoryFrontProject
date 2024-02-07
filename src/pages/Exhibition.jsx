@@ -8,8 +8,8 @@ import { TestDummy } from '../TestDummy';
 import { Link } from 'react-router-dom';
 //import Genre from '../components/Exhibition/Genre'; //여기 이 Genre.jsx는 잠시 사용하지 말아주세요
 
-const url = 'http://3.39.39.6:8080/api/exhibitions/';
-const distanceRecommendUrl = 'http://3.39.39.6:8080/api/exhibitions/distanceRecommend?page=1'
+const url = 'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/exhibitions/';
+const distanceRecommendUrl = 'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/exhibitions/distanceRecommend?page=1'
 export default function Exhibition() {
   //주연씨가 작업해주실 EXHIBITION페이지입니다.
   const [popularityExhibitionData, setPopularityExhibitionData] = useState([]);
