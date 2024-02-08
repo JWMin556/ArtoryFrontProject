@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 import * as S from '../../styled-components/Slide.style';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import StoryHeart from './StoryHeart';
 import Prev from '../Exhibition/Prev';
 import Next from '../Exhibition/Next';
 import StoryPoster from './StoryPoster';
-import StoryScrap from './StoryScrap';
+import styled from 'styled-components';
 
 export default function StorySlide(props) {
   const setting = {
@@ -20,16 +19,12 @@ export default function StorySlide(props) {
   };
   return (
     <S.WrapSlider>
-      <S.Category>{props.title}</S.Category>
+      <S.Category>{props.title}</S.Category> {/* ex) 인기스토리, 최근 스토리 */}
       <S.StyledSlider {...setting}>
         {props.Dummy.map((item) => (
           <div key={item.storyId}>
             <S.WrapPoster>
               <StoryPoster item={item} />
-              <S.WrapIcon>
-                <StoryHeart id={item.storyId} isLiked={item.isLiked} />
-                <StoryScrap id={item.storyId} isScrapped={item.isScrapped} />
-              </S.WrapIcon>
             </S.WrapPoster>
           </div>
         ))}

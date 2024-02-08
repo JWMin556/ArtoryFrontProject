@@ -15,7 +15,7 @@ export const Category = styled.button`
   font-size: 1.6em;
   word-spacing: 1px;
   border: none;
-  background-color : #fff;
+  background-color: #fff;
 `;
 export const IMG = styled.img`
   width: 186px;

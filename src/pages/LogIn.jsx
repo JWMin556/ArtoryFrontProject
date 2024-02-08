@@ -9,7 +9,8 @@ import LOCK from '../Img/Login/lock.svg';
 import { getUserInfo } from '../components/API/Logout_API';
 import axios from 'axios';
 
-const UserInfoURL = 'http://3.39.39.6:8080/api/member/info';
+const UserInfoURL =
+  'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/member/info';
 export default function LogIn() {
   //주연씨가 작업해주실 LogIn페이지입니다.
   const [ID, setID] = useState('');

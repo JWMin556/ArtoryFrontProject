@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import StyledButton from '../styled-components/StyledButton';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import AWS from "aws-sdk";
+import AWS from 'aws-sdk';
 
 export default function Onboarding() {
   const [length, setLength] = useState(0);
@@ -32,6 +32,7 @@ export default function Onboarding() {
       reader.onload = (event) => {
         // 이미지의 src를 선택한 파일의 내용으로 대체합니다.
         setImageSrc(event.target.result);
+        uploadFileAWS(file);
       };
       reader.readAsDataURL(file);
     }
@@ -48,15 +49,15 @@ export default function Onboarding() {
   useEffect(() => {
     //1. AWS 키 설정
     AWS.config.update({
-      accessKeyId: "AKIA4FTBI4U6A6W6RRPK",
-      secretAccessKey: "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"
-    })
+      accessKeyId: 'AKIA4FTBI4U6A6W6RRPK',
+      secretAccessKey: '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',
+    });
     //2. AWS S3 객체 생성
     const myBucket = new AWS.S3({
-      params: { Bucket: "artory-s3-arbitary" },
-      region: "ap-northeast-2"  //서울에서 생성
-    })
-    
+      params: { Bucket: 'artory-s3-arbitary' },
+      region: 'ap-northeast-2', //서울에서 생성
+    });
+
     setMyBucket(myBucket);
   }, []);
 
@@ -64,51 +65,53 @@ export default function Onboarding() {
   const uploadFileAWS = (file) => {
     //2-1. aws에서 시킨 양식 그대로 따름
     const param = {
-      ACL: "public-read", //일단 public으로 누구나 다 읽을 수 있다...임시로 이렇게 함(나중에 바꿔야)
+      ACL: 'public-read', //일단 public으로 누구나 다 읽을 수 있다...임시로 이렇게 함(나중에 바꿔야)
       //ContentType: "image/png",  //일단 주석처리함
       Body: file,
-      Bucket: "artory-s3-arbitary",
+      Bucket: 'artory-s3-arbitary',
       Key: `upload/${imageSrcReal.name}`,
-    }
+    };
 
     //2-2. AWS가 정한 양식대로 보내기
-    myBucket
-      .putObject(param)
-      .send((error) => {
-        if(error) {
-          console.log(error);
-        } else {
-          //const url = myBucket.getSignedUrl("getObject", {Key: param.Key}); 기존의 코드..그런데 이렇게 하면 짤림
-          const signedUrl = myBucket.getSignedUrl("getObject", { Key: param.Key });
-          const pureUrl = signedUrl.match(/^(https:\/\/[^?]+)/)[1];
-          console.log("awsurl: ", pureUrl);
-          setImgUrl(pureUrl);
-        }
-      })
-  }
+    myBucket.putObject(param).send((error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        //const url = myBucket.getSignedUrl("getObject", {Key: param.Key}); 기존의 코드..그런데 이렇게 하면 짤림
+        const signedUrl = myBucket.getSignedUrl('getObject', {
+          Key: param.Key,
+        });
+        const pureUrl = signedUrl.match(/^(https:\/\/[^?]+)/)[1];
+        console.log('awsurl: ', pureUrl);
+        setImgUrl(pureUrl);
+      }
+    });
+  };
 
   const token = localStorage.getItem('Token');
-  const saveNicknameAndImage = async() => {
-    try{
-      const baseUrl = `http://3.39.39.6:8080/api/member/save/nickname?nickname=${nickname}&image=${imgUrl}`;
-			const response = await axios.post(
-        baseUrl, 
+  const URL = localStorage.getItem('URL');
+
+  const saveNicknameAndImage = async () => {
+    try {
+      const baseUrl = `${URL}/api/member/save/nickname?nickname=${nickname}&image=${imgUrl}`;
+      const response = await axios.post(
+        baseUrl,
         {
           // nickname: Cnickname,
           // image: Cimage,
         },
         {
           headers: {
-            'Accept': '*/*',
+            Accept: '*/*',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          }
-        },
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log('사용자 정보가 성공적으로 저장되었습니다.');
-			console.log(response);
+      console.log(response);
     } catch (error) {
-			console.log(error.response.data);
+      console.log(error.response.data);
     }
   };
 
@@ -118,10 +121,16 @@ export default function Onboarding() {
         <Title>사용할 이름과 프로필을 설정해주세요</Title>
       </div>
       <ContentBox>
-        <ImgStyled src={imageSrc} alt='사진첨부' onClick={handleImageClick} />
-        <input type='file' accept='image/*' ref={fileInputRef} style={{display:"none"}} onChange={handleFileChange} />
-        <button onClick={() => uploadFileAWS(imageSrcReal)}>aws전송</button> {/*그 파일을 s3로 전송*/}
-        
+        <ImgStyled src={imageSrc} alt="사진첨부" onClick={handleImageClick} />
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          style={{ display: 'none' }}
+          onChange={handleFileChange}
+        />
+        {/* <button onClick={() => uploadFileAWS(imageSrcReal)}>aws전송</button>{' '} */}
+        {/*그 파일을 s3로 전송*/}
         <Nickname
           maxLength="10"
           type="text"
@@ -136,6 +145,7 @@ export default function Onboarding() {
           style={{
             height: '52px',
             width: '333px',
+            borderRadius: '0',
           }}
           onClick={saveNicknameAndImage}
         >
@@ -148,11 +158,13 @@ export default function Onboarding() {
 }
 
 //온보딩 컨테이너
-const Count = styled.p`
+const Count = styled.div`
   color: #ababab;
   text-align: end;
-  width: 304px;
-  margin: 5px;
+  padding-left: 20px;
+  padding-top: 5px;
+  width: 65%;
+  margin: 0;
 `;
 const Container = styled.div`
   margin: 100px auto;
@@ -163,18 +175,21 @@ const Container = styled.div`
   width: 460px;
 `;
 const Title = styled.p`
-  font-weight: 800;
+  font-weight: 700;
   font-size: 180%;
 `;
 
 const Nickname = styled.input`
+  &::placeholder {
+    color: #a6a9af;
+  }
   margin-top: 40px;
   padding-left: 20px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   border: none;
   box-shadow: 1px 2px 8px #f3f3f3;
-  width: 60%;
-  height: 50px;
+  width: 65%;
+  min-height: 50px;
   color: #ababab; //닉네임 입력 후 글자 색
   font-weight: 500;
   font-family: 'Pretendard';
@@ -191,5 +206,7 @@ const ContentBox = styled.div`
 
 const ImgStyled = styled.img`
   width: 150px;
+  height: 150px;
+  object-fit: cover;
   cursor: 'pointer';
 `;

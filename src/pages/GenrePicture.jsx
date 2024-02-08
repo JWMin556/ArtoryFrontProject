@@ -33,9 +33,10 @@ const WrapIcon = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
+const URL = localStorage.getItem('URL');
 
 export default function GenrePicture() {
-  const url = 'http://3.39.39.6:8080/api/cagegory/picture?page=1';
+  const url = `${URL}/api/cagegory/picture?page=1`;
   const [pictureData, setPictureData] = useState([]);
   const token = localStorage.getItem('Token');
 

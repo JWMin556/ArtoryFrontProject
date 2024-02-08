@@ -33,9 +33,10 @@ const WrapIcon = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
+const URL = localStorage.getItem('URL');
 
 export default function GenreArtistExhibition() {
-  const url = 'http://3.39.39.6:8080/api/cagegory/artistExhibition?page=1';
+  const url = `${URL}/api/cagegory/artistExhibition?page=1`;
   const [artistExhibitionData, setArtistExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
 

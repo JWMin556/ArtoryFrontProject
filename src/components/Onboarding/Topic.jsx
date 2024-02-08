@@ -21,16 +21,15 @@ export default function Topic(props) {
 const Button = styled.button`
   cursor: pointer;
   font-size: 130%;
-  font-weight: 400;
+  font-weight: 500;
   font-family: 'Pretendard';
   margin: 10px 5px;
   width: 18%;
-  height: 35%;
-  border-radius: 10px;
+  height: 103px;
   border: none;
   background-color: white;
   box-shadow: 1px 2px 8px #f3f3f3;
-  color: #a8a7a7;
+  color: #a6a9af;
   &.clicked {
     background-color: black;
     color: white;

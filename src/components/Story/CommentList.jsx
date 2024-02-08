@@ -4,21 +4,21 @@ import ReplyInput from './ReplyInput';
 import { getMemberInfo } from '../API/member_API';
 import Emoticon from './Emoticon';
 import { deleteComment, patchComment } from '../API/story_API';
-import { Modal } from 'bootstrap';
 import DeleteModal from './DeleteModal';
 
 export default function CommentList({
   storyId,
-  items,
+  items, //댓글 리스트
   greyEmoticons,
   loadComments,
 }) {
   //계정 소유 유저 id get
   const [userId, setUserId] = useState();
+
   useEffect(() => {
     async function fetchMemberInfo() {
       const response = await getMemberInfo();
-      setUserId(response.memberId);
+      setUserId(response.memberId); //작성자 id
     }
 
     fetchMemberInfo();
@@ -35,8 +35,8 @@ export default function CommentList({
             <CommentStyled key={item.commentId}>
               <CommentListItem
                 storyId={storyId}
-                userId={userId}
-                item={item}
+                userId={userId} //댓글 작성자 id(Story작성자 말고)
+                item={item} // 댓글 하나의 정보
                 greyEmoticons={greyEmoticons}
                 loadComments={loadComments}
               ></CommentListItem>
@@ -108,6 +108,7 @@ function CommentListItem({
     <>
       {' '}
       <div style={{ display: 'flex' }}>
+        {/* 댓글 작성자 아이디 & 프사 => 수정필요 */}
         <ProfileImg src={item.memberProfile} alt={item.memberId}></ProfileImg>
 
         <RightComment>
@@ -135,10 +136,10 @@ function CommentListItem({
               <img
                 style={{ height: '25px', verticalAlign: 'middle' }}
                 src={satisfactionSrc}
-                alt={item.satisfactionLevel}
+                alt={item.satisfactionLevel} //작성자 선택 만족도
               />
               <CommentContent>{item.commentContext}</CommentContent>
-              {userId === item.memberId && (
+              {userId === item.memberId && ( //계정 주랑 작성자가 같다면 수정&삭제 버튼
                 <ChangeWrap>
                   <ChangeBtn onClick={() => setIsPatch(true)}>수정</ChangeBtn>|
                   <ChangeBtn onClick={() => setModal(true)}>삭제</ChangeBtn>
@@ -213,11 +214,10 @@ const ChangeBtn = styled.button`
 const Wrap = styled.div`
   border: none;
   box-shadow: 1px 2px 8px #00000025;
-  padding: 10px 0 10px 40px;
+  padding: 10px 10px 10px 40px;
   //text-align: start;
   background-color: white;
   //  margin-bottom: 80px;
-  margin-right: 10px;
 `;
 const RightComment = styled.div`
   flex: 1;
@@ -238,13 +238,13 @@ const CommentStyled = styled.div`
   position: relative;
 `;
 const Comments = styled.div`
-  max-height: 400px;
+  max-height: 580px;
   //스크롤 관련
 
   overflow: auto;
   &::-webkit-scrollbar {
     z-index: -2;
-    width: 8px;
+    width: 10px;
   }
   &::-webkit-scrollbar-thumb {
     z-index: -2;

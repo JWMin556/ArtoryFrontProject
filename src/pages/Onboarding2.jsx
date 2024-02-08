@@ -12,7 +12,7 @@ export default function Onboarding2() {
   const [isButton1Clicked, setIsButton1Clicked] = useState(false);
   const [isButton2Clicked, setIsButton2Clicked] = useState(false);
   const [gender, setGender] = useState('');
-  const [age, setAge] = useState(25); 
+  const [age, setAge] = useState(25);
 
   // 버튼1 클릭 이벤트 핸들러
   const handleButton1Click = () => {
@@ -39,12 +39,13 @@ export default function Onboarding2() {
       label: (startYear + index).toString(),
     })
   );
+  const URL = localStorage.getItem('URL');
 
   const token = localStorage.getItem('Token');
   //api관련 함수
-  const saveAgeAndGender = async() => {
-    try{
-      const baseUrl = `http://3.39.39.6:8080/api/member/save/age-gender?gender=${gender}&age=${age}`;
+  const saveAgeAndGender = async () => {
+    try {
+      const baseUrl = `${URL}/api/member/save/age-gender?gender=${gender}&age=${age}`;
       const response = await axios.post(
         baseUrl,
         {
@@ -53,43 +54,24 @@ export default function Onboarding2() {
         },
         {
           headers: {
-            'Accept': '*/*',
+            Accept: '*/*',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          }
-        },
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log('사용자 정보가 성공적으로 저장되었습니다.');
-			console.log(response);
-    } catch(error) {
+      console.log(response);
+    } catch (error) {
       console.log(error.response.data);
     }
-  }
-  // const saveAgeAndGender = async() => {
-  //   try {
-  //     const response = await axios.post(
-  //       `http://3.39.39.6:8080/api/member/save/age-gender`,
-  //     {
-  //       age: age,
-  //       gender: gender,
-  //     },
-  //     {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     console.log(response);
-  //   } catch(error) {
-  //     console.error('나이, 성별 보내는 에러발생', error);
-  //   }
-  // };
+  };
 
   return (
     <Container>
       <div style={{ height: '120px', textAlign: 'center' }}>
         <Title>성별과 연령대를 선택해주세요</Title>
-        <div style={{ color: '#D2D2D2', height: '20px', marginTop: '10px' }}>
+        <div style={{ color: '#A6A9AF', height: '20px', marginTop: '20px' }}>
           당신에게 맞는 전시를 추천해드려요
         </div>
       </div>
@@ -115,12 +97,24 @@ export default function Onboarding2() {
           )}
         </div>
         {/*태어난 년도 선택*/}
-        <CustomSelect options={yearArray} onSelect={(selectedYear) => setAge(new Date().getFullYear() - selectedYear + 1)}/>
+        <CustomSelect
+          options={yearArray}
+          onSelect={(selectedYear) =>
+            setAge(new Date().getFullYear() - selectedYear + 1)
+          }
+        />
       </ContentBox>
 
       {/*다음 버튼*/}
       <Link to="/onboarding3">
-        <StyledButton onClick={saveAgeAndGender} style={{ height: '52px', width: '333px' }}>
+        <StyledButton
+          onClick={saveAgeAndGender}
+          style={{
+            height: '52px',
+            width: '333px',
+            borderRadius: '0',
+          }}
+        >
           다음
         </StyledButton>
       </Link>
@@ -136,10 +130,9 @@ export default function Onboarding2() {
 const Gender = styled.button`
   font-family: 'Pretendard';
   font-size: 130%;
-  font-weight: 400;
+  font-weight: 500;
   width: 45%;
   height: 55px;
-  border-radius: 10px;
   border: none;
   background-color: white;
   box-shadow: 1px 2px 8px #f3f3f3;
@@ -153,10 +146,9 @@ const Gender = styled.button`
 const Gender2 = styled.button`
   font-family: 'Pretendard';
   font-size: 130%;
-  font-weight: 400;
+  font-weight: 500;
   width: 45%;
   height: 55px;
-  border-radius: 10px;
   border: none;
   background-color: black;
   box-shadow: 1px 2px 8px #f3f3f3;
@@ -173,7 +165,7 @@ const Container = styled.div`
   //height: 670px;
 `;
 const Title = styled.div`
-  font-weight: 800;
+  font-weight: 700;
   font-size: 180%;
 `;
 

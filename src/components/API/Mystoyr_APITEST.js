@@ -1,5 +1,7 @@
 import axios from 'axios';
-const BASE_URL = 'http://3.39.39.6:8080/api/';
+const URL = localStorage.getItem('URL');
+
+const BASE_URL = `${URL}/api/`;
 const token = localStorage.getItem('Token');
 
 export const createStory = async (
@@ -16,20 +18,23 @@ export const createStory = async (
   isOpen,
   year,
   month,
-  date
+  date,
+  keyword,
+  picturesUrl
 ) => {
-  console.log(exhibitionId);
-  console.log(data);
-  console.log(title);
-  console.log(companion);
-  console.log(genre1);
-  console.log(genre2);
-  console.log(genre3);
-  console.log(satisfactionLevel);
-  console.log(weather);
-  console.log(year);
-  console.log(month);
-  console.log(date);
+  // console.log(exhibitionId);
+  // console.log(data);
+  // console.log(title);
+  // console.log(companion);
+  // console.log(genre1);
+  // console.log(genre2);
+  // console.log(genre3);
+  // console.log(satisfactionLevel);
+  // console.log(weather);
+  // console.log(year);
+  // console.log(month);
+  // console.log(date);
+  console.log('선택된 사진', picturesUrl);
   try {
     const response = await axios.post(
       `${BASE_URL}stories/save`,
@@ -40,7 +45,7 @@ export const createStory = async (
         storySatisfactionLevel: satisfactionLevel,
         storyWeather: weather,
         storyCompanion: companion,
-        storyKeyword: 'string',
+        storyKeyword: keyword,
         storyViewingTime: viewingTime,
         year: year,
         month: month,
@@ -50,7 +55,7 @@ export const createStory = async (
         genre2: genre2,
         genre3: genre3,
         isOpen: isOpen,
-        picturesUrl: ['string'],
+        picturesUrl: picturesUrl,
       },
       {
         headers: {

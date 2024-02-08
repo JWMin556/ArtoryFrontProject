@@ -32,24 +32,24 @@ const ExhibitImg = styled.img`
   border-radius: 10px;
 `; //메인화면의  오른쪽 부분 즉, 전시회 사진이 나오는 부분을 감싸주기 위한 스타일드 컴포넌트입니다.
 
-const url = 'http://3.39.39.6:8080/api/exhibitions/main'
+const URL = localStorage.getItem('URL');
+
+const url = `${URL}/api/exhibitions/main`;
 
 export default function Home() {
-  const [selectedImage, setSelectedImage] = useState(null); 
+  const [selectedImage, setSelectedImage] = useState(null);
   const token = localStorage.getItem('Token');
 
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get(url, 
-          {
-            headers : {
-              'Accept': '*/*',
-              'Authorization': `Bearer ${token}`,
-              'content-type': 'application/json',
-            }
-          }
-        );
+        const response = await axios.get(url, {
+          headers: {
+            Accept: '*/*',
+            Authorization: `Bearer ${token}`,
+            'content-type': 'application/json',
+          },
+        });
         console.log(response.data);
         setSelectedImage(response.data.exhibitionImage);
       } catch (error) {

@@ -50,13 +50,7 @@ export default function StorySearch(props) {
       <WrapResult>
         {state.result.map((item) => (
           <WrapPoster key={item.storyId}>
-            <div>
-              <Poster item={item} />
-            </div>
-            <WrapIcon>
-              <StoryHeart id={item.storyId} isLiked={item.isLiked} />
-              <StoryScrap id={item.storyId} isScrapped={item.isScrapped} />
-            </WrapIcon>
+            <Poster item={item} />
           </WrapPoster>
         ))}
       </WrapResult>

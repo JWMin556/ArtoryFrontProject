@@ -33,9 +33,10 @@ const WrapIcon = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
+const URL = localStorage.getItem('URL');
 
 export default function GenrePlanExhibition() {
-  const url = 'http://3.39.39.6:8080/api/cagegory/planExhibition?page=1';
+  const url = `${URL}/api/cagegory/planExhibition?page=1`;
   const [planExhibitionData, setPlanExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
 

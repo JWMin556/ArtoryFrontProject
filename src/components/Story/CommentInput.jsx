@@ -214,11 +214,10 @@ const Submit = styled.button`
 `;
 
 const CommentWrap = styled.div`
-  margin-left: 10%;
-  padding-left: 10px;
+  /* margin-left: 10px; */
 `;
 const OpenBtn = styled.button`
-  width: 99%;
+  width: 100%;
   //height: 60px;
   //border: 1px solid black;
   border: none;
@@ -241,7 +240,7 @@ const OpenedComment = styled.div`
   font-family: 'Pretendard';
   font-weight: bold;
   margin-bottom: 30px;
-  margin-right: 10px;
+
   font-size: 15px;
   //height: 230px;
 `;

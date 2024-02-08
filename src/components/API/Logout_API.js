@@ -1,5 +1,6 @@
 import axios from 'axios';
-const url = 'http://3.39.39.6:8080/api/member/logout';
+const URL = localStorage.getItem('URL');
+const url = `${URL}/api/member/logout`;
 const token = localStorage.getItem('Token');
 
 export const LogoutApi = async () => {

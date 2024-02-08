@@ -33,9 +33,10 @@ const WrapIcon = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
+const URL = localStorage.getItem('URL');
 
 export default function GenreInstallationArt() {
-  const url = 'http://3.39.39.6:8080/api/cagegory/installationArt?page=1';
+  const url = `${URL}/api/cagegory/installationArt?page=1`;
   const [installationArtData, setInstallationArtData] = useState([]);
   const token = localStorage.getItem('Token');
 

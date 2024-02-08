@@ -6,8 +6,9 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import axios from 'axios';
+const URL = localStorage.getItem('URL');
 
-const url = 'http://3.39.39.6:8080/api/exhibitions/';
+const url = `${URL}/api/exhibitions/`;
 const AdImg = styled.img`
   width: 300px;
   height: 450px;
