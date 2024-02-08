@@ -1,95 +1,38 @@
-import React from 'react'
-import styled from 'styled-components'
-import Poster from './Poster';
+import React,{useState} from 'react'
+import styled from 'styled-components';
+import Title from './Title';
 
-const GenreWrap = styled.div`
-    width: 61%;
-    height: 100%;
-    margin-bottom: 10%;
-`
-
-const Title = styled.div`
-    position: relative;
-    font-family: 'Pretendard';
-    font-weight: 900;
-    font-size: 1.6em;
-    word-spacing: 1px;
+const GenreStyle = styled.img`
+    width : 186px;
+    height: 268px;
+    //border-radius : 10px; 
+    box-shadow: 5px 5px 8px #D9D9D9; 
 `;
-
-const Content = styled.div`
-    position: relative;
-    display: flex;
-    flex-direction: row;
+const WrapTitle = styled.div`
+    position : relative;
+    bottom : 270px;
 `;
+export default function Poster({exhibitionTitle,...props}) { //본래는 그냥 ...props만...
+    // 상태 초기값을 true로 설정
+    const [isShowTitle, setIsShowTitle] = useState(false);
+    // 마우스가 Poster 위에 올라가면 Title을 보여주도록 변경
+    const handleMouseEnter = () => {
+        setIsShowTitle(true);
+    };
 
-const ContentFirstColumn = styled.div`
-    width: auto;
-    height: auto;
-`;
+    // 마우스가 Poster에서 벗어나면 Title을 숨기도록 변경
+    const handleMouseLeave = () => {
+        setIsShowTitle(false);
+    };
 
-const ContentSecondColumn = styled.div`
-    width: auto;
-    height: auto;
-`;
-
-const ContentArea = styled.div`
-    
-`;
-
-const WrapPorterAndIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 350px;
-`;
-
-export default function Genre(props) {
-  return (
-    <GenreWrap>
-        <Title>{props.title}</Title>
-        <Content>
-            <ContentFirstColumn>
-                <ContentArea>
-                    {props.Dummy.results.slice(0, 4).map((item, index) => (
-                        <div key={index}>
-                            <WrapPorterAndIcon>
-                                <Poster source={props.source} item={item} />
-                            </WrapPorterAndIcon>
-                        </div>
-                    ))}
-                </ContentArea>
-            </ContentFirstColumn>
-            <ContentSecondColumn>
-            <ContentArea>
-                    {props.Dummy.results.slice(0, 2).map((item, index) => (
-                        <div key={index}>
-                            <WrapPorterAndIcon>
-                                <Poster source={props.source} item={item} />
-                            </WrapPorterAndIcon>
-                        </div>
-                    ))}
-                </ContentArea>
-            </ContentSecondColumn>
-            <ContentFirstColumn>
-            <ContentArea>
-                    {props.Dummy.results.slice(0, 4).map((item, index) => (
-                        <div key={index}>
-                            <WrapPorterAndIcon>
-                                <Poster source={props.source} item={item} />
-                            </WrapPorterAndIcon>
-                        </div>
-                    ))}
-                </ContentArea>
-            </ContentFirstColumn>
-            <ContentSecondColumn>
-                {props.Dummy.results.slice(0, 2).map((item, index) => (
-                    <div key={index}>
-                        <WrapPorterAndIcon>
-                            <Poster source={props.source} item={item} />
-                        </WrapPorterAndIcon>
-                    </div>
-                ))}</ContentSecondColumn>
-        </Content>
-    </GenreWrap>
-  )
+return (
+    <div style={{height:'268px' }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+    >
+        <GenreStyle src={props.item.exhibitionImage}/>
+        <WrapTitle>{isShowTitle && <Title title = {exhibitionTitle}/>}</WrapTitle>
+        {/* <WrapTitle>{isShowTitle && <Title title = {props.item.exhibitionTitle}/>}</WrapTitle> */}
+    </div>
+);
 }

@@ -8,29 +8,32 @@ import SlidePictures from '../components/MyPage/SlidePictures';
 import { TestDummy } from '../TestDummy';
 import Pictures from '../components/MyPage/Pictures';
 import SlideMyStory from '../components/MyPage/SlideMyStory';
+import SlideScrappedStory from '../components/MyPage/SlideScrappedStory';
+import SlideScrappedMember from '../components/MyPage/SlideScrappedMember';
 
 const PageContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 100vh; /* 페이지가 화면 전체를 채우도록 설정 */
+  height: 100%; /* 페이지가 화면 전체를 채우도록 설정 */
   display: flex;
   justify-content: center; /* 수평 가운데 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
+  /* align-items: center;  */
   padding-bottom: 20px; /* 원하는 여백 값 */
+  margin-top: 100px;
 `;
 
 const Page = styled.div`
-  z-index: 900;
+  /* z-index: 900; */
   position: relative;
   width: 100%;
   max-width: 700px;
   padding: 0 20px;
   /* background: rgba(0, 0, 0, 0.1); */
-  top: 70%;
-  left: 50%;
+  /* top: 90%; */
+  /* left: 50%; */
   position: absolute;
-  transform: translate3d(-50%, -50%, 0);
-  overflow: hidden;
+  /* transform: translate3d(-50%, -50%, 0); */
+  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   margin-bottom: 20px; /* 원하는 여백 값 */
@@ -306,8 +309,8 @@ export default function MyPage() {
                 <ContentPosters>
                     {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
                     {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
-                    {isSavedUserBtnClicked && <Slide Dummy={myScrappedStoriesData} />}
-                    {isSaveStoryBtnClicked && <Slide Dummy={myScrappedMembersData} />}
+                    {isSavedUserBtnClicked && <SlideScrappedMember Dummy={myScrappedMembersData} />}
+                    {isSaveStoryBtnClicked && <SlideScrappedStory Dummy={myScrappedStoriesData} />}
                 </ContentPosters>
             </ContentWrap>
         </Page>

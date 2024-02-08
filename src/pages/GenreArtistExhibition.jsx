@@ -1,9 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import Heart from '../components/Exhibition/Heart';
 import Save from '../components/Exhibition/Save';
 import Poster from '../components/Exhibition/Poster';
+import Pagination from 'react-js-pagination';
+import PREV from '../Img/Pagination/prev.svg'
+import NEXT from '../Img/Pagination/next.svg'
 
 const Container = styled.div`
   display: flex;
@@ -17,6 +20,7 @@ const WrapResult = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-top : 4%;
   // justify-content : center;
   // align-items : center;
 `;
@@ -34,28 +38,90 @@ const WrapIcon = styled.div`
   align-items: flex-end;
 `;
 
-export default function GenreArtistExhibition() {
-  const url = 'http://3.39.39.6:8080/api/cagegory/artistExhibition?page=1';
+const Wrap = styled.div`
+    //border: 1px solid red;
+    width : 75%;
+    display : flex;
+    justify-content : center;
+`;
+const PaginationBox = styled.div`
+    .pagination { 
+        display: flex; 
+        justify-content: space-between; 
+        margin-top: 15px; 
+        width : 100px;
+        height : 18px;
+    }
+    ul { 
+        list-style: none; 
+        padding: 0;
+    }
+    ul.pagination li {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color : #d9d9d9;
+        //border: 1px solid #000;
+        border-radius : 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem; 
+    }
+    ul.pagination li:first-child{
+        display : none;
+    }
+    ul.pagination li:last-child{ 
+        display : none;
+    }
+    ul.pagination li:second-child{ 
+        display : none;
+    }
+    ul.pagination li a { 
+        text-decoration: none; 
+        color: #d9d9d9; 
+        font-size: 1px; 
+        //display : none;
+    }
+    ul.pagination li.active a { display : none; }
+    ul.pagination li.active { background-color: #000; }
+    
+    ul.pagination li a.active { color: #d9d9d9; display : none; }
+    ul.pagination li.disabled {
+        //display : none;
+    }
+`;
+
+export default function GenreMedia() {
+  const url = 'http://3.39.39.6:8080/api/cagegory/artistExhibition'
   const [artistExhibitionData, setArtistExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
+  const [currentPage, setCurrentPage] = useState(1);
+  const fetchData = async (page) => {
+    try {
+      const response = await axios.get(`${url}?page=${page}`,
+        {
+          headers : {
+            'Accept': '*/*',
+            'Authorization': `Bearer ${token}`,
+          }
+        }
+      );
+      setArtistExhibitionData(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await axios.get(url, {
-          headers: {
-            Accept: '*/*',
-            Authorization: `Bearer ${token}`,
-            'content-type': 'application/json',
-          },
-        });
-        setArtistExhibitionData(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    })();
-  }, []);
+    fetchData(currentPage);
+  }, [currentPage]);
+
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <Container>
@@ -67,11 +133,25 @@ export default function GenreArtistExhibition() {
             </div>
             <WrapIcon>
               <Heart item={item} />
-              <Save item={item} />
+              <Save item={item}/>
             </WrapIcon>
           </WrapPoster>
         ))}
       </WrapResult>
+
+      <Wrap>
+        <PaginationBox> 
+          <Pagination 
+            activePage={currentPage} 
+            itemsCountPerPage={10} 
+            totalItemsCount={48} 
+            pageRangeDisplayed={5}
+            prevPageText={<img src={PREV} style={{width : "10px", height : "10px", backgroundColor:"#fff"}}/>}
+            nextPageText={<img src={NEXT} style={{width : "10px", height : "10px", backgroundColor:"#fff"}}/>} 
+            onChange={handlePageChange}
+            />
+        </PaginationBox>
+      </Wrap>
     </Container>
-  );
+  )
 }

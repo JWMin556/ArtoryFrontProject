@@ -1,7 +1,7 @@
 import styled from "styled-components";
 //메인화면의 paragraph 3개를 위해서 따로 만들은 스타일드 컴포넌트입니다.  
 
-export const FirstParagraph = styled.p `
+export const FirstParagraph = styled.div `
   color: #595959;
   font-size: 14px;
   font-family: Pretendard;
@@ -13,7 +13,7 @@ export const FirstParagraph = styled.p `
   height: 19px;
 `;  //첫 문장인 Story community를 위한 스타일드 컴포넌트입니다. 
 
-export const SecondParagraph = styled.h2 `
+export const SecondParagraph = styled.div`
   color: #5D5D5D;
   font-size: 40px;
   font-family: Pretendard;
@@ -24,7 +24,7 @@ export const SecondParagraph = styled.h2 `
   height: 41px;
 `; //두 번쨰 문장인 '나만의 문화일기'를 위한 스타일드 컴포넌트입니다. 
 
-export const ThirdParagraph = styled.h1 `
+export const ThirdParagraph = styled.div`
   color: black;
   font-size: 80px;
   font-family: Pretendard;

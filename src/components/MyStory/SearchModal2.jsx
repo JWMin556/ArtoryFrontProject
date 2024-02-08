@@ -31,7 +31,7 @@ const StyledModal = {
         border : 'none',
         boxShadow: '2px 2px 5px #f3f3f3',
     },
-}
+};
 const Container = styled.div`
     position : absolute;
     left : 90%;

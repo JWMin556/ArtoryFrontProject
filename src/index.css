@@ -13,7 +13,7 @@ h4,
 h5,
 h6,p, */
 
-blockquote,
+/* blockquote, */
 pre,
 a,
 abbr,
@@ -60,9 +60,9 @@ article,
 aside,
 canvas,
 details,
-embed,
+/* embed,
 figure,
-figcaption,
+figcaption, */
 footer,
 header,
 hgroup,
@@ -87,8 +87,8 @@ video {
 article,
 aside,
 details,
-figcaption,
-figure,
+/* figcaption,
+figure, */
 footer,
 header,
 hgroup,
@@ -104,7 +104,7 @@ body {
   line-height: 1;
   font-family: 'Pretendard';
 }
-ol,
+/* ol,
 ul {
   list-style: none;
 }
@@ -118,7 +118,7 @@ q:before,
 q:after {
   content: '';
   content: none;
-}
+} */
 table {
   border-collapse: collapse;
   border-spacing: 0;

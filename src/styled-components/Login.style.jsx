@@ -25,7 +25,7 @@ export const HomeLeftWrap = styled.div `
 
 `;  //메인화면의  왼쪽 부분 
 
-export const FirstParagraph = styled.p `
+export const FirstParagraph = styled.div`
     color: #595959;
     font-size: 14px;
     font-family: 'Pretendard';
@@ -42,7 +42,7 @@ export const FirstParagraph = styled.p `
     }
 `;  // Story community
 
-export const SecondParagraph = styled.h2 `
+export const SecondParagraph = styled.div`
     color: #5D5D5D;
     font-size: 40px;
     font-family: 'Pretendard';
@@ -59,7 +59,7 @@ export const SecondParagraph = styled.h2 `
     }
 `; //'나만의 문화일기'
 
-export const ThirdParagraph = styled.h1 `
+export const ThirdParagraph = styled.div`
     color: black;
     font-size: 80px;
     font-family: 'Pretendard';

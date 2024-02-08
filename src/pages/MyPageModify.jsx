@@ -10,25 +10,26 @@ import AWS from "aws-sdk";
 const PageContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 100vh; /* 페이지가 화면 전체를 채우도록 설정 */
+  height: 100%; /* 페이지가 화면 전체를 채우도록 설정 */
   display: flex;
   justify-content: center; /* 수평 가운데 정렬 */
-  align-items: center; /* 수직 가운데 정렬 */
+  /* align-items: center;  */
   padding-bottom: 20px; /* 원하는 여백 값 */
+  margin-top: 100px;
 `;
 
 const Page = styled.div`
-  z-index: 900;
+  /* z-index: 900; */
   position: relative;
   width: 100%;
   max-width: 700px;
   padding: 0 20px;
   /* background: rgba(0, 0, 0, 0.1); */
-  top: 90%;
-  left: 50%;
+  /* top: 90%; */
+  /* left: 50%; */
   position: absolute;
-  transform: translate3d(-50%, -50%, 0);
-  overflow: hidden;
+  /* transform: translate3d(-50%, -50%, 0); */
+  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   margin-bottom: 20px; /* 원하는 여백 값 */
@@ -215,6 +216,7 @@ export default function MyPageModify() {
       reader.onload = (event) => {
         // 이미지의 src를 선택한 파일의 내용으로 대체합니다.
         setImageSrc(event.target.result);
+        uploadFileAWS(file);
       };
       reader.readAsDataURL(file);
     }
@@ -369,7 +371,7 @@ export default function MyPageModify() {
               {isHovered && <SettingIcon style={{display:"block", width:"30%"}} src="/img/setting2.png" alt="설정 아이콘" onClick={handleImageClick} />}
             </ImageContainer>
             <input type="file" accept="image/*" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange}/>
-            <button onClick={() => uploadFileAWS(imageSrcReal)}>aws전송</button> {/*그 파일을 s3로 전송*/}
+            {/* <button onClick={() => uploadFileAWS(imageSrcReal)}>aws전송</button> 그 파일을 s3로 전송 */}
           </TitleLeftWrapImgArea>
         </TitleLeftWrap>
 

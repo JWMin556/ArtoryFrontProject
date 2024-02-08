@@ -32,6 +32,7 @@ export default function Onboarding() {
       reader.onload = (event) => {
         // 이미지의 src를 선택한 파일의 내용으로 대체합니다.
         setImageSrc(event.target.result);
+        uploadFileAWS(file);
       };
       reader.readAsDataURL(file);
     }
@@ -69,12 +70,10 @@ export default function Onboarding() {
       Body: file,
       Bucket: "artory-s3-arbitary",
       Key: `upload/${imageSrcReal.name}`,
-    }
+    };
 
     //2-2. AWS가 정한 양식대로 보내기
-    myBucket
-      .putObject(param)
-      .send((error) => {
+    myBucket.putObject(param).send((error) => {
         if(error) {
           console.log(error);
         } else {
@@ -84,7 +83,7 @@ export default function Onboarding() {
           console.log("awsurl: ", pureUrl);
           setImgUrl(pureUrl);
         }
-      })
+      });
   }
 
   const token = localStorage.getItem('Token');
@@ -120,7 +119,7 @@ export default function Onboarding() {
       <ContentBox>
         <ImgStyled src={imageSrc} alt='사진첨부' onClick={handleImageClick} />
         <input type='file' accept='image/*' ref={fileInputRef} style={{display:"none"}} onChange={handleFileChange} />
-        <button onClick={() => uploadFileAWS(imageSrcReal)}>aws전송</button> {/*그 파일을 s3로 전송*/}
+        {/* <button onClick={() => uploadFileAWS(imageSrcReal)}>aws전송</button> 그 파일을 s3로 전송 */}
         
         <Nickname
           maxLength="10"

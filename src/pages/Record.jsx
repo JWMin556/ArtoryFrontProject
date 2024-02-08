@@ -395,27 +395,44 @@ export default function Record(props) {
         date
     ]
     //저장 버튼 클릭 
-    const handleSubmit = async () =>{
-        console.log("data.exhibitionTitle",userStoryData[0].exhibitionTitle)
-        console.log("exhibitionTitle",exhibitionTitle)
-        for (let i=0 ; i<userStoryData.length ; i++){
-            if(userStoryData[i].exhibitionTitle === exhibitionTitle)
-            {
-                alert("동일한 전시가 있습니다.")
-                break;
+    const handleSubmit = async () => {
+        // console.log('data.exhibitionTitle', userStoryData[0].exhibitionTitle);
+        console.log('exhibitionTitle', exhibitionTitle);
+        if (userStoryData) {
+          //이거 없으면 디버깅 에러가 계속 나서 임시로 해뒀어요[은향]
+          for (let i = 0; i < userStoryData.length; i++) {
+            if (userStoryData[i].exhibitionTitle === exhibitionTitle) {
+              alert('동일한 전시가 있습니다.');
+              break;
             }
+          }
         }
-            //await createStory(id,data,title,viewingTime,companion,genre1,genre2,genre3,satisfactionLevel,weather,isOpen,year,month,date);
-            alert("스토리가 저장되었습니다")
-            //navigate(`/mystory`, { state: { markEvent } 
+        //await createStory(id,data,title,viewingTime,companion,genre1,genre2,genre3,satisfactionLevel,weather,isOpen,year,month,date);
+    
+        //navigate(`/mystory`, { state: { markEvent }
         try {
-            await createStory(id,data,title,viewingTime,companion,genre1,genre2,genre3,satisfactionLevel,weather,isOpen,year,month,date);
-            alert("스토리가 저장되었습니다")
-            navigate(`/mystory`, { state: { markEvent } }) 
+          await createStory(
+            id,
+            data,
+            title,
+            viewingTime,
+            companion,
+            genre1,
+            genre2,
+            genre3,
+            satisfactionLevel,
+            weather,
+            isOpen,
+            year,
+            month,
+            date
+          );
+          alert('스토리가 저장되었습니다');
+          navigate(`/mystory`, { state: { markEvent } });
         } catch (error) {
-            console.log(error.response.data);
+          console.log(error.response.data);
         }
-    }
+      };
 
       //임시저장 버튼 클릭 
     const handleProgressSubmit = async() =>{
