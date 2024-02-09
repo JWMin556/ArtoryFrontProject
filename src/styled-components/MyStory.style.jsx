@@ -16,7 +16,7 @@ export const WrapSaveExhibition = styled.div`
     margin-right : 15%;
     justify-content: center;
     align-items: center;
-
+    //border : 1px solid red;
 
 `;
 export const WrapPoster = styled.div`
@@ -28,6 +28,8 @@ export const WrapCalendar = styled.div`
     display : flex;
     justify-content: space-evenly;
     //margin-top : 5%;
+    position : relative;
+    bottom : 30px;
 `;
 export const WrapCalendar2 = styled.div`
     //border : 1px solid #f7f7;
@@ -48,21 +50,24 @@ export const WrapProfile = styled.div`
     display : flex;
     flex-direction : column;
     justify-content: space-evenly;
-    //position : relative;
-    //left : 20%;
+    position : relative;
+    right : 6%;
 `;
 
 export const ProfileIMG = styled.img`
-    border-radius : 10px;
 `;
 
 export const WrapProfileAndButton = styled.div`
     width : 100%;
     display : flex;
     justify-content: space-around;
-
+    margin-top : 6%;
+    //border : 1px solid red;
 `;
-
+export const WrapButton = styled.div`
+    position : relative;
+    left : 6%;
+`;
 export const WrapMemo = styled.div`
     //margin-right : 2%;
     //border : 1px solid red;

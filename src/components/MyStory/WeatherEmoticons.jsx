@@ -1,31 +1,30 @@
-// import weather_b1 from '../../Img/MyStory/weather.b1.svg'
-// import weather_b2 from '../../Img/MyStory/weather.b2.svg'
-// import weather_b3 from '../../Img/MyStory/weather.b3.svg'
-// import weather_b4 from '../../Img/MyStory/weather.b4.svg'
-// import weather_b5 from '../../Img/MyStory/weather.b5.svg'
-
-
 import styled from 'styled-components';
 import React from 'react';
-import { useState } from 'react';
-// const blackEmoticons = [
-//     weather_b1,
-//     weather_b2,
-//     weather_b3,
-//     weather_b4,
-//     weather_b5
-// ];
+import { useState,useEffect } from 'react';
 
-export default function Emoticon({
+
+export default function  WeatherEmoticon({
   onSelect,
   greyEmoticons,
   emoticons, //그레이 이모티콘 배열
   setEmoticons,
-  selectweather //블랙 이모티콘 배열 
+  blackEmoticon, //블랙 이모티콘 배열 
+  defaultValue
 }) {
-    
   const [prevIdx, setPrevIdx] = useState(); //누른 이모티콘 인덱스
-  //const [prevIdx, setPrevIdx] = useState(0);
+
+  useEffect(() => {
+    setEmoticons((prevEmoticons) => {
+      const newEmoticons = [...prevEmoticons];
+      greyEmoticons.forEach((item, index) => {
+        if (index === defaultValue-1) {
+          newEmoticons[index] = blackEmoticon[index];
+          setPrevIdx(index);
+        }
+      });
+      return newEmoticons;
+    });
+  }, [defaultValue, greyEmoticons, setEmoticons]);
   const toggleEmoticon = (index) => {
     setEmoticons((prevEmoticons) => {
       const newEmoticons = [...prevEmoticons];
@@ -35,11 +34,11 @@ export default function Emoticon({
       setPrevIdx(index); //누른 이모티콘의 인덱스 변경
       newEmoticons[index] = //누를 이모티콘의 색깔 변경 (그레이 -> 블랙)
         newEmoticons[index] === greyEmoticons[index]
-          ? selectweather[index]
+          ? blackEmoticon[index]
           : greyEmoticons[index]; // Toggle between grey and black
 
       // 이 부분에서 선택된 인덱스를 상위 컴포넌트로 전달합니다.
-      onSelect(newEmoticons[index] === selectweather[index] ? index : -1);
+      onSelect(newEmoticons[index] === blackEmoticon[index] ? index : -1);
       return newEmoticons;
     });
   };
@@ -59,8 +58,8 @@ export default function Emoticon({
 }
 
 const EmoticonImg = styled.img`
-  margin-right: 15px;
-  height: 25px;
+  margin-right: 10px;
+  height: 30px;
   cursor: pointer;
 `;
 

@@ -16,7 +16,7 @@ const InputTitle = styled.input`
       outline : none;
     }
 `;
-export default function StoryTitle({SetTitle}) {
+export default function StoryTitle({stroyId,Title,SetTitle}) {
   const [isClick, setIsClick] = useState();
   const [title,setTitle] = useState();
   const onFocusInput = () =>
@@ -29,15 +29,14 @@ export default function StoryTitle({SetTitle}) {
   }
   const onChangeTitle = (e) =>
   {
-    setTitle(e.target.value);
     SetTitle(e.target.value);
     //console.log(e.target.value);
   }
   return (
     <div>
         <InputTitle 
-          value={title}
-          placeholder={isClick ? "" : '제목을 직접 작성해주세요'} 
+          value={Title}
+          placeholder={isClick ? "" : (stroyId ? {Title} : "제목을 직접 작성해주세요" )} 
           onFocus={onFocusInput}
           onBlur={onBlurInput}
           onChange={onChangeTitle}

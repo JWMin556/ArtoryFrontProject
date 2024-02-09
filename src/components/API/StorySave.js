@@ -4,47 +4,9 @@ const URL = localStorage.getItem('URL');
 const url = `${URL}/api/`;
 const token = localStorage.getItem('Token');
 
-//스토리 내용 저장
-export const saveContentApi = async (ID, content) => {
-  console.log('saveContentApi 함수로 들어옴 ', ID);
-  console.log('saveContentApi 함수로 들어옴 ', content);
-  try {
-    const response = await axios.post(
-      url,
-      {
-        exhibitionId: ID,
-        storyTitle: '전시회 다녀온 후기',
-        storySatisfactionLevel: 'string',
-        storyWeather: 'string',
-        storyCompanion: 'string',
-        storyKeyword: 'string',
-        storyViewingTime: 'string',
-        year: 0,
-        month: 0,
-        day: 0,
-        storyContext: content,
-        genre1: 'MEDIA',
-        genre2: 'MEDIA',
-        genre3: 'MEDIA',
-        isOpen: true,
-        picturesUrl: ['string'],
-      },
-      {
-        headers: {
-          Accept: '*/*',
-          Authorization: `Bearer ${token}`,
-          'content-type': 'application/json',
-        },
-      }
-    );
-    console.log(response.data);
-  } catch (error) {
-    console.error('Error fetching data:', error.response);
-  }
-  //fetchData();
-};
-//스토리 수정 api (임시저장)
-export const progressSaveApi = async (
+//임시저장 (스토리 아이디 존재)
+export const progressSaveApi1 = async (
+  storyId,
   exhibitionId,
   data,
   title,
@@ -62,21 +24,9 @@ export const progressSaveApi = async (
   keyword,
   picturesUrl
 ) => {
-  //   console.log(exhibitionId);
-  //   console.log(data);
-  //   console.log(title);
-  //   console.log(companion);
-  //   console.log(genre1);
-  //   console.log(genre2);
-  //   console.log(genre3);
-  //   console.log(satisfactionLevel);
-  //   console.log(weather);
-  //   console.log(year);
-  //   console.log(month);
-  //   console.log(date);
   try {
-    const response = await axios.patch(
-      `${url}stories/upadte/{story-id}?storyId=${exhibitionId}`,
+    const response = await axios.post(
+      `${url}mystory/draft-save?storyId=${storyId}`,
       {
         exhibitionId: exhibitionId,
         storyTitle: title,
@@ -105,7 +55,74 @@ export const progressSaveApi = async (
     );
     console.log(response.data);
   } catch (error) {
-    console.error('Error fetching data:', error.response);
+    console.error('Error fetching data:', error.response.data);
+  }
+  //fetchData();
+};
+
+//임시저장 (스토리 아이디 존재X)
+export const progressSaveApi2 = async (
+  exhibitionId,
+  data,
+  title,
+  viewingTime,
+  companion,
+  genre1,
+  genre2,
+  genre3,
+  satisfactionLevel,
+  weather,
+  isOpen,
+  year,
+  month,
+  date,
+  keyword,
+  picturesUrl
+) => {
+  //console.log("스토리 아이디 : ", storyId)
+  console.log(exhibitionId);
+  console.log(data);
+  console.log(title);
+  console.log(companion);
+  console.log(genre1);
+  console.log(genre2);
+  console.log(genre3);
+  console.log(satisfactionLevel);
+  console.log(weather);
+  console.log(year);
+  console.log(month);
+  console.log(date);
+  try {
+    const response = await axios.post(
+      `${url}mystory/draft-save`,
+      {
+        exhibitionId: exhibitionId,
+        storyTitle: title,
+        storySatisfactionLevel: satisfactionLevel,
+        storyWeather: weather,
+        storyCompanion: companion,
+        storyKeyword: keyword,
+        storyViewingTime: viewingTime,
+        year: year,
+        month: month,
+        day: date,
+        storyContext: data,
+        genre1: genre1,
+        genre2: genre2,
+        genre3: genre3,
+        isOpen: isOpen,
+        picturesUrl: picturesUrl,
+      },
+      {
+        headers: {
+          Accept: '*/*',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response.data);
+  } catch (error) {
+    console.error('Error fetching data:', error.response.data);
   }
   //fetchData();
 };

@@ -7,7 +7,7 @@ import { LogoutApi } from './API/Logout_API';
 
 const HeaderContainer = styled.div`
   width: 100%;
-  height: 30px; //전체를 감싸주는 div태그를 60xp로 바꿈
+  height: 40px; //전체를 감싸주는 div태그를 40xp로 맞추는 것으로 고정!!
 `; //상단바 전체를 감싸주는 스타일드 컴포넌트입니다.
 
 const HeaderWrap = styled.div`
@@ -26,13 +26,13 @@ const HeaderWrap = styled.div`
 
 const HeaderLeftWrap = styled.div`
   display: flex;
-  margin-left: 7%;
+  margin-left: 12%;
 `;
 
 const HeaderRightWrap = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 7%;
+  margin-right: 12%;
 `;
 
 const UnorderedList = styled.ul`
@@ -43,6 +43,7 @@ const UnorderedList = styled.ul`
 `; //상단바의 오른쪽 부분인 EXHIBITION, STORY, MY STORY, MY PAGE를 urorderedlist형식의 스타일드 컴포넌트로 만들어주었습니다.
 
 const ListItem = styled.li`
+  margin-bottom: 3px;
   margin-right: 60px;
   font-size: 10px;
   font-family: 'Pretendard';
@@ -57,18 +58,17 @@ const NavLink = styled(Link)`
   text-decoration: none;
 `;
 const LogoutButton = styled.button`
-  width: 71px;
-  height: 25px;
+  width: 10.5%;
+  height: 18px;
   background-color: #262626;
   border: none;
   color: #f5f5f5;
   font-size: 10px;
   font-family: 'Pretendard';
+  margin-bottom: 3px;
 `;
 
-
 export default function Header() {
-
   const [isMouseOverExhibition, setMouseOverExhibition] = useState(false); //마우스가 Exhibition위에 올라는지 아닌지 상태를 관리하는 변수
   const handleMouseOverExhibition = () => {
     //마우스가 Exhibition에 올라갔을 때 호출되는 함수 -> setMouseOverExhibition를 이용하여 isMouseOverExhibition가 false->true로 바뀜
@@ -78,10 +78,9 @@ export default function Header() {
     //마우스가 Exhibition에서 나갔을 때 호출되는 함수 -> setMouseOverExhibition를 이용하여 isMouseOverExhibition가 true->false로 바뀜
     setMouseOverExhibition(false);
   };
-  const logoutButtonClick = () =>
-  {
+  const logoutButtonClick = () => {
     LogoutApi();
-  }
+  };
 
   const location = useLocation();
   return (
@@ -95,7 +94,7 @@ export default function Header() {
               alignItems: 'center',
               textDecoration: 'none',
               color: '#F5F5F5',
-              fontSize: '14px',
+              fontSize: '10px',
               fontFamily: 'Pretendard',
               fontWeight: '500',
               lineHeight: '18.63px',
@@ -108,8 +107,8 @@ export default function Header() {
               src="/img/Vector.png"
               alt="로고"
               style={{
-                width: '23px',
-                height: '25px',
+                width: '20px',
+                height: '22px',
                 backgroundColor: 'black',
                 marginRight: '6px',
               }}
@@ -162,15 +161,14 @@ export default function Header() {
             <LogoutButton onClick={logoutButtonClick}>LOGOUT</LogoutButton>
           </UnorderedList>
         </HeaderRightWrap>
-      </HeaderWrap>
-{' '}
+      </HeaderWrap>{' '}
       {/*isMouseOverExhibition가 true이면 <Navigation/>이 뜸 */}
       {isMouseOverExhibition && (
-            <Navigation
-            onmouseover = {handleMouseOverExhibition}
-            onmouseout={handleMouseOutExhibition}
-            />
-          )}
+        <Navigation
+          onmouseover={handleMouseOverExhibition}
+          onmouseout={handleMouseOutExhibition}
+        />
+      )}
     </HeaderContainer>
   );
 }

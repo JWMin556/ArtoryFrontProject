@@ -38,6 +38,7 @@ export default function LogIn() {
   }
 
   function handleLoginArbitary() {
+    localStorage.setItem('Token','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDczNzMzNzksImV4cCI6MTcwNzQ2MzM3OSwibWVtYmVySWQiOjMsInJvbGUiOiJVU0VSIn0.TL4gJHsj-KfaVEtfFsILKW1VKO0-23cSaEWsI2M5SyTEM24CwpqsOYWFuR57f83uy4_aFqmVKlnoFAcOssnZFA')
     localStorage.setItem('arbitaryLoginForHeader2', true);
     window.location.href = '/'; // Home 페이지로 이동
   }
@@ -50,7 +51,7 @@ export default function LogIn() {
     <S.HomeWrap>
       <S.HomeLeftWrap>
         <S.FirstParagraph>Story community</S.FirstParagraph>
-        <S.SecondParagraph>나만의 문화일기</S.SecondParagraph>
+        <S.SecondParagraph>나만의 문화이야기</S.SecondParagraph>
         <S.ThirdParagraph>ARTORY</S.ThirdParagraph>
       </S.HomeLeftWrap>
       <S.WrapLogin>

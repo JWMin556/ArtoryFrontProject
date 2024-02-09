@@ -23,7 +23,7 @@ export default function CommentList({
 
     fetchMemberInfo();
   }, []);
-  //댓글 아무것도 없으면 댓글 띄우지 않기.
+  //댓글 아무것도 없으면 댓글 박스 띄우지 않기.
   if (items.length === 0) {
     return null;
   }

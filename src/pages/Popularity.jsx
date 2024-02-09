@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 //import './Pagination.css';
-import Pagination from 'react-js-pagination';
 import axios from 'axios';
 import styled from 'styled-components';
 import Poster from '../components/Exhibition/Poster';

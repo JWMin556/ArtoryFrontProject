@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
 import ADD from '../../Img/Calendar/add.svg';
-import SearchModa2 from './SearchModal2'; // 주석 해제
-import axios from 'axios';
-import StoryTitle from './StoryTitle';
+import SearchModa2 from './SearchModal2';
 import StoryList from './StoryList';
-const url =
-  'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/mystory/bySavedDate?';
-const token = localStorage.getItem('Token');
 
 const TileWrapper = styled.div`
   position: relative;
@@ -53,7 +47,14 @@ const Mark = styled.div`
   // top : 60%;
   left: 20%;
 `;
-export const Tile = ({ key, year, month, day, userStoryData }) => {
+export const Tile = ({
+  key,
+  year,
+  month,
+  day,
+  userStoryData,
+  loadUserStories,
+}) => {
   const [isButtonOpen, setIsButtonOpen] = useState(false);
   const [mouseOverStyle, setMouseOverStyle] = useState();
   const [mark, setMark] = useState(null);
@@ -65,46 +66,59 @@ export const Tile = ({ key, year, month, day, userStoryData }) => {
   useEffect(() => {
     //console.log(`${day}일`);
   });
-  useEffect(() => {
-    const checkStoryData = async () => {
-      try {
-        userStoryData.forEach((item, index) => {
-          if (item.year === year && item.month === month && item.day === day) {
-            //유저가 저장한 스토리 배열에 있는 날짜와 같으면
-            if (item.storyState === 'DONE') {
-              setMark({
-                color: '#fff',
-                backgroundColor: '#000',
-                borderRadius: '50px',
-              }); //블랙 동그라미 스타일
-              setStory(item.exhibitionTitle);
-              setIsStyleStyle({ color: '#000' });
-              //console.log(`스토리목록${index}`,item.exhibitionTitle);
-            } else if (item.storyState === 'NOT_STARTED') {
-              setMark({
-                color: '#fff',
-                backgroundColor: '#D9D9D9',
-                borderRadius: '50px',
-              }); //블랙 동그라미 스타일
-              setStory(item.exhibitionTitle);
-              setIsStyleStyle({ color: '#D9D9D9' });
-            } else if (item.storyState === ' IN_PROGRESS') {
-              setMark({
-                backgroundColor: 'none',
-                border: '2px solid #000',
-                borderRadius: '50px',
-              }); //블랙 동그라미 스타일
-              setStory(item.exhibitionTitle);
-            }
-            throw new Error('Stop!');
+  const checkStoryData = async () => {
+    // if (userStoryData.length > 0) {//이해를 돕기 위함.조건문은 따로 없어도 stories 배열(item)이 0이면 try문 안에의 forEach문이 돌아가지 않을 것이기에.
+    try {
+      userStoryData.forEach((item, index) => {
+        if (item.year === year && item.month === month && item.day === day) {
+          //유저가 저장한 스토리 배열에 있는 날짜와 같으면
+          if (item.storyState === 'DONE') {
+            setMark({
+              color: '#fff',
+              backgroundColor: '#000',
+              borderRadius: '50px',
+            }); //블랙 동그라미 스타일 작성 완
+            setStory(item.exhibitionTitle);
+            setIsStyleStyle({ color: '#000' });
+
+            //console.log(`스토리목록${index}`,item.exhibitionTitle);
+          } else if (item.storyState === 'NOT_STARTED') {
+            setMark({
+              color: '#fff',
+              backgroundColor: '#D9D9D9',
+              borderRadius: '50px',
+            }); //블랙 동그라미 스타일 작성 전
+            setStory(item.exhibitionTitle);
+            setIsStyleStyle({ color: '#D9D9D9' });
+          } else if (item.storyState === 'IN_PROGRESS') {
+            setMark({
+              backgroundColor: 'none',
+              border: '3px solid #000',
+              borderRadius: '50px',
+              width: '13px',
+              height: '13px',
+            }); //블랙 동그라미 스타일
+            setStory(item.exhibitionTitle);
           }
-        });
-      } catch (e) {
-        console.log('stop!' + e);
-      }
-    };
+          throw new Error('Stop!');
+        }
+      });
+    } catch (e) {
+      console.log('stop!' + e);
+    } finally {
+      // }
+    }
+  };
+  useEffect(() => {
+    //checkStoryData함수 실행 전 stories의 length가 0인것을 대비해 초기화 해둠.  setMark & setStory(스토리 해당 전시제목) 포함.
+    setMark({
+      color: 'black',
+      backgroundColor: 'transparent',
+      borderRadius: '50px',
+    });
+    setStory([]);
     checkStoryData();
-  }, [day, userStoryData]);
+  }, [day, userStoryData]); //필수
 
   if (story.length > 5) {
     var result1 = story.substr(0, 6);
@@ -157,13 +171,14 @@ export const Tile = ({ key, year, month, day, userStoryData }) => {
           day={day}
         />
       )}
-      <Mark style={isMarkStyle}>{result2}</Mark>
+      <Mark style={isMarkStyle}>{result2}</Mark> {/* 전시제목... */}
       {isClickTile && (
         <StoryList
           userStoryData={userStoryData}
           year={year}
           month={month}
           day={day}
+          loadUserStories={loadUserStories}
         />
       )}
     </TileWrapper>

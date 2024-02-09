@@ -4,18 +4,17 @@ import StyledButton from '../../styled-components/StyledButton'
 import { memoSaveApi } from '../API/Memo_API';
 const Wrap = styled.div`
     width : 269px;
-    height : 400px;
+    height : 522px;
 `;
 const MemoStyle = styled.textarea`
     width: 100%;
     height: 100%;
     color: #ababab;
     font-family: 'Pretendard';
-    background-color: #F5F5F5;
+    background-color: #F4f5f7;
     border: none;
-    border-radius: 10px;
     padding-left : 5%;
-    padding-top : 3%;
+    padding-top : 5%;
     resize: none;
     margin-left : 30%;
     margin-top : 23%;
@@ -31,7 +30,6 @@ const SaveButton = styled.button`
     background-color : #121212;
     color : #ffff;
     border : none;
-    border-radius : 7px;
     width : 70px;
     height : 28px;
     position : relative;
@@ -46,8 +44,8 @@ export default function Memo(props) {
     const [content,setContent] = useState();
     const [isContent,setIsContent] = useState();
     useEffect(() => {
-        if (props.content === undefined) {
-            setIsContent('메모하고 싶은 내용을 적어주세요');
+        if (props.content === "") {
+            setContent('메모하고 싶은 내용을 적어주세요');
         } else {
           setContent(props.content);
         }
@@ -78,7 +76,7 @@ export default function Memo(props) {
                 onChange={handleChangeContent}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
-                placeholder={isInputClick ? "" : isContent}
+                placeholder={isInputClick ? "" : content}
             />
             <SaveButton onClick={clickSaveButton}>저장</SaveButton> 
         </Wrap>

@@ -7,7 +7,7 @@ const PosterStyle = styled.img`
     width : 186px;
     height: 268px;
     //border-radius : 10px; 
-    box-shadow: 5px 5px 8px #D9D9D9; 
+    box-shadow: 1px 2px 8px #f3f3f3;
 `;
 const WrapTitle = styled.div`
     position : relative;
@@ -26,6 +26,7 @@ export default function Poster({setIsModalOpen,year,month,day,userStoryData,...p
         {
             BeforeWritionSaveApi(item.exhibitionId,year,month,day)
             setIsModalOpen(false)
+            navigate('/mystory');
         }
         else{
              //전시회 세부 정보로 가기 위한 포스터 

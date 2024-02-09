@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import moment from "moment";
-import ADD from '../../Img/Calendar/add.svg';
+
 
 const TileWrapper = styled.div`
   position : relative;

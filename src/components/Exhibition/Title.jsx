@@ -14,7 +14,6 @@ const WrapTitle = styled.div`
     //bottom : 0%;
     //left : 0%;
     //right : 0%;
-    border-radius : 10px;
     display : flex ;
     justify-content : center;
     align-items : center;
@@ -23,6 +22,7 @@ const WrapTitle = styled.div`
     padding-left: 15px;
     padding-right: 15px;
     text-align : center;
+    font-weight : 800;
 `;
 export default function Title(props) {
 return (
