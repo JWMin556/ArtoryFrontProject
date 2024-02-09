@@ -24,7 +24,7 @@ export const GenreParagraph = styled.div`
     left: 2.5%;
     position: relative;
     font-family: 'Pretendard';
-    font-weight: 900;
+    font-weight: 700;
     font-size: 1.6em;
     word-spacing: 1px;
 `;
@@ -41,5 +41,5 @@ export const GenreWrapRow = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    margin-right: 47px;
+    margin-right: 18px;
 `;

@@ -22,7 +22,7 @@ const Page = styled.div`
   /* z-index: 900; */
   position: relative;
   width: 100%;
-  max-width: 700px;
+  max-width: 800px;
   padding: 0 20px;
   /* background: rgba(0, 0, 0, 0.1); */
   /* top: 90%; */
@@ -416,7 +416,7 @@ export default function MyPageModify() {
           </TitleRightWrapParagraphArea>
 
           
-          <BoldSentence>나의 관심전시 수정하기</BoldSentence>
+          <BoldSentence style={{marginRight:"10px"}}>나의 관심전시 수정하기</BoldSentence>
           <ExamineWrap>
             <ExamineContentBox>
               {genres__kor.map((genre, index) => {

@@ -140,13 +140,13 @@ export default function Exhibition() {
         </S.GenreParagraph>
         <S.GenreWrap>
           <S.GenreWrapRow>
-            <Link style={{marginTop: "50px"}} to="/exhibition/genremedia">
+            <Link style={{marginTop: "18px"}} to="/exhibition/genremedia">
               <Genre item={mediaData} exhibitionTitle="미디어"/>
             </Link>
-            <Link style={{marginTop: "50px"}} to="/exhibition/genrecraft">
+            <Link style={{marginTop: "18px"}} to="/exhibition/genrecraft">
               <Genre item={craftData} exhibitionTitle="공예" />
             </Link>
-            <Link style={{marginTop: "50px"}} to="/exhibition/genredesign">
+            <Link style={{marginTop: "18px"}} to="/exhibition/genredesign">
               <Genre item={designData} exhibitionTitle="디자인" />
             </Link>
           </S.GenreWrapRow>

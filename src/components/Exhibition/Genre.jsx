@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import Title from './Title';
 
 const GenreStyle = styled.img`
-    width : 186px;
-    height: 268px;
+    width : 210px;
+    height: 302px;
     //border-radius : 10px; 
-    box-shadow: 5px 5px 8px #D9D9D9; 
+    box-shadow: 1px 2px 8px #f3f3f3;
 `;
 const WrapTitle = styled.div`
     position : relative;

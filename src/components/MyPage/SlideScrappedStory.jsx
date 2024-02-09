@@ -49,10 +49,10 @@ export default function SlideScrappedStory(props) {
             <div key={index}>
                 <WrapPorterAndIcon>
                 <PosterMyPage item={item}/>
-                <WrapIcon>
+                {/* <WrapIcon>
                     <Heart item={item}/>
                     <Save item={item}/>
-                </WrapIcon>
+                </WrapIcon> */}
                 </WrapPorterAndIcon>
             </div>
             ))}

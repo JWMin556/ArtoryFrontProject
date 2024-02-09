@@ -35,7 +35,7 @@ export default function SlidePictures(props) {
             {props.Dummy.map((item, index) => (
             <div key={index}>
                 <WrapPoster>
-                <Pictures item={item} index={index}/>
+                <Pictures item={item}/>
                 </WrapPoster>
             </div>
             ))}

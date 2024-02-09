@@ -20,6 +20,10 @@ const Page = styled.div`
   flex-direction: column;
 `;
 
+const SuperTitle = styled.div`
+  margin-bottom: 4%;
+`;
+
 const TitleWrap = styled.div`
   margin-top: 150%; /* 여기부분이 살짝 애매해서 토의가 필요 여기가 회원가입 마진top조절하는 부분*/
   color: black;
@@ -37,8 +41,8 @@ const ContentWrap = styled.div`
 
 const InputTitle = styled.div`
   color: black;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 400;
   word-wrap: break-word;
   font-family: 'Pretendard';
   margin-top: 13px;
@@ -60,11 +64,15 @@ const InputStyle = styled.input`
   width: 100%;
   outline: none;
   border: none;
-  color: #4d4d4d;
-  font-size: 13px;
+  color: #A6A9Af;
+  font-size: 12px;
   font-family: 'Pretendard';
-  font-weight: 500;
+  font-weight: 400;
   word-wrap: break-word;
+
+  &::placeholder {
+    color: #A6A9Af; 
+  }
 `;
 
 const ErrorMessageWrap = styled.div`
@@ -224,44 +232,51 @@ export default function SignUp() {
     <Page>
       <TitleWrap>회원가입</TitleWrap>
       <ContentWrap>
-        <InputTitle style={{ marginTop: '30px' }}>아이디(이메일)</InputTitle>
-        <InputWrap>
-          <InputStyle
-            placeholder="아이디를 입력해주세요"
-            value={email}
-            onChange={onChangeEmail}
-          />
-          <ErrorMessageWrap>
-            {!emailValid && email.length > 0 && (
-              <div>올바르지 않은 이메일입니다.</div>
-            )}
-          </ErrorMessageWrap>
-        </InputWrap>
+        <SuperTitle>
+          <InputTitle style={{ marginTop: '30px' }}>아이디(이메일)</InputTitle>
+          <InputWrap>
+            <InputStyle
+              placeholder="아이디를 입력해주세요"
+              value={email}
+              onChange={onChangeEmail}
+            />
+            <ErrorMessageWrap>
+              {!emailValid && email.length > 0 && (
+                <div>올바르지 않은 이메일입니다.</div>
+              )}
+            </ErrorMessageWrap>
+          </InputWrap>
+        </SuperTitle>
 
-        <InputTitle>비밀번호</InputTitle>
-        <InputWrap>
-          <InputStyle
-            placeholder="비밀번호를 입력해주세요"
-            type="password"
-            value={password}
-            onChange={onChangePassword}
-          />
-        </InputWrap>
 
-        <InputTitle>비밀번호 확인</InputTitle>
-        <InputWrap>
-          <InputStyle
-            placeholder="비밀번호를 입력해주세요"
-            type="password"
-            value={passwordConfirm}
-            onChange={onChangePasswordConfirm}
-          />
-          <ErrorMessageWrap>
-            {!isPasswordConfirm && passwordConfirm.length > 0 && (
-              <div>비밀번호가 일치하지 않습니다. </div>
-            )}
-          </ErrorMessageWrap>
-        </InputWrap>
+        <SuperTitle>
+          <InputTitle>비밀번호</InputTitle>
+          <InputWrap>
+            <InputStyle
+              placeholder="비밀번호를 입력해주세요"
+              type="password"
+              value={password}
+              onChange={onChangePassword}
+            />
+          </InputWrap>
+        </SuperTitle>
+
+        <SuperTitle>
+          <InputTitle>비밀번호 확인</InputTitle>
+          <InputWrap>
+            <InputStyle
+              placeholder="비밀번호를 입력해주세요"
+              type="password"
+              value={passwordConfirm}
+              onChange={onChangePasswordConfirm}
+            />
+            <ErrorMessageWrap>
+              {!isPasswordConfirm && passwordConfirm.length > 0 && (
+                <div>비밀번호가 일치하지 않습니다. </div>
+              )}
+            </ErrorMessageWrap>
+          </InputWrap>
+        </SuperTitle>
 
         <InputTitle style={{ marginTop: '94px' }}>이름</InputTitle>
         <InputWrap>

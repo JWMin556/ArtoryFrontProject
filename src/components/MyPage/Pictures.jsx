@@ -15,10 +15,10 @@ export default function Pictures(props) {
     const onClickImg = () => {
       if(showModal) {
         setShowModal(false);
-        //console.log("안녕", props.index);
+        console.log("안녕", props.index);
       } else {
         setShowModal(true);
-        //console.log("안녕", props.index);
+      console.log("안녕", props.index);
       }
     }
   return (

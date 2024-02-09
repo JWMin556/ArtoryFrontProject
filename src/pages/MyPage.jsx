@@ -26,7 +26,7 @@ const Page = styled.div`
   /* z-index: 900; */
   position: relative;
   width: 100%;
-  max-width: 700px;
+  max-width: 800px;
   padding: 0 20px;
   /* background: rgba(0, 0, 0, 0.1); */
   /* top: 90%; */
@@ -177,7 +177,7 @@ const url = 'http://3.39.39.6:8080/api/mypage/all?page=1';
 const token = localStorage.getItem('Token');
 export default function MyPage() {
     //여기서부터 나의 스토리 버튼 ~ 저장 스토리 버튼을 위한 부분입니다. 
-    const [isMyStoryBtnClicked, setIsMyStoryBtnClicked] = useState(false);
+    const [isMyStoryBtnClicked, setIsMyStoryBtnClicked] = useState(true);
     const [isMyGalaryBtnClicked, setIsGalaryBtnClicked] = useState(false);
     const [isSavedUserBtnClicked, setIsSavedUserBtnClicked] = useState(false);
     const [isSaveStoryBtnClicked, setIsSaveStoryBtnClicked] = useState(false);
@@ -285,24 +285,24 @@ export default function MyPage() {
             <ContentWrap>
                 <ContentBtns>
                     {isMyStoryBtnClicked ? (
-                        <Btns2>나의 스토리</Btns2>
-                        ) : (
-                        <Btns1 onClick={handleMyStoryBtnClick}>나의 스토리</Btns1>
-                        )}
-                        {isMyGalaryBtnClicked ? (
-                        <Btns2>나의 사진첩</Btns2>
-                        ) : (
-                        <Btns1 onClick={handleMyGalaryBtnClick}>나의 사진첩</Btns1>
-                        )}
-                        {isSavedUserBtnClicked ? (
-                        <Btns2>저장 유저</Btns2>
-                        ) : (
-                        <Btns1 onClick={handleSavedUserBtnClick}>저장 유저</Btns1>
-                        )}
-                        {isSaveStoryBtnClicked ? (
-                        <Btns2>저장 스토리</Btns2>
-                        ) : (
-                        <Btns1 onClick={handleSaveStoryBtnClick}>저장 스토리</Btns1>
+                    <Btns2>나의 스토리</Btns2>
+                    ) : (
+                    <Btns1 onClick={handleMyStoryBtnClick}>나의 스토리</Btns1>
+                    )}
+                    {isMyGalaryBtnClicked ? (
+                    <Btns2>나의 사진첩</Btns2>
+                    ) : (
+                    <Btns1 onClick={handleMyGalaryBtnClick}>나의 사진첩</Btns1>
+                    )}
+                    {isSavedUserBtnClicked ? (
+                    <Btns2>저장 유저</Btns2>
+                    ) : (
+                    <Btns1 onClick={handleSavedUserBtnClick}>저장 유저</Btns1>
+                    )}
+                    {isSaveStoryBtnClicked ? (
+                    <Btns2>저장 스토리</Btns2>
+                    ) : (
+                    <Btns1 onClick={handleSaveStoryBtnClick}>저장 스토리</Btns1>
                     )}
                 </ContentBtns>
 
