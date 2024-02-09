@@ -6,7 +6,7 @@ const StyledButton = styled.button`
   background-color: ${(props) => (props.disabled ? '#dadada' : '#121212')};
   color: white;
   border: none;
-  border-radius: 10px;
+  //border-radius: 10px;
   font-weight: 600;
   font-size: 20px;
   word-wrap: break-word;

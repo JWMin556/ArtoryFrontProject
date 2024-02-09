@@ -4,10 +4,11 @@ import SEARCH from '../../Img/Search/search.svg'
 import { useNavigate } from 'react-router-dom';
 import { searchExhibition } from '../API/search_API';
 const SearchStyle = styled.input`
-    background-color : #f5f5f5;
+    background-color : #ffffff;
+    box-shadow: 1px 2px 8px #f3f3f3;
     border : none;
     border-radius : 5px;
-    width : 370px;
+    width : 350px;
     height : 39px;
     padding : 0;
     padding-left :14%;

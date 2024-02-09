@@ -7,7 +7,7 @@ const KakaoURL = 'http://3.39.39.6:8080/oauth/kakao/callback';
 //const code = new URL(link); //인가코드 추출
 
 export default function KakaoLogin() {
-  const REST_API_KEY = 'ee35f9bdbb7d489738218a16bc693718';
+  const REST_API_KEY = '5b7d7ffc9aa7f5e78dd3f29e032aafd4'
   const KAKAO_REDIRECT_URI = 'http://3.39.39.6:8080/oauth/kakao/callback';
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
   const HandleClickKakaoLogin = () => {

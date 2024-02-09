@@ -1,6 +1,5 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import styled from 'styled-components';
-import Emoticon from '../Story/Emoticon';
 import face_g1 from '../../Img/Story/face_g1.svg';
 import face_g2 from '../../Img/Story/face_g2.svg';
 import face_g3 from '../../Img/Story/face_g3.svg';
@@ -10,6 +9,15 @@ import face_g6 from '../../Img/Story/face_g6.svg';
 import face_g7 from '../../Img/Story/face_g7.svg';
 import face_g8 from '../../Img/Story/face_g8.svg';
 import face_g9 from '../../Img/Story/face_g9.svg';
+import face_b1 from '../../Img/Story/face_b1.svg';
+import face_b2 from '../../Img/Story/face_b2.svg';
+import face_b3 from '../../Img/Story/face_b3.svg';
+import face_b4 from '../../Img/Story/face_b4.svg';
+import face_b5 from '../../Img/Story/face_b5.svg';
+import face_b6 from '../../Img/Story/face_b6.svg';
+import face_b7 from '../../Img/Story/face_b7.svg';
+import face_b8 from '../../Img/Story/face_b8.svg';
+import face_b9 from '../../Img/Story/face_b9.svg';
 import weather_g1 from '../../Img/MyStory/weather_g1.svg'
 import weather_g2 from '../../Img/MyStory/weather_g2.svg'
 import weather_g3 from '../../Img/MyStory/weather_g3.svg'
@@ -20,7 +28,7 @@ import weather_b2 from '../../Img/MyStory/weather.b2.svg'
 import weather_b3 from '../../Img/MyStory/weather.b3.svg'
 import weather_b4 from '../../Img/MyStory/weather.b4.svg'
 import weather_b5 from '../../Img/MyStory/weather.b5.svg'
-import WeatherEmoticons from './WeatherEmoticons'
+import SelectEmoticons from './WeatherEmoticons'
 import Select from './Select';
 import CategorySelect from'./CategorySelect'
 import MiniCalendar from './MiniCalendar'
@@ -147,8 +155,9 @@ const DateDiv = styled.div`
   border : none;
   margin-bottom : 3%;
 `;
+
 const time = [
-  <Time value='30분'>30분</Time>,
+  <Time>30분</Time>,
   <Time>1시간</Time>,
   <Time>1시간30분</Time>,
   <Time>2시간</Time>,
@@ -173,6 +182,17 @@ const greyEmoticons = [
   face_g7,
   face_g8,
   face_g9,
+];
+const blackEmoticons = [
+  face_b1,
+  face_b2,
+  face_b3,
+  face_b4,
+  face_b5,
+  face_b6,
+  face_b7,
+  face_b8,
+  face_b9,
 ];
 const greyWeather =[
   weather_g1,
@@ -227,10 +247,18 @@ const blackCategory=[
   <BlakcCategory>작가전시</BlakcCategory>
 ]
 export default function TodayExhibition ({
+  stroyId,
+  viewingTime,
   setViewingTime,
+  satisfactionLevel,
   setSatisfactionLevel,
+  weather,
   setWeatherLevel,
+  companion,
   setCompanion,
+  genre11,
+  genre22,
+  genre33,
   setGenre1,
   setGenre2,
   setGenre3,
@@ -242,10 +270,14 @@ export default function TodayExhibition ({
   setDate
   }) 
   {
+
+    //console.log('stroyId',stroyId)
   //console.log(year,month,date)
   //표정 이모티콘
   const [selectedEmotionIndex, setSelectedEmotionIndex] = useState(null);
   const [Emotion, setEmotion] = useState(greyEmoticons);
+  const [selectEmoticon, setSelectEmoticon] = useState(blackEmoticons)
+
   //날씨 이모티콘
   const [selectedWeatherIndex, setSelectedWeatherIndex] = useState(null);
   const [Weather, setWeather] = useState(greyWeather);
@@ -291,10 +323,16 @@ export default function TodayExhibition ({
     const ClickedModalOpen = () =>{
       isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true)
     }
+    useEffect(()=>{
+      if(stroyId)
+      {
+        setDateBoxColor({backgroundColor:"#000",color:"#fff"})
+      }
+    },[dateBoxColor])
   return (
     <SelectExhibition>
             <div style={{marginBottom:'4%'}}>오늘의 전시</div>
-                <DateDiv onClick={ClickedModalOpen} style={dateBoxColor}>
+                <DateDiv onClick={ClickedModalOpen} style={dateBoxColor }>
                   {year}.{month}.{date}
                   {isModalOpen && <MiniCalendar
                     setYear={setYear}
@@ -322,20 +360,25 @@ export default function TodayExhibition ({
                       box={Time}
                       setBox={setTime}
                       blackBox={blackTime}
+                      defaultValue={viewingTime}
+                      //selectedIndex = {timeIndex}
                     />
                 </WrapTime>
-                  <Emoticon
+                  <SelectEmoticons
                   onSelect={handleEemotionSelection} 
                   greyEmoticons={greyEmoticons}
                   emoticons={Emotion} //이모지가 담긴 배열
                   setEmoticons={setEmotion}  
+                  blackEmoticon={selectEmoticon}
+                  defaultValue={satisfactionLevel}
                   />
-                <WeatherEmoticons
+                <SelectEmoticons
                   onSelect={handleWeatherSelection}
                   greyEmoticons={greyWeather}
                   emoticons={Weather}
                   setEmoticons={setWeather}
-                  selectweather={selectweather}
+                  blackEmoticon={selectweather}
+                  defaultValue={weather}
               />
                 <WrapWho>
                 <Select
@@ -344,6 +387,8 @@ export default function TodayExhibition ({
                       box={Who}
                       setBox={setWho}
                       blackBox={blackWho}
+                      defaultValue={companion}
+                      //selectedIndex={whoIndex}
                     />
                 </WrapWho>
                 <WrapCategory>
@@ -353,6 +398,9 @@ export default function TodayExhibition ({
                       box={Category}
                       setBox={setCategory}
                       blackBox={blackCategory}
+                      genre11={genre11}
+                      genre22={genre22}
+                      genre33={genre33}
                       setGenre1={setGenre1}
                       setGenre2={setGenre2}
                       setGenre3={setGenre3}

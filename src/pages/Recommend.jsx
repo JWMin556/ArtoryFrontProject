@@ -43,7 +43,7 @@ export const WrapIcon = styled.div`
   align-items: flex-end;
 `;
 export default function Recommend() {
-  const url = 'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/exhibitions/ParticularRecommend?page=1';
+  const url = 'http://3.39.39.6:8080/api/exhibitions/ParticularRecommend?page=1';
   const [recommendExhibitionData, setRecommedExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
   const [page, setPage] = useState(1);

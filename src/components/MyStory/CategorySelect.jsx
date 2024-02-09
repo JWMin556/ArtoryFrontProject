@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 const genres = [
   'MEDIA',
   'CRAFT',
@@ -19,6 +19,9 @@ export default function CategorySelect({
   box,
   setBox,
   blackBox,
+  genre11,
+  genre22,
+  genre33,
   setGenre1,
   setGenre2,
   setGenre3
@@ -26,9 +29,80 @@ export default function CategorySelect({
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState([]);    
   const [prevIdx, setPrevIdx] = useState();
-  //const [prevIdx, setPrevIdx] = useState(0);
+  const [genre1Index,setGenre1Index]=useState();
+  const [genre2Index,setGenre2Index]=useState();
+  const [genre3Index,setGenre3Index]=useState();
+
+  useEffect(() => {
+    console.log("장르1",genre11)
+    console.log("장르2",genre22)
+    console.log("장르3",genre33)
+    ///setBox((prevBox) => {
+      //const newBox = [...prevBox];
+      genres.forEach((item, index) => {
+        if (item === genre11 ) {
+          setGenre1Index(index);
+
+        }
+      });
+      //console.log("genreArray",genreArray)
+      genres.forEach((item, index) => {
+        if (item === genre22 ) {
+          setGenre2Index(index);
+        }
+      });
+      //console.log("genreArray",genreArray)
+      genres.forEach((item, index) => {
+        if (item === genre33 ) {
+          setGenre3Index(index);
+        }
+      });
+      // console.log("genre1Index",genre1Index)
+      // console.log("genre2Index",genre2Index)
+      // console.log("genre3Index",genre3Index)
+
+      //return newBox;
+    //});
+  }, [genre11,genre22,genre33, genre1Index,genre2Index,genre3Index]);
+
+  useEffect(() => {
+    setBox((prevBox) => {
+      const newBox = [...prevBox];
+      greyBox.forEach((genre1, index1) => {
+        greyBox.forEach((genre2,index2)=>{
+          greyBox.forEach((genre3,index3)=>{
+            if (genre1 === greyBox[genre1Index] && genre2 === greyBox[genre2Index] && genre3 === greyBox[genre3Index]) {
+              newBox[index1] = blackBox[index1];
+              newBox[index2] = blackBox[index2];
+              newBox[index3] = blackBox[index3];
+              selectedTopics.push(greyBox[index1].props.children)
+              selectedTopics.push(greyBox[index2].props.children)
+              selectedTopics.push(greyBox[index3].props.children)
+              selectedIndex.push(index1)
+              selectedIndex.push(index2)
+              selectedIndex.push(index3)
+              setPrevIdx(index3);
+            }
+          })
+        })
+      });
+
+      console.log('selectedTopics', selectedTopics);
+      console.log('selectedIndex', selectedIndex);
+
+      return newBox;
+    });
+  }, [genre1Index,genre2Index,genre3Index, greyBox, setBox]);
+  
+useEffect(()=>{
+
+
+},[genre1Index,genre2Index,genre3Index])
+  
+
   const toggleBox = (index) => {
     {
+
       setBox((prevBox) => {
         const newBox = [...prevBox];
         //주제가 이미 선택되어 있을 때
@@ -57,15 +131,18 @@ export default function CategorySelect({
             newBox[index] === greyBox[index]
               ? blackBox[index]
               : greyBox[index]; // Toggle between grey and black
-          setSelectedTopics((prevSelectedTopics) => [
-            ...prevSelectedTopics,
-            greyBox[index].props.children,
-          ]);
+          // setSelectedTopics(() => [
+          //   ...greyBox[index].props.children,
+          // ]);
+          selectedTopics.push(greyBox[index].props.children)
           selectedIndex.push(index);
         }
         else{ //이미 3개의 주제 선택 
           alert('최대 3개의 주제만 선택할 수 있습니다.');
         }
+        console.log('selectedTopics', selectedTopics);
+        console.log('selectedIndex', selectedIndex);
+
 
       // 이 부분에서 선택된 인덱스를 상위 컴포넌트로 전달합니다.
         onSelect(newBox[index].props.children === blackBox[index].props.children ? index : -1);

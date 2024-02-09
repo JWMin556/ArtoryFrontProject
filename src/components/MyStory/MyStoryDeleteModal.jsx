@@ -62,15 +62,15 @@ width: 127px;
 height: 36px;
 margin: 0 10px;
 `;
-export default function MyStoryDeleteModal({title,modal,setModal}) {
+export default function MyStoryDeleteModal({title,isModal,setModal}) {
   const ClickedNoButton = ()=>{
     setModal(false)
   }
   
   return (
     <Modal
-      isOpen={modal}
-      onRequestClose={()=>setModal(false)}
+      isOpen={isModal}
+      //onRequestClose={()=>setModal(false)}
       style={StyledModal}
       shouldCloseOnOverlayClick={true}
     >

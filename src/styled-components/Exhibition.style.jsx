@@ -12,7 +12,7 @@ export const WrapAdBanner = styled.div`
 export const WrapSearch = styled.div`
     position : relative;
     right : 15.5%;
-    margin-bottom : 7%;
+    margin-bottom : 4%;
     margin-top : 7%
 `;
 

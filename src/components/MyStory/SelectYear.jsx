@@ -9,8 +9,10 @@ const SelectStyled = styled(Select)`
       border-color: white;
     }
     &__control {
+      position : relative;
+      left : 8%;
       border: none;
-      width: 120px;
+      width: 130px;
       height: 50px;
       text-align: center;
       font-size: 25px;
@@ -19,7 +21,9 @@ const SelectStyled = styled(Select)`
         border: 1px solid #ffff;
       }
       &__placeholder {
-        color: #000; /* placeholder 색상을 변경합니다. */
+        color: red; /* placeholder 색상을 변경합니다. */
+        font-size: 18px; /* 폰트 크기 변경 */
+        font-family: 'Pretendard'; /* 폰트 변경 */
       }
     }
     &__menu {
@@ -62,7 +66,7 @@ const SelectStyled = styled(Select)`
 `;
 
 export default function SelectYear({ options, defaultValue, onSelect }) {
-  console.log("defaultValue", defaultValue);
+  console.log("options", options);
   const handleSelectChange = (selectedOption) => {
     onSelect(selectedOption.value); // 값만 전달하도록 수정
   };
@@ -70,10 +74,11 @@ export default function SelectYear({ options, defaultValue, onSelect }) {
     <SelectStyled
       className="basic-single"
       classNamePrefix="select"
+      //defaultValue={}      
       placeholder={defaultValue.toString()}
       isClearable={false}
       isSearchable={false}
-      name="month"
+      name="year"
       options={options}
       maxMenuHeight="193px"
       closeMenuOnScroll={true}

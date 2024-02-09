@@ -41,9 +41,11 @@ const Message = styled.div`
   font-size : 30px;
   font-weight : bold;
   font-family: 'Pretendard';
+  width : 16em;
+  text-align : center;
 `;
 const ExhibitionList = styled.div`
-  font-size : 20px;
+  font-size : 24px;
   color : #979797;
   text-align : center;
 `;
@@ -61,25 +63,37 @@ width: 127px;
 height: 36px;
 margin: 0 10px;
 `;
-export default function StoryDelete({storyByDate,isDeleteModal,setIsDeleteModal,saveStory}) {
-  const ClickedYesButton = ()=>{
-    setIsDeleteModal(false)
-    StoryDeleteApi(storyByDate.storyId)
-    saveStory()
+export default function StoryDelete({year,month,day,messgage,part,storyByDate,isModal,setIsDeleteModal,setIsNotifyModal,setIsProgressModal,saveStory}) {
+  const ClickedYesButton = ()=>{ //예 버튼을 눌렀을 때 
+    if(part === "delete")
+    {
+      setIsDeleteModal(false) //모달 닫침
+      StoryDeleteApi(storyByDate.storyId) //동일한 전시 스토리 삭제 
+      saveStory() //스토리 저장하는 함수로 이동
+    }
+    else if(part === "notify")
+    {
+      setIsNotifyModal(false) // 저장 알림 모달 닫음
+    }
+    else if (part === "progress")
+    {
+      setIsProgressModal(false) //임시저장 알림 모달 닫음 
+    }
+
+
   }
-  console.log("storyByDate",storyByDate)
   return (
     <Modal
-      isOpen={isDeleteModal}
+      isOpen={isModal}
       //onRequestClose={()=>setModal(false)}
       style={StyledModal}
       shouldCloseOnOverlayClick={true}
     >
     <WrapModal>
-      <Message>캘린더에 동일한 전시 일정이 있습니다. 삭제하시겠습니까?</Message>
+      <Message>{messgage}</Message>
       <ExhibitionList>
           <div>
-            {storyByDate.year}.{storyByDate.month}.{storyByDate.day}
+            {year}{month}{day}
           </div>
       </ExhibitionList>
       <WrapButton>

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Delete from '../../Img/Calendar/close.svg'
 import { StoryDeleteApi } from '../API/Delete_API';
 import MyStoryDeleteModal from './MyStoryDeleteModal'
-const url = "http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/mystory/bySavedDate?";
+const url = "http://3.39.39.6:8080/api/mystory/bySavedDate?";
 const token = localStorage.getItem('Token');
 
 const WrapList = styled.div`
@@ -65,15 +65,19 @@ export default function StoryList({ year, month, day }) {
     // 동적으로 계산된 height 값
     const dynamicHeight = storyByDate.length * 50; // 각 아이템이 50px로 가정
     const clickedList = (item) =>{
-        if(item.storyState==="NOT_STARTED"){
+        //if(item.storyState==="NOT_STARTED" ){
             navigate(`/mystory/${item.exhibitionTitle}`, { state: { item}}) 
-        }
+        //}
+        //else if(item.storyState==="IN_PROGRESS")
+        //{
+            //navigate(`/mystory/${item.exhibitionTitle}`, { state: { item}}) 
+        //}
     }
     const ClickedDelete = (item) => {
-        console.log(isModal);
-        setIsModal(true);
-        //setIsModal((prevModal) => !prevModal);
-        console.log(isModal);
+        StoryDeleteApi(item.storyId)
+        //console.log('1',isModal);
+        //setIsModal(true);
+        //log('2',isModal);
     }
     const handleDelete = () =>{
         //StoryDeleteApi(item.storyId)
@@ -83,13 +87,16 @@ export default function StoryList({ year, month, day }) {
         <WrapList dynamicHeight={dynamicHeight}>
         {storyByDate.length > 0 ? (
             storyByDate.map((item, index) => (
-            <div key={index}>
-                <List onClick={()=>clickedList(item)}>• {item.exhibitionTitle} <img src={Delete} onClick={ () => ClickedDelete(item) }/></List>
+            <div key={index}> 
+                {/* onClick={()=>clickedList(item)} */}
+                <List onClick={()=>clickedList(item)}>• {item.exhibitionTitle} 
+                    <img src={Delete} onClick={ () => ClickedDelete(item) }/>
+                </List>
                 {index != storyByDate.length-1 ? (<img src={Line} alt="Line"/>) : <span></span> }
                 {isModal && <MyStoryDeleteModal 
-                title={item.exhibitionTitle}
-                modal = {isModal}
-                setModal = {setIsModal}
+                    title={item.exhibitionTitle}
+                    isModal = {isModal}
+                    setModal = {setIsModal}
                 />}
             </div>
             ))

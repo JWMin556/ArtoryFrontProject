@@ -11,15 +11,16 @@ import SelectMonth from "./SelectMonth";
 import SelectYear from './SelectYear'
 const Container = styled.div`
     //border : 1px solid blue;
-    box-shadow: 1px 1px 70px  #f3f3f3;
-    border-radius : 10px;
-    width: 684px;
-    height: 400px;
+    box-shadow: 1px 2px 8px #f3f3f3;   
+    width: 735px;
+    height: 522px;
     align-items: center;
     flex-direction: column;
     display: flex;
     font-size: 20px;
     padding : 0 5% 0 5%;
+    position : relative;
+    top : 4%;
 `;
 const Header = styled.div`
   display: flex;
@@ -30,6 +31,8 @@ const Header = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 14%;
+  font-weight : 700;
+  font-size : 24px;
   & img {
       width : 12px;
       height : 19px;
@@ -122,6 +125,9 @@ const WrapMark = styled.div`
   font-family: 'Pretendard';
   font-size : 14px;
   margin-top : 2%;
+  position : relative ;
+  top : 5%;
+  left : 9.5%;
   & .before {
     width : 9%;
     margin-right : 5%;
@@ -300,7 +306,8 @@ const MyCalendar = ({userStoryData,...props}) => {
         <Header>
           <img src={PREV_BUTTON} onClick={prevMonth}></img>
           <span>
-              <SelectMonth options={MonthArray} defaultValue={month} onSelect={changeMonth}/>
+              {/* <SelectMonth options={MonthArray} defaultValue={month} onSelect={changeMonth}/> */}
+              {month}월
           </span>
           <img src={NEXT_BUTTON} onClick={nextMonth}></img>
         </Header>
