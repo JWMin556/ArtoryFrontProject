@@ -9,7 +9,8 @@ import SearchModal from '../components/MyStory/SearchModal1';
 import Memo from '../components/MyStory/Memo';
 import { getMystoryInfo, mystoryInfo } from '../components/API/Mystoyr_APITEST';
 import Poster from '../components/Exhibition/Poster';
-const url = 'http://3.39.39.6:8080/api/mystory/all?page=1';
+const URL = localStorage.getItem('URL');
+const url = `${URL}/api/mystory/all?page=1`;
 const token = localStorage.getItem('Token');
 
 export default function MyStory() {
