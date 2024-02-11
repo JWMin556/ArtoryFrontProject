@@ -12,28 +12,17 @@ import SlideScrappedStory from '../components/MyPage/SlideScrappedStory';
 import SlideScrappedMember from '../components/MyPage/SlideScrappedMember';
 
 const PageContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%; /* 페이지가 화면 전체를 채우도록 설정 */
   display: flex;
   justify-content: center; /* 수평 가운데 정렬 */
-  /* align-items: center;  */
-  padding-bottom: 20px; /* 원하는 여백 값 */
   margin-top: 100px;
 `;
 
 const Page = styled.div`
-  /* z-index: 900; */
-  position: relative;
-  width: 100%;
-  max-width: 800px;
+  /* position: relative; */
+  width: 76%;
+  /* max-width: 800px; */
   padding: 0 20px;
-  /* background: rgba(0, 0, 0, 0.1); */
-  /* top: 90%; */
-  /* left: 50%; */
   position: absolute;
-  /* transform: translate3d(-50%, -50%, 0); */
-  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   margin-bottom: 20px; /* 원하는 여백 값 */
@@ -67,14 +56,12 @@ const ImgStyled = styled.img`
   display: flex;
   flex-direction: column;
   margin-top: 20%;
-  border-radius: 10px;
   width: 130px;
 `;
 
 const TitleRightWrap = styled.div` 
   display: flex;
   flex-direction: column;
-  
 `;
 
 const TitleRightWrapParagraphArea = styled.div`
@@ -84,42 +71,57 @@ const TitleRightWrapParagraphArea = styled.div`
 `;
 
 const TitleRightWrapParagraphTitle = styled.div`
-    color: #616161;
-    font-size: 24px;
-    font-family: 'Pretendard';
-    font-weight: 700;
-    line-height: 31.94px;
-    word-wrap: break-word;
-    margin-right: 120px;
+    display: flex;
+    flex-direction: column;
 `;
 
-const TitleRightWrapParagraphContent = styled.div`
-    display: flex;
-    background: #EFEEEE;
-    border-radius: 10px;
-    /* border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid; */
-    align-items : center;
-    box-shadow: 1px 2px 8px #f3f3f3;
-    color: #262626;
-    font-size: 12px;
-    font-family: 'Pretendard';
-    font-weight: 600;
-    line-height: 21.29px;
-    letter-spacing: 0.56px;
-    word-wrap: break-word;
+const BoldSentence = styled.p`
+  color: #262626;
+  font-size: 20px;
+  font-family: 'Pretendard';
+  font-weight: 700;
+  line-height: 26.61px;
+  word-wrap: break-word;
+  margin-right: 120px;
+`;
+
+const InputWrap = styled.div`  
+  display: flex;
+  background: #EFEEEE;
+  box-shadow: 1px 2px 8px #f3f3f3;
+  padding: 5px;
+  margin-left: auto;
+  margin-top: 8px;
+  margin-bottom: 13px;
+  width: 200px;
+`;
+
+const InputStyle = styled.div`  
+  color: #262626;
+  font-size: 16px;
+  font-family: 'Pretendard';
+  font-weight: 600;
+  line-height: 21.29px;
+  letter-spacing: 0.56px;
+  word-wrap: break-word;
+  border: none;
+  outline: none;
+  background: #EFEEEE;
 `;
 
 const ContentWrap = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 20%;
+    margin-left: 5%;
+    margin-right: 5%;
     /* background-color: red; */
 `;
 
 const ContentBtns = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 `;
 
 const Btns1 = styled.button`
@@ -128,7 +130,6 @@ const Btns1 = styled.button`
     display: flex;
     align-items : center;
     justify-content: center;
-    border-radius: 10px;
     border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid;
     align-items : center;
     box-shadow: 1px 2px 8px #f3f3f3;
@@ -153,7 +154,6 @@ const Btns2 = styled.button`
     display: flex;
     align-items : center;
     justify-content: center;
-    border-radius: 10px;
     border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid;
     align-items : center;
     box-shadow: 1px 2px 8px #f3f3f3;
@@ -267,17 +267,29 @@ export default function MyPage() {
                     </Link>
 
                     <TitleRightWrapParagraphArea>
-                        <TitleRightWrapParagraphTitle>닉네임</TitleRightWrapParagraphTitle>
-                        <TitleRightWrapParagraphContent>{userData.nickname}</TitleRightWrapParagraphContent>
+                        <TitleRightWrapParagraphTitle>
+                            <BoldSentence>닉네임</BoldSentence>
+                        </TitleRightWrapParagraphTitle>
+                        <InputWrap>
+                            <InputStyle>{userData.nickname}</InputStyle>
+                        </InputWrap>
                     </TitleRightWrapParagraphArea>
 
                     <TitleRightWrapParagraphArea>
-                        <TitleRightWrapParagraphTitle>한 줄 소개</TitleRightWrapParagraphTitle>
-                        <TitleRightWrapParagraphContent>{userData.introduction}</TitleRightWrapParagraphContent>
+                        <TitleRightWrapParagraphTitle>
+                            <BoldSentence>한 줄 소개</BoldSentence>
+                        </TitleRightWrapParagraphTitle>
+                        <InputWrap>
+                            <InputStyle>{userData.introduction}</InputStyle>
+                        </InputWrap>
                     </TitleRightWrapParagraphArea>
                     <TitleRightWrapParagraphArea>
-                        <TitleRightWrapParagraphTitle>나의 키워드</TitleRightWrapParagraphTitle>
-                        <TitleRightWrapParagraphContent>{userData.myKeyword}</TitleRightWrapParagraphContent>
+                        <TitleRightWrapParagraphTitle>
+                            <BoldSentence>나의 키워드</BoldSentence>
+                        </TitleRightWrapParagraphTitle>
+                        <InputWrap>
+                            <InputStyle>{userData.myKeyword}</InputStyle>
+                        </InputWrap>
                     </TitleRightWrapParagraphArea>
                 </TitleRightWrap>
             </TitleWrap>

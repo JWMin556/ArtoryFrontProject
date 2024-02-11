@@ -8,28 +8,17 @@ import axios from 'axios';
 import AWS from "aws-sdk";
 
 const PageContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%; /* 페이지가 화면 전체를 채우도록 설정 */
   display: flex;
   justify-content: center; /* 수평 가운데 정렬 */
-  /* align-items: center;  */
-  padding-bottom: 20px; /* 원하는 여백 값 */
   margin-top: 100px;
 `;
 
 const Page = styled.div`
-  /* z-index: 900; */
-  position: relative;
-  width: 100%;
-  max-width: 800px;
+  /* position: relative; */
+  width: 76%;
+  /* max-width: 800px; */
   padding: 0 20px;
-  /* background: rgba(0, 0, 0, 0.1); */
-  /* top: 90%; */
-  /* left: 50%; */
   position: absolute;
-  /* transform: translate3d(-50%, -50%, 0); */
-  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   margin-bottom: 20px; /* 원하는 여백 값 */
@@ -46,7 +35,6 @@ const TitleWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* margin-right: 22%; */
 `;
 
 const TitleLeftWrap = styled.div`
@@ -64,7 +52,7 @@ const TitleLeftWrapImgArea = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20%;
-  border-radius: 10px;
+  width: 130px;
 `;
 
 const ImageContainer = styled.div`
@@ -97,15 +85,16 @@ const TitleRightWrap = styled.div`
 const TitleRightWrapParagraphArea = styled.div`  
   display: flex;
   flex-direction: row;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
 `;
 
 const TitleRightWrapParagraphTitle = styled.div`  
   display: flex;
   flex-direction: column;
+  align-items: flex-start; /* 텍스트를 왼쪽으로 정렬합니다. */
 `;
 
-const BoldSentence = styled.p`
+const BoldSentence = styled.div`
   color: #262626;
   font-size: 20px;
   font-family: 'Pretendard';
@@ -115,13 +104,14 @@ const BoldSentence = styled.p`
   margin-right: 120px;
 `;
 
-const GraySentence = styled.p`
+const GraySentence = styled.div`
   color: #979797;
-  font-size: 12px;
+  font-size: 10px;
   font-family: 'Pretendard';
   font-weight: 400;
   line-height: 15.97px;
   word-wrap: break-word;
+  margin-top: 2%;
 `;
 
 const InputWrap = styled.div`  
@@ -132,6 +122,7 @@ const InputWrap = styled.div`
   margin-left: auto;
   margin-top: 8px;
   margin-bottom: 13px;
+  /* width : 250px; */
 `;
 
 const InputStyle = styled.input`  
@@ -379,6 +370,7 @@ export default function MyPageModify() {
           <TitleRightWrapParagraphArea>
             <TitleRightWrapParagraphTitle>
               <BoldSentence>이름</BoldSentence> {/*아직 서버가 미완성*/}
+              <GraySentence />
             </TitleRightWrapParagraphTitle>
             <InputWrap>
               <InputStyle onChange={handleNameChange} />
@@ -417,7 +409,7 @@ export default function MyPageModify() {
 
           
           <BoldSentence style={{marginRight:"10px"}}>나의 관심전시 수정하기</BoldSentence>
-          <ExamineWrap>
+          <ExamineWrap style={{marginTop:"3%"}}>
             <ExamineContentBox>
               {genres__kor.map((genre, index) => {
                 return (
@@ -434,7 +426,7 @@ export default function MyPageModify() {
             </ExamineContentBox>
           </ExamineWrap>
 
-          <TitleRightWrapParagraphArea>
+          <TitleRightWrapParagraphArea style={{marginTop:"10%", marginBottom:"1px"}}>
             <TitleRightWrapParagraphTitle>
               <BoldSentence>비밀번호 변경</BoldSentence>
               <GraySentence>현재 비밀번호를 입력해주세요</GraySentence>
@@ -446,10 +438,18 @@ export default function MyPageModify() {
 
           <TitleRightWrapParagraphArea>
             <TitleRightWrapParagraphTitle>
-              <GraySentence>변경 비밀번호를 입력해주세요</GraySentence>
+              <GraySentence style={{marginTop:"20%"}}>변경 비밀번호를 입력해주세요</GraySentence>
             </TitleRightWrapParagraphTitle>
             <InputWrap>
               <InputStyle />
+              <StyledButton
+                //disabled={notAllow}
+                height="23px"
+                width="30%"
+                fontSize="10px"
+              >
+                비밀번호 변경
+              </StyledButton>
             </InputWrap>
           </TitleRightWrapParagraphArea>
 
@@ -460,6 +460,14 @@ export default function MyPageModify() {
             </TitleRightWrapParagraphTitle>
             <InputWrap>
               <InputStyle />
+              <StyledButton
+                //disabled={notAllow}
+                height="23px"
+                width="30%"
+                fontSize="10px"
+              >
+                회원탈퇴
+              </StyledButton>
             </InputWrap>
           </TitleRightWrapParagraphArea>
 

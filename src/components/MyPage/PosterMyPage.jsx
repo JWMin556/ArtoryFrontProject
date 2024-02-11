@@ -4,21 +4,19 @@ import styled from 'styled-components';
 import { getStoryInfo } from '../API/story_API';
 
 const PosterStyle = styled.img`
-    display: block;
-    width: 186px;
-    height: 268px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 8px #d9d9d9;
+  display: block;
+  width: 172px;
+  height: 268px;
+  box-shadow: 5px 5px 8px #d9d9d9;
 `;
 const WrapTitle = styled.div`
-  width: 186px;
+  width: 172px;
   height: 268px;
   background-color: rgba(0, 0, 0, 0.6);
   color: #ffff;
   z-index: 1;
   position: absolute;
   top: 0;
-  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;

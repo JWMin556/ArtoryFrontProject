@@ -16,6 +16,7 @@ const WrapPoster = styled.div`
   justify-content: center;
   align-items: center;
   height: 350px;
+  justify-content: space-around;
 `;
 const StyledSlider = styled(Slider)``;
 

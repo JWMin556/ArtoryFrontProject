@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import BigImg from './BigImg';
 
 const PictureStyle = styled.img`
-    width : 186px;
+    width : 172px;
     height: 268px;
-    //border-radius : 10px; 
     box-shadow: 5px 5px 8px #D9D9D9; 
     cursor: pointer;
 `;
