@@ -22,14 +22,13 @@ const WrapList = styled.div`
   z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  text-align: center;
-  padding-left: 15%;
-  padding-right: 15%;
+  justify-content: center;
+  //align-items: center;
+  //text-align: center;
+  //padding-left: 15%;
+  //padding-right: 15%;
   & img {
-    margin-left: 10%;
-    margin-top: 5%;
+
   }
 `;
 
@@ -38,6 +37,9 @@ const List = styled.div`
   font-size: 13px;
   font-family: 'Pretendard';
   font-weight: bold;
+  display : flex;
+  justify-content : space-around;
+  width : 100%;
 `;
 
 export default function StoryList({ year, month, day, loadUserStories }) {
@@ -80,58 +82,58 @@ export default function StoryList({ year, month, day, loadUserStories }) {
     //navigate(`/mystory/${item.exhibitionTitle}`, { state: { item}})
     //}
   };
-  const ClickedDelete = async (item, e) => {
+  const ClickedDelete = async (e) => {
     e.stopPropagation(); // 이벤트 전파 중단 x누르면 수정 페이지(Record.jsx)로 들어가지 않도록
+    setIsModal(true);
+  };
 
+  const deleteStory= async (storyId,e) =>{
     try {
+      e.stopPropagation()
       // StoryDeleteApi를 await으로 호출하여 삭제가 완료될 때까지 기다림
-      await StoryDeleteApi(item.storyId);
+      await StoryDeleteApi(storyId);
       // await userInfo(); //Record 유저정보
       await fetchData(); // 삭제 후 storyList 새로고침 필수!
       await loadUserStories(); //삭제 후 stories 새로고침 필수!
     } catch (error) {
       console.log(error.response);
     }
+    setIsModal(false)
+  }
 
-    //console.log('1',isModal);
-    //setIsModal(true);
-    //log('2',isModal);
-  };
-  const handleDelete = () => {
-    //StoryDeleteApi(item.storyId)
-    alert(`번 스토리가 삭제되었습니다`);
-  };
   return (
     <WrapList dynamicHeight={dynamicHeight}>
       {storyByDate.length > 0 ? (
         storyByDate.map((item, index) => (
           <div key={index}>
-            {/* onClick={()=>clickedList(item)} */}
             <List onClick={() => clickedList(item)}>
-              • {item.exhibitionTitle}{' '}
+              <span>• {item.exhibitionTitle}{' '}</span>
               <img
                 src={Delete}
                 alt={'story 삭제'}
-                onClick={(e) => ClickedDelete(item, e)}
+                onClick={(e) => ClickedDelete(e)}
               />
+              {isModal && (
+                <MyStoryDeleteModal
+                  title={item.exhibitionTitle}
+                  storyId = {item.storyId}
+                  isModal={isModal}
+                  setModal={setIsModal}
+                  deleteStory={deleteStory}
+                />
+              )}
             </List>
             {index != storyByDate.length - 1 ? (
               <img src={Line} alt="Line" />
             ) : (
               <span></span>
             )}
-            {isModal && (
-              <MyStoryDeleteModal
-                title={item.exhibitionTitle}
-                isModal={isModal}
-                setModal={setIsModal}
-              />
-            )}
           </div>
         ))
       ) : (
         <List></List>
-      )}
+      )
+      }
     </WrapList>
   );
 }

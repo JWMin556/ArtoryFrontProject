@@ -269,6 +269,8 @@ export default function Record(props) {
       }
     }
     setIsProgressModal(true);
+    navigate('/mystory')
+
   };
 
   //미니달력모달열기
@@ -282,11 +284,11 @@ export default function Record(props) {
   };
 
   //스토리 저장하는 api
-  const saveStory = () => {
+  const saveStory = async() => {
     if (stroyId) {
       try {
         //스토리 아이디 존재
-        createStory1(
+        await createStory1(
           stroyId,
           id,
           data,
@@ -305,7 +307,7 @@ export default function Record(props) {
           keyword,
           picturesUrl
         );
-        //navigate(`/mystory`, { state: { markEvent } })
+        //navigate(`/mystory`)
         setIsNotifyModal(true);
       } catch (error) {
         console.log(error.response.data);
@@ -313,7 +315,7 @@ export default function Record(props) {
     } else {
       try {
         //스토리 아이디 존재x
-        createStory2(
+        await createStory2(
           id,
           data,
           title,
@@ -331,8 +333,9 @@ export default function Record(props) {
           keyword,
           picturesUrl
         );
-        //navigate(`/mystory`, { state: { markEvent } })
         setIsNotifyModal(true);
+        //navigate(`/mystory`)
+
       } catch (error) {
         console.log(error.response.data);
       }
@@ -397,7 +400,9 @@ export default function Record(props) {
             <button onClick={ClickedOpen} style={dateBoxColor}>
               공개
             </button>
-            <button onClick={ClickClosed}>비공개</button>
+            <button onClick={ClickClosed}>
+              비공개
+            </button>
           </OpenSelectButton>
           <TodayExhibition
             stroyId={stroyId}

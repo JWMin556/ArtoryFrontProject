@@ -8,6 +8,7 @@ import StyledButton from '../styled-components/StyledButton';
 import SearchModal from '../components/MyStory/SearchModal1';
 import Memo from '../components/MyStory/Memo';
 import { getMystoryInfo, mystoryInfo } from '../components/API/Mystoyr_APITEST';
+import Poster from '../components/Exhibition/Poster';
 const url = 'http://3.39.39.6:8080/api/mystory/all?page=1';
 const token = localStorage.getItem('Token');
 
@@ -43,7 +44,6 @@ export default function MyStory() {
   const loadUserStories = async () => {
     try {
       const response = await getMystoryInfo();
-
       console.log('유저 스토리 정보', response.data.stories);
       setUserStoryData(response.data.stories);
     } catch (error) {
@@ -64,13 +64,12 @@ export default function MyStory() {
       )}
       <S.WrapProfileAndButton>
         <S.WrapProfile>
-          <S.ProfileIMG
+          <img
             src={profileIMG}
             style={{ width: '100px', height: '100px' }}
-          ></S.ProfileIMG>
+          ></img>
           <S.RecordName> {userData.nickname + ' '} 님의 기록</S.RecordName>
         </S.WrapProfile>
-        <S.WrapButton>
           <StyledButton
             height="35px"
             width="169px"
@@ -79,18 +78,13 @@ export default function MyStory() {
           >
             스토리 작성하기
           </StyledButton>
-        </S.WrapButton>
       </S.WrapProfileAndButton>
       <S.WrapCalendar>
-        <S.WrapMemo>
           <Memo content={userData.memo} />
-        </S.WrapMemo>
-        <S.WrapCalendar2>
           <MyCalendar
             loadUserStories={loadUserStories}
             userStoryData={userStoryData}
           />
-        </S.WrapCalendar2>
       </S.WrapCalendar>
       <div style={{ margin: '5%' }}>
         <div
@@ -100,7 +94,7 @@ export default function MyStory() {
             fontFamily: 'Pretendard',
             width: '50%',
             textAlign: 'center',
-            marginTop: '7%',
+            //marginTop: '2%',
           }}
         >
           저장한 전시
@@ -111,9 +105,9 @@ export default function MyStory() {
           ) : (
             //<p>있음</p>
             userData.exhibitions.map((item, index) => (
-              <S.WrapPoster className="hi" key={index}>
-                <SaveExhibition item={item} />
-              </S.WrapPoster>
+              <S.WrapExhibitionPoster>
+                <Poster item={item} />
+              </S.WrapExhibitionPoster>
             ))
           )}
         </S.WrapSaveExhibition>

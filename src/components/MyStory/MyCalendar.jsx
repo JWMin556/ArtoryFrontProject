@@ -19,8 +19,8 @@ const Container = styled.div`
   display: flex;
   font-size: 20px;
   padding: 0 5% 0 5%;
-  position: relative;
-  top: 4%;
+  //position: relative;
+  //top: 4%;
 `;
 const Header = styled.div`
   display: flex;
@@ -122,9 +122,9 @@ const WrapMark = styled.div`
   color: #ababab;
   font-family: 'Pretendard';
   font-size: 14px;
-  margin-top: 2%;
+  margin-top: 3%;
   position: relative;
-  top: 5%;
+  //top: 5%;
   left: 9.5%;
   & .before {
     width: 9%;
@@ -232,30 +232,6 @@ const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
       label: startYear + index,
     })
   );
-  //월 관련 객체 생성
-  const startMonth = 1;
-  const endMonth = 12;
-  const MonthArray = Array.from(
-    { length: endMonth - startMonth + 1 },
-    (_, index) => ({
-      value: startMonth + index,
-      label: startMonth + index,
-    })
-  );
-  // const MonthArray = [
-  //   "1월",
-  //   "2월",
-  //   "3월",
-  //   "4월",
-  //   "5월",
-  //   "6월",
-  //   "7월",
-  //   "8월",
-  //   "9월",
-  //   "10월",
-  //   "11월",
-  //   "12월",
-  // ];
 
   const nextMonth = () => {
     if (month != 11) {

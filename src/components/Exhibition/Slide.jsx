@@ -49,10 +49,10 @@ export default function Slide(props) {
           <div key={index}>
             <S.WrapPorterAndIcon>
               <Poster item={item} />
-              <S.WrapIcon>
+              {/* <S.WrapIcon>
                 <Heart item={item}/>
                 <Save item={item}/>
-              </S.WrapIcon>
+              </S.WrapIcon> */}
             </S.WrapPorterAndIcon>
           </div>
         ))}

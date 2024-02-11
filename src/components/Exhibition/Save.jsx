@@ -5,14 +5,20 @@ import styled from 'styled-components';
 import { saveApi, saveCancelApi } from '../API/Heart_Save_Api';
 
 export const SaveImg = styled.img`
+  position : absolute;
+  bottom : 0;
+  right : 0;
   width: 20px;
   height: 18px;
+  z-index : 10;
+  margin : 6%;
 `;
 export default function Save(props) {
   //props.item.~~ 으로 호출
   const [isClickSave, setIsClickSave] = useState(props.item.scrapped); // 좋아요 누름 = true / 좋아요 안누름 = false
 
-  function handleClickSave(exhibitionId) {
+  function handleClickSave(exhibitionId,e) {
+    e.stopPropagation()
     //Save 이미지를 누르면
     setIsClickSave((prevIsClickSave) => !prevIsClickSave);
     console.log('전시회 저장', exhibitionId);
@@ -28,7 +34,7 @@ export default function Save(props) {
     <div>
       <SaveImg
         src={isClickSave ? ON_SAVE : SAVE}
-        onClick={() => handleClickSave(props.item.exhibitionId)}
+        onClick={(e) => handleClickSave(props.item.exhibitionId,e)}
         alt="저장 아이콘"
       />
     </div>

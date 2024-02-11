@@ -62,15 +62,20 @@ width: 127px;
 height: 36px;
 margin: 0 10px;
 `;
-export default function MyStoryDeleteModal({title,isModal,setModal}) {
-  const ClickedNoButton = ()=>{
+export default function MyStoryDeleteModal({title,isModal,setModal,storyId,deleteStory}) {
+  const ClickedNoButton = (e)=>{
     setModal(false)
+    e.stopPropagation()
+  }
+  const ClickYesButton = () =>
+  {
+    deleteStory(storyId)
   }
   
   return (
     <Modal
       isOpen={isModal}
-      //onRequestClose={()=>setModal(false)}
+      onRequestClose={()=>setModal(false)}
       style={StyledModal}
       shouldCloseOnOverlayClick={true}
     >
@@ -78,8 +83,8 @@ export default function MyStoryDeleteModal({title,isModal,setModal}) {
       <Message>해당 전시 정보를 삭제하시겠습니까?</Message>
       <ExhibitionTitle>{title}</ExhibitionTitle>
       <WrapButton>
-        <ModalButton>예</ModalButton>
-        <ModalButton onClick={ClickedNoButton}>아니요</ModalButton>
+        <ModalButton onClick={(e)=>deleteStory(storyId,e)}>예</ModalButton>
+        <ModalButton onClick={(e)=>ClickedNoButton(e)}>아니요</ModalButton>
       </WrapButton>
     </WrapModal>
     </Modal>

@@ -6,7 +6,7 @@ const WrapNavigation = styled.div`
   box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
   background-color : #ffffff;
   position: relative;
-  left: 55%;
+  left: 47%;
   width: 338px;
   height: 44px;
   display: flex;

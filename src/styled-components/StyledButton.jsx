@@ -13,7 +13,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   font-family: 'Pretendard';
   box-shadow: ${(props) =>
-    props.disabled ? '' : '0px 2px 8px rgba(0, 58.18, 103.06, 0.4)'};
+    props.disabled ? '' : '1px 2px 8px #f3f3f3'};
 `;
 
 export default StyledButton;

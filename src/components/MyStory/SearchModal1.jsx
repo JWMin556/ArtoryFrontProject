@@ -132,7 +132,11 @@ return (
                 {resultData.map((item, index) => (
                     <WrapPoster key={index}>
                         <div>
-                            <Poster item={item} source={props.source} userStoryData={userStoryData}/>
+                            <Poster 
+                                item={item} 
+                                source={props.source} 
+                                userStoryData={userStoryData}
+                                />
                         </div>
                     </WrapPoster>
                 ))}
