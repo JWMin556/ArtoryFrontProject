@@ -241,7 +241,7 @@ export default function SignUp() {
  
   return (
     <Page>
-      <TitleWrap>회원가입</TitleWrap>
+      <TitleWrap>회원가입인데 아직 사용하지 말아줘요!!!</TitleWrap>
       <ContentWrap>
         <SuperTitle>
           <InputTitle style={{ marginTop: '94px' }}>이름</InputTitle>
