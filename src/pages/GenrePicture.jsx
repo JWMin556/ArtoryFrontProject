@@ -37,6 +37,7 @@ const WrapIcon = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
+const URL = localStorage.getItem('URL');
 
 const Wrap = styled.div`
     //border: 1px solid red;
@@ -92,8 +93,8 @@ const PaginationBox = styled.div`
     }
 `;
 
-export default function GenreMedia() {
-  const url = 'http://3.39.39.6:8080/api/cagegory/picture'
+export default function GenrePicture() {
+  const url = `${URL}/api/cagegory/picture`;
   const [pictureData, setPictureData] = useState([]);
   const token = localStorage.getItem('Token');
   const [currentPage, setCurrentPage] = useState(1);
@@ -131,10 +132,10 @@ export default function GenreMedia() {
             <div>
               <Poster item={item} />
             </div>
-            <WrapIcon>
+            {/* <WrapIcon>
               <Heart item={item} />
               <Save item={item}/>
-            </WrapIcon>
+            </WrapIcon> */}
           </WrapPoster>
         ))}
       </WrapResult>

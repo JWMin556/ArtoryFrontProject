@@ -318,11 +318,12 @@ export default function MyPageModify() {
       })
   }
 
+  const URL = localStorage.getItem('URL');
   const token = localStorage.getItem('Token');
   const saveModifiedInformations = async() => {
     try {
       await handleSubmitGenre(); //전시정보 먼저 저장
-      const baseUrl = `http://3.39.39.6:8080/api/mypage/update`;
+      const baseUrl = `${URL}/api/mypage/update`;
 			const response = await axios.post(
         baseUrl, 
         {

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import TextEditor from './TextEditor';
-import EmojiPicker from './EmojiPicker';
 const WriteBox = styled.div`
   width: 820px;
   //height: 713px;
@@ -27,11 +26,11 @@ const Bottom = styled.span`
 `;
 
 const Keyword = styled.div`
-  padding: 30px 40px;
+  padding: 30px 40px 0 30px;
   border: none;
   z-index: 101;
   /* width: 100%; */
-  max-width: 800px;
+  width: 100%;
   background: none;
   /* border-bottom: 5px solid white; */
   position: absolute;
@@ -42,24 +41,41 @@ const Keyword = styled.div`
 const KeywordInput = styled.input`
   /* font-weight: 400; */
   font-family: 'Pretendard';
-  color: #000;
-  font-size: 1rem;
+  color: #5a5c62;
+  font-size: 0.95rem;
   border: none;
   outline: none;
   width: 90%;
   margin-top: 10px;
   margin-bottom: 50px;
+  &::placeholder {
+    color: #5a5c62;
+  }
 `;
-export default function WritingStory({ setData, data }) {
+export default function WritingStory({
+  setKeyword,
+  keyword,
+  setData,
+  data,
+  picturesUrl,
+  setPicturesUrl,
+}) {
   return (
     <div>
       <WriteBox>
-        <TextEditor setData={setData} data={data} />{' '}
-        {/* <div style={{ display: 'flex' }}>
+        <TextEditor
+          setPicturesUrl={setPicturesUrl}
+          picturesUrl={picturesUrl}
+          setData={setData}
+          data={data}
+        />{' '}
+        {/* 
+        // 결과 확인
+        <div style={{ display: 'flex' }}>
           <div className="ck ck-editor__main" style={{ width: '100%' }}>
             <div
               className="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
-              dangerouslySetInnerHTML={{ __html: data }} // 결과 확인
+              dangerouslySetInnerHTML={{ __html: data }} 
             />
           </div>
         </div> */}
@@ -68,9 +84,10 @@ export default function WritingStory({ setData, data }) {
           <p>오늘의 전시 키워드</p>
           <KeywordInput
             type="text"
-            // value={'#키워드1 #키워드2 #키워드3'}
-            placeholder="#키워드 를 입력해주세요"
-          ></KeywordInput>
+            value={keyword}
+            placeholder="#키워드를 입력해주세요"
+            onChange={(e) => setKeyword(e.target.value)}
+          />
           <br />
           <p>오늘의 전시 스토리</p>
         </Keyword>

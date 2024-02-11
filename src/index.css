@@ -4,7 +4,7 @@ div,
 span,
 applet,
 object,
-iframe,
+/* iframe, */
 /* h1,
 /* h1,
 h2,
@@ -217,6 +217,12 @@ select {
   -webkit-appearance: none;
   appearance: none;
 }
+.css-1fdsijx-ValueContainer {
+  /* display: flex !important;
+  justify-content: end;
+  align-items: center !important; */
+}
+
 /*profile 실험중*/
 .centering {
   display: flex;
@@ -228,11 +234,18 @@ p {
 
   font: inherit;
 }
-.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-  min-height: 400px;
-  margin-bottom: 20px;
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 .ck.ck-editor_editable.ck-focused {
   border: none;
   box-shadow: none;
+}
+.css-13cymwt-control:hover {
+  border: none !important;
+  outline-color: white !important;
 }

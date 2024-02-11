@@ -1,3 +1,69 @@
+import React, { useEffect, useRef } from 'react';
+import { EmojiButton } from '@joeattardi/emoji-button';
+import styled from 'styled-components';
+const Button = styled.button`
+  background-color: #f4f5f7;
+  color: #9ba0ae;
+  border: none;
+  outline: none;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1002;
+  font-weight: 500;
+  font-size: 1.1rem;
+  font-family: 'Pretendard';
+  padding: 0 10px;
+  width: 12%;
+  height: 33px;
+`;
+
+const EmojiPicker = ({ setData, data }) => {
+  const buttonRef = useRef(null);
+  const pickerRef = useRef(null);
+
+  useEffect(() => {
+    const picker = new EmojiButton({
+      position: 'bottom-start',
+      autoHide: false,
+    });
+
+    pickerRef.current = picker;
+
+    const button = buttonRef.current;
+
+    if (button) {
+      const togglePicker = () => {
+        picker.togglePicker(button);
+      };
+
+      button.addEventListener('click', togglePicker);
+
+      picker.on('emoji', (selection) => {
+        setData((prevData) => prevData + selection.emoji);
+      });
+
+      return () => {
+        button.removeEventListener('click', togglePicker);
+      };
+    }
+  }, [setData]);
+
+  return (
+    <Button ref={buttonRef} id="emoji_btn">
+      <img
+        style={{ verticalAlign: 'middle' }}
+        src="/Img/Story/plus.png"
+        alt="이모지추가"
+      />{' '}
+      이모지
+    </Button>
+  );
+};
+
+export default EmojiPicker;
+
+//이 밑에는 설명이 있음. 아직 정리 못해서 못지우는 중.
 // import React, { useState, useEffect, useRef } from 'react';
 // import { EmojiButton } from '@joeattardi/emoji-button';
 
@@ -96,67 +162,3 @@
 
 // export default EmojiPicker;
 //d이 위에 주석처리는 일단 놔둬주세요. 설명이 써있는데 정리를 못해서..ㅜ
-import React, { useEffect, useRef } from 'react';
-import { EmojiButton } from '@joeattardi/emoji-button';
-import styled from 'styled-components';
-const Button = styled.button`
-  background-color: #f4f5f7;
-  color: #9ba0ae;
-  border: none;
-  outline: none;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  z-index: 1002;
-  font-weight: 500;
-  font-size: 1rem;
-  font-family: 'Pretendard';
-  padding: 0 10px;
-  width: fit-content;
-  height: 30px;
-`;
-
-const EmojiPicker = ({ setData, data }) => {
-  const buttonRef = useRef(null);
-  const pickerRef = useRef(null);
-
-  useEffect(() => {
-    const picker = new EmojiButton({
-      position: 'bottom-start',
-      autoHide: false,
-    });
-
-    pickerRef.current = picker;
-
-    const button = buttonRef.current;
-
-    if (button) {
-      const togglePicker = () => {
-        picker.togglePicker(button);
-      };
-
-      button.addEventListener('click', togglePicker);
-
-      picker.on('emoji', (selection) => {
-        setData((prevData) => prevData + selection.emoji);
-      });
-
-      return () => {
-        button.removeEventListener('click', togglePicker);
-      };
-    }
-  }, [setData]);
-
-  return (
-    <Button ref={buttonRef} id="emoji_btn">
-      <img
-        style={{ verticalAlign: 'middle' }}
-        src="/Img/Story/plus.png"
-        alt="이모지추가"
-      />{' '}
-      이모지
-    </Button>
-  );
-};
-
-export default EmojiPicker;

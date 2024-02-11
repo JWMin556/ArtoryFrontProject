@@ -83,14 +83,14 @@ export default function Onboarding3() {
   return (
     <Container>
       <div style={{ height: '120px' }}>
-        <Title>관심있는 주제를 모두 선택해주세요</Title>
+        <Title>관심있는 주제를 선택해주세요</Title>
         <div style={divStyle}>
           관심있는 주제를{' '}
-          <span style={{ color: '#616161', fontWeight: 'bold' }}>1가지</span>{' '}
-          이상 선택해주세요 <br />
+          <span style={{ color: '#616161', fontWeight: 'bold' }}>3가지</span>{' '}
+          이하로 선택해주세요 <br />
           당신에게 맞는 전시를 추천해 드릴게요
-          <br />
-          <span style={{ fontSize: 'small' }}>*최대 3가지 선택 가능</span>
+          {/* <br />
+          <span style={{ fontSize: 'small' }}>*최대 3가지 선택 가능</span> */}
         </div>
       </div>
       <ContentBox>
@@ -112,6 +112,7 @@ export default function Onboarding3() {
         style={{
           height: '52px',
           width: '482px',
+          borderRadius: '0',
         }}
         disabled={selectedTopics.length < 1} // 1개 이상의 주제가 선택되었을 때 버튼을 비활성화합니다.
         onClick={handleSubmit}
@@ -128,10 +129,10 @@ export default function Onboarding3() {
 //온보딩 컨테이너
 //인라인 스타일
 const divStyle = {
-  color: '#D2D2D2',
+  color: '#A6A9AF',
   width: '100%',
   lineHeight: 'normal',
-  marginTop: '10px',
+  marginTop: '20px',
   textAlign: 'center',
 };
 //스타일 컴포넌트
@@ -145,14 +146,14 @@ const Container = styled.div`
   //height: 670px;
 `;
 const Title = styled.div`
-  font-weight: 800;
+  font-weight: 700;
   font-size: 180%;
 `;
 const ContentBox = styled.div`
-  margin-bottom: 60px;
+  margin-bottom: 115px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
-  height: 295px;
+  height: 240px;
 `;

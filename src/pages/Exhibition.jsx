@@ -7,9 +7,10 @@ import axios from 'axios';
 import { TestDummy } from '../TestDummy';
 import { Link } from 'react-router-dom';
 import Genre from '../components/Exhibition/Genre'; //여기 이 Genre.jsx는 잠시 사용하지 말아주세요
+const URL = localStorage.getItem('URL');
 
-const url = 'http://3.39.39.6:8080/api/exhibitions/';
-const distanceRecommendUrl = 'http://3.39.39.6:8080/api/exhibitions/distanceRecommend?page=1'
+const url = `${URL}/api/exhibitions/`;
+const distanceRecommendUrl = `${URL}/api/exhibitions/distanceRecommend?page=1`;
 const genreUrl = `${url}allCategory` 
 
 export default function Exhibition() {
@@ -33,94 +34,97 @@ export default function Exhibition() {
 
   const token = localStorage.getItem('Token');
 
-    useEffect(() => {
-        (async () => {
-          //인기, 최근, 추천, 유사 전시회 API
-            try {
-            const response = await axios.post(`${url}all?page=1`,
-            {
-                    //"latitude": "90",
-                    //"longitude": "90"
-            },
-                {
-                    headers: {
-                        'Accept': '*/*',
-                        'Authorization': `Bearer ${token}`,
-                        'content-type': 'application/json',
-                }
-                }
-            );
-            //console.log(response.data);
-            console.log("인기전시",response?.data.popluarExhibitionDtoList);
-            setPopularityExhibitionData(response?.data.popluarExhibitionDtoList);
-            console.log("최근전시",response?.data.recentExhibitionDtoList);
-            setRecentExhibitionData(response?.data.recentExhibitionDtoList);
-            console.log("추천전시",response?.data.recommendExhibitionDtoList);
-            setRecommedExhibitionData(response?.data.recommendExhibitionDtoList);
-            console.log("최근 본 전시와 유사한 전시",response?.data.similarExhibitionDtoList);
-            setSimlarExhibitionData(response?.data.similarExhibitionDtoList);
-
-            } catch (error) {
-                console.log(error.response.data);
-        }
-        })();
-      }, []);
-    useEffect(() => {
-      (async () => {
-        //거리 추천 전시회 API
-          try {
-          const response = await axios.post(distanceRecommendUrl,
+  useEffect(() => {
+    (async () => {
+      //인기, 최근, 추천, 유사 전시회 API
+      try {
+        const response = await axios.post(
+          `${url}all?page=1`,
           {
-                  "latitude": "90",
-                  "longitude": "90"
+            //"latitude": "90",
+            //"longitude": "90"
           },
-              {
-                  headers: {
-                      'Accept': '*/*',
-                      'Authorization': `Bearer ${token}`,
-                      'content-type': 'application/json',
-              }
-              }
-          );
-          //console.log(response.data);
-          console.log("거리추천전시",response?.data);
-          setDistanceRecommedExhibitionData(response?.data);
-
-          } catch (error) {
-              console.log(error.response.data);
+          {
+            headers: {
+              Accept: '*/*',
+              Authorization: `Bearer ${token}`,
+              'content-type': 'application/json',
+            },
+          }
+        );
+        //console.log(response.data);
+        console.log('인기전시', response?.data.popluarExhibitionDtoList);
+        setPopularityExhibitionData(response?.data.popluarExhibitionDtoList);
+        console.log('최근전시', response?.data.recentExhibitionDtoList);
+        setRecentExhibitionData(response?.data.recentExhibitionDtoList);
+        console.log('추천전시', response?.data.recommendExhibitionDtoList);
+        setRecommedExhibitionData(response?.data.recommendExhibitionDtoList);
+        console.log(
+          '최근 본 전시와 유사한 전시',
+          response?.data.similarExhibitionDtoList
+        );
+        setSimlarExhibitionData(response?.data.similarExhibitionDtoList);
+      } catch (error) {
+        console.log(error.response.data);
       }
-      })();
-    }, []);
-
-    useEffect(() => {
-      (async () => {
-        try {
-          const response = await axios.post(genreUrl,
-            {},
-            {
-              headers : {
-                'Accept': '*/*',
-                'Authorization': `Bearer ${token}`,
-              }
+    })();
+  }, []);
+  useEffect(() => {
+    (async () => {
+      //거리 추천 전시회 API
+      try {
+        const response = await axios.post(
+          distanceRecommendUrl,
+          {
+            latitude: '90',
+            longitude: '90',
+          },
+          {
+            headers: {
+              Accept: '*/*',
+              Authorization: `Bearer ${token}`,
+              'content-type': 'application/json',
+            },
+          }
+        );
+        //console.log(response.data);
+        console.log('거리추천전시', response?.data);
+        setDistanceRecommedExhibitionData(response?.data);
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    })();
+  }, []);
+  
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.post(genreUrl,
+          {},
+          {
+            headers : {
+              'Accept': '*/*',
+              'Authorization': `Bearer ${token}`,
             }
-          );
-          console.log("카테고리별로 랜덤", response?.data);
-          setMediaData(response?.data.mediaCategoryResponseDto);
-          setCraftData(response?.data.craftCategoryResponseDto);
-          setDesignData(response?.data.designCategoryResponseDto);
-          setSculptureData(response?.data.sculptureCategoryResponseDto);
-          setPlanData(response?.data.planExhibitionCategoryResponseDto);
-          setInstallationData(response?.data.installationArtCategoryResponseDto);
-          setPaintingsData(response?.data.paintingCategoryResponseDto);
-          setArtistData(response?.data.artistExhibitionCategoryResponseDto);
-          setPictureData(response?.data.pictureCategoryResponseDto);
-          setSpecialData(response?.data.specialExhibitionCategoryResponseDto);
-        } catch (error) {
-          console.log(error.response.data);
-        }
-      })();
-    }, []);
-    
+          }
+        );
+        console.log("카테고리별로 랜덤", response?.data);
+        setMediaData(response?.data.mediaCategoryResponseDto);
+        setCraftData(response?.data.craftCategoryResponseDto);
+        setDesignData(response?.data.designCategoryResponseDto);
+        setSculptureData(response?.data.sculptureCategoryResponseDto);
+        setPlanData(response?.data.planExhibitionCategoryResponseDto);
+        setInstallationData(response?.data.installationArtCategoryResponseDto);
+        setPaintingsData(response?.data.paintingCategoryResponseDto);
+        setArtistData(response?.data.artistExhibitionCategoryResponseDto);
+        setPictureData(response?.data.pictureCategoryResponseDto);
+        setSpecialData(response?.data.specialExhibitionCategoryResponseDto);
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    })();
+  }, []);
+
   return (
     <S.Container>
       <S.WrapAdBanner>
@@ -129,11 +133,31 @@ export default function Exhibition() {
       <S.WrapSearch>
         <Search />
       </S.WrapSearch>
-      <Slide title={'인기 전시'} Dummy={popularityExhibitionData} source={'popularity'} />
-      <Slide title={'최근 전시'} Dummy={recentExhibitionData} source={'recent'} />
-      <Slide title={'추천 전시'} Dummy={recommendExhibitionData} source={'recommend'}/>
-      <Slide title={'근처 추천 전시'} Dummy={distanceRecommendExhibitionData} source={'distanceRecommend'} />
-      <Slide title={'최근 본 전시와 비슷한 전시'} Dummy={simailarExhibitionData} source={'simailar'}/>
+      <Slide
+        title={'인기 전시'}
+        Dummy={popularityExhibitionData}
+        source={'popularity'}
+      />
+      <Slide
+        title={'최근 전시'}
+        Dummy={recentExhibitionData}
+        source={'recent'}
+      />
+      <Slide
+        title={'추천 전시'}
+        Dummy={recommendExhibitionData}
+        source={'recommend'}
+      />
+      <Slide
+        title={'근처 추천 전시'}
+        Dummy={distanceRecommendExhibitionData}
+        source={'distanceRecommend'}
+      />
+      <Slide
+        title={'최근 본 전시와 비슷한 전시'}
+        Dummy={simailarExhibitionData}
+        source={'simailar'}
+      />
       <div style={{ width: '885px', height: '100%', marginBottom: '10%' }}>
         <S.GenreParagraph>
           전시 카테고리

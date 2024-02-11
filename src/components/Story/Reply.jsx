@@ -4,13 +4,7 @@ import { CgCornerDownRight } from 'react-icons/cg';
 import { deleteReply, patchReply } from '../API/story_API';
 import DeleteModal from './DeleteModal';
 
-export default function Reply({
-  userId,
-  memberProfile,
-  items,
-  commentId,
-  loadComments,
-}) {
+export default function Reply({ userId, items, commentId, loadComments }) {
   return (
     <Comments>
       {items.map((item, index) => {
@@ -19,7 +13,6 @@ export default function Reply({
             <CommentListItem
               commentId={commentId}
               userId={userId}
-              memberProfile={memberProfile}
               item={item}
               loadComments={loadComments}
             ></CommentListItem>
@@ -30,13 +23,7 @@ export default function Reply({
   );
 }
 
-function CommentListItem({
-  commentId,
-  userId,
-  memberProfile,
-  item,
-  loadComments,
-}) {
+function CommentListItem({ commentId, userId, item, loadComments }) {
   const [isPatch, setIsPatch] = useState(false);
   const [content, setContent] = useState(item.subCommentContext);
   const [modal, setModal] = useState(false);
@@ -74,7 +61,7 @@ function CommentListItem({
       {!isPatch ? (
         <>
           <img
-            src={memberProfile}
+            src={item.memberProfile}
             alt={item.memberNickname}
             style={{
               verticalAlign: 'middle',

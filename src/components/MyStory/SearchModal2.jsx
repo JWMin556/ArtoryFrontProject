@@ -1,42 +1,14 @@
 import React,{useState} from 'react'
 import styled from 'styled-components'
-import Modal  from 'react-modal';
 import { searchExhibition } from '../API/search_API';
 import Poster from '../Exhibition/Poster';
 import SEARCH from '../../Img/Search/search.svg'
 import SEARCH_IMG from '../../Img/Search/search.svg'
 import Close from '../../Img/Calendar/close.svg'
-const StyledModal = {
-    overlay: {
-        backgroundColor: " rgba(0, 0, 0, 0)",
-        width: "100%",
-        height: "100vh",
-        zIndex: "10",
-        position: "fixed",
-        top: "0",
-        left: "0",
-    },
-    content: {
-        width: "413px",
-        height: "516px",
-        zIndex: "150",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        borderRadius: "10px",
-        backgroundColor: "#ffff",
-        justifyContent: "center",
-        overflow: "auto",
-        border : 'none',
-        boxShadow: '2px 2px 5px #f3f3f3',
-    },
-};
 const Container = styled.div`
     position : absolute;
     left : 90%;
     display : flex;
-    //justify-content: space-between;
     align-items : center;
     flex-direction : column;
     width: 450px;
@@ -45,7 +17,6 @@ const Container = styled.div`
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
     z-index : 150;
     overflow-y: scroll;
-    //padding : 15%;
     boxShadow: '2px 2px 5px #f3f3f3',
     & img {
         width : 15px;
@@ -58,9 +29,6 @@ const WrapSearch = styled.div`
     margin-left : 12%;
 `;
 const SearchStyle = styled.input`   
-    // position : relative;
-    // left : 10%;
-    // bottom : 550%;
     background-color : #f5f5f5;
     border : none;
     border-radius : 5px;
@@ -93,7 +61,6 @@ const CloseButton = styled.img`
     width : 20px;
     height : 20px;
     position : relative;
-    //bottom : 43.5%;
     top : 1%;
     right : 45%;
 `;
@@ -135,12 +102,7 @@ const handleKeyPress = async(e) => {
     }
 }
 return (
-    // <Modal 
-    //     isOpen={isOpenModal} 
-    //     onRequestClose={()=>setIsOpenModal(false)}
-    //     style={StyledModal}
-    //     shouldCloseOnOverlayClick={true}>
-        <Container>
+    <Container>
     <CloseButton src={Close} onClick={()=>setIsModalOpen(false)}/>
         <WrapSearch>
             <SearchStyle 
@@ -175,6 +137,5 @@ return (
         <IMG src={SEARCH_IMG}/> 
 }
         </Container>
-    // </Modal>
 )
 }

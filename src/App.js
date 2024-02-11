@@ -20,7 +20,7 @@ import Popularity from './pages/Popularity';
 import Recent from './pages/Recent';
 import Recommend from './pages/Recommend';
 import DistanceRecommend from './pages/DistanceRecommend';
-import Simailar from './pages/Simailar'
+import Simailar from './pages/Simailar';
 import TokenPage from './pages/TokenPage';
 import StoryDetail from './pages/StoryDetail';
 import StorySearch from './pages/StorySearch';
@@ -35,6 +35,7 @@ import GenreArtistExhibition from './pages/GenreArtistExhibition';
 import GenrePicture from './pages/GenrePicture';
 import GenreSpecialExhibition from './pages/GenreSpecialExhibition';
 import Record from './pages/Record';
+import Footer from './components/Footer';
 const Root = styled.div`
   position: absolute;
   top: 0;
@@ -46,6 +47,8 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // 로컬 스토리지에 URL 저장
+    localStorage.setItem('URL', 'http://3.39.39.6:8080');
     // 일정 시간(예: 1.5초) 후에 로딩 상태 변경
     const timer = setTimeout(() => {
       setLoading(false);
@@ -60,7 +63,8 @@ function App() {
         <SplashScreen />
       ) : (
         <BrowserRouter>
-          <Header />{' '}
+          <Header />
+
           {/*Header컴포넌트입니다. 즉, 맨 위의 검은색 상단 바입니다.*/}
           <Routes>
             <Route path="/" element={<Home />} /> {/*메인페이지입니다.*/}
@@ -76,7 +80,10 @@ function App() {
             <Route path="/exhibition/popularity" element={<Popularity />} />
             <Route path="/exhibition/recent" element={<Recent />} />
             <Route path="/exhibition/recommend" element={<Recommend />} />
-            <Route path="/exhibition/distancerecommend" element={<DistanceRecommend/>} />
+            <Route
+              path="/exhibition/distancerecommend"
+              element={<DistanceRecommend />}
+            />
             <Route path="/exhibition/simailar" element={<Simailar />} />
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mystory/:record" element={<Record />} />
@@ -135,6 +142,7 @@ function App() {
             {/*승우 담당 페이지*/}
             <Route path="/splashscreen" element={<SplashScreen />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       )}
     </Root>

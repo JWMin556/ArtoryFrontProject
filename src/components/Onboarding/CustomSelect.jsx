@@ -20,25 +20,50 @@ export default function CustomSelect({ options, onSelect }) {
       closeMenuOnScroll={true}
       menuShouldBlockScroll={true}
       menuShouldScrollIntoView={false}
-      onChange={handleSelectChange} 
+      onChange={handleSelectChange}
+      components={{
+        IndicatorSeparator: () => null,
+      }}
     />
   );
 }
 
 const SelectStyled = styled(Select)`
   & .select {
-    &__control:focus-within {
+    &__value-container {
+      padding-right: 0;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+    }
+    &__indicator {
+      padding: 0;
+    }
+    &__control:hover {
       //box-shadow: 0 0 5px 5px whitesmoke;
+      border-color: white;
+      outline: none !important;
+    }
+    &__control:focus-visible {
+      outline: none !important;
+      border-color: white;
+    }
+    &__control:focus {
+      outline: none !important;
       border-color: white;
     }
     &__control {
+      border: none !important;
       box-shadow: 1px 2px 8px #f3f3f3;
-      border-color: white;
       margin-top: 20px;
       //background-color: red;
       width: 334px;
       height: 55px;
       text-align: center;
+      border-radius: 0;
+      display: grid;
+      grid-template-columns: 5.7fr 4.3fr;
+      outline: none !important;
     }
     &__menu {
       text-align: center;

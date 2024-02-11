@@ -4,18 +4,18 @@ import Slider from 'react-slick';
 export const WrapSlider = styled.div`
   width: 885px;
   height: 350px;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 `;
 export const Category = styled.button`
   position: relative;
   top: 5%;
-  left: 2.5%;
+  left: 1.2%;
   font-family: 'Pretendard';
-  font-weight: 900;
+  font-weight: 700;
   font-size: 1.6em;
   word-spacing: 1px;
   border: none;
-  background-color : #fff;
+  background-color: #fff;
 `;
 export const IMG = styled.img`
   width: 186px;
@@ -27,7 +27,7 @@ export const WrapPorterAndIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 350px;
+  height: 340px;
 `;
 export const WrapPoster = styled.div`
   display: flex;

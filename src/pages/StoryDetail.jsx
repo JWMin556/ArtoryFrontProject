@@ -11,7 +11,7 @@ const genres = [
   'PICTURE',
   'SPECIAL_EXHIBITION',
   'SCULPTURE',
-  'PLANEXHIBITION',
+  'PLAN_EXHIBITION',
   'INSTALLATION_ART',
   'PAINTING',
   'ARTIST_EXHIBITION',
@@ -48,19 +48,20 @@ export default function StoryDetail() {
   const weatherSrc = `/Img/MyStory/weather.b${item.storyWeather}.svg`;
 
   return (
-    <WrapStory>
+    <WrapStory className="wrapstory">
       <Banner
+        id="banner"
         image={item.exhibitionImage}
         title={item.exhibitionTitle}
       ></Banner>
 
-      <Right>
+      <Right id="storyContent">
         <div
+          id="profile"
           style={{
             display: 'flex',
             alignItems: 'end',
-            paddingLeft: '10%',
-            marginLeft: '10px',
+            // marginLeft: '10px',
             marginBottom: '40px',
           }}
         >
@@ -76,7 +77,7 @@ export default function StoryDetail() {
             </p>
           </div>
         </div>
-        <div className="story_content" style={{ paddingLeft: '10%' }}>
+        <div className="story_content">
           <BoxStyle
             style={{
               display: 'flex',
@@ -134,9 +135,15 @@ export default function StoryDetail() {
                       </Keyword>
                     </td>
                     <td>
-                      <Keyword>{genres__kor[selectedIndex[0]]}</Keyword>
-                      <Keyword>{genres__kor[selectedIndex[1]]}</Keyword>
-                      <Keyword>{genres__kor[selectedIndex[2]]}</Keyword>
+                      {genres__kor[selectedIndex[0]] && (
+                        <Keyword>{genres__kor[selectedIndex[0]]}</Keyword>
+                      )}
+                      {genres__kor[selectedIndex[1]] && (
+                        <Keyword>{genres__kor[selectedIndex[1]]}</Keyword>
+                      )}
+                      {genres__kor[selectedIndex[2]] && (
+                        <Keyword>{genres__kor[selectedIndex[2]]}</Keyword>
+                      )}
                     </td>
                   </tr>
                 </tbody>
@@ -146,12 +153,10 @@ export default function StoryDetail() {
           <BoxStyle style={{}}>
             <ExhbnKeyword id="전시 키워드">
               <H5>오늘의 전시 키워드</H5>
-              <p style={{ color: '#616161' }}>
-                #요시다 유니 #키워드2 #키워드3 {item.storyKeyword}
-              </p>
+              <p style={{ color: '#616161' }}>{item.storyKeyword}</p>
             </ExhbnKeyword>
             <ExhbnContent id="전시 내용">
-              <H5>오늘의 전시 내용</H5>
+              <H5>오늘의 전시 스토리</H5>
 
               <div
                 className="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
@@ -184,6 +189,7 @@ const Table = styled.table`
     color: #9ba0ae;
     font-weight: 400;
     min-width: 30px;
+    padding-bottom: 8px;
   }
 `;
 const ExhbnInfo = styled.div``;
@@ -208,8 +214,9 @@ const Keyword = styled.span`
 const Right = styled.div`
   font-size: 1.4rem;
   color: black;
-  width: 1000px;
-  height: 90vh;
+  width: 820px;
+  height: 100%;
+  padding: 0 10px;
 `;
 const BoxStyle = styled.div`
   //background-color: white;
@@ -220,13 +227,15 @@ const BoxStyle = styled.div`
   // border-radius: 10px;
   font-size: small;
   font-weight: 600;
-  margin: 10px 10px 20px;
+  margin: 10px 0 20px;
   padding: 30px 10px 40px 40px;
   height: fit-content;
   //max-height: 800px;
 `;
 const WrapStory = styled.div`
   width: 100%;
+  min-height: 100%;
+  height: max-content;
   display: flex;
   align-items: center;
   flex-direction: column;

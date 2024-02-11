@@ -2,29 +2,50 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { getStoryInfo } from '../API/story_API';
+import * as S from '../../styled-components/Slide.style';
+import StoryHeart from './StoryHeart';
+import StoryScrap from './StoryScrap';
 
-const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w1280/';
 const PosterStyle = styled.img`
   display: block;
   width: 186px;
   height: 268px;
-  border-radius: 10px;
   box-shadow: 5px 5px 8px #d9d9d9;
+  object-fit: cover;
 `;
 const WrapTitle = styled.div`
   width: 186px;
   height: 268px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
   color: #ffff;
-  z-index: 1;
+  z-index: 3;
   position: absolute;
   top: 0;
-  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: small;
+  font-weight: 400;
   font-family: Pretendard;
+  p {
+    padding: 0 10%;
+    text-align: center;
+  }
+`;
+export const Linear = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60%; //60% 100% 고민
+  background-image: linear-gradient(rgba(217, 217, 217, 0), rgba(0, 0, 0, 0.7));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  p {
+    z-index: 4;
+    color: white;
+  }
 `;
 export default function StoryPoster(props) {
   const navigate = useNavigate();
@@ -33,6 +54,7 @@ export default function StoryPoster(props) {
   const onClickDetail = async (id) => {
     try {
       const item = await getStoryInfo(id);
+      console.log('StoryPoster->storyDetail로 넘어가는 item', item);
       navigate(`/story/${id}`, { state: { item } });
     } catch (error) {
       // 오류 처리
@@ -54,12 +76,14 @@ export default function StoryPoster(props) {
       onClick={() => onClickDetail(props.item.storyId)}
     >
       <PosterStyle src={props.item.storyImage} alt={props.item.storyId} />
-      {isShowTitle && <WrapTitle>{props.item.storyId}</WrapTitle>}
+      <Linear />
+      <StoryHeart id={props.item.storyId} isLiked={props.item.isLiked} />
+      <StoryScrap id={props.item.storyId} isScrapped={props.item.isScrapped} />
+      {isShowTitle && (
+        <WrapTitle>
+          <p>{props.item.storyTitle}</p>
+        </WrapTitle>
+      )}
     </div>
   );
 }
-/* <div
-      onMouseOver={handleMouseOverImg}
-      onMouseOut={handleMouseOutImg}
-      onClick={() => onClickDetail(props.item.storyId)}
-    >*/

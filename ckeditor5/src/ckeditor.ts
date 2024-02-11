@@ -48,8 +48,7 @@ import { Table, TableToolbar } from '@ckeditor/ckeditor5-table';
 import { TextTransformation } from '@ckeditor/ckeditor5-typing';
 import { Undo } from '@ckeditor/ckeditor5-undo';
 import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
-//Emoji
-
+import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload';
 // You can read more about extending the build with additional plugins in the "Installing plugins" guide.
 // See https://ckeditor.com/docs/ckeditor5/latest/installation/plugins/installing-plugins.html for details.
 
@@ -88,6 +87,7 @@ class Editor extends ClassicEditor {
     PasteFromOffice,
     SpecialCharacters,
     Strikethrough,
+    SimpleUploadAdapter,
     Table,
     TableToolbar,
     TextTransformation,

@@ -31,10 +31,7 @@
     "@ckeditor/ckeditor5-table": "41.0.0",
     "@ckeditor/ckeditor5-typing": "41.0.0",
     "@ckeditor/ckeditor5-undo": "41.0.0",
-    "@ckeditor/ckeditor5-upload": "41.0.0",
-    "@harrisonlucas/ckeditor5-emojis": "^1.0.0",
-    "@phudak/ckeditor5-emoji": "^1.1.1",
-    "ckeditor4-react": "^1.4.2"
+    "@ckeditor/ckeditor5-upload": "41.0.0"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-core": "^41.0.0",

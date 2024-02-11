@@ -5,8 +5,8 @@ import '../../css/ckeditor.css';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import EmojiPicker from './EmojiPicker';
-import styled from 'styled-components';
-const TextEditor = ({ setData, data }) => {
+import ImgaeLoader from './ImageLoader';
+const TextEditor = ({ setPicturesUrl, picturesUrl, setData, data }) => {
   const editorConfiguration = {
     // plugins: [...SpecialCharacters, SpecialCharactersEmoji],
     // 이모지 렌더링을 위해 contentRenderer를 사용
@@ -16,11 +16,12 @@ const TextEditor = ({ setData, data }) => {
         writer.setAttribute('data-emoji', true, model);
       }
     },
+
     toolbar: {
       items: [
         'undo',
         'redo',
-        '|',
+        // '|',
         'heading',
         'fontFamily',
         'fontSize',
@@ -34,7 +35,7 @@ const TextEditor = ({ setData, data }) => {
         'numberedList',
         'alignment',
         '|',
-        'imageUpload',
+        // 'imageUpload',
         'blockQuote',
         // 'mediaEmbed',
         'link',
@@ -101,6 +102,7 @@ const TextEditor = ({ setData, data }) => {
           }
         }}
       />
+      <ImgaeLoader setData={setData} setPicturesUrl={setPicturesUrl} />
       <EmojiPicker setData={setData} data={data} className="이모티콘" />
     </div>
   );

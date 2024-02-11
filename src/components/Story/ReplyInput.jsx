@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { createFood, getFoods } from '../../api';
+import React, { useState } from 'react';
 import Reply from './Reply';
 import styled from 'styled-components';
-import rightVector from '../../Img/Story/rightVector_grey.png';
 import downVector from '../../Img/Story/downVector_grey.png';
 import { createReply } from '../API/story_API';
 const INITIAL_VALUES = {
@@ -52,7 +50,6 @@ export default function ReplyInput(props) {
     <>
       <Reply
         userId={props.userId}
-        memberProfile={props.item.memberProfile}
         items={props.item.subCommentResponseDtoList}
         commentId={props.item.commentId}
         loadComments={props.loadComments}

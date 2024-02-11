@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import Slide from '../components/Exhibition/Slide';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -27,7 +27,6 @@ const Page = styled.div`
   flex-direction: column;
   margin-bottom: 20px; /* 원하는 여백 값 */
 `;
-
 const TitleWrap = styled.div`
   color: black;
   font-size: 30px;
@@ -59,15 +58,15 @@ const ImgStyled = styled.img`
   width: 130px;
 `;
 
-const TitleRightWrap = styled.div` 
+const TitleRightWrap = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
 const TitleRightWrapParagraphArea = styled.div`
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 5%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5%;
 `;
 
 const TitleRightWrapParagraphTitle = styled.div`
@@ -169,163 +168,171 @@ const Btns2 = styled.button`
 `;
 
 const ContentPosters = styled.div`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 `;
+const URL = localStorage.getItem('URL');
 
-const url = 'http://3.39.39.6:8080/api/mypage/all?page=1';
+const url = `${URL}/api/mypage/all?page=1`;
 const token = localStorage.getItem('Token');
 export default function MyPage() {
-    //여기서부터 나의 스토리 버튼 ~ 저장 스토리 버튼을 위한 부분입니다. 
-    const [isMyStoryBtnClicked, setIsMyStoryBtnClicked] = useState(true);
-    const [isMyGalaryBtnClicked, setIsGalaryBtnClicked] = useState(false);
-    const [isSavedUserBtnClicked, setIsSavedUserBtnClicked] = useState(false);
-    const [isSaveStoryBtnClicked, setIsSaveStoryBtnClicked] = useState(false);
+  //여기서부터 나의 스토리 버튼 ~ 저장 스토리 버튼을 위한 부분입니다. 
+  const [isMyStoryBtnClicked, setIsMyStoryBtnClicked] = useState(true);
+  const [isMyGalaryBtnClicked, setIsGalaryBtnClicked] = useState(false);
+  const [isSavedUserBtnClicked, setIsSavedUserBtnClicked] = useState(false);
+  const [isSaveStoryBtnClicked, setIsSaveStoryBtnClicked] = useState(false);
 
-    const handleMyStoryBtnClick = () => {
-        setIsMyStoryBtnClicked(true);
-        setIsGalaryBtnClicked(false);
-        setIsSavedUserBtnClicked(false);
-        setIsSaveStoryBtnClicked(false);
-    };
+  const handleMyStoryBtnClick = () => {
+    setIsMyStoryBtnClicked(true);
+    setIsGalaryBtnClicked(false);
+    setIsSavedUserBtnClicked(false);
+    setIsSaveStoryBtnClicked(false);
+  };
 
-    const handleMyGalaryBtnClick = () => { 
-        setIsMyStoryBtnClicked(false);
-        setIsGalaryBtnClicked(true);
-        setIsSavedUserBtnClicked(false);
-        setIsSaveStoryBtnClicked(false);
-    };
+  const handleMyGalaryBtnClick = () => {
+    setIsMyStoryBtnClicked(false);
+    setIsGalaryBtnClicked(true);
+    setIsSavedUserBtnClicked(false);
+    setIsSaveStoryBtnClicked(false);
+  };
 
-    const handleSavedUserBtnClick = () => { 
-        setIsMyStoryBtnClicked(false);
-        setIsGalaryBtnClicked(false);
-        setIsSavedUserBtnClicked(true);
-        setIsSaveStoryBtnClicked(false);
-    };
+  const handleSavedUserBtnClick = () => {
+    setIsMyStoryBtnClicked(false);
+    setIsGalaryBtnClicked(false);
+    setIsSavedUserBtnClicked(true);
+    setIsSaveStoryBtnClicked(false);
+  };
 
-    const handleSaveStoryBtnClick = () => {
-        setIsMyStoryBtnClicked(false);
-        setIsGalaryBtnClicked(false);
-        setIsSavedUserBtnClicked(false);
-        setIsSaveStoryBtnClicked(true);
-    };
-    //여기까지가 나의 스토리 버튼 ~ 저장 스토리 버튼을 위한 부분입니다.
+  const handleSaveStoryBtnClick = () => {
+    setIsMyStoryBtnClicked(false);
+    setIsGalaryBtnClicked(false);
+    setIsSavedUserBtnClicked(false);
+    setIsSaveStoryBtnClicked(true);
+  };
+  //여기까지가 나의 스토리 버튼 ~ 저장 스토리 버튼을 위한 부분입니다.
 
-    //여기서부터는 슬라이드 부분입니다. 
-    const [myStoryData, setMyStoryData] = useState([]);
-    const [myPicturesData, setMyPicturesData] = useState([]);
-    const [myScrappedMembersData, setMyScrappedMembersData] = useState([]);
-    const [myScrappedStoriesData, setMyScrappedStoriesData] = useState([]);
+  //여기서부터는 슬라이드 부분입니다.
+  const [myStoryData, setMyStoryData] = useState([]);
+  const [myPicturesData, setMyPicturesData] = useState([]);
+  const [myScrappedMembersData, setMyScrappedMembersData] = useState([]);
+  const [myScrappedStoriesData, setMyScrappedStoriesData] = useState([]);
 
-    //서버연결을 위한 부분입니다. 
-    const [userData, setUserData] = useState([]);
-    useEffect(() => {
-        (async () => {
-            //유저 정보 불러오기
-            try {
-                const response = await axios.get(url,
-                    {
-                        headers: {
-                            'Accept': '*/*',
-                            'Authorization': `Bearer ${token}`,
-                            'content-type': 'application/json',
-                    }
-                    }
-                );
-                console.log("유저정보",response.data);
-                setUserData(response.data);
+  //서버연결을 위한 부분입니다.
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    (async () => {
+      //유저 정보 불러오기
+      try {
+        const response = await axios.get(url, {
+          headers: {
+            Accept: '*/*',
+            Authorization: `Bearer ${token}`,
+            'content-type': 'application/json',
+          },
+        });
+        console.log('유저정보', response.data);
+        setUserData(response.data);
 
-                //이제 하나하나씩 슬라이드 부분을 저장해서 받아오자
-                setMyStoryData(response?.data.stories);
-                //console.log("스토리정보", myStoryData);
-                setMyPicturesData(response?.data.storyPictures);
-                setMyScrappedMembersData(response?.data.scrappedMembers);
-                setMyScrappedStoriesData(response?.data.scrappedStories);
-            } catch (error) {
-                console.log(error.response.data);
-            }
-        })();
-    }, []);
+        //이제 하나하나씩 슬라이드 부분을 저장해서 받아오자
+        setMyStoryData(response?.data.stories);
+        //console.log("스토리정보", myStoryData);
+        setMyPicturesData(response?.data.storyPictures);
+        setMyScrappedMembersData(response?.data.scrappedMembers);
+        setMyScrappedStoriesData(response?.data.scrappedStories);
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    })();
+  }, []);
   return (
     <PageContainer>
-        <Page>
-            <TitleWrap>
-                <TitleLeftWrap>
-                    <TitleLeftWrapParagraph>
-                        {userData.nickname}님<br />  
-                        마이페이지
-                    </TitleLeftWrapParagraph>
-                    <ImgStyled src={userData.image} alt="사진첨부" />
-                </TitleLeftWrap>
+      <Page>
+        <TitleWrap>
+          <TitleLeftWrap>
+            <TitleLeftWrapParagraph>
+              {userData.nickname}님<br />
+              마이페이지
+            </TitleLeftWrapParagraph>
+            <ImgStyled src={userData.image} alt="사진첨부" />
+          </TitleLeftWrap>
 
-                <TitleRightWrap>
-                    <Link to= {{
-                        pathname: "/mypagemodify",
-                        search: `?nickname=${userData.nickname}&image=${userData.image}` 
-                    }} style={{display: 'inline-block', marginBottom:'10px' }}>
-                        <img style={{float:"right"}} src="/img/setting.png" alt="환경설정버튼" width="8%"/>
-                    </Link>
+          <TitleRightWrap>
+            <Link
+              to={{
+                pathname: '/mypagemodify',
+                search: `?nickname=${userData.nickname}&image=${userData.image}`,
+              }}
+              style={{ display: 'inline-block', marginBottom: '10px' }}
+            >
+              <img
+                style={{ float: 'right' }}
+                src="/img/setting.png"
+                alt="환경설정버튼"
+                width="8%"
+              />
+            </Link>
+            <TitleRightWrapParagraphArea>
+                <TitleRightWrapParagraphTitle>
+                    <BoldSentence>닉네임</BoldSentence>
+                </TitleRightWrapParagraphTitle>
+                <InputWrap>
+                    <InputStyle>{userData.nickname}</InputStyle>
+                </InputWrap>
+            </TitleRightWrapParagraphArea>
 
-                    <TitleRightWrapParagraphArea>
-                        <TitleRightWrapParagraphTitle>
-                            <BoldSentence>닉네임</BoldSentence>
-                        </TitleRightWrapParagraphTitle>
-                        <InputWrap>
-                            <InputStyle>{userData.nickname}</InputStyle>
-                        </InputWrap>
-                    </TitleRightWrapParagraphArea>
+            <TitleRightWrapParagraphArea>
+                <TitleRightWrapParagraphTitle>
+                    <BoldSentence>한 줄 소개</BoldSentence>
+                </TitleRightWrapParagraphTitle>
+                <InputWrap>
+                    <InputStyle>{userData.introduction}</InputStyle>
+                </InputWrap>
+            </TitleRightWrapParagraphArea>
 
-                    <TitleRightWrapParagraphArea>
-                        <TitleRightWrapParagraphTitle>
-                            <BoldSentence>한 줄 소개</BoldSentence>
-                        </TitleRightWrapParagraphTitle>
-                        <InputWrap>
-                            <InputStyle>{userData.introduction}</InputStyle>
-                        </InputWrap>
-                    </TitleRightWrapParagraphArea>
-                    <TitleRightWrapParagraphArea>
-                        <TitleRightWrapParagraphTitle>
-                            <BoldSentence>나의 키워드</BoldSentence>
-                        </TitleRightWrapParagraphTitle>
-                        <InputWrap>
-                            <InputStyle>{userData.myKeyword}</InputStyle>
-                        </InputWrap>
-                    </TitleRightWrapParagraphArea>
-                </TitleRightWrap>
-            </TitleWrap>
+            <TitleRightWrapParagraphArea>
+                <TitleRightWrapParagraphTitle>
+                    <BoldSentence>나의 키워드</BoldSentence>
+                </TitleRightWrapParagraphTitle>
+                <InputWrap>
+                    <InputStyle>{userData.myKeyword}</InputStyle>
+                </InputWrap>
+            </TitleRightWrapParagraphArea>
 
-            <ContentWrap>
-                <ContentBtns>
-                    {isMyStoryBtnClicked ? (
-                    <Btns2>나의 스토리</Btns2>
-                    ) : (
-                    <Btns1 onClick={handleMyStoryBtnClick}>나의 스토리</Btns1>
-                    )}
-                    {isMyGalaryBtnClicked ? (
-                    <Btns2>나의 사진첩</Btns2>
-                    ) : (
-                    <Btns1 onClick={handleMyGalaryBtnClick}>나의 사진첩</Btns1>
-                    )}
-                    {isSavedUserBtnClicked ? (
-                    <Btns2>저장 유저</Btns2>
-                    ) : (
-                    <Btns1 onClick={handleSavedUserBtnClick}>저장 유저</Btns1>
-                    )}
-                    {isSaveStoryBtnClicked ? (
-                    <Btns2>저장 스토리</Btns2>
-                    ) : (
-                    <Btns1 onClick={handleSaveStoryBtnClick}>저장 스토리</Btns1>
-                    )}
-                </ContentBtns>
+          </TitleRightWrap>
+        </TitleWrap>
 
-                <ContentPosters>
-                    {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
-                    {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
-                    {isSavedUserBtnClicked && <SlideScrappedMember Dummy={myScrappedMembersData} />}
-                    {isSaveStoryBtnClicked && <SlideScrappedStory Dummy={myScrappedStoriesData} />}
-                </ContentPosters>
-            </ContentWrap>
-        </Page>
+        <ContentWrap>
+            <ContentBtns>
+                {isMyStoryBtnClicked ? (
+                <Btns2>나의 스토리</Btns2>
+                ) : (
+                <Btns1 onClick={handleMyStoryBtnClick}>나의 스토리</Btns1>
+                )}
+                {isMyGalaryBtnClicked ? (
+                <Btns2>나의 사진첩</Btns2>
+                ) : (
+                <Btns1 onClick={handleMyGalaryBtnClick}>나의 사진첩</Btns1>
+                )}
+                {isSavedUserBtnClicked ? (
+                <Btns2>저장 유저</Btns2>
+                ) : (
+                <Btns1 onClick={handleSavedUserBtnClick}>저장 유저</Btns1>
+                )}
+                {isSaveStoryBtnClicked ? (
+                <Btns2>저장 스토리</Btns2>
+                ) : (
+                <Btns1 onClick={handleSaveStoryBtnClick}>저장 스토리</Btns1>
+                )}
+            </ContentBtns>
+
+            <ContentPosters>
+                {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
+                {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
+                {isSavedUserBtnClicked && <SlideScrappedMember Dummy={myScrappedMembersData} />}
+                {isSaveStoryBtnClicked && <SlideScrappedStory Dummy={myScrappedStoriesData} />}
+            </ContentPosters>
+        </ContentWrap>
+      </Page>
     </PageContainer>
-  )
+  );
 }

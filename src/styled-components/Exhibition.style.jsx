@@ -7,12 +7,15 @@ export const Container = styled.div`
 `;
 export const WrapAdBanner = styled.div`
     width : 100%;
+    height : 693px;
+    background-color : #121212;
+    //border : 1px solid red;
 `;
 
 export const WrapSearch = styled.div`
     position : relative;
-    right : 15.5%;
-    margin-bottom : 7%;
+    right : 16.2%;
+    margin-bottom : 4%;
     margin-top : 7%;
 `;
 

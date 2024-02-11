@@ -1,6 +1,7 @@
 import axios from 'axios';
+const URL = localStorage.getItem('URL');
 
-const BASE_URL = 'http://3.39.39.6:8080/api/member';
+const BASE_URL = `${URL}/api/member`;
 const token = localStorage.getItem('Token');
 
 export const getMemberInfo = async () => {

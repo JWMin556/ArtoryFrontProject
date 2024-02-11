@@ -5,8 +5,9 @@ import UserSlide from '../components/Story/UserSlide';
 import StorySlide from '../components/Story/StorySlide';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+const URL = localStorage.getItem('URL');
 
-const url = 'http://3.39.39.6:8080/api/stories/';
+const url = `${URL}/api/stories/`;
 const token = localStorage.getItem('Token');
 
 export default function Story(props) {

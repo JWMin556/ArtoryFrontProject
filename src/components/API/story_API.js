@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://3.39.39.6:8080/api/';
+const URL = localStorage.getItem('URL');
+
+const BASE_URL = `${URL}/api/`;
 const token = localStorage.getItem('Token');
 
 export const getStoryInfo = async (id) => {
@@ -38,7 +40,46 @@ export const searchStory = async (keyword) => {
     console.error('Error fetching data:', error.response.data);
   }
 };
+//유저 스크랩 관리
+
+export const userScrapped = async (id) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/scrap-member/member-scrapped?toMemberId=${id}`,
+      {}, //빈 바디 필수.post요청
+      {
+        headers: {
+          Accept: '*/*',
+          Authorization: `Bearer ${token}`,
+          'content-type': 'application/json',
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error.response.data);
+  }
+};
+export const userUnScrapped = async (id) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/scrap-member/member-unscrapped?toMemberId=${id}`,
+      {}, //빈 바디를 넣어줘야 함.
+      {
+        headers: {
+          Accept: '*/*',
+          Authorization: `Bearer ${token}`,
+          'content-type': 'application/json',
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error.response.data);
+  }
+};
 //스토리 스크랩 관리
+
 export const storyScrapped = async (id) => {
   try {
     const response = await axios.get(

@@ -1,5 +1,7 @@
 import axios from 'axios';
-const url = 'http://3.39.39.6:8080/api/exhibitions/ParticularSearch?';
+const URL = localStorage.getItem('URL');
+
+const url = `${URL}/api/exhibitions/ParticularSearch?`;
 export const searchExhibition = async (keyword) => {
   const token = localStorage.getItem('Token');
   try {

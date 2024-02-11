@@ -6,7 +6,6 @@ export const HomeWrap = styled.div`
     margin-top: 10%;
     margin-left: 15%;
     margin-right: 15%;
-
     @media screen and (max-width: 500px) { /* 'max-width' 값에 'px' 단위 추가 */
         height : 100%;
         flex-direction: column;
@@ -51,6 +50,7 @@ export const SecondParagraph = styled.div`
     word-wrap: break-word;
     width: 405px;
     height: 41px;
+    margin : 0;
     @media screen and (max-width: 500px){
         width: 155.66px;
         height: 23.00px;
@@ -69,6 +69,7 @@ export const ThirdParagraph = styled.div`
     word-wrap: break-word;
     width: 393px;
     height: 77px;
+    margin : 0;
     @media screen and (max-width: 500px){
         width: 221.11x;
         height: 38.71px;
@@ -79,9 +80,11 @@ export const ThirdParagraph = styled.div`
 export const WrapLogin = styled.div`
     display : flex;
     flex-direction: column;
-    @media screen and (max-width: 500px){ 
-
-}
+    //height : 100%;
+    //border : 1px solid red;
+    &:focus{
+        outline : none;
+    }
 `;
 //로그인 폼 전체를 감싸는 스타일드 컴포넌트
 
@@ -89,10 +92,9 @@ export const Input = styled.input`
     padding-left : 5%;
     font-family: 'Pretendard';
     margin-top : 15px;
+    border : none;
     width : 325px;
     height : 50px;
-    border: none;
-    border-radius: 10px;
     box-shadow: 1px 2px 8px #f3f3f3; 
     color : #ababab;
     @media screen and (max-width: 500px){
@@ -127,3 +129,4 @@ export const LockStyle = styled.img`
     bottom : 40%;
     left : 90%;
 `;
+

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Heart from '../components/Exhibition/Heart';
 import Save from '../components/Exhibition/Save';
@@ -37,6 +37,7 @@ const WrapIcon = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
+const URL = localStorage.getItem('URL');
 
 const Wrap = styled.div`
     //border: 1px solid red;
@@ -93,7 +94,7 @@ const PaginationBox = styled.div`
 `;
 
 export default function GenreMedia() {
-  const url = 'http://3.39.39.6:8080/api/cagegory/media'
+  const url = `${URL}/api/cagegory/media`;
   const [mediaData, setMediaData] = useState([]);
   const token = localStorage.getItem('Token');
   const [currentPage, setCurrentPage] = useState(1);
@@ -131,10 +132,10 @@ export default function GenreMedia() {
             <div>
               <Poster item={item} />
             </div>
-            <WrapIcon>
+            {/* <WrapIcon>
               <Heart item={item} />
-              <Save item={item}/>
-            </WrapIcon>
+              <Save item={item} />
+            </WrapIcon> */}
           </WrapPoster>
         ))}
       </WrapResult>
@@ -153,7 +154,7 @@ export default function GenreMedia() {
         </PaginationBox>
       </Wrap>
     </Container>
-  )
+  );
 }
 
 // import axios from 'axios';
