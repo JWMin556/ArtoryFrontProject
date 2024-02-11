@@ -61,18 +61,25 @@ const SearchContainer = styled.div`
   width: 419px;
   display: grid;
   grid-template-columns: 1fr 9fr;
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
   border: none;
   border-radius: 5px;
+  box-shadow: 1px 2px 8px #f3f3f3;
+
   margin-left: 15px;
 `;
 const SearchStyle = styled.input`
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
   border: none;
   border-radius: 5px;
   height: 39px;
   font-family: Pretendard;
-  color: #ababab;
+  color: #717276;
+  font-weight: 600;
+  &::placeholder {
+    color: #a6a9af;
+    font-weight: 500;
+  }
 `;
 const SearchImg = styled.img`
   vertical-align: middle;

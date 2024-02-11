@@ -16,7 +16,9 @@ const TextEditor = ({ setPicturesUrl, picturesUrl, setData, data }) => {
         writer.setAttribute('data-emoji', true, model);
       }
     },
-
+    // Enter: {
+    //   shouldCreateNewParagraph: false, //흠...
+    // },
     toolbar: {
       items: [
         'undo',
