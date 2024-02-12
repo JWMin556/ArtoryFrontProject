@@ -4,55 +4,58 @@ import Modal from 'react-modal';
 
 const StyledModal = {
   overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
-    zIndex: "1000", // 기존보다 더 높은 z-index로 설정
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    zIndex: '1000', // 기존보다 더 높은 z-index로 설정
+    overFlow: 'hidden',
   },
   content: {
-    position: "relative", // 절대 위치에서 상대 위치로 변경
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    borderRadius: "10px",
-    border: "none",
-    maxWidth: "40%", // 모달이 너무 커지지 않도록 최대 너비 설정
+    backgroundColor: 'transparent',
+    position: 'relative', // 절대 위치에서 상대 위치로 변경
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    borderRadius: '10px',
+    border: 'none',
+    width: 'fit-content',
+    // maxWidth: '40%', // 모달이 너무 커지지 않도록 최대 너비 설정
+    // maxHeight: '80%',
+    overFlow: 'hidden',
   },
 };
 
 const Container = styled.div`
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  padding: 20px; // 내부 여백 추가
+
+  overflow: hidden;
 `;
 
 const Image = styled.img`
-  max-width: 100%;
-  max-height: 100%;
+  width: 490px;
+  /* max-height: 80%; */
   object-fit: contain;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 20px;
-`;
-
 const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #ffffff;
+  /* width: 50px; */
+  padding: 10px 70px;
+  background-color: transparent;
+  /* color: #ffffff; */
   border: none;
   border-radius: 5px;
   cursor: pointer;
 `;
 
-export default function BigImg({ imgsrc, isClick }) {
+export default function BigImg({ images, isClick, index }) {
   const [isOpenModal, setIsOpenModal] = useState(isClick);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImgIdx, setCurrentImgIdx] = useState(index);
+  const [left, setLeft] = useState('/Img/Mypage/left.svg');
+  const [right, setRight] = useState('/Img/Mypage/right.svg');
 
   useEffect(() => {
+    console.log('인덱스', index);
     // 모달이 열릴 때 body 요소에 overflow: hidden 스타일 적용하여 스크롤 막기
     if (isOpenModal) {
       document.body.style.overflow = 'hidden';
@@ -68,97 +71,41 @@ export default function BigImg({ imgsrc, isClick }) {
   }, [isOpenModal]);
 
   const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imgsrc.length);
+    setCurrentImgIdx((prevIndex) => (prevIndex + 1) % images.length);
   };
 
   const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + imgsrc.length) % imgsrc.length);
+    setCurrentImgIdx(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
   };
 
   return (
-    <Modal isOpen={isOpenModal} onRequestClose={() => setIsOpenModal(false)} style={StyledModal} shouldCloseOnOverlayClick={true}>
+    <Modal
+      isOpen={isOpenModal}
+      onRequestClose={() => setIsOpenModal(false)}
+      style={StyledModal}
+      shouldCloseOnOverlayClick={true}
+    >
       <Container>
-          <Image src={imgsrc} alt='DetailImage' />
-          <ButtonContainer>
-            <Button onClick={handlePrevImage}>이전</Button>
-            <Button onClick={handleNextImage}>다음</Button>
-        </ButtonContainer>
+        <Button
+          style={{ paddingLeft: '0' }}
+          onMouseEnter={() => setLeft('Img/Mypage/left_focus.svg')}
+          onMouseLeave={() => setLeft('Img/Mypage/left.svg')}
+          onClick={handlePrevImage}
+        >
+          <img src={left} alt="left" />
+        </Button>
+        <Image src={images[currentImgIdx].pictureUrl} alt="DetailImage" />
+        <Button
+          style={{ paddingRight: '0' }}
+          onMouseEnter={() => setRight('Img/Mypage/right_focus.svg')}
+          onMouseLeave={() => setRight('Img/Mypage/right.svg')}
+          onClick={handleNextImage}
+        >
+          <img src={right} alt="right" />
+        </Button>
       </Container>
     </Modal>
   );
 }
-
-// import React, { useState } from 'react';
-// import styled from 'styled-components';
-// import Modal from 'react-modal';
-
-// const StyledModal = {
-//   overlay: {
-//     backgroundColor: "rgba(0, 0, 0, 0.8)",
-//     zIndex: "1000",
-//   },
-//   content: {
-//     position: "relative",
-//     top: "50%",
-//     left: "50%",
-//     transform: "translate(-50%, -50%)",
-//     borderRadius: "10px",
-//     border: "none",
-//     maxWidth: "80%",
-//     maxHeight: "80%",
-//   },
-// };
-
-// const Container = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   flex-direction: column;
-//   padding: 20px;
-// `;
-
-// const Image = styled.img`
-//   max-width: 100%;
-//   max-height: 100%;
-//   object-fit: contain;
-// `;
-
-// const ButtonContainer = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   width: 100%;
-//   margin-top: 20px;
-// `;
-
-// const Button = styled.button`
-//   padding: 10px 20px;
-//   background-color: #007bff;
-//   color: #ffffff;
-//   border: none;
-//   border-radius: 5px;
-//   cursor: pointer;
-// `;
-
-// export default function BigImg({ images, selectedImageIndex, closeModal }) {
-//   const [currentIndex, setCurrentIndex] = useState(selectedImageIndex);
-
-//   const handleNextImage = () => {
-//     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-//   };
-
-//   const handlePrevImage = () => {
-//     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-//   };
-
-//   return (
-//     <Modal isOpen={true} onRequestClose={closeModal} style={StyledModal} shouldCloseOnOverlayClick={true}>
-//       <Container>
-//         <Image src={images[currentIndex]} alt={`Image ${currentIndex}`} />
-//         <ButtonContainer>
-//           <Button onClick={handlePrevImage}>이전</Button>
-//           <Button onClick={handleNextImage}>다음</Button>
-//         </ButtonContainer>
-//       </Container>
-//     </Modal>
-//   );
-// }
