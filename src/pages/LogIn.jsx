@@ -35,16 +35,45 @@ export default function LogIn() {
     setIsPWInputClick(false);
   }
 
-  function handleLoginArbitary() {
-    localStorage.setItem('Token','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDczNzMzNzksImV4cCI6MTcwNzQ2MzM3OSwibWVtYmVySWQiOjMsInJvbGUiOiJVU0VSIn0.TL4gJHsj-KfaVEtfFsILKW1VKO0-23cSaEWsI2M5SyTEM24CwpqsOYWFuR57f83uy4_aFqmVKlnoFAcOssnZFA')
-    localStorage.setItem('arbitaryLoginForHeader2', true);
-    //localStorage.setItem('Token','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDczOTczMjQsImV4cCI6MTcwNzQ4NzMyNCwibWVtYmVySWQiOjEzLCJyb2xlIjoiVVNFUiJ9.AVpOV_T7F2L6saBDgQpg2t_K9e122P0bxjobI5P0rqYqTa1lzFXsNnJbvTeODZqROF2tXNOVUOZJdyn13JmUYw')
-    window.location.href = '/'; // Home 페이지로 이동
+  const onChangeId = (e) => {
+    setID(e.target.value);
   }
 
-  function handleClick() {
-    //getUserInfo();
+  const onChangePasswords = (e) => {
+    setPassword(e.target.value);
   }
+
+  const URL = localStorage.getItem('URL');
+  const handleLogin = async () => {
+    try {
+      const baseUrl = `${URL}/api/form/signIn`;
+      const response = await axios.post(
+        baseUrl,
+        {
+          "email": ID,
+          "password": Password,
+        },
+        {
+          headers: {
+            'Accept': '*/*',
+            'Content-Type': 'application/json',
+          }
+        },
+      );
+      console.log('사용자 정보가 성공적으로 보내졌습니다.',response.data);
+      localStorage.setItem('Token', response.data.accessToken);
+      window.location.href = '/'; // Home 페이지로 이동
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
+
+  // function handleLogin() {
+  //   localStorage.setItem('Token','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDczNzMzNzksImV4cCI6MTcwNzQ2MzM3OSwibWVtYmVySWQiOjMsInJvbGUiOiJVU0VSIn0.TL4gJHsj-KfaVEtfFsILKW1VKO0-23cSaEWsI2M5SyTEM24CwpqsOYWFuR57f83uy4_aFqmVKlnoFAcOssnZFA')
+  //   localStorage.setItem('arbitaryLoginForHeader2', true);
+  //   //localStorage.setItem('Token','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDczOTczMjQsImV4cCI6MTcwNzQ4NzMyNCwibWVtYmVySWQiOjEzLCJyb2xlIjoiVVNFUiJ9.AVpOV_T7F2L6saBDgQpg2t_K9e122P0bxjobI5P0rqYqTa1lzFXsNnJbvTeODZqROF2tXNOVUOZJdyn13JmUYw')
+  //   window.location.href = '/'; // Home 페이지로 이동
+  // }
 
   return (
     <S.HomeWrap>
@@ -57,7 +86,8 @@ export default function LogIn() {
         <div>
           <S.Input
             type="email"
-            //value={ID}
+            value={ID}
+            onChange={onChangeId}
             onFocus={handleIDInputFocus} //input박스에 들어올 때
             onBlur={handleIDInputBlur} //input박스에서 나갔을 때
             placeholder={isIDInputClick ? '' : '아이디를 입력해주세요'}
@@ -70,7 +100,8 @@ export default function LogIn() {
         <div>
           <S.Input
             type="password"
-            //value={Password}
+            value={Password}
+            onChange={onChangePasswords}
             onFocus={handlePWInputFocus} //input박스에 들어올 때
             onBlur={handlePWInputBlur} //input박스에서 나갔을 때
             placeholder={isPWInputClick ? '' : '비밀번호를 입력해주세요'}
@@ -85,7 +116,7 @@ export default function LogIn() {
             height="52px"
             width="345px"
             style={{ marginTop: '20px' }}
-            onClick={handleLoginArbitary}
+            onClick={handleLogin}
           >
             로그인
           </StyledButton>

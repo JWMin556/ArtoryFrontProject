@@ -38,7 +38,6 @@ const url = `${URL}/api/exhibitions/main`;
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState(null);
-  const token = localStorage.getItem('Token');
 
   useEffect(() => {
     (async () => {
@@ -46,7 +45,6 @@ export default function Home() {
         const response = await axios.get(url, {
           headers: {
             Accept: '*/*',
-            Authorization: `Bearer ${token}`,
             'content-type': 'application/json',
           },
         });

@@ -90,60 +90,108 @@ export default function SignUp() {
   // 초기값 세팅
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [certificateNumber, setCertificateNumber] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
   // 유효성 검사
+  const [nameValid, setNameValid] = useState(false);
   const [emailValid, setEmailValid] = useState(false); //아마 얘로 이메일 유효성 검사를 해야할 듯
+  const [certificateNumberValid, setCertificateNumberValid] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
+  const [checkBoxValid, setCheckBoxValid] = useState(false);
   
-  const [notAllow, setNotAllow] = useState(true);
+  //이메일버튼과 인증번호 버튼 활성화여부
+  const [notAllowEmail, setNotAllowEmail] = useState(true);
+  const [notAllowCertificateNumber, setNotAllowCertificateNumber] = useState(true);
+
+  //랜덤6자리 인증번호 생성을 위한 함수
+  const[random,setRandom] = useState("000000");
+  function generateRandomString(length){
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+  function generateRandomCode() {
+    setRandom(generateRandomString(6));
+  }
 
   const onChangeName = (e) => {
     setName(e.target.value);
+    if(name){
+      setNameValid(true);
+    } else {
+      setNameValid(false);
+    }
   };
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
-    // const regex =
-    //   /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
-    // if (regex.test(e.target.value)) {
-    //   setEmailValid(true);
-    // } else {
-    //   setEmailValid(false);
-    // }
+    const regex =
+      /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    if (regex.test(e.target.value)) {
+      setNotAllowEmail(false);
+      generateRandomCode();
+    } else {
+      setNotAllowEmail(true);
+    }
   };
 
-  //Emailjs시험용
-  const [isEmailSent, setIsEmailSent] = useState(false);
-    const sendVerificationEmail = () => {
-      const templateParams = {
-        to_email: 'gtj556@naver.com',// 수신 이메일 ex) test@test.gmail.com,
-        from_name : 'test',
-        message: '인증되었습니다.'
+  //Emailjs를 통해 인증번호 메일보내기
+  const sendVerificationEmail = () => {
+    const templateParams = {
+      to_email: email,
+      from_name: 'Artory인증',
+      message: `당신의 인증번호는 ${random}입니다.`
     };
-
     emailjs
       .send(
-        'test-service', // 서비스 ID
-        'test-templete', // 템플릿 ID
+        'service_n3mb2ob', //서비스 ID
+        'template_w8wnorl', //템플릿 ID
         templateParams,
-        'qsos29YmuOaN1CNcl', // public-key
+        'qsos29YmuOaN1CNcl' //public key
       )
       .then((response) => {
         console.log('이메일이 성공적으로 보내졌습니다:', response);
-        setIsEmailSent(true);
+        setEmailValid(true);
       })
       .catch((error) => {
         console.error('이메일 보내기 실패:', error);
-        // 이메일 전송 실패 처리 로직 추가
+        alert("인증번호가 보내지지 않았습니다. 다시 시작해주세요");
       });
   };
 
   const handleVerification = () => {
     sendVerificationEmail();
+    alert("인증번호를 발송했습니다. 만약, 입력이 잘못될 경우 다시 시작해주세요");
   };
+
+  const onChangeCertificateNumber = (e) => {  //인증번호가 일치할 경우 이 함수를 통해 certifacateNumber와 인증확인 버튼을 활성화한다. 
+    setCertificateNumber(e.target.value);
+    if(e.target.value === random){
+      setNotAllowCertificateNumber(false);
+    } else {
+      setNotAllowCertificateNumber(true);
+    }
+  };
+
+  // useEffect(() => {
+  //   //우선, 인증번호부분만 useEffect를 주었음(그렇기에 현재는 휴대폰 번호만 입력해도 인증확인 부분이 활성화됨)
+  //   if (certificateNumberValid) {
+  //     setNotAllowCertificateNumber(false);
+  //     return;
+  //   }
+  //   setNotAllowCertificateNumber(true);
+  // }, [certificateNumberValid]);
+
+  const checkCertificateNumber = () => { //n에는 certificateNumber가 들어가야
+    setCertificateNumberValid(true);
+    alert("인증이 완료되었습니다");
+  }
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
@@ -165,15 +213,6 @@ export default function SignUp() {
     }
   };
 
-  // useEffect(() => {
-  //   //우선, 인증번호 말고 휴대폰 번호 부분만 useEffect를 주었음(그렇기에 현재는 휴대폰 번호만 입력해도 인증확인 부분이 활성화됨)
-  //   if (isPhone) {
-  //     setNotAllow(false);
-  //     return;
-  //   }
-  //   setNotAllow(true);
-  // }, [isPhone]);
-
   //체크박스 전용
   const [allAgreed, setAllAgreed] = useState(false);
   const [agreements, setAgreements] = useState({
@@ -189,6 +228,11 @@ export default function SignUp() {
       (value) => value === true
     );
     setAllAgreed(allChecked);
+    if(allChecked) {
+      setCheckBoxValid(true);
+    } else {
+      setCheckBoxValid(false);
+    }
   };
 
   const onChangeAllAgreement = (e) => {
@@ -203,6 +247,7 @@ export default function SignUp() {
       )
     );
     setAllAgreed(checked);
+    setCheckBoxValid(true);   //여기다가 하면 되는지 잘 확신은 안가지만....
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -221,27 +266,44 @@ export default function SignUp() {
     setIsModal3Open(!isModal3Open);
   };
 
-  /*
+  
   //회원가입 폼 제출 함수
-  const url = 'http://3.39.39.6:8080/api/member/'
-  // const token = localStorage.getItem('Token');
+  const URL = localStorage.getItem('URL');
   const handleSubmit = async() => {
     try {
-      const response = await axios.post(`${url}info`, 
-      {
-        email: email,
-        //필요한 다른 변수들은 추가해야 함
-      });
-      console.log(response.data);
+      const baseUrl = `${URL}/api/form/signUp`;
+      const response = await axios.post(
+        baseUrl, 
+        {
+          "email": email,
+          "password": password,
+          "memberName" : name,
+          "memberType": "FORM",
+          "role": "USER",
+          "profile": "string",
+        },
+        {
+          headers: {
+            'Accept': '*/*',
+            'Content-Type': 'application/json',
+          }
+        },
+      );
+      console.log('사용자 정보가 성공적으로 보내졌습니다.',response.data);
+      localStorage.setItem('Token', response.data.accessToken);
     }catch(error) {
-      console.error('Error fetching data:', error.response.data);
+      console.log(error.response.data);
+      if(error.response.data.errorCode === 'M-002'){
+        alert("이미 가입된 회원입니다!");
+        window.location.href = '/';
+      }
     }
   };
-  */
+  
  
   return (
     <Page>
-      <TitleWrap>회원가입인데 아직 사용하지 말아줘요!!!</TitleWrap>
+      <TitleWrap>회원가입</TitleWrap>
       <ContentWrap>
         <SuperTitle>
           <InputTitle style={{ marginTop: '94px' }}>이름</InputTitle>
@@ -270,16 +332,22 @@ export default function SignUp() {
             ) : (
                 <button onClick={handleVerification}>인증</button>
             )} */}
-            <StyledButton disabled={notAllow} color="#9BA0AE" height="25px" width="20%" fontSize="13px">인증하기</StyledButton>
+            <StyledButton disabled={notAllowEmail} onClick={handleVerification} color="#9BA0AE" height="25px" width="20%" fontSize="13px">인증하기</StyledButton>
           </InputWrap>
         </SuperTitle>
+
+        <div>{random}</div>
 
         <SuperTitle>
           <InputTitle>인증번호</InputTitle>
           <InputWrap>
-            <InputStyle placeholder="인증번호를 입력해주세요" />{' '}
+            <InputStyle 
+              placeholder="인증번호를 입력해주세요"
+              value={certificateNumber}
+              onChange={onChangeCertificateNumber}
+              />
             {/*value와 onchange 추가해야 함*/}
-            <StyledButton disabled={notAllow} color="#9BA0AE" height="25px" width="20%" fontSize="13px">인증완료</StyledButton>
+            <StyledButton disabled={notAllowCertificateNumber} onClick={checkCertificateNumber} color="#9BA0AE" height="25px" width="20%" fontSize="13px">인증완료</StyledButton>
           </InputWrap>
         </SuperTitle>
 
@@ -423,15 +491,27 @@ export default function SignUp() {
 
         <div style={{ textAlign: 'center' }}>
           <Link to="/onboarding">
-            <StyledButton
-              style={{ display: 'inline-block' }}
-              height="52px"
-              width="80%"
-              fontSize="20px"
-              // onClick={handleSubmit} 후에 회원가입 페이지가 완료되면 얘를 보내면 됨
-            >
-              ARTORY 시작하기
-            </StyledButton>
+            {/* {nameValid && emailValid && certificateNumberValid && isPassword && isPasswordConfirm && checkBoxValid &&
+              <StyledButton  //{isModal3Open && <Modal3 onClose={toggleModal3} />} 이런 방식으로 모두가 활성화되어야 가능하도록 하자...전부 유효성변수들로 즉, checkCertificateNumber에는 email의 유효성을 setture로
+                style={{ display: 'inline-block' }}
+                height="52px"
+                width="80%"
+                fontSize="20px"
+                onClick={handleSubmit} //후에 회원가입 페이지가 완료되면 얘를 보내면 됨
+                >
+                ARTORY 시작하기
+              </StyledButton>
+            } */}
+            <StyledButton  //{isModal3Open && <Modal3 onClose={toggleModal3} />} 이런 방식으로 모두가 활성화되어야 가능하도록 하자...전부 유효성변수들로 즉, checkCertificateNumber에는 email의 유효성을 setture로
+                style={{ display: 'inline-block' }}
+                height="52px"
+                width="80%"
+                fontSize="20px"
+                disabled={!nameValid || !emailValid || !certificateNumberValid || !isPassword || !isPasswordConfirm || !checkBoxValid}
+                onClick={handleSubmit} //후에 회원가입 페이지가 완료되면 얘를 보내면 됨
+                >
+                ARTORY 시작하기
+              </StyledButton>
           </Link>
         </div>
       </ContentWrap>
