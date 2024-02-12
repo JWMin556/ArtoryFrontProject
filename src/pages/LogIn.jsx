@@ -9,8 +9,6 @@ import LOCK from '../Img/Login/lock.svg';
 import { getUserInfo } from '../components/API/Logout_API';
 import axios from 'axios';
 
-const UserInfoURL =
-  'http://artory-prod-env.eba-axnhdqgn.ap-northeast-2.elasticbeanstalk.com/api/member/info';
 export default function LogIn() {
   //주연씨가 작업해주실 LogIn페이지입니다.
   const [ID, setID] = useState('');
@@ -40,6 +38,7 @@ export default function LogIn() {
   function handleLoginArbitary() {
     localStorage.setItem('Token','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDczNzMzNzksImV4cCI6MTcwNzQ2MzM3OSwibWVtYmVySWQiOjMsInJvbGUiOiJVU0VSIn0.TL4gJHsj-KfaVEtfFsILKW1VKO0-23cSaEWsI2M5SyTEM24CwpqsOYWFuR57f83uy4_aFqmVKlnoFAcOssnZFA')
     localStorage.setItem('arbitaryLoginForHeader2', true);
+    //localStorage.setItem('Token','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDczOTczMjQsImV4cCI6MTcwNzQ4NzMyNCwibWVtYmVySWQiOjEzLCJyb2xlIjoiVVNFUiJ9.AVpOV_T7F2L6saBDgQpg2t_K9e122P0bxjobI5P0rqYqTa1lzFXsNnJbvTeODZqROF2tXNOVUOZJdyn13JmUYw')
     window.location.href = '/'; // Home 페이지로 이동
   }
 

@@ -86,7 +86,7 @@ const Time = styled.button`
   //font-weight : 530;
   padding-bottom : 5%;
   border : none;
-  color : #ABABAB
+  color : #ABABAB;
 `;
 const BlackTime = styled.button`
   background-color : #000;
@@ -109,7 +109,7 @@ const Who = styled.button`
   font-size : 11px;  
   padding-bottom : 5%;
   border : none;
-  color : #ABABAB
+  color : #ABABAB;
 `;
 const BlackWho = styled.button`
   background-color : #000;

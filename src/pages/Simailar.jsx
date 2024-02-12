@@ -83,10 +83,6 @@ export default function Simailar() {
               <div>
                 <Poster item={item} />
               </div>
-              <WrapIcon className="ggg">
-                <Heart item={item} />
-                <Save item={item} />
-              </WrapIcon>
             </WrapPoster>
           ))}
       </WrapResult>

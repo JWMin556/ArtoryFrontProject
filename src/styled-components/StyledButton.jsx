@@ -3,17 +3,16 @@ import styled from 'styled-components';
 const StyledButton = styled.button`
   height: ${(props) => props.height || '40px'};
   width: ${(props) => props.width || '123px'};
+  font-size: ${(props) => props.fontSize || '20px'};
   background-color: ${(props) => (props.disabled ? '#dadada' : '#121212')};
-  color: white;
+  color: ${(props) => props.color || 'white'};
   border: none;
-  //border-radius: 10px;
   font-weight: 600;
-  font-size: 20px;
   word-wrap: break-word;
   cursor: pointer;
   font-family: 'Pretendard';
   box-shadow: ${(props) =>
-    props.disabled ? '' : '0px 2px 8px rgba(0, 58.18, 103.06, 0.4)'};
+    props.disabled ? '' : '1px 2px 8px #f3f3f3'};
 `;
 
 export default StyledButton;

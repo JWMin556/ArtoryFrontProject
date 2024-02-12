@@ -7,7 +7,6 @@ import StoryList from './StoryList';
 const TileWrapper = styled.div`
   position: relative;
   //border : 1px solid red;
-  border-radius: 10px;
   width: 100%;
   height: 100%;
   box-sizing: border-box;

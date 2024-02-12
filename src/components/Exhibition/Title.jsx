@@ -1,4 +1,5 @@
-import React from 'react'
+import axios from 'axios';
+import React,{useEffect, useState} from 'react'
 import styled from 'styled-components'
 
 const WrapTitle = styled.div`
@@ -14,10 +15,15 @@ const WrapTitle = styled.div`
     //bottom : 0%;
     //left : 0%;
     //right : 0%;
+<<<<<<< HEAD
+    box-shadow: 1px 2px 8px #f3f3f3;
+=======
+>>>>>>> 3b8d5198434746ac002af99541c8e8bbd2b5226f
     display : flex ;
     justify-content : center;
     align-items : center;
-    font-size : small;
+    font-size : 15px;
+    font-weight: 800;
     font-family: 'Pretendard';
     padding-left: 15px;
     padding-right: 15px;

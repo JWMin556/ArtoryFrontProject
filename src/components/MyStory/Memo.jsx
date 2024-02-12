@@ -8,7 +8,7 @@ const Wrap = styled.div`
 `;
 const MemoStyle = styled.textarea`
     width: 100%;
-    height: 100%;
+    height: 510.5px;
     color: #ababab;
     font-family: 'Pretendard';
     background-color: #F4f5f7;
@@ -16,8 +16,11 @@ const MemoStyle = styled.textarea`
     padding-left : 5%;
     padding-top : 5%;
     resize: none;
-    margin-left : 30%;
-    margin-top : 23%;
+    position : relative;
+    top : 9.5%;
+    right : 28%;
+    //margin-left : 30%;
+    //margin-top : 23%;
     &::placeholder {
         color: #ababab;
         font-family: 'Pretendard';
@@ -33,8 +36,8 @@ const SaveButton = styled.button`
     width : 70px;
     height : 28px;
     position : relative;
-    bottom : 10%;
-    left : 105%;
+    top : 1%;
+    left : 46%;
     font-family: 'Pretendard';
     font-size : 12px;
 `;

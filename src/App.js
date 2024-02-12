@@ -49,6 +49,7 @@ function App() {
   useEffect(() => {
     // 로컬 스토리지에 URL 저장
     localStorage.setItem('URL', 'http://3.39.39.6:8080');
+    //localStorage.setItem('URL', 'http://artory-powerful-server.store');
     // 일정 시간(예: 1.5초) 후에 로딩 상태 변경
     const timer = setTimeout(() => {
       setLoading(false);

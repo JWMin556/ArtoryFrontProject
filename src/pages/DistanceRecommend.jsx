@@ -92,10 +92,6 @@ export default function DistanceRecommend() {
               <div>
                 <Poster item={item} />
               </div>
-              <WrapIcon>
-                <Heart item={item} />
-                <Save item={item} />
-              </WrapIcon>
             </WrapPoster>
           ))}
       </WrapResult>

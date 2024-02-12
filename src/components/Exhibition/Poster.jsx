@@ -1,19 +1,57 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Title from './Title';
 import { BeforeWritionSaveApi } from '../API/StorySave';
+import Heart from './Heart';
+import Save from './Save';
 const PosterStyle = styled.img`
+    display: block;
     width : 186px;
     height: 268px;
     //border-radius : 10px; 
     box-shadow: 1px 2px 8px #f3f3f3;
+    object-fit: cover;
 `;
 const WrapTitle = styled.div`
     position : relative;
     bottom : 270px;
 `;
-export default function Poster({setIsModalOpen,year,month,day,userStoryData,...props}) {
+export const Linear = styled.div`
+    position: absolute;
+    bottom : 0;
+    width: 100%;
+    height: 60%; //60% 100% 고민
+    background-image: linear-gradient(rgba(217, 217, 217, 0), rgba(0, 0, 0, 0.7));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    p {
+    z-index: 4;
+    color: white;
+    }
+`;
+export default function Poster({
+    setIsModalOpen,
+    year,
+    month,
+    day,
+    userStoryData,
+    ...props}) {
+    const [isShow, setIsShow] = useState();
+
+    useEffect(()=>{
+        if(props.source=="record" || props.source==="before")
+        {
+            setIsShow(false)
+        }
+        else
+        {
+            setIsShow(true)
+        }
+    },[isShow])
+    const [duration,setDuration] = useState();
     //console.log('전시명:',props.item.exhibitionTitle)
     const navigate = useNavigate();
     const onClickDetail = (item) => {
@@ -21,6 +59,7 @@ export default function Poster({setIsModalOpen,year,month,day,userStoryData,...p
         if(props.source=="record")//스토리를 작성 페이지로 가기 위한 포스터
         {
             navigate(`/mystory/${item.exhibitionTitle}`, { state: { item, userStoryData}}) 
+            setIsShow(true)
         }
         else if(props.source=="before")  //캘린더에 전시회를 저장하기 위한 포스터
         {
@@ -28,7 +67,8 @@ export default function Poster({setIsModalOpen,year,month,day,userStoryData,...p
             setIsModalOpen(false)
             navigate('/mystory');
         }
-        else{
+        else
+        {
              //전시회 세부 정보로 가기 위한 포스터 
             navigate(`/exhibitiondetail/${item.exhibitionTitle}`, { state: { item } });
         }
@@ -46,12 +86,15 @@ export default function Poster({setIsModalOpen,year,month,day,userStoryData,...p
     };
 
 return (
-    <div style={{height:'268px' }}
+    <div style={{ height:'268px',position: 'relative' }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={() => onClickDetail(props.item)}
     >
         <PosterStyle src={props.item.exhibitionImage}/>
+        <Linear />
+            {isShow && <Heart item={props.item}/> }
+            {isShow && <Save item={props.item}/> }
         <WrapTitle>{isShowTitle && <Title title = {props.item.exhibitionTitle}/>}</WrapTitle>
     </div>
 );

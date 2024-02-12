@@ -25,6 +25,7 @@ const StyledModal = {
     backgroundColor: '#ffff',
     justifyContent: 'center',
     overflow: 'auto',
+    zIndex : '500'
   },
 };
 const WrapModal = styled.div`

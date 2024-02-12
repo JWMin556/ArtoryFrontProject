@@ -8,7 +8,7 @@ const SearchStyle = styled.input`
     box-shadow: 1px 2px 8px #f3f3f3;
     border : none;
     border-radius : 5px;
-    width : 350px;
+    width : 360px;
     height : 39px;
     padding : 0;
     padding-left :14%;

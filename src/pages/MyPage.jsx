@@ -8,22 +8,21 @@ import SlidePictures from '../components/MyPage/SlidePictures';
 import { TestDummy } from '../TestDummy';
 import Pictures from '../components/MyPage/Pictures';
 import SlideMyStory from '../components/MyPage/SlideMyStory';
+import SlideScrappedStory from '../components/MyPage/SlideScrappedStory';
+import SlideScrappedMember from '../components/MyPage/SlideScrappedMember';
 
 const PageContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%; /* 페이지가 화면 전체를 채우도록 설정 */
   display: flex;
   justify-content: center; /* 수평 가운데 정렬 */
-  padding-bottom: 20px; /* 원하는 여백 값 */
   margin-top: 100px;
 `;
 
 const Page = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 700px;
+  /* position: relative; */
+  width: 76%;
+  /* max-width: 800px; */
   padding: 0 20px;
+  position: absolute;
   display: flex;
   flex-direction: column;
   margin-bottom: 20px; /* 원하는 여백 값 */
@@ -56,7 +55,6 @@ const ImgStyled = styled.img`
   display: flex;
   flex-direction: column;
   margin-top: 20%;
-  border-radius: 10px;
   width: 130px;
 `;
 
@@ -72,88 +70,101 @@ const TitleRightWrapParagraphArea = styled.div`
 `;
 
 const TitleRightWrapParagraphTitle = styled.div`
-  color: #616161;
-  font-size: 24px;
+    display: flex;
+    flex-direction: column;
+`;
+
+const BoldSentence = styled.p`
+  color: #262626;
+  font-size: 20px;
   font-family: 'Pretendard';
   font-weight: 700;
-  line-height: 31.94px;
+  line-height: 26.61px;
   word-wrap: break-word;
   margin-right: 120px;
 `;
 
-const TitleRightWrapParagraphContent = styled.div`
+const InputWrap = styled.div`  
   display: flex;
-  background: #efeeee;
-  border-radius: 10px;
-  /* border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid; */
-  align-items: center;
+  background: #EFEEEE;
   box-shadow: 1px 2px 8px #f3f3f3;
+  padding: 5px;
+  margin-left: auto;
+  margin-top: 8px;
+  margin-bottom: 13px;
+  width: 200px;
+`;
+
+const InputStyle = styled.div`  
   color: #262626;
-  font-size: 12px;
+  font-size: 16px;
   font-family: 'Pretendard';
   font-weight: 600;
   line-height: 21.29px;
   letter-spacing: 0.56px;
   word-wrap: break-word;
+  border: none;
+  outline: none;
+  background: #EFEEEE;
 `;
 
 const ContentWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 20%;
-  /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    margin-top: 20%;
+    margin-left: 5%;
+    margin-right: 5%;
+    /* background-color: red; */
 `;
 
 const ContentBtns = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 `;
 
 const Btns1 = styled.button`
-  height: 35px;
-  width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid;
-  align-items: center;
-  box-shadow: 1px 2px 8px #f3f3f3;
-  color: #616161;
-  font-size: 14px;
-  font-family: 'Pretendard';
-  font-weight: 600;
-  line-height: 18.63px;
-  letter-spacing: 0.49px;
-  word-wrap: break-word;
-  border: none;
-  background-color: #efeeee;
-  &:hover {
-    background-color: black;
-    color: white;
-  }
+    height: 35px;
+    width: 20%;
+    display: flex;
+    align-items : center;
+    justify-content: center;
+    border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid;
+    align-items : center;
+    box-shadow: 1px 2px 8px #f3f3f3;
+    color: #616161;
+    font-size: 14px;
+    font-family: 'Pretendard';
+    font-weight: 600;
+    line-height: 18.63px;
+    letter-spacing: 0.49px;
+    word-wrap: break-word;
+    border: none;
+    background-color: #EFEEEE;
+    &:hover {
+        background-color: black;
+        color: white;
+    }
 `;
 
 const Btns2 = styled.button`
-  height: 35px;
-  width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid;
-  align-items: center;
-  box-shadow: 1px 2px 8px #f3f3f3;
-  color: #f3f3f3;
-  font-size: 14px;
-  font-family: 'Pretendard';
-  font-weight: 600;
-  line-height: 18.63px;
-  letter-spacing: 0.49px;
-  word-wrap: break-word;
-  border: none;
-  background-color: black;
+    height: 35px;
+    width: 20%;
+    display: flex;
+    align-items : center;
+    justify-content: center;
+    border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid;
+    align-items : center;
+    box-shadow: 1px 2px 8px #f3f3f3;
+    color: #f3f3f3;
+    font-size: 14px;
+    font-family: 'Pretendard';
+    font-weight: 600;
+    line-height: 18.63px;
+    letter-spacing: 0.49px;
+    word-wrap: break-word;
+    border: none;
+    background-color: black;
 `;
 
 const ContentPosters = styled.div`
@@ -165,8 +176,8 @@ const URL = localStorage.getItem('URL');
 const url = `${URL}/api/mypage/all?page=1`;
 const token = localStorage.getItem('Token');
 export default function MyPage() {
-  //여기서부터 나의 스토리 버튼 ~ 저장 스토리 버튼을 위한 부분입니다.
-  const [isMyStoryBtnClicked, setIsMyStoryBtnClicked] = useState(false);
+  //여기서부터 나의 스토리 버튼 ~ 저장 스토리 버튼을 위한 부분입니다. 
+  const [isMyStoryBtnClicked, setIsMyStoryBtnClicked] = useState(true);
   const [isMyGalaryBtnClicked, setIsGalaryBtnClicked] = useState(false);
   const [isSavedUserBtnClicked, setIsSavedUserBtnClicked] = useState(false);
   const [isSaveStoryBtnClicked, setIsSaveStoryBtnClicked] = useState(false);
@@ -260,65 +271,66 @@ export default function MyPage() {
                 width="8%"
               />
             </Link>
-
             <TitleRightWrapParagraphArea>
-              <TitleRightWrapParagraphTitle>
-                닉네임
-              </TitleRightWrapParagraphTitle>
-              <TitleRightWrapParagraphContent>
-                {userData.nickname}
-              </TitleRightWrapParagraphContent>
+                <TitleRightWrapParagraphTitle>
+                    <BoldSentence>닉네임</BoldSentence>
+                </TitleRightWrapParagraphTitle>
+                <InputWrap>
+                    <InputStyle>{userData.nickname}</InputStyle>
+                </InputWrap>
             </TitleRightWrapParagraphArea>
 
             <TitleRightWrapParagraphArea>
-              <TitleRightWrapParagraphTitle>
-                한 줄 소개
-              </TitleRightWrapParagraphTitle>
-              <TitleRightWrapParagraphContent>
-                {userData.introduction}
-              </TitleRightWrapParagraphContent>
+                <TitleRightWrapParagraphTitle>
+                    <BoldSentence>한 줄 소개</BoldSentence>
+                </TitleRightWrapParagraphTitle>
+                <InputWrap>
+                    <InputStyle>{userData.introduction}</InputStyle>
+                </InputWrap>
             </TitleRightWrapParagraphArea>
+
             <TitleRightWrapParagraphArea>
-              <TitleRightWrapParagraphTitle>
-                나의 키워드
-              </TitleRightWrapParagraphTitle>
-              <TitleRightWrapParagraphContent>
-                {userData.myKeyword}
-              </TitleRightWrapParagraphContent>
+                <TitleRightWrapParagraphTitle>
+                    <BoldSentence>나의 키워드</BoldSentence>
+                </TitleRightWrapParagraphTitle>
+                <InputWrap>
+                    <InputStyle>{userData.myKeyword}</InputStyle>
+                </InputWrap>
             </TitleRightWrapParagraphArea>
+
           </TitleRightWrap>
         </TitleWrap>
 
         <ContentWrap>
-          <ContentBtns>
-            {isMyStoryBtnClicked ? (
-              <Btns2>나의 스토리</Btns2>
-            ) : (
-              <Btns1 onClick={handleMyStoryBtnClick}>나의 스토리</Btns1>
-            )}
-            {isMyGalaryBtnClicked ? (
-              <Btns2>나의 사진첩</Btns2>
-            ) : (
-              <Btns1 onClick={handleMyGalaryBtnClick}>나의 사진첩</Btns1>
-            )}
-            {isSavedUserBtnClicked ? (
-              <Btns2>저장 유저</Btns2>
-            ) : (
-              <Btns1 onClick={handleSavedUserBtnClick}>저장 유저</Btns1>
-            )}
-            {isSaveStoryBtnClicked ? (
-              <Btns2>저장 스토리</Btns2>
-            ) : (
-              <Btns1 onClick={handleSaveStoryBtnClick}>저장 스토리</Btns1>
-            )}
-          </ContentBtns>
+            <ContentBtns>
+                {isMyStoryBtnClicked ? (
+                <Btns2>나의 스토리</Btns2>
+                ) : (
+                <Btns1 onClick={handleMyStoryBtnClick}>나의 스토리</Btns1>
+                )}
+                {isMyGalaryBtnClicked ? (
+                <Btns2>나의 사진첩</Btns2>
+                ) : (
+                <Btns1 onClick={handleMyGalaryBtnClick}>나의 사진첩</Btns1>
+                )}
+                {isSavedUserBtnClicked ? (
+                <Btns2>저장 유저</Btns2>
+                ) : (
+                <Btns1 onClick={handleSavedUserBtnClick}>저장 유저</Btns1>
+                )}
+                {isSaveStoryBtnClicked ? (
+                <Btns2>저장 스토리</Btns2>
+                ) : (
+                <Btns1 onClick={handleSaveStoryBtnClick}>저장 스토리</Btns1>
+                )}
+            </ContentBtns>
 
-          <ContentPosters>
-            {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
-            {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
-            {isSavedUserBtnClicked && <Slide Dummy={myScrappedStoriesData} />}
-            {isSaveStoryBtnClicked && <Slide Dummy={myScrappedMembersData} />}
-          </ContentPosters>
+            <ContentPosters>
+                {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
+                {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
+                {isSavedUserBtnClicked && <SlideScrappedMember Dummy={myScrappedMembersData} />}
+                {isSaveStoryBtnClicked && <SlideScrappedStory Dummy={myScrappedStoriesData} />}
+            </ContentPosters>
         </ContentWrap>
       </Page>
     </PageContainer>
