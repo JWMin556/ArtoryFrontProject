@@ -10,6 +10,7 @@ const HomeWrap = styled.div`
   margin: 100px auto; /*정확하게 가운데로 정렬시킵니다. */
   display: flex;
   justify-content: space-evenly;
+  height: 100vh; //footer 때문에 받아주셔야 합니다ㅜ
 `; //메인화면 전체를 감싸주기 위한 스타일드 컴포넌트입니다.
 
 const HomeLeftWrap = styled.div`
