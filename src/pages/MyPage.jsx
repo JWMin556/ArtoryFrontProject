@@ -314,44 +314,7 @@ export default function MyPage() {
             </TitleRightWrapParagraphArea>
           </TitleRightWrap>
         </TitleWrap>
-
-        {/* {isSavedUserClicked ? (
-          <ContentUserWrap>
-            토리토리님이 <br /> 작성하신 STORY
-          </ContentUserWrap>
-        ) : (
-          <ContentWrap>
-            <ContentBtns>
-              {isMyStoryBtnClicked ? (
-                <Btns2>나의 스토리</Btns2>
-              ) : (
-                <Btns1 onClick={handleMyStoryBtnClick}>나의 스토리</Btns1>
-              )}
-              {isMyGalaryBtnClicked ? (
-                <Btns2>나의 앨범</Btns2>
-              ) : (
-                <Btns1 onClick={handleMyGalaryBtnClick}>나의 앨범</Btns1>
-              )}
-              {isSavedUserBtnClicked ? (
-                <Btns2>저장 유저</Btns2>
-              ) : (
-                <Btns1 onClick={handleSavedUserBtnClick}>저장 유저</Btns1>
-              )}
-              {isSaveStoryBtnClicked ? (
-                <Btns2>저장 스토리</Btns2>
-              ) : (
-                <Btns1 onClick={handleSaveStoryBtnClick}>저장 스토리</Btns1>
-              )}
-            </ContentBtns>
-
-            <ContentPosters>
-              {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
-              {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
-              {isSavedUserBtnClicked && <UserSlide width={126} height={126} Dummy={myScrappedMembersData}/>}
-              {isSaveStoryBtnClicked && <SlideScrappedStory Dummy={myScrappedStoriesData} />}
-            </ContentPosters>
-        </ContentWrap>
-        )} */}
+        
         <ContentWrap>
           <ContentBtns>
             {isMyStoryBtnClicked ? (
@@ -379,8 +342,7 @@ export default function MyPage() {
           <ContentPosters>
             {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
             {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
-            {isSavedUserBtnClicked && <UserSlide width={126} height={126} Dummy={myScrappedMembersData}/>}
-            {/* <SlideScrappedMember width={126} height={126} Dummy={myScrappedMembersData} /> */}
+            {isSavedUserBtnClicked && <SlideScrappedMember width={126} height={126} Dummy={myScrappedMembersData} />}
             {isSaveStoryBtnClicked && <SlideScrappedStory Dummy={myScrappedStoriesData} />}
           </ContentPosters>
         </ContentWrap>
