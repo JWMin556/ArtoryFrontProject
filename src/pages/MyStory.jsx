@@ -9,9 +9,7 @@ import SearchModal from '../components/MyStory/SearchModal1';
 import Memo from '../components/MyStory/Memo';
 import { getMystoryInfo, mystoryInfo } from '../components/API/Mystoyr_APITEST';
 import Poster from '../components/Exhibition/Poster';
-const URL = localStorage.getItem('URL');
-const url = `${URL}/api/mystory/all?page=1`;
-const token = localStorage.getItem('Token');
+
 
 export default function MyStory() {
   const [userData, setUserData] = useState([]);
@@ -90,9 +88,8 @@ export default function MyStory() {
         <div
           style={{
             fontSize: '30px',
-            fontWeight: 'bold',
-            fontFamily: 'Pretendard',
-            
+            fontWeight: '700',
+            fontFamily: 'Pretendard',            
             //textAlign: 'center'
           }}
         >

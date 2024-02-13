@@ -7,11 +7,10 @@ const InputTitle = styled.input`
     width : 800px;
     height : 55px;
     border: none;
-    border-radius: 10px;
     box-shadow: 1px 2px 8px #f3f3f3; 
     color : #ababab;
     //margin-bottom : 8%;
-    margin-top : 5%;
+    margin-top : 2%;
     &:focus {
       outline : none;
     }

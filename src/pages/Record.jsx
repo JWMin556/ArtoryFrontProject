@@ -36,8 +36,9 @@ const StoryRecord = styled.div`
 const Story = styled.div`
   //border : 1px solid red;
   width: 100%;
+  //color : red;
   font-size: 30px;
-  font-weight: bold;
+  font-weight: 800;
   font-family: 'Pretendard';
   margin-top: 10%;
 `;
@@ -122,7 +123,7 @@ export default function Record(props) {
   const [dateBoxColor, setDateBoxColor] = useState();
   const [keyword, setKeyword] = useState(''); //키워드
   const [picturesUrl, setPicturesUrl] = useState([state.item.exhibitionImage]); //선택한 사진 배열 
-
+  //console.log('state.item.exhibitionImage',state.item.exhibitionImage.toString())
   const id = state.item.exhibitionId; //전시회 아이디
   const exhibitionTitle = state.item.exhibitionTitle; //전시회 제목
   const storyId = state.item.storyId; //스토리 아이디
@@ -138,6 +139,7 @@ export default function Record(props) {
             'content-type': 'application/json',
           },
         });
+        //console.log("UserStoryData",response.data.stories)
         setUserStoryData(response.data.stories);
         //console.log("유저 스토리 정보",response.data.stories);
       } catch (error) {
@@ -175,8 +177,11 @@ export default function Record(props) {
           setWeather(response.data.storyWeather); //날씨 저장
           setCompanion(response.data.storyCompanion); //동반인
           setKeyword(response.data.storyKeyword); //키워드
-          setPicturesUrl(response.data.picturesUrl); //사진 리스트
-          console.log('스토리 내용 ', response.data);
+          setPicturesUrl([response.data.exhibitionImage]); //사진 리스트
+          console.log("스토리정보",response.data)
+          //console.log("이미지유알엘",response.data.picturesUrl); //사진 리스트
+
+          //console.log('스토리 내용 ', response.data);
         } catch (error) {
           console.error('Error fetching data:', error.response.data);
         }
@@ -186,20 +191,21 @@ export default function Record(props) {
 
   useEffect(() => {
     //api통신할 때 보내기 위한 값들이 잘 받아와지나 확인하기 위한 콘솔
-    // console.log("제목: ",title)
-    // console.log("시간: ",viewingTime)
-    // console.log("동반인: ",companion)
-    // console.log('장르1: ', genre1);
-    // console.log('장르2: ', genre2);
-    // console.log('장르3: ', genre3);
-    // console.log("만족도",satisfactionLevel)
-    // console.log("날씨",weather)
-    // console.log("내용",data)
-    // console.log("공개여부",isOpen)
-    // console.log("년",year)
-    // console.log("월",month)
-    // console.log("일",date)
-  }, []);
+    console.log("제목: ",title)
+    console.log("시간: ",viewingTime)
+    console.log("동반인: ",companion)
+    console.log('장르1: ', genre1);
+    console.log('장르2: ', genre2);
+    console.log('장르3: ', genre3);
+    console.log("만족도",satisfactionLevel)
+    console.log("날씨",weather)
+    console.log("내용",data)
+    console.log("공개여부",isOpen)
+    console.log("년",year)
+    console.log("월",month)
+    console.log("일",date)
+    //console.log("picturesUrl",picturesUrl)
+  });
 
   //저장 버튼 클릭 -> 동일한 전시 삭제를 물어보는 모달창 뜸
   //-> 동일한 전시 삭제 -> 새롭게 작성한 스토리 저장
@@ -232,7 +238,11 @@ export default function Record(props) {
       setStoryByDate((prevStoryByDate) => {
         for (let i = 0; i < userStoryData.length; i++) {
           for (let j = 0; j < userStoryData.length; j++) {
-            if (userStoryData[i].exhibitionTitle === exhibitionTitle) {
+            if (userStoryData[i].exhibitionTitle === exhibitionTitle && 
+                userStoryData[i].year !== year && 
+                userStoryData[i].month !== month &&
+                userStoryData[i].day !== date
+                ) {
               // 동일한 전시가 다른 날짜에 존재할 경우
               setIsDeleteModal(true); //모달 띄우고
               return (storyByDate[j] = userStoryData[i]); //겹치는 전시들만 모으는 배열에 넣어줌
@@ -277,6 +287,7 @@ export default function Record(props) {
         await progressSaveApi2(
           id, //전시회 아이디(exhibitionId)
           title,
+          data,
           viewingTime,
           companion,
           genre1,
@@ -284,10 +295,10 @@ export default function Record(props) {
           genre3,
           satisfactionLevel,
           weather,
-          isOpen,
           year,
           month,
           date,
+          isOpen,
           keyword,
           picturesUrl
         );

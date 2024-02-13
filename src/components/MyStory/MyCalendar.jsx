@@ -10,26 +10,38 @@ import one3 from '../../Img/Calendar/one3.svg'; //임시저장 원
 import SelectMonth from './SelectMonth';
 import SelectYear from './SelectYear';
 const Container = styled.div`
-  //border : 1px solid blue;
-  box-shadow: 1px 2px 8px #f3f3f3;
-  width: 735px;
-  height: 522px;
+  //border : 1px solid green;
+  width: 100vw;
+  height: 90vh;
   align-items: center;
   flex-direction: column;
+  //justify-content : center;
   display: flex;
   font-size: 20px;
-  padding: 0 5% 0 5%;
+  //padding: 0 5% 0 5%;
   //position: relative;
   //top: 4%;
 `;
+const WrapHeaderAndTile = styled.div`
+  width : 100%;
+  height : 100%;
+  display : flex;
+  flex-direction : column;
+  align-items : center;
+  justify-content : center;
+  box-shadow: 1px 2px 8px #f3f3f3; 
+  //border : 1px solid pink;
+`;
 const Header = styled.div`
+  position : relative;
+  right : 2%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0;
   padding: 5px 20px;
   box-sizing: border-box;
-  width: 100%;
+  width: 90%;
   height: 14%;
   font-weight: 700;
   font-size: 24px;
@@ -39,9 +51,11 @@ const Header = styled.div`
   }
 `;
 const Days = styled.div`
+  position : relative;
+  left : 2%;  
   background-color: #fff;
-  width: 93%;
-  height: 81%;
+  width: 95%;
+  height: 100%;
   padding: 8px 10px;
   box-sizing: border-box;
   color: #ababab;
@@ -82,7 +96,7 @@ const Row = styled.div`
 `;
 
 const WrapYearSelect = styled.div`
-  width: 108%;
+  width : 97.5%;
   display: flex;
   justify-content: end;
 `;
@@ -94,8 +108,8 @@ const WrapMark = styled.div`
   color: #ababab;
   font-family: 'Pretendard';
   font-size: 14px;
-  margin-top: 3%;
-  position: relative;
+  // margin-top: 3%;
+  // position: relative;
   //top: 5%;
   left: 9.5%;
   & .before {
@@ -228,50 +242,53 @@ const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
     changeMonth(month);
   };
   return (
-    <div style={{ width: '735px', height: '522px' }}>
-      <WrapYearSelect>
-        <SelectYear
-          options={yearArray}
-          defaultValue={year}
-          onSelect={changeYear}
-        />
-      </WrapYearSelect>
-      <Container>
-        <Header>
-          <img src={PREV_BUTTON} onClick={prevMonth}></img>
-          <span>
-            {monList[month-1]}월
+    <Container>
+      {/* <div style={{ width: '735px', height: '522px' }}> */}
+        <WrapYearSelect>
+          <SelectYear
+            options={yearArray}
+            defaultValue={year}
+            onSelect={changeYear}
+          />
+        </WrapYearSelect>
+        <WrapHeaderAndTile>
+          <Header>
+              <img src={PREV_BUTTON} onClick={prevMonth}></img>
+              <span>
+                {monList[month-1]}월
+              </span>
+              <img src={NEXT_BUTTON} onClick={nextMonth}></img>
+            </Header>
+            <Days>
+              <Day>
+                <div style={{ color: '#f85835' }}>일</div>
+                <div>월</div>
+                <div>화</div>
+                <div>수</div>
+                <div>목</div>
+                <div>금</div>
+                <div>토</div>
+              </Day>
+              {makeCalendar(year, month - 1)}
+            </Days>
+        </WrapHeaderAndTile>
+        <WrapMark>
+          <span className="before">
+            <img src={one1} />
+            <span>작성 전</span>
           </span>
-          <img src={NEXT_BUTTON} onClick={nextMonth}></img>
-        </Header>
-        <Days>
-          <Day>
-            <div style={{ color: '#f85835' }}>일</div>
-            <div>월</div>
-            <div>화</div>
-            <div>수</div>
-            <div>목</div>
-            <div>금</div>
-            <div>토</div>
-          </Day>
-          {makeCalendar(year, month - 1)}
-        </Days>
-      </Container>
-      <WrapMark>
-        <span className="before">
-          <img src={one1} />
-          <span>작성 전</span>
-        </span>
-        <span className="progress">
-          <img src={one3} />
-          <span>임시저장</span>
-        </span>
-        <span className="after">
-          <img src={one2} />
-          <span>작성 완료</span>
-        </span>
-      </WrapMark>
-    </div>
+          <span className="progress">
+            <img src={one3} />
+            <span>임시저장</span>
+          </span>
+          <span className="after">
+            <img src={one2} />
+            <span>작성 완료</span>
+          </span>
+        </WrapMark>
+      {/* </div> */}
+    </Container>
+
   );
 };
 export default MyCalendar;
