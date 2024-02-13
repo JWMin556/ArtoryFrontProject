@@ -24,8 +24,8 @@ const WrapTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: small;
-  font-weight: 400;
+  font-size: 0.8rem;
+  font-weight: 600;
   font-family: Pretendard;
   p {
     padding: 0 10%;

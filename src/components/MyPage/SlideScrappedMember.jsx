@@ -1,7 +1,46 @@
-import React from 'react'
+import React from 'react';
+import * as S from '../../styled-components/Slide.style';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import styled from 'styled-components';
+import Prev from '../Exhibition/Prev';
+import Next from '../Exhibition/Next';
+import MyPageProfileImg from './MyPageProfileImg';
 
-export default function SlideScrappedMember() {
+export const WrapSlider = styled.div`
+  width: 885px;
+  height: fit-content;
+  margin-bottom: 10%;
+  .hkkcyC {
+    top: 50%;
+  }
+`;
+
+export default function SlideScrappedMember(props) {
+  const setting = {
+    arrows: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 6,
+    slidesToScroll: 6,
+    nextArrow: <Next />,
+    prevArrow: <Prev />,
+  };
   return (
-    <div>SlideScrappedMember</div>
+    <WrapSlider>
+      {/* <S.StyledSlider {...setting}>
+        {props.Dummy.map((item) => (
+          <div key={item.storyId}>
+            <S.WrapPoster style={{ height: '200px' }}>
+              <MyPageProfileImg item={item} w={props.width} h={props.height}  />
+              <S.WrapIcon style={{ width: '126px', marginTop: '-10px' }}>
+              <StoryHeart />
+              <StoryScrap />
+              </S.WrapIcon>
+            </S.WrapPoster>
+          </div>
+        ))}
+      </S.StyledSlider> */}
+    </WrapSlider>
   )
 }

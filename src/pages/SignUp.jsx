@@ -336,8 +336,6 @@ export default function SignUp() {
           </InputWrap>
         </SuperTitle>
 
-        <div>{random}</div>
-
         <SuperTitle>
           <InputTitle>인증번호</InputTitle>
           <InputWrap>

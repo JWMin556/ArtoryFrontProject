@@ -249,3 +249,6 @@ body {
   border: none !important;
   outline-color: white !important;
 }
+.emoji-picker__wrapper {
+  z-index: 1010;
+}

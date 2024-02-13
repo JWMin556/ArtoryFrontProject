@@ -55,7 +55,7 @@ function CommentListItem({ commentId, userId, item, loadComments }) {
     <div style={{ display: 'flex' }}>
       <CgCornerDownRight
         style={{ verticalAlign: 'middle' }}
-        size={25}
+        size={28}
         color="#ababab"
       />
       {!isPatch ? (
