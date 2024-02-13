@@ -36,6 +36,7 @@ import GenrePicture from './pages/GenrePicture';
 import GenreSpecialExhibition from './pages/GenreSpecialExhibition';
 import Record from './pages/Record';
 import Footer from './components/Footer';
+import MyPageUserInfo from './pages/MyPageUserInfo';
 const Root = styled.div`
   position: absolute;
   top: 0;
@@ -49,6 +50,7 @@ function App() {
   useEffect(() => {
     // 로컬 스토리지에 URL 저장
     localStorage.setItem('URL', 'http://3.39.39.6:8080');
+    //localStorage.setItem('URL', 'https://artory-powerful-server.store');
     // 일정 시간(예: 1.5초) 후에 로딩 상태 변경
     const timer = setTimeout(() => {
       setLoading(false);
@@ -88,6 +90,7 @@ function App() {
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mystory/:record" element={<Record />} />
             <Route path="/mypage" element={<MyPage />} />
+            <Route path='/mypageuserinfo' element={<MyPageUserInfo />} />
             <Route path="/mypagemodify" element={<MyPageModify />} />
             <Route path="/exhibition" element={<Exhibition />} />{' '}
             <Route path="/exhibition/genremedia" element={<GenreMedia />} />

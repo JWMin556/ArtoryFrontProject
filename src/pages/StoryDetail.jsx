@@ -153,16 +153,16 @@ export default function StoryDetail() {
           <BoxStyle style={{}}>
             <ExhbnKeyword id="전시 키워드">
               <H5>오늘의 전시 키워드</H5>
-              <p style={{ color: '#616161' }}>{item.storyKeyword}</p>
+              <p>{item.storyKeyword}</p>
             </ExhbnKeyword>
-            <ExhbnContent id="전시 내용">
-              <H5>오늘의 전시 스토리</H5>
+            <div id="전시 내용">
+              <H5 style={{ marginBottom: '6px' }}>오늘의 전시 스토리</H5>
 
-              <div
+              <ExhbnContent
                 className="ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline ck-blurred"
                 dangerouslySetInnerHTML={{ __html: item.storyContext }} // 결과 확인
               />
-            </ExhbnContent>
+            </div>
           </BoxStyle>
         </div>
         <CommentInput
@@ -175,19 +175,27 @@ export default function StoryDetail() {
 }
 
 const Table = styled.table`
-  width: 100%;
+  /* width: 100%; */
+  /* width: 70%; */
+  max-width: 100%;
   margin-top: 20px;
 
   td {
+    width: fit-content;
     padding-top: 5px;
     vertical-align: middle;
+    padding-right: 10px;
   }
   th {
+    padding-right: 10px;
+
+    width: fit-content;
+
     text-align: start;
     //font-weight: bold;
     vertical-align: middle;
     color: #9ba0ae;
-    font-weight: 400;
+    font-weight: 500;
     min-width: 30px;
     padding-bottom: 8px;
   }
@@ -195,13 +203,23 @@ const Table = styled.table`
 const ExhbnInfo = styled.div``;
 const ExhbnKeyword = styled.div`
   margin: 10px 0 50px;
+  color: #737373;
+  /* font-size: 0.8rem; */
+  font-size: 0.95rem;
+  font-weight: 500;
 `;
-const ExhbnContent = styled.div``;
+const ExhbnContent = styled.div`
+  color: #505154;
+  font-size: 0.95rem;
+  line-height: 1.3rem;
+  font-weight: 500;
+`;
 const H5 = styled.h5`
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 800;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   margin-top: 0;
+  color: black;
 `;
 const Keyword = styled.span`
   background-color: #28292a;
@@ -249,4 +267,5 @@ const Profile = styled.img`
   width: 60px;
   height: 60px;
   margin-right: 10px;
+  object-fit: cover; //이렇게 할 건지 안 할 건지
 `;

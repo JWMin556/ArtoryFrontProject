@@ -1,6 +1,7 @@
 import axios from "axios";
 const token = localStorage.getItem('Token');
-const url = 'http://3.39.39.6:8080/api/stories/delete/{story-id}?storyId='
+const URL = localStorage.getItem('URL');
+const url = `${URL}/api/stories/delete/{story-id}?storyId=`
 export const StoryDeleteApi =async (stroyId)=>{
     try {
         const response = await axios.delete(`${url}${stroyId}`,

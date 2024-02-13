@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { storyLiked, storyUnLiked } from '../API/story_API';
-
+import ON_HEART from '../../Img/Slider/onheart.svg';
+import HEART from '../../Img/Slider/heart.svg';
 export const HeartImg = styled.img`
   position: absolute;
   left: 0;
@@ -13,8 +14,6 @@ export const HeartImg = styled.img`
 `;
 
 export default function StoryHeart(props) {
-  const ON_HEART = '/Img/Story/onheart.svg';
-  const HEART = '/Img/Story/heart.svg';
   const [colorHeart, setColorHeart] = useState(
     props.isLiked ? ON_HEART : HEART
   );

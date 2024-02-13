@@ -33,6 +33,14 @@
 .ck.ck-sticky-panel__content {
   border: none;
 }
+/* 툴바 간격 넓히기 */
+.ck.ck-toolbar > .ck-toolbar__items {
+  justify-content: space-around;
+}
+/* 툴바 구분자 색 지정 */
+.ck.ck-toolbar .ck.ck-toolbar__separator {
+  background: #f4f5f7 !important;
+}
 /* 입력창 border제거 */
 .ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
   border: none;

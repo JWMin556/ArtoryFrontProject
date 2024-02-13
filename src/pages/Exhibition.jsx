@@ -6,19 +6,32 @@ import AdBanner from '../components/Exhibition/AdBanner';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { tokenReissueApi } from '../components/API/tokenReissue_API';
-//import Genre from '../components/Exhibition/Genre'; //여기 이 Genre.jsx는 잠시 사용하지 말아주세요
+import Genre from '../components/Exhibition/Genre'; 
 const URL = localStorage.getItem('URL');
 
 const url = `${URL}/api/exhibitions/`;
 const distanceRecommendUrl = `${URL}/api/exhibitions/distanceRecommend?page=1`;
+const genreUrl = `${url}allCategory` 
+
 export default function Exhibition() {
   //주연씨가 작업해주실 EXHIBITION페이지입니다.
   const [popularityExhibitionData, setPopularityExhibitionData] = useState([]);
   const [recentExhibitionData, setRecentExhibitionData] = useState([]);
   const [recommendExhibitionData, setRecommedExhibitionData] = useState([]);
-  const [distanceRecommendExhibitionData, setDistanceRecommedExhibitionData] =
-    useState([]);
+  const [distanceRecommendExhibitionData, setDistanceRecommedExhibitionData] = useState([]);
   const [simailarExhibitionData, setSimlarExhibitionData] = useState([]);
+
+  const [mediaData, setMediaData] = useState([]);
+  const [craftData, setCraftData] = useState([]);
+  const [designData, setDesignData] = useState([]);
+  const [sculptureData, setSculptureData] = useState([]);
+  const [planData, setPlanData] = useState([]);
+  const [installationData, setInstallationData] = useState([]); 
+  const [paintingsData, setPaintingsData] = useState([]);
+  const [artistData, setArtistData] = useState([]);
+  const [pictureData, setPictureData] = useState([]);
+  const [specialData, setSpecialData] = useState([]);
+
   const token = localStorage.getItem('Token');
 
   useEffect(() => {
@@ -102,6 +115,36 @@ export default function Exhibition() {
       }
     })();
   }, []);
+  
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.post(genreUrl,
+          {},
+          {
+            headers : {
+              'Accept': '*/*',
+              'Authorization': `Bearer ${token}`,
+            }
+          }
+        );
+        console.log("카테고리별로 랜덤", response?.data);
+        setMediaData(response?.data.mediaCategoryResponseDto);
+        setCraftData(response?.data.craftCategoryResponseDto);
+        setDesignData(response?.data.designCategoryResponseDto);
+        setSculptureData(response?.data.sculptureCategoryResponseDto);
+        setPlanData(response?.data.planExhibitionCategoryResponseDto);
+        setInstallationData(response?.data.installationArtCategoryResponseDto);
+        setPaintingsData(response?.data.paintingCategoryResponseDto);
+        setArtistData(response?.data.artistExhibitionCategoryResponseDto);
+        setPictureData(response?.data.pictureCategoryResponseDto);
+        setSpecialData(response?.data.specialExhibitionCategoryResponseDto);
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    })();
+  }, []);
+
   return (
     <S.Container>
       <S.WrapAdBanner>
@@ -136,199 +179,52 @@ export default function Exhibition() {
         source={'simailar'}
       />
       <div style={{ width: '885px', height: '100%', marginBottom: '10%' }}>
-        <div
-          style={{
-            position: 'relative',
-            fontFamily: 'Pretendard',
-            fontWeight: '900',
-            fontSize: '1.6em',
-            wordSpacing: '1px',
-          }}
-        >
+        <S.GenreParagraph>
           전시 카테고리
-        </div>
-        <div
-          style={{
-            position: 'relative',
-            display: 'flex',
-            flexDirection: 'row',
-          }}
-        >
-          <div
-            style={{
-              position: 'relative',
-              display: 'flex',
-              flexDirection: 'column',
-              marginBottom: '20px',
-              marginRight: '47px',
-            }}
-          >
-            <Link to="/exhibition/genremedia">
-              <img
-                src="/Img/genre-media-arbitary.png"
-                alt="미디어"
-                style={{
-                  marginTop: '50px',
-                  width: '186px',
-                  height: '268px',
-                  borderRadius: '10px',
-                  boxShadow: '5px 5px 8px #D9D9D9',
-                }}
-              />
+        </S.GenreParagraph>
+        <S.GenreWrap>
+          <S.GenreWrapRow>
+            <Link style={{marginTop: "18px"}} to="/exhibition/genremedia">
+              <Genre item={mediaData} exhibitionTitle="미디어"/>
             </Link>
-            <Link to="/exhibition/genrecraft">
-              <img
-                src="/Img/genre-craft-arbitary.png"
-                alt="공예"
-                style={{
-                  marginTop: '20px',
-                  width: '186px',
-                  height: '268px',
-                  borderRadius: '10px',
-                  boxShadow: '5px 5px 8px #D9D9D9',
-                }}
-              />
+            <Link style={{marginTop: "18px"}} to="/exhibition/genrecraft">
+              <Genre item={craftData} exhibitionTitle="공예" />
             </Link>
-            <Link to="/exhibition/genredesign">
-              <img
-                src="/Img/genre-design-arbitary.png"
-                alt="디자인"
-                style={{
-                  marginTop: '20px',
-                  width: '186px',
-                  height: '268px',
-                  borderRadius: '10px',
-                  boxShadow: '5px 5px 8px #D9D9D9',
-                }}
-              />
+            <Link style={{marginTop: "18px"}} to="/exhibition/genredesign">
+              <Genre item={designData} exhibitionTitle="디자인" />
             </Link>
-          </div>
+          </S.GenreWrapRow>
 
-          <div
-            style={{
-              position: 'relative',
-              display: 'flex',
-              flexDirection: 'column',
-              marginBottom: '20px',
-              marginRight: '47px',
-            }}
-          >
-            <Link to="/exhibition/genresculpture">
-              <img
-                src="/Img/genre-sculpture-arbitary.png"
-                alt="조각"
-                style={{
-                  marginTop: '100px',
-                  width: '186px',
-                  height: '268px',
-                  borderRadius: '10px',
-                  boxShadow: '5px 5px 8px #D9D9D9',
-                }}
-              />
+          <S.GenreWrapRow>
+            <Link style={{marginTop: "170px"}} to="/exhibition/genresculpture">
+              <Genre item={sculptureData} exhibitionTitle="조각" />
             </Link>
-            <Link to="/exhibition/genreplanexhibition">
-              <img
-                src="/Img/genre-planexhibition-arbitary.png"
-                alt="기획전"
-                style={{
-                  marginTop: '20px',
-                  width: '186px',
-                  height: '268px',
-                  borderRadius: '10px',
-                  boxShadow: '5px 5px 8px #D9D9D9',
-                }}
-              />
+            <Link style={{marginTop: "50px"}} to="/exhibition/genreplanexhibition">
+              <Genre item={planData} exhibitionTitle="기획전" /> 
             </Link>
-          </div>
+          </S.GenreWrapRow>
 
-          <div
-            style={{
-              position: 'relative',
-              display: 'flex',
-              flexDirection: 'column',
-              marginBottom: '20px',
-              marginRight: '47px',
-            }}
-          >
-            <Link to="/exhibition/genreinstallationart">
-              <img
-                src="/Img/genre-installationart-arbitary.png"
-                alt="설치미술"
-                style={{
-                  marginTop: '50px',
-                  width: '186px',
-                  height: '268px',
-                  borderRadius: '10px',
-                  boxShadow: '5px 5px 8px #D9D9D9',
-                }}
-              />
+          <S.GenreWrapRow>
+            <Link style={{marginTop: "50px"}} to="/exhibition/genreinstallationart">
+              <Genre item={installationData} exhibitionTitle="설치미술" />
             </Link>
-            <Link to="/exhibition/genrepainting">
-              <img
-                src="/Img/genre-painting-arbitary.png"
-                alt="회화"
-                style={{
-                  marginTop: '20px',
-                  width: '186px',
-                  height: '268px',
-                  borderRadius: '10px',
-                  boxShadow: '5px 5px 8px #D9D9D9',
-                }}
-              />
+            <Link style={{marginTop: "50px"}} to="/exhibition/genrepainting">
+              <Genre item={paintingsData} exhibitionTitle="회화" />
             </Link>
-            <Link to="/exhibition/genreartistexhibition">
-              <img
-                src="/Img/genre-artistexhibition-arbitary.png"
-                alt="작가전"
-                style={{
-                  marginTop: '20px',
-                  width: '186px',
-                  height: '268px',
-                  borderRadius: '10px',
-                  boxShadow: '5px 5px 8px #D9D9D9',
-                }}
-              />
+            <Link style={{marginTop: "50px"}} to="/exhibition/genreartistexhibition">
+              <Genre item={artistData} exhibitionTitle="작가전" />
             </Link>
-          </div>
+          </S.GenreWrapRow>
 
-          <div
-            style={{
-              position: 'relative',
-              display: 'flex',
-              flexDirection: 'column',
-              marginBottom: '20px',
-              marginRight: '47px',
-            }}
-          >
-            <Link to="/exhibition/genrepicture">
-              <img
-                src="/Img/genre-picture-arbitary.png"
-                alt="조각"
-                style={{
-                  marginTop: '100px',
-                  marginTop: '100px',
-                  width: '186px',
-                  height: '268px',
-                  borderRadius: '10px',
-                  boxShadow: '5px 5px 8px #D9D9D9',
-                }}
-              />
+          <S.GenreWrapRow>
+            <Link style={{marginTop: "170px"}} to="/exhibition/genrepicture">
+              <Genre item={pictureData} exhibitionTitle="사진" />
             </Link>
-            <Link to="/exhibition/genrespecialexhibition">
-              <img
-                src="/Img/genre-specalexhibition-arbitary.png"
-                alt="특별전시"
-                style={{
-                  marginTop: '20px',
-                  width: '186px',
-                  height: '268px',
-                  borderRadius: '10px',
-                  boxShadow: '5px 5px 8px #D9D9D9',
-                }}
-              />
+            <Link style={{marginTop: "50px"}} to="/exhibition/genrespecialexhibition">
+              <Genre item={specialData} exhibitionTitle="특별전시" />
             </Link>
-          </div>
-        </div>
+          </S.GenreWrapRow>
+        </S.GenreWrap>
       </div>
     </S.Container>
   );

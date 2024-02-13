@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -16,6 +16,7 @@ const WrapPoster = styled.div`
   justify-content: center;
   align-items: center;
   height: 350px;
+  justify-content: space-around;
 `;
 const StyledSlider = styled(Slider)``;
 
@@ -31,15 +32,15 @@ export default function SlidePictures(props) {
   };
   return (
     <WrapSlider>
-        <StyledSlider {...setting}>
-            {props.Dummy.map((item, index) => (
-            <div key={index}>
-                <WrapPoster>
-                <Pictures item={item}/>
-                </WrapPoster>
-            </div>
-            ))}
-        </StyledSlider>
+      <StyledSlider {...setting}>
+        {props.Dummy.map((item, index) => (
+          <div key={index}>
+            <WrapPoster>
+              <Pictures items={props.Dummy} item={item} index={index} />
+            </WrapPoster>
+          </div>
+        ))}
+      </StyledSlider>
     </WrapSlider>
-  )
+  );
 }

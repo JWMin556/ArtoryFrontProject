@@ -1,33 +1,37 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Slide from '../components/Exhibition/Slide';
 import { useEffect } from 'react';
 import axios from 'axios';
 import SlidePictures from '../components/MyPage/SlidePictures';
-import { TestDummy } from '../TestDummy';
-import Pictures from '../components/MyPage/Pictures';
 import SlideMyStory from '../components/MyPage/SlideMyStory';
+import SlideScrappedStory from '../components/MyPage/SlideScrappedStory';
+import SlideScrappedMember from '../components/MyPage/SlideScrappedMember';
+import UserSlide from '../components/Story/UserSlide';
 
+//PageContainer & Page 스타일 수정한 거 변경하시면 안됩니다!footer랑 겹치는 문제가 있어서..ㅜ
 const PageContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%; /* 페이지가 화면 전체를 채우도록 설정 */
   display: flex;
   justify-content: center; /* 수평 가운데 정렬 */
-  padding-bottom: 20px; /* 원하는 여백 값 */
+  /* align-items: center;  */
+  padding-bottom: 20%; /* 원하는 여백 값 */
   margin-top: 100px;
 `;
 
 const Page = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 700px;
+  /* position: relative; */
+  width: 76%;
+  /* max-width: 800px; */
   padding: 0 20px;
+  position: absolute;
   display: flex;
   flex-direction: column;
   margin-bottom: 20px; /* 원하는 여백 값 */
 `;
+
 const TitleWrap = styled.div`
   color: black;
   font-size: 30px;
@@ -56,7 +60,6 @@ const ImgStyled = styled.img`
   display: flex;
   flex-direction: column;
   margin-top: 20%;
-  border-radius: 10px;
   width: 130px;
 `;
 
@@ -72,51 +75,66 @@ const TitleRightWrapParagraphArea = styled.div`
 `;
 
 const TitleRightWrapParagraphTitle = styled.div`
-  color: #616161;
-  font-size: 24px;
-  font-family: 'Pretendard';
-  font-weight: 700;
-  line-height: 31.94px;
-  word-wrap: break-word;
-  margin-right: 120px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
 `;
 
-const TitleRightWrapParagraphContent = styled.div`
+const BoldSentence = styled.p`
+  color: #262626;
+  font-size: 20px;
+  font-family: 'Pretendard';
+  font-weight: 700;
+  line-height: 26.61px;
+  word-wrap: break-word;
+  /* margin-right: 120px; */
+`;
+
+const InputWrap = styled.div`
   display: flex;
   background: #efeeee;
-  border-radius: 10px;
-  /* border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid; */
-  align-items: center;
   box-shadow: 1px 2px 8px #f3f3f3;
+  padding: 5px;
+  margin-left: auto;
+  margin-top: 8px;
+  margin-bottom: 13px;
+  width: 300px;
+`;
+
+const InputStyle = styled.div`
   color: #262626;
-  font-size: 12px;
+  font-size: 16px;
   font-family: 'Pretendard';
   font-weight: 600;
   line-height: 21.29px;
   letter-spacing: 0.56px;
   word-wrap: break-word;
+  border: none;
+  outline: none;
+  background: #efeeee;
 `;
 
 const ContentWrap = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20%;
+  margin-left: 3%;
+  margin-right: 3%;
   /* background-color: red; */
 `;
 
 const ContentBtns = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const Btns1 = styled.button`
   height: 35px;
-  width: 20%;
+  width: 19%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
   border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid;
   align-items: center;
   box-shadow: 1px 2px 8px #f3f3f3;
@@ -137,11 +155,10 @@ const Btns1 = styled.button`
 
 const Btns2 = styled.button`
   height: 35px;
-  width: 20%;
+  width: 19%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
   border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid;
   align-items: center;
   box-shadow: 1px 2px 8px #f3f3f3;
@@ -160,16 +177,27 @@ const ContentPosters = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const ContentUserWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 20%;
+  margin-left: 3%;
+  margin-right: 3%;
+  background-color: red;
+`;
+
 const URL = localStorage.getItem('URL');
 
-const url = `${URL}/api/mypage/all?page=1`;
+const url = `${URL}/api/mypage/all?page=1`;  //문제점...page가 어디까지 되는지 몰라서 접근이 어렵
 const token = localStorage.getItem('Token');
 export default function MyPage() {
   //여기서부터 나의 스토리 버튼 ~ 저장 스토리 버튼을 위한 부분입니다.
-  const [isMyStoryBtnClicked, setIsMyStoryBtnClicked] = useState(false);
+  const [isMyStoryBtnClicked, setIsMyStoryBtnClicked] = useState(true);
   const [isMyGalaryBtnClicked, setIsGalaryBtnClicked] = useState(false);
   const [isSavedUserBtnClicked, setIsSavedUserBtnClicked] = useState(false);
   const [isSaveStoryBtnClicked, setIsSaveStoryBtnClicked] = useState(false);
+  //const [isSavedUserClicked, setIsSavedUserClicked] = useState(false);
 
   const handleMyStoryBtnClick = () => {
     setIsMyStoryBtnClicked(true);
@@ -226,6 +254,7 @@ export default function MyPage() {
         setMyStoryData(response?.data.stories);
         //console.log("스토리정보", myStoryData);
         setMyPicturesData(response?.data.storyPictures);
+        // console.log(response.data.storyPictures);
         setMyScrappedMembersData(response?.data.scrappedMembers);
         setMyScrappedStoriesData(response?.data.scrappedStories);
       } catch (error) {
@@ -239,7 +268,7 @@ export default function MyPage() {
         <TitleWrap>
           <TitleLeftWrap>
             <TitleLeftWrapParagraph>
-              {userData.nickname}님<br />
+              {userData.nickname}님의<br />
               마이페이지
             </TitleLeftWrapParagraph>
             <ImgStyled src={userData.image} alt="사진첨부" />
@@ -260,35 +289,72 @@ export default function MyPage() {
                 width="8%"
               />
             </Link>
-
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
-                닉네임
+                <BoldSentence>닉네임</BoldSentence>
               </TitleRightWrapParagraphTitle>
-              <TitleRightWrapParagraphContent>
-                {userData.nickname}
-              </TitleRightWrapParagraphContent>
+              <InputWrap>
+                <InputStyle>{userData.nickname}</InputStyle>
+              </InputWrap>
             </TitleRightWrapParagraphArea>
 
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
-                한 줄 소개
+                <BoldSentence>한 줄 소개</BoldSentence>
               </TitleRightWrapParagraphTitle>
-              <TitleRightWrapParagraphContent>
-                {userData.introduction}
-              </TitleRightWrapParagraphContent>
+              <InputWrap>
+                <InputStyle>{userData.introduction}</InputStyle>
+              </InputWrap>
             </TitleRightWrapParagraphArea>
+
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
-                나의 키워드
+                <BoldSentence>나의 키워드</BoldSentence>
               </TitleRightWrapParagraphTitle>
-              <TitleRightWrapParagraphContent>
-                {userData.myKeyword}
-              </TitleRightWrapParagraphContent>
+              <InputWrap>
+                <InputStyle>{userData.myKeyword}</InputStyle>
+              </InputWrap>
             </TitleRightWrapParagraphArea>
           </TitleRightWrap>
         </TitleWrap>
 
+        {/* {isSavedUserClicked ? (
+          <ContentUserWrap>
+            토리토리님이 <br /> 작성하신 STORY
+          </ContentUserWrap>
+        ) : (
+          <ContentWrap>
+            <ContentBtns>
+              {isMyStoryBtnClicked ? (
+                <Btns2>나의 스토리</Btns2>
+              ) : (
+                <Btns1 onClick={handleMyStoryBtnClick}>나의 스토리</Btns1>
+              )}
+              {isMyGalaryBtnClicked ? (
+                <Btns2>나의 앨범</Btns2>
+              ) : (
+                <Btns1 onClick={handleMyGalaryBtnClick}>나의 앨범</Btns1>
+              )}
+              {isSavedUserBtnClicked ? (
+                <Btns2>저장 유저</Btns2>
+              ) : (
+                <Btns1 onClick={handleSavedUserBtnClick}>저장 유저</Btns1>
+              )}
+              {isSaveStoryBtnClicked ? (
+                <Btns2>저장 스토리</Btns2>
+              ) : (
+                <Btns1 onClick={handleSaveStoryBtnClick}>저장 스토리</Btns1>
+              )}
+            </ContentBtns>
+
+            <ContentPosters>
+              {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
+              {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
+              {isSavedUserBtnClicked && <UserSlide width={126} height={126} Dummy={myScrappedMembersData}/>}
+              {isSaveStoryBtnClicked && <SlideScrappedStory Dummy={myScrappedStoriesData} />}
+            </ContentPosters>
+        </ContentWrap>
+        )} */}
         <ContentWrap>
           <ContentBtns>
             {isMyStoryBtnClicked ? (
@@ -297,9 +363,9 @@ export default function MyPage() {
               <Btns1 onClick={handleMyStoryBtnClick}>나의 스토리</Btns1>
             )}
             {isMyGalaryBtnClicked ? (
-              <Btns2>나의 사진첩</Btns2>
+              <Btns2>나의 앨범</Btns2>
             ) : (
-              <Btns1 onClick={handleMyGalaryBtnClick}>나의 사진첩</Btns1>
+              <Btns1 onClick={handleMyGalaryBtnClick}>나의 앨범</Btns1>
             )}
             {isSavedUserBtnClicked ? (
               <Btns2>저장 유저</Btns2>
@@ -316,8 +382,9 @@ export default function MyPage() {
           <ContentPosters>
             {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
             {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
-            {isSavedUserBtnClicked && <Slide Dummy={myScrappedStoriesData} />}
-            {isSaveStoryBtnClicked && <Slide Dummy={myScrappedMembersData} />}
+            {isSavedUserBtnClicked && <UserSlide width={126} height={126} Dummy={myScrappedMembersData}/>}
+            {/* <SlideScrappedMember width={126} height={126} Dummy={myScrappedMembersData} /> */}
+            {isSaveStoryBtnClicked && <SlideScrappedStory Dummy={myScrappedStoriesData} />}
           </ContentPosters>
         </ContentWrap>
       </Page>

@@ -7,21 +7,24 @@ import { saveGenre } from '../components/API/member_API';
 import axios from 'axios';
 import AWS from 'aws-sdk';
 
+//PageContainer & Page 스타일 수정한 거 변경하시면 안됩니다!footer랑 겹치는 문제가 있어서..ㅜ
 const PageContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%; /* 페이지가 화면 전체를 채우도록 설정 */
   display: flex;
   justify-content: center; /* 수평 가운데 정렬 */
-  padding-bottom: 20px; /* 원하는 여백 값 */
+  /* align-items: center;  */
+  padding-bottom: 20%; /* 원하는 여백 값 */
   margin-top: 100px;
 `;
 
 const Page = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 700px;
+  /* position: relative; */
+  width: 76%;
+  /* max-width: 800px; */
   padding: 0 20px;
+  position: absolute;
   display: flex;
   flex-direction: column;
   margin-bottom: 20px; /* 원하는 여백 값 */
@@ -38,7 +41,6 @@ const TitleWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* margin-right: 22%; */
 `;
 
 const TitleLeftWrap = styled.div`
@@ -55,7 +57,7 @@ const TitleLeftWrapImgArea = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20%;
-  border-radius: 10px;
+  width: 130px;
 `;
 
 const ImageContainer = styled.div`
@@ -88,15 +90,16 @@ const TitleRightWrap = styled.div`
 const TitleRightWrapParagraphArea = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
 `;
 
 const TitleRightWrapParagraphTitle = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start; /* 텍스트를 왼쪽으로 정렬합니다. */
 `;
 
-const BoldSentence = styled.p`
+const BoldSentence = styled.div`
   color: #262626;
   font-size: 20px;
   font-family: 'Pretendard';
@@ -106,13 +109,14 @@ const BoldSentence = styled.p`
   margin-right: 120px;
 `;
 
-const GraySentence = styled.p`
+const GraySentence = styled.div`
   color: #979797;
-  font-size: 12px;
+  font-size: 10px;
   font-family: 'Pretendard';
   font-weight: 400;
   line-height: 15.97px;
   word-wrap: break-word;
+  margin-top: 2%;
 `;
 
 const InputWrap = styled.div`
@@ -123,6 +127,7 @@ const InputWrap = styled.div`
   margin-left: auto;
   margin-top: 8px;
   margin-bottom: 13px;
+  width: 300px;
 `;
 
 const InputStyle = styled.input`
@@ -160,7 +165,7 @@ export default function MyPageModify() {
   const myNickname = query.get('nickname');
   const myImage = query.get('image');
 
-  //서버에 이름, 닉네임, 한줄소개, 키워드와 이미지를 제출하기 위한 변수 및 함수입니다. (전시조사수정, 비밀번호와 탈퇴는 아직 미완)
+  //서버에 이름, 닉네임, 한줄소개, 키워드와 이미지를 제출하기 위한 변수 및 함수입니다. 
   const [name, setname] = useState('');
   const [nickname, setNickname] = useState('');
   const [length, setLength] = useState(0);
@@ -171,6 +176,8 @@ export default function MyPageModify() {
   const [introduction, setIntroduction] = useState('');
   const [myKeyword, setMyKeyword] = useState('');
   const [imgUrl, setImgUrl] = useState('');
+  const [chagedpPassword, setChagedpPassword] = useState('');
+
 
   const handleNameChange = (e) => {
     setname(e.target.value);
@@ -179,6 +186,9 @@ export default function MyPageModify() {
   const handleNicknameChange = (e) => {
     const value = e.target.value;
     value.length > 10 ? setLength(10) : setLength(value.length);
+    if(value.length > 10) {
+      alert("닉네님은 10자까지만 해주세요");
+    }
     setNickname(value);
   };
 
@@ -189,6 +199,10 @@ export default function MyPageModify() {
   const handleKeywordChange = (e) => {
     setMyKeyword(e.target.value);
   };
+
+  const handlePasswordsChange = (e) => {
+    setChagedpPassword(e.target.value);
+  }
 
   const handleImageClick = () => {
     fileInputRef.current.click();
@@ -207,6 +221,7 @@ export default function MyPageModify() {
       reader.onload = (event) => {
         // 이미지의 src를 선택한 파일의 내용으로 대체합니다.
         setImageSrc(event.target.result);
+        uploadFileAWS(file);
       };
       reader.readAsDataURL(file);
     }
@@ -315,8 +330,8 @@ export default function MyPageModify() {
       }
     });
   };
-  const URL = localStorage.getItem('URL');
 
+  const URL = localStorage.getItem('URL');
   const token = localStorage.getItem('Token');
   const saveModifiedInformations = async () => {
     try {
@@ -325,6 +340,7 @@ export default function MyPageModify() {
       const response = await axios.post(
         baseUrl,
         {
+          userName: name,
           introduction: introduction,
           myKeyword: myKeyword,
           nickname: nickname,
@@ -346,13 +362,36 @@ export default function MyPageModify() {
     }
   };
 
+  // const saveModifiedPassword = async () => { //이거 하기전에 먼저 사용자 전체정보를 불러왔어야 함 ㅠㅠ
+  //   try {
+  //     const baseUrl = `${URL}/api/member/save/pwchange`;
+  //     const response = await axios.post(
+  //       baseUrl,
+  //       {
+  //         chagedpPassword
+  //       },
+  //       {
+  //         headers: {
+  //           Accept: '*/*',
+  //           'Content-Type': 'application/json',
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     console.log('비밀번호가 성공적으로 수정되었습니다.');
+  //     alert('비밀번호가 성공적으로 수정되었습니다.');
+  //   } catch (error) {
+  //     console.log(error.response.data);
+  //   }
+  // }
+
   return (
     <PageContainer>
       <Page>
         <TitleWrap>
           <TitleLeftWrap>
             <TitleLeftWrapParagraph>
-              {myNickname}
+              {myNickname}님의
               <br />
               마이페이지
             </TitleLeftWrapParagraph>
@@ -382,10 +421,7 @@ export default function MyPageModify() {
                 style={{ display: 'none' }}
                 onChange={handleFileChange}
               />
-              <button onClick={() => uploadFileAWS(imageSrcReal)}>
-                aws전송
-              </button>{' '}
-              {/*그 파일을 s3로 전송*/}
+              {/* <button onClick={() => uploadFileAWS(imageSrcReal)}>aws전송</button> 그 파일을 s3로 전송 */}
             </TitleLeftWrapImgArea>
           </TitleLeftWrap>
 
@@ -393,6 +429,7 @@ export default function MyPageModify() {
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
                 <BoldSentence>이름</BoldSentence> {/*아직 서버가 미완성*/}
+                <GraySentence />
               </TitleRightWrapParagraphTitle>
               <InputWrap>
                 <InputStyle onChange={handleNameChange} />
@@ -435,8 +472,10 @@ export default function MyPageModify() {
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
-            <BoldSentence>나의 관심전시 수정하기</BoldSentence>
-            <ExamineWrap>
+            <BoldSentence style={{ marginRight: '10px' }}>
+              나의 관심전시 수정하기
+            </BoldSentence>
+            <ExamineWrap style={{ marginTop: '3%' }}>
               <ExamineContentBox>
                 {genres__kor.map((genre, index) => {
                   return (
@@ -454,22 +493,34 @@ export default function MyPageModify() {
               </ExamineContentBox>
             </ExamineWrap>
 
-            <TitleRightWrapParagraphArea>
+            <TitleRightWrapParagraphArea
+              style={{ marginTop: '10%', marginBottom: '1px' }}
+            >
               <TitleRightWrapParagraphTitle>
                 <BoldSentence>비밀번호 변경</BoldSentence>
                 <GraySentence>현재 비밀번호를 입력해주세요</GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap>
-                <InputStyle />
+                <InputStyle />  {/*onChange={handleKeywordChange}*/}
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
-                <GraySentence>변경 비밀번호를 입력해주세요</GraySentence>
+                <GraySentence style={{ marginTop: '20%' }}>
+                  변경 비밀번호를 입력해주세요
+                </GraySentence>
               </TitleRightWrapParagraphTitle>
-              <InputWrap>
-                <InputStyle />
+              <InputWrap style={{width:"300px"}}>
+                <InputStyle onChange={handlePasswordsChange} />   
+                <StyledButton
+                  //onClick={saveModifiedPassword}
+                  height="23px"
+                  width="30%"
+                  fontSize="10px"
+                >
+                  비밀번호 변경
+                </StyledButton>
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
@@ -478,13 +529,21 @@ export default function MyPageModify() {
                 <BoldSentence>회원탈퇴</BoldSentence>
                 <GraySentence>탈퇴사유를 입력해주세요</GraySentence>
               </TitleRightWrapParagraphTitle>
-              <InputWrap>
+              <InputWrap style={{width:"300px"}}>
                 <InputStyle />
+                <StyledButton
+                  //disabled={notAllow}
+                  height="23px"
+                  width="30%"
+                  fontSize="10px"
+                >
+                  회원탈퇴
+                </StyledButton>
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
             <StyledButton
-              onClick={saveModifiedInformations}
+              onClick={saveModifiedInformations}  //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
               height="52px"
               width="70%"
               style={{ marginTop: '40px', marginBottom: '30%' }}

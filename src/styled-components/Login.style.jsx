@@ -1,30 +1,36 @@
 import styled from 'styled-components'
 
 export const HomeWrap = styled.div`
+    margin: auto;
     display: flex;
+    justify-content: space-between;
+    /* display: flex;
     justify-content: space-evenly;
     margin-top: 10%;
     margin-left: 15%;
-    margin-right: 15%;
-    @media screen and (max-width: 500px) { /* 'max-width' 값에 'px' 단위 추가 */
+    margin-right: 15%; */
+    /* @media screen and (max-width: 500px) { 'max-width' 값에 'px' 단위 추가 
         height : 100%;
         flex-direction: column;
         align-items: center;
-        align-content : space-evenly;
-}
+        align-content : space-evenly; 
+    }*/
 `;
  //메인화면 전체를 감싸주기 위한 스타일드 컴포넌트입니다. 
 
 export const HomeLeftWrap = styled.div `
     display: block;
-    margin-top : 2%;
-    @media screen and (max-width: 500px){
+    margin-left: 12%;
+    margin-top: 10%;
+    /* display: block;
+    margin-top : 2%; */
+    /* @media screen and (max-width: 500px){
         margin-left : 10%;
-    }
+    } */
 
 `;  //메인화면의  왼쪽 부분 
 
-export const FirstParagraph = styled.p `
+export const FirstParagraph = styled.div`
     color: #595959;
     font-size: 14px;
     font-family: 'Pretendard';
@@ -34,14 +40,14 @@ export const FirstParagraph = styled.p `
     word-wrap: break-word;
     //width: 116px;
     height: 19px;
-    @media screen and (max-width: 500px){
+    /* @media screen and (max-width: 500px){
         width: 76.37px;
         height: 8px;
         font-size: 8px;
-    }
+    } */
 `;  // Story community
 
-export const SecondParagraph = styled.h2 `
+export const SecondParagraph = styled.div`
     color: #5D5D5D;
     font-size: 40px;
     font-family: 'Pretendard';
@@ -51,15 +57,15 @@ export const SecondParagraph = styled.h2 `
     width: 405px;
     height: 41px;
     margin : 0;
-    @media screen and (max-width: 500px){
+    /* @media screen and (max-width: 500px){
         width: 155.66px;
         height: 23.00px;
         font-size: 20px;
 
-    }
+    } */
 `; //'나만의 문화일기'
 
-export const ThirdParagraph = styled.h1 `
+export const ThirdParagraph = styled.div`
     color: black;
     font-size: 80px;
     font-family: 'Pretendard';
@@ -70,18 +76,18 @@ export const ThirdParagraph = styled.h1 `
     width: 393px;
     height: 77px;
     margin : 0;
-    @media screen and (max-width: 500px){
+    /* @media screen and (max-width: 500px){
         width: 221.11x;
         height: 38.71px;
         font-size: 50px;
-    }
+    } */
 `;  //ARTORY
 
 export const WrapLogin = styled.div`
-    display : flex;
+    display: flex;
     flex-direction: column;
-    //height : 100%;
-    //border : 1px solid red;
+    margin-right: 12%;
+    margin-top: 10%;
     &:focus{
         outline : none;
     }

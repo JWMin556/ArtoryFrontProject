@@ -13,7 +13,7 @@ h4,
 h5,
 h6,p, */
 
-/* /* blockquote, */ */
+/* blockquote, */
 pre,
 a,
 abbr,
@@ -60,9 +60,9 @@ article,
 aside,
 canvas,
 details,
-/* /* embed,
+/* embed,
 figure,
-figcaption, */ */
+figcaption, */
 footer,
 header,
 hgroup,
@@ -89,8 +89,6 @@ aside,
 details,
 /* figcaption,
 figure, */
-/* figcaption,
-figure, */
 footer,
 header,
 hgroup,
@@ -107,7 +105,6 @@ body {
   font-family: 'Pretendard';
 }
 /* ol,
-/* ol,
 ul {
   list-style: none;
 }
@@ -122,7 +119,6 @@ q:after {
   content: '';
   content: none;
 } */
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -245,7 +241,18 @@ body {
   padding: 0;
   margin: 0;
 }
+/* 디자인 모두 허용해 주셔야 합니다! */
+.ck.ck-editor_editable.ck-focused {
+  border: none;
+  box-shadow: none;
+}
 .css-13cymwt-control:hover {
   border: none !important;
   outline-color: white !important;
+}
+.emoji-picker__wrapper {
+  z-index: 1010;
+}
+.dyIpbr {
+  top: 50% !important;
 }
