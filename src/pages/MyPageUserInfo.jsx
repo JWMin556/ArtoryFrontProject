@@ -15,6 +15,7 @@ const PageContainer = styled.div`
   margin-top: 100px;
 `;
 
+
 const Page = styled.div`
   /* position: relative; */
   width: 76%;
