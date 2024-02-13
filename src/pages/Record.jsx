@@ -96,7 +96,6 @@ export default function Record(props) {
   const defaultData = ``;
 
   const { state } = useLocation();
-  console.log('state', state.item);
   const [userStoryData, setUserStoryData] = useState([]);
   const [data, setData] = useState(defaultData); //스토리 내용
   const [title, setTitle] = useState(''); //제목
@@ -122,7 +121,7 @@ export default function Record(props) {
   const [storyContent, setStoryContent] = useState([]);
   const [dateBoxColor, setDateBoxColor] = useState();
   const [keyword, setKeyword] = useState(''); //키워드
-  const [picturesUrl, setPicturesUrl] = useState([state.item.exhibitionImage]); //선택한 사진 배열 //
+  const [picturesUrl, setPicturesUrl] = useState([state.item.exhibitionImage]); //선택한 사진 배열
 
   const id = state.item.exhibitionId; //전시회 아이디
   const exhibitionTitle = state.item.exhibitionTitle; //전시회 제목
@@ -206,7 +205,7 @@ export default function Record(props) {
   //-> 동일한 전시 삭제 -> 새롭게 작성한 스토리 저장
   const handleSubmit = async () => {
     //스토리 아이디가 존재하고 스토리의 상태가 Done 상태(저장까지 완료한 상태)이면
-    if (storyId && storyState === 'DONE') {
+    if (storyState === 'DONE') {
       modifySaveApi(
         //스토리 수정
         storyId,

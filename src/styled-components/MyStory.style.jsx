@@ -6,15 +6,16 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 `;
-
+export const WrapExhibition = styled.div`
+    //border : 1px solid red;
+    width : 60%;
+`;
 export const WrapSaveExhibition = styled.div`
     display : flex;
     flex-direction : row;
     flex-wrap : wrap;
     margin-top : 2%;
-    margin-left : 19%;
-    margin-right : 10%;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 `;
 export const WrapPoster = styled.div`
@@ -43,7 +44,7 @@ export const WrapProfile = styled.div`
 `;
 
 export const WrapExhibitionPoster = styled.div`
-    margin-right : 5%;
+    //margin-right : 5%;
     margin-bottom : 5%;
 `;
 
