@@ -61,12 +61,12 @@ const Day = styled.div`
   position: relative;
   right: 4.3%;
   margin-bottom: 2%;
-
   & div {
     min-width: 13%;
     max-height: 5%;
     text-align: center;
-    font-weight: 600;
+    font-weight: 700;
+    font-size : 16px;
     box-sizing: border-box;
   }
 `;
@@ -80,39 +80,11 @@ const Row = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const MonthSelect = styled.select`
-  border: none;
-  font-size: 25px;
-  font-weight: bold;
-  font-family: 'Pretendard';
-  width: 112px;
-`;
-const OptionStyle = styled.option`
-  font-size: 14px;
-  text-align: center;
-  font-family: 'Pretendard';
-  color: #616161;
-  :hover {
-    background-color: #121212;
-    color: #fff;
-  }
-`;
+
 const WrapYearSelect = styled.div`
-  //border : 1px solid red;
-  width: 110%;
+  width: 108%;
   display: flex;
   justify-content: end;
-`;
-const YearSelect = styled.select`
-  width: 2.5em;
-  height: 1.5em;
-  text-align: end;
-  border: none;
-  font-size: 30px;
-  font-weight: bold;
-  font-family: 'Pretendard';
-  margin-bottom: 3%;
-  margin-right: 5%;
 `;
 const WrapMark = styled.div`
   width: 100%;
@@ -234,7 +206,7 @@ const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
   );
 
   const nextMonth = () => {
-    if (month != 11) {
+    if (month != 12) {
       changeMonth((month) => month + 1);
     } else {
       changeMonth((month) => month - 11);
@@ -243,7 +215,7 @@ const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
     makeCalendar(year, month);
     console.log('next!', year, month, new_month);
   };
-  const prevMonth = () => {
+  const prevMonth = async () => {
     if (month != 0) {
       changeMonth((month) => month - 1);
     } else {
@@ -268,8 +240,7 @@ const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
         <Header>
           <img src={PREV_BUTTON} onClick={prevMonth}></img>
           <span>
-            {/* <SelectMonth options={MonthArray} defaultValue={month} onSelect={changeMonth}/> */}
-            {month}월
+            {monList[month-1]}월
           </span>
           <img src={NEXT_BUTTON} onClick={nextMonth}></img>
         </Header>

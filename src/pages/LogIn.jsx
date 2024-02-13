@@ -38,7 +38,6 @@ export default function LogIn() {
   }
 
   function handleLoginArbitary() {
-    localStorage.setItem('Token','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDczNzMzNzksImV4cCI6MTcwNzQ2MzM3OSwibWVtYmVySWQiOjMsInJvbGUiOiJVU0VSIn0.TL4gJHsj-KfaVEtfFsILKW1VKO0-23cSaEWsI2M5SyTEM24CwpqsOYWFuR57f83uy4_aFqmVKlnoFAcOssnZFA')
     localStorage.setItem('arbitaryLoginForHeader2', true);
     window.location.href = '/'; // Home 페이지로 이동
   }

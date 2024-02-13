@@ -34,9 +34,9 @@ export default function CategorySelect({
   const [genre3Index, setGenre3Index] = useState();
 
   useEffect(() => {
-    console.log('장르1', genre11);
-    console.log('장르2', genre22);
-    console.log('장르3', genre33);
+    // console.log('장르1', genre11);
+    // console.log('장르2', genre22);
+    // console.log('장르3', genre33);
     ///setBox((prevBox) => {
     //const newBox = [...prevBox];
     genres.forEach((item, index) => {
@@ -90,8 +90,8 @@ export default function CategorySelect({
         });
       });
 
-      console.log('selectedTopics', selectedTopics);
-      console.log('selectedIndex', selectedIndex);
+      //console.log('selectedTopics', selectedTopics);
+      //console.log('selectedIndex', selectedIndex);
 
       return newBox;
     });
@@ -132,8 +132,8 @@ export default function CategorySelect({
         //이미 3개의 주제 선택
         alert('최대 3개의 주제만 선택할 수 있습니다.');
       }
-      console.log('selectedTopics', selectedTopics);
-      console.log('selectedIndex', selectedIndex);
+      //console.log('selectedTopics', selectedTopics);
+      //console.log('selectedIndex', selectedIndex);
 
       // 이 부분에서 선택된 인덱스를 상위 컴포넌트로 전달합니다.
       onSelect(
@@ -141,13 +141,15 @@ export default function CategorySelect({
           ? index
           : -1
       );
+      setEngGenre()
       return newBox;
     });
   };
-  setGenre1(genres[selectedIndex[0]]);
-  setGenre2(genres[selectedIndex[1]]);
-  setGenre3(genres[selectedIndex[2]]);
-
+  const setEngGenre = () =>{
+    setGenre1(genres[selectedIndex[0]]);
+    setGenre2(genres[selectedIndex[1]]);
+    setGenre3(genres[selectedIndex[2]]);
+  }
   return (
     <WrapBox>
       {box.map((src, index) => (

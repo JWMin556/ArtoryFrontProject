@@ -3,23 +3,29 @@ import styled from 'styled-components'
 import SEARCH from '../../Img/Search/search.svg'
 import { useNavigate } from 'react-router-dom';
 import { searchExhibition } from '../API/search_API';
+const SearchContainer = styled.div`
+    width: 419px;
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    margin-left: 15px;
+`;
 const SearchStyle = styled.input`
     background-color : #ffffff;
     box-shadow: 1px 2px 8px #f3f3f3;
     border : none;
     border-radius : 5px;
-    width : 360px;
+    //width : 360px;
     height : 39px;
-    padding : 0;
-    padding-left :14%;
+    //padding : 0;
+    //padding-left :14%;
     font-family: 'Pretendard';
     color : #ababab;
 `;
 const SearchImg = styled.img`
-    position: absolute;
-    top : 24%;
-    left : 3%;
-
+    vertical-align: middle;
 `;
 export default function Search() {
     const navigate = useNavigate();
@@ -50,7 +56,17 @@ const handleKeyPress = async(e) => {
     }
 }
 return (
-    <div>
+    <SearchContainer>
+        <label
+            htmlFor="search"
+            style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
+        >
+        <SearchImg src={SEARCH}/>
+        </label>
         <SearchStyle 
             type="text" 
             onFocus={handleInputFocus} 
@@ -61,7 +77,6 @@ return (
             onChange={(e)=>setKeyWord(e.target.value)}
             onKeyPress={handleKeyPress}
             />
-        <SearchImg src={SEARCH}/>
-    </div>
+    </SearchContainer>
 )
 }

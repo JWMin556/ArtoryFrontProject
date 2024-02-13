@@ -6,6 +6,7 @@ import Heart from '../components/Exhibition/Heart';
 import Save from '../components/Exhibition/Save';
 import Search2 from '../components/Exhibition/Search2';
 import CustomPagination from '../components/Exhibition/CustomPagination';
+import Search from '../components/Exhibition/Search';
 
 const Container = styled.div`
   display: flex;
@@ -25,9 +26,6 @@ const WrapResult = styled.div`
 `;
 const WrapSearch = styled.div`
   margin-top: 5%;
-  margin-bottom: 10%;
-  width: 419px;
-  height: 39px;
 `;
 const WrapPoster = styled.div`
   margin-right: 5%;
@@ -75,7 +73,9 @@ export default function Popularity() {
   }, []);
   return (
     <Container>
-      <Search2 />
+      <WrapSearch>
+        <Search/>
+      </WrapSearch>
       <WrapResult>
         {recentExhibitionData
           .slice(exhibition * (page - 1), exhibition * (page - 1) + exhibition)

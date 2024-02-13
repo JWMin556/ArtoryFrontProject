@@ -13,7 +13,8 @@ import {
   progressSaveApi2,
 } from '../components/API/StorySave';
 import Banner from '../components/Story/Banner';
-import StoryDelete from '../components/MyStory/StroyDelete';
+import Modal from '../components/MyStory/StroyDelete';
+import { modifySaveApi } from '../components/API/StorySave';
 
 const token = localStorage.getItem('Token');
 const URL = localStorage.getItem('URL');
@@ -95,7 +96,7 @@ export default function Record(props) {
   const defaultData = ``;
 
   const { state } = useLocation();
-  //console.log('state',state.item.storyId);
+  console.log('state',state.item);
   const [userStoryData, setUserStoryData] = useState([]);
   const [data, setData] = useState(defaultData); //스토리 내용
   const [title, setTitle] = useState(''); //제목
@@ -115,16 +116,18 @@ export default function Record(props) {
   const [date, setDate] = useState(getDate); //일
   const [isDeleteModal, setIsDeleteModal] = useState(false); //동일한 전시 삭제 모달
   const [isNotifyModal, setIsNotifyModal] = useState(false); //저장 모달
-  const [isProgressModal, setIsProgressModal] = useState(false);
+  const [isProgressModal, setIsProgressModal] = useState(false); //임시저장 모달
+  const [isModifyModal, setIsModifyModal] = useState(false); //수정 모달
   const [storyByDate, setStoryByDate] = useState([]);
   const [storyContent, setStoryContent] = useState([]);
   const [dateBoxColor, setDateBoxColor] = useState();
   const [keyword, setKeyword] = useState(''); //키워드
-  const [picturesUrl, setPicturesUrl] = useState([state.item.exhibitionImage]); //선택한 사진 배열
+  const [picturesUrl, setPicturesUrl] = useState(); //선택한 사진 배열 //[state.item.exhibitionImage]
 
   const id = state.item.exhibitionId; //전시회 아이디
   const exhibitionTitle = state.item.exhibitionTitle; //전시회 제목
-  const stroyId = state.item.storyId; //스토리 아이디
+  const storyId = state.item.storyId; //스토리 아이디
+  const storyState = state.item.storyState
   useEffect(() => {
     (async () => {
       //유저 정보 불러오기(스토리 목록을 불러오기 위해)
@@ -146,8 +149,8 @@ export default function Record(props) {
   useEffect(() => {
     (async () => {
       //특정 스토리 조회 , 수정할 스토리를 불러오기 위해
-      //console.log("stroyId",state.item.storyId)
-      if (stroyId) {
+      //console.log("storyId",state.item.storyId)
+      if (storyId) {
         try {
           const response = await axios.get(
             `${url}stories/${state.item.storyId}`,
@@ -180,16 +183,16 @@ export default function Record(props) {
         }
       }
     })();
-  }, [stroyId]);
+  }, [storyId]);
 
   useEffect(() => {
     //api통신할 때 보내기 위한 값들이 잘 받아와지나 확인하기 위한 콘솔
     // console.log("제목: ",title)
     // console.log("시간: ",viewingTime)
     // console.log("동반인: ",companion)
-    console.log('장르1: ', genre1);
-    console.log('장르2: ', genre2);
-    console.log('장르3: ', genre3);
+    // console.log('장르1: ', genre1);
+    // console.log('장르2: ', genre2);
+    // console.log('장르3: ', genre3);
     // console.log("만족도",satisfactionLevel)
     // console.log("날씨",weather)
     // console.log("내용",data)
@@ -197,31 +200,57 @@ export default function Record(props) {
     // console.log("년",year)
     // console.log("월",month)
     // console.log("일",date)
-  }, [genre11, genre22, genre33]);
+  }, []);
 
   //저장 버튼 클릭 -> 동일한 전시 삭제를 물어보는 모달창 뜸
   //-> 동일한 전시 삭제 -> 새롭게 작성한 스토리 저장
   const handleSubmit = async () => {
-    setStoryByDate((prevStoryByDate) => {
-      for (let i = 0; i < userStoryData.length; i++) {
-        for (let j = 0; j < userStoryData.length; j++) {
-          if (userStoryData[i].exhibitionTitle === exhibitionTitle) {
-            // 동일한 전시가 다른 날짜에 존재할 경우
-            setIsDeleteModal(true); //모달 띄우고
-            return (storyByDate[j] = userStoryData[i]); //겹치는 전시들만 모으는 배열에 넣어줌
+    //스토리 아이디가 존재하고 스토리의 상태가 Done 상태(저장까지 완료한 상태)이면
+    if(storyId && storyState==="DONE" )
+    {
+      modifySaveApi( //스토리 수정 
+        storyId,
+        id,
+        data,
+        title,
+        viewingTime,
+        companion,
+        genre1,
+        genre2,
+        genre3,
+        satisfactionLevel,
+        weather,
+        isOpen,
+        year,
+        month,
+        date,
+        keyword,
+        picturesUrl
+      )
+      setIsModifyModal(true)
+    }
+    else {
+      setStoryByDate((prevStoryByDate) => {
+        for (let i = 0; i < userStoryData.length; i++) {
+          for (let j = 0; j < userStoryData.length; j++) {
+            if (userStoryData[i].exhibitionTitle === exhibitionTitle) {
+              // 동일한 전시가 다른 날짜에 존재할 경우
+              setIsDeleteModal(true); //모달 띄우고
+              return (storyByDate[j] = userStoryData[i]); //겹치는 전시들만 모으는 배열에 넣어줌
+            }
           }
         }
-      }
-      saveStory();
-    });
+        saveStory();
+      });
+    }
   };
   //임시저장 버튼 클릭
   const handleProgressSubmit = async () => {
-    if (stroyId) {
+    if (storyId) {
       //storyId가 존재하는 경우 , 캘린더 -> 작성전(storyId존재) 스토리 저장 (성공)
       try {
         await progressSaveApi1(
-          stroyId,
+          storyId,
           id,
           data,
           title,
@@ -269,8 +298,7 @@ export default function Record(props) {
       }
     }
     setIsProgressModal(true);
-    navigate('/mystory')
-
+    //navigate('/mystory')
   };
 
   //미니달력모달열기
@@ -285,11 +313,11 @@ export default function Record(props) {
 
   //스토리 저장하는 api
   const saveStory = async() => {
-    if (stroyId) {
+    if (storyId) {
       try {
         //스토리 아이디 존재
         await createStory1(
-          stroyId,
+          storyId,
           id,
           data,
           title,
@@ -342,15 +370,15 @@ export default function Record(props) {
     }
   };
   useEffect(() => {
-    if (stroyId) {
+    if (storyId && isOpen!==undefined) {
       setDateBoxColor({ backgroundColor: '#000', color: '#fff' });
     }
-  }, [dateBoxColor]);
+  },[]);
   return (
     <div>
       {/* 동일한 전시 삭제 모달 */}
       {isDeleteModal && (
-        <StoryDelete
+        <Modal
           year={storyByDate.year + '.'}
           month={storyByDate.month + '.'}
           day={storyByDate.day}
@@ -365,7 +393,7 @@ export default function Record(props) {
       )}
       {/* 저장했음 알림 모달 */}
       {isNotifyModal && (
-        <StoryDelete
+        <Modal
           year={''}
           month={''}
           day={''}
@@ -377,7 +405,7 @@ export default function Record(props) {
       )}
       {/* 임시저장했음 알림 모달 */}
       {isProgressModal && (
-        <StoryDelete
+        <Modal
           year={''}
           month={''}
           day={''}
@@ -387,6 +415,18 @@ export default function Record(props) {
           setIsProgressModal={setIsProgressModal}
         />
       )}
+      {/* 수정했음 알림 모달 */}
+      {isModifyModal && (
+          <Modal
+            year={''}
+            month={''}
+            day={''}
+            messgage={'스토리가 수정 되었습니다.'}
+            part={'modify'}
+            isModal={isModifyModal}
+            setIsModifyModal={setIsModifyModal}
+          />
+      )}
       <Banner
         image={state.item.exhibitionImage}
         title={state.item.exhibitionTitle}
@@ -395,7 +435,7 @@ export default function Record(props) {
         <StoryRecord>
           <Story>스토리 기록</Story>
           <Story2>나만의 스토리를 작성해보세요</Story2>
-          <StoryTitle stroyId={stroyId} Title={title} SetTitle={setTitle} />
+          <StoryTitle stroyId={storyId} Title={title} SetTitle={setTitle} />
           <OpenSelectButton>
             <button onClick={ClickedOpen} style={dateBoxColor}>
               공개
@@ -405,7 +445,7 @@ export default function Record(props) {
             </button>
           </OpenSelectButton>
           <TodayExhibition
-            stroyId={stroyId}
+            storyId={storyId}
             viewingTime={viewingTime}
             setViewingTime={setViewingTime}
             satisfactionLevel={satisfactionLevel}
@@ -426,6 +466,7 @@ export default function Record(props) {
             setYear={setYear}
             setMonth={setMonth}
             setDate={setDate}
+            isOpen={isOpen}
           />
           <WritingStory
             keyword={keyword}

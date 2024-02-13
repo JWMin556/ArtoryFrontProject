@@ -247,7 +247,7 @@ const blackCategory=[
   <BlakcCategory>작가전시</BlakcCategory>
 ]
 export default function TodayExhibition ({
-  stroyId,
+  storyId,
   viewingTime,
   setViewingTime,
   satisfactionLevel,
@@ -267,10 +267,24 @@ export default function TodayExhibition ({
   date,
   setYear,
   setMonth,
-  setDate
+  setDate,
+  isOpen
   }) 
   {
-
+    const monList = [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+    ];
     //console.log('stroyId',stroyId)
   //console.log(year,month,date)
   //표정 이모티콘
@@ -324,17 +338,18 @@ export default function TodayExhibition ({
       isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true)
     }
     useEffect(()=>{
-      if(stroyId)
+      if(storyId)
       {
         setDateBoxColor({backgroundColor:"#000",color:"#fff"})
       }
-    },[dateBoxColor])
+    },[])
   return (
     <SelectExhibition>
             <div style={{marginBottom:'4%'}}>오늘의 전시</div>
                 <DateDiv onClick={ClickedModalOpen} style={dateBoxColor }>
-                  {year}.{month}.{date}
+                  {year}.{monList[month-1]}.{date}
                   {isModalOpen && <MiniCalendar
+                    Month={month}
                     setYear={setYear}
                     setMonth={setMonth}
                     setDate={setDate}

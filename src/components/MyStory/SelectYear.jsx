@@ -1,8 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import styled from 'styled-components';
-import moment from 'moment';
-
+import DropDown from './Drop'
 const SelectStyled = styled(Select)`
   & .select {
     &__control:focus-within {
@@ -20,11 +19,12 @@ const SelectStyled = styled(Select)`
       &--is-focused {
         border: 1px solid #ffff;
       }
-      &__placeholder {
-        color: red; /* placeholder 색상을 변경합니다. */
-        font-size: 18px; /* 폰트 크기 변경 */
-        font-family: 'Pretendard'; /* 폰트 변경 */
-      }
+    }
+    &__placeholder {
+      color : #000;
+      font-size : 30px;
+      font-family: 'Pretendard';
+      font-weight : bold;
     }
     &__menu {
       text-align: center;
@@ -60,13 +60,13 @@ const SelectStyled = styled(Select)`
       //   }
     }
     &__indicator-separator {
-      display: none;
+      //display: none;
     }
   }
 `;
 
 export default function SelectYear({ options, defaultValue, onSelect }) {
-  console.log("options", options);
+  //console.log("options", options);
   const handleSelectChange = (selectedOption) => {
     onSelect(selectedOption.value); // 값만 전달하도록 수정
   };
@@ -86,6 +86,9 @@ export default function SelectYear({ options, defaultValue, onSelect }) {
       menuShouldScrollIntoView={false}
       Scroll
       onChange={handleSelectChange}
+    components={{
+      IndicatorsContainer: ()=><DropDown/>,
+    }}
     />
   );
 }
