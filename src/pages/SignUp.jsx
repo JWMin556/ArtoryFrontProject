@@ -150,8 +150,8 @@ export default function SignUp() {
     };
     emailjs
       .send(
-        'service_n1us3jy', //서비스 ID
-        'template_w8wnorl', //템플릿 ID
+        'service_2ey3saf', //서비스 ID
+        'template_tkd98j8', //템플릿 ID
         templateParams,
         'qsos29YmuOaN1CNcl' //public key
       )
@@ -303,7 +303,7 @@ export default function SignUp() {
  
   return (
     <Page>
-      <TitleWrap>회원가입</TitleWrap>
+      <TitleWrap>회원가입.. 잠시만 사용하지 말아주세요..</TitleWrap>
       <ContentWrap>
         <SuperTitle>
           <InputTitle style={{ marginTop: '94px' }}>이름</InputTitle>
