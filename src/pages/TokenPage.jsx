@@ -99,7 +99,7 @@ const TokenPage = () => {
           localStorage.setItem('Token', response.data.accessToken); //엑세스토큰 저장
           localStorage.setItem('refreshToken',response.data.refreshToken)//리프레시토큰 저장
           // window.location.href = '/exhibition'; //기존의 코드
-          //window.location.href = '/onboarding';
+          window.location.href = '/onboarding';
         } else if (provider === 'kakao') {
           const response = await axios.get(
             `${URL}/kakaologin?accessToken=${access_token}`

@@ -68,7 +68,7 @@ export const Tile = ({
       userStoryData.forEach((item, index) => {
         if (item.year === year && item.month === month && item.day === day) {
           //유저가 저장한 스토리 배열에 있는 날짜와 같으면
-          if (item.storyState === 'DONE') {
+          if (item.storyState === 'DONE' ||item.storyState === null ) {
             setMark({
               color: '#fff',
               backgroundColor: '#000',
@@ -103,8 +103,8 @@ export const Tile = ({
               backgroundColor: 'none',
               border: '3px solid #000',
               borderRadius: '50px',
-              width : '20px',
-              height : '24px',
+              width : '17px',
+              height : '21px',
               textAlign: 'center',
               paddingRight : '8%',
               paddingTop : '10%', 
@@ -181,6 +181,7 @@ export const Tile = ({
           year={year}
           month={month}
           day={day}
+          loadUserStories={loadUserStories}
         />
       )}
       <Mark style={isMarkStyle}>{result2}</Mark> {/* 전시제목... */}

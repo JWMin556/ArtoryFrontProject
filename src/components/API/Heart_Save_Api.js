@@ -2,9 +2,9 @@ import axios from 'axios';
 import { useEffect } from 'react';
 const token = localStorage.getItem('Token');
 const URL = localStorage.getItem('URL');
-
 const SaveUrl = `${URL}/api/scrap-exhibition/`;
 const HeartUrl = `${URL}/api/like-exhibition/`;
+
 //전시회 스크랩
 export const saveApi = async (exhibitionId) => {
   console.log('saveApi 함수로 들어옴 ', exhibitionId);
