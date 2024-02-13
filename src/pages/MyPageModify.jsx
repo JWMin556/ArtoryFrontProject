@@ -543,7 +543,7 @@ export default function MyPageModify() {
             </TitleRightWrapParagraphArea>
 
             <StyledButton
-              onClick={saveModifiedInformations}  //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
+              onClick={saveModifiedInformations}  //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화fsdfsdfdsfsd
               height="52px"
               width="70%"
               //disabled={}
