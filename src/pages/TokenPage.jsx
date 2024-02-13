@@ -22,6 +22,7 @@ const TokenPage = () => {
           console.log('access Token : ', response.data.accessToken);
           localStorage.setItem('Token', response.data.accessToken); //엑세스토큰 저장
           localStorage.setItem('refreshToken',response.data.refreshToken)//리프레시토큰 저장
+          localStorage.setItem('arbitaryLoginForHeader',true);
           // window.location.href = '/exhibition'; //기존의 코드
           window.location.href = '/onboarding';
         } else if (provider === 'kakao') {
@@ -33,6 +34,7 @@ const TokenPage = () => {
           console.log('access Token : ', response.data.accessToken);
           localStorage.setItem('Token', response.data.accessToken);
           localStorage.setItem('refreshToken',response.data.refreshToken)//리프레시토큰 저장
+          localStorage.setItem('arbitaryLoginForHeader',true);
           // window.location.href = '/exhibition'; //기존의 코드
           window.location.href = '/onboarding';
         } else console.log('소셜 제공자가 없습니다.');

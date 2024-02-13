@@ -62,6 +62,7 @@ export default function LogIn() {
       );
       console.log('사용자 정보가 성공적으로 보내졌습니다.',response.data);
       localStorage.setItem('Token', response.data.accessToken);
+      localStorage.setItem('arbitaryLoginForHeader',true);
       window.location.href = '/'; // Home 페이지로 이동
     } catch (error) {
       console.log(error.response.data);

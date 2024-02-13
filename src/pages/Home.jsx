@@ -10,7 +10,6 @@ const HomeWrap = styled.div`
   margin: auto;
   display: flex;
   justify-content: space-between; /* 요소들 사이의 간격을 최대화하여 가장 왼쪽과 가장 오른쪽에 배치 */
-  /* justify-content: space-evenly; */
   height: 100vh; //footer 때문에 받아주셔야 합니다ㅜ
 `; //메인화면 전체를 감싸주기 위한 스타일드 컴포넌트입니다.
 
