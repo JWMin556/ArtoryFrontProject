@@ -150,7 +150,7 @@ export default function SignUp() {
     };
     emailjs
       .send(
-        'service_n3mb2ob', //서비스 ID
+        'service_n1us3jy', //서비스 ID
         'template_w8wnorl', //템플릿 ID
         templateParams,
         'qsos29YmuOaN1CNcl' //public key

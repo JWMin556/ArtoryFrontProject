@@ -177,9 +177,17 @@ export default function MyPageModify() {
   const [imgUrl, setImgUrl] = useState('');
   const [chagedpPassword, setChagedpPassword] = useState('');
 
+  //버튼활성화를 위한 유효성 검사
+  const [nameValid, setNameValid] = useState(false);
+  const [nickNameValid, setNickNameValid] = useState(false);
+  const [imageValid, setImageValid] = useState(false);
+  const [introductionValid, setIntroductionValid] = useState(false);
+  const [myKeywordValid, setMyKeywordValid] = useState(false);
+  const [genreValid, setGenreValid] = useState(false);
 
   const handleNameChange = (e) => {
     setname(e.target.value);
+    setNameValid(true);
   };
 
   const handleNicknameChange = (e) => {
@@ -189,14 +197,17 @@ export default function MyPageModify() {
       alert("닉네님은 10자까지만 해주세요");
     }
     setNickname(value);
+    setNickNameValid(true);
   };
 
   const handleIntroductionChange = (e) => {
     setIntroduction(e.target.value);
+    setIntroductionValid(true);
   };
 
   const handleKeywordChange = (e) => {
     setMyKeyword(e.target.value);
+    setMyKeywordValid(true);
   };
 
   const handlePasswordsChange = (e) => {
@@ -276,6 +287,7 @@ export default function MyPageModify() {
     console.log(updatedTopics.length < 3);
     setSelectedIndex(updatedIndex);
     setSelectedTopics(updatedTopics);
+    setGenreValid(true);
   };
   const handleSubmitGenre = async () => {
     await saveGenre(
@@ -326,6 +338,7 @@ export default function MyPageModify() {
         const pureUrl = signedUrl.match(/^(https:\/\/[^?]+)/)[1];
         console.log('awsurl: ', pureUrl);
         setImgUrl(pureUrl);
+        setImageValid(true);
       }
     });
   };
@@ -355,6 +368,7 @@ export default function MyPageModify() {
       );
       console.log('사용자 정보가 성공적으로 수정되었습니다.');
       alert('사용자 정보가 성공적으로 수정되었습니다.');
+      window.location.href = '/mypage';
       console.log(response);
     } catch (error) {
       console.log(error.response.data);
@@ -541,12 +555,12 @@ export default function MyPageModify() {
                 </StyledButton>
               </InputWrap>
             </TitleRightWrapParagraphArea>
-
+                
             <StyledButton
               onClick={saveModifiedInformations}  //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
               height="52px"
               width="70%"
-              //disabled={}
+              disabled={!nameValid || !nickNameValid || !imageValid || !introductionValid || !myKeywordValid || !genreValid}
               style={{ marginTop: '40px', marginBottom: '30%' }}
             >
               수정하기
