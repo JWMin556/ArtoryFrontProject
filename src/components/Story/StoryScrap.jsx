@@ -1,8 +1,10 @@
 //check
 import React, { useState } from 'react';
-
 import styled from 'styled-components';
 import { storyScrapped, storyUnScrapped } from '../API/story_API';
+import ON_SAVE from '../../Img/Slider/onsave.svg';
+import SAVE from '../../Img/Slider/save.svg';
+
 export const SaveImg = styled.img`
   position: absolute;
   right: 0;

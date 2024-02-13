@@ -10,6 +10,8 @@ const HomeWrap = styled.div`
   margin: auto;
   display: flex;
   justify-content: space-between; /* 요소들 사이의 간격을 최대화하여 가장 왼쪽과 가장 오른쪽에 배치 */
+  /* justify-content: space-evenly; */
+  height: 100vh; //footer 때문에 받아주셔야 합니다ㅜ
 `; //메인화면 전체를 감싸주기 위한 스타일드 컴포넌트입니다.
 
 const HomeLeftWrap = styled.div`
@@ -28,7 +30,7 @@ const HomeRightWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: flex-start; 
+  justify-content: flex-start;
 `;
 
 const ExhibitImgWrapBanner = styled.div`
@@ -64,7 +66,7 @@ export default function Home() {
       try {
         const response = await axios.get(url, {
           headers: {
-            Accept: '*/*'
+            Accept: '*/*',
           },
         });
         console.log(response.data);
@@ -87,14 +89,14 @@ export default function Home() {
         {/*현재는 이 버튼을 누르면 로그인 페이지로 넘어가도록 만들었습니다. 주연씨는 LogIn.jsx에서 바로 로그인 화면을 작업해주시면 될 것 같습니다. */}
       </HomeLeftWrap>
       <HomeRightWrap>
-        {selectedImage && 
+        {selectedImage && (
           <ExhibitImgWrapBanner>
             <img src={selectedImage} alt="" style={{ width: '100%' }} />
             <ExhibitImgBanner1>
               <img src={selectedImage} alt="" />
             </ExhibitImgBanner1>
           </ExhibitImgWrapBanner>
-        }
+        )}
       </HomeRightWrap>
     </HomeWrap>
   );
