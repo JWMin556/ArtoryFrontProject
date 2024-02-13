@@ -241,6 +241,7 @@ body {
   padding: 0;
   margin: 0;
 }
+/* 디자인 모두 허용해 주셔야 합니다! */
 .ck.ck-editor_editable.ck-focused {
   border: none;
   box-shadow: none;
@@ -251,4 +252,7 @@ body {
 }
 .emoji-picker__wrapper {
   z-index: 1010;
+}
+.dyIpbr {
+  top: 50% !important;
 }
