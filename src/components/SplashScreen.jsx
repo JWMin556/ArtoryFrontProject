@@ -34,9 +34,9 @@ const SplashRightWrap = styled.div`
 
 const SplashFirstParagraph = styled.div`
   color: #979797;
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 400;
   font-family: 'Pretendard';
-  font-weight: 300;
   line-height: 53.23px;
   word-wrap: break-word;
 `;
@@ -45,7 +45,7 @@ const SplashSecondParagraph = styled.div`
   color: white;
   font-size: 40px;
   font-family: 'Pretendard';
-  font-weight: 500;
+  font-weight: 700;
   line-height: 53.23px;
   letter-spacing: 2.8px;
   word-wrap: break-word;

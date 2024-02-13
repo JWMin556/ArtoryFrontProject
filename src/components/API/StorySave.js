@@ -26,7 +26,7 @@ export const progressSaveApi1 = async (
 ) => {
   try {
     const response = await axios.post(
-      `${url}mystory/draft-save?storyId=${storyId}`,
+      `${url}mystory/draft-save-with-storyId?storyId=${storyId}`,
       {
         exhibitionId: exhibitionId,
         storyTitle: title,

@@ -100,7 +100,7 @@ const TitleRightWrapParagraphTitle = styled.div`
 `;
 
 const BoldSentence = styled.div`
-  color: #262626;
+  color: #5A5C62;
   font-size: 20px;
   font-family: 'Pretendard';
   font-weight: 700;
@@ -110,7 +110,7 @@ const BoldSentence = styled.div`
 `;
 
 const GraySentence = styled.div`
-  color: #979797;
+  color: #9BA0AE;
   font-size: 10px;
   font-family: 'Pretendard';
   font-weight: 400;

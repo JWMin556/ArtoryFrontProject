@@ -92,8 +92,7 @@ const BoldSentence = styled.p`
 
 const InputWrap = styled.div`
   display: flex;
-  background: #efeeee;
-  box-shadow: 1px 2px 8px #f3f3f3;
+  background: #f4f5f7;
   padding: 5px;
   margin-left: auto;
   margin-top: 8px;
@@ -111,7 +110,7 @@ const InputStyle = styled.div`
   word-wrap: break-word;
   border: none;
   outline: none;
-  background: #efeeee;
+  background: #f4f5f7;
 `;
 
 const ContentWrap = styled.div`
@@ -137,7 +136,6 @@ const Btns1 = styled.button`
   justify-content: center;
   border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid;
   align-items: center;
-  box-shadow: 1px 2px 8px #f3f3f3;
   color: #616161;
   font-size: 14px;
   font-family: 'Pretendard';
@@ -146,7 +144,7 @@ const Btns1 = styled.button`
   letter-spacing: 0.49px;
   word-wrap: break-word;
   border: none;
-  background-color: #efeeee;
+  background-color: #f4f5f7;
   &:hover {
     background-color: black;
     color: white;
