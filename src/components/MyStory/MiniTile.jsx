@@ -25,20 +25,36 @@ const TileWrapper = styled.div`
 const DateStyle = styled.span`
   margin : 8px 0 0 9px;
   font-size : 10px;
+  width : 10px;
+  height : 15px;
 `;
 
 
-export const MiniTile = ({ index,day,setDate,setIsModalOpen,selectedTile,setDateBoxColor}) => {
+export const MiniTile = ({
+  year,
+  setYear,
+  Month,
+  setMonth,
+  day,
+  setDate,
+  setIsModalOpen,
+  selectedTile,
+  setDateBoxColor
+}) => {
     const [isSelectedDate,setIsSelectDate] = useState(false);
     const [TileColor,setTileColor] = useState()
     const [prevDay,setPrevDay] = useState()
     useEffect(()=>{
         selectedTile === day ?
-        setTileColor({backgroundColor : "#EFEEEE"}) :
+        setTileColor({
+          backgroundColor : "#EFEEEE",
+        }) :
         setTileColor({backgroundColor : "#FFFFFF"}) 
     },[])
 
     const ClickedDate = (day) =>{
+        setYear(year)
+        setMonth(Month)
         setDate(day)
         setIsModalOpen(false)
         setDateBoxColor({backgroundColor:"#000",color:'#fff'})

@@ -9,6 +9,7 @@ export const Container = styled.div`
 
 export const WrapSaveExhibition = styled.div`
     display : flex;
+    flex-direction : row;
     flex-wrap : wrap;
     margin-top : 2%;
     margin-left : 19%;

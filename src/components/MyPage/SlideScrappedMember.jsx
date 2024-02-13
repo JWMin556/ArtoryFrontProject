@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import Prev from '../Exhibition/Prev';
 import Next from '../Exhibition/Next';
-import MyPageProfileImg from './MyPageProfileImg';
+//import MyPageProfileImg from './MyPageProfileImg';
 
 export const WrapSlider = styled.div`
   width: 885px;

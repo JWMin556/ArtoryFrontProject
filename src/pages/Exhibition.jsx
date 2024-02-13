@@ -4,9 +4,9 @@ import Slide from '../components/Exhibition/Slide';
 import Search from '../components/Exhibition/Search';
 import AdBanner from '../components/Exhibition/AdBanner';
 import axios from 'axios';
-import { TestDummy } from '../TestDummy';
 import { Link } from 'react-router-dom';
-import Genre from '../components/Exhibition/Genre'; //여기 이 Genre.jsx는 잠시 사용하지 말아주세요
+import { tokenReissueApi } from '../components/API/tokenReissue_API';
+import Genre from '../components/Exhibition/Genre'; 
 const URL = localStorage.getItem('URL');
 
 const url = `${URL}/api/exhibitions/`;
@@ -65,6 +65,26 @@ export default function Exhibition() {
         );
         setSimlarExhibitionData(response?.data.similarExhibitionDtoList);
       } catch (error) {
+        if (error.response.data.errorCode === 'A-001') { //토큰 만료
+          //alert(error.response.data.message);
+          tokenReissueApi(); //토큰 재발급 
+        } else if (error.response.data.errorCode === 'A-002') {
+          alert(error.response.data.errorMessage);
+        } else if (error.response.data.errorCode === 'A-003') {
+          alert(error.response.data.errorMessage);
+        } else if (error.response.data.errorCode === 'A-004') {
+          alert(error.response.data.errorMessage);
+        } else if (error.response.data.errorCode === 'A-005') {
+          alert(error.response.data.errorMessage);
+        } else if (error.response.data.errorCode === 'A-006') { //리프레시 토큰 만료
+          alert(error.response.data.errorMessage);
+          localStorage.removeItem('Token')
+          window.location.href = '/login'
+        } else if (error.response.data.errorCode === 'A-007') {
+          alert(error.response.data.errorMessage);
+        } else if (error.response.data.errorCode === 'A-008') {
+          alert(error.response.data.errorMessage);
+        }
         console.log(error.response.data);
       }
     })();
@@ -130,7 +150,7 @@ export default function Exhibition() {
       <S.WrapAdBanner>
         <AdBanner />
       </S.WrapAdBanner>
-      <S.WrapSearch>
+      <S.WrapSearch style={{ width: '885px', right: '0' }}>
         <Search />
       </S.WrapSearch>
       <Slide

@@ -6,7 +6,6 @@ const WrapPoster = styled.div`
     margin-right: 2%;
     padding-bottom : 5%;
     margin-bottom : 15%;
-
 `;
 const PosterStyle = styled.img`
     width : 186px;

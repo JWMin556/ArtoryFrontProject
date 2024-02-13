@@ -28,6 +28,7 @@ const DateStyle = styled.span`
   height: 18px;
   padding-top: 7%;
   padding-left: 7%;
+  font-size : 14px;
 `;
 
 const AddImg = styled.img`
@@ -61,12 +62,8 @@ export const Tile = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMarkStyle, setIsStyleStyle] = useState();
   const [isClickTile, setIsClickTile] = useState(false);
-  //const result=
-  useEffect(() => {
-    //console.log(`${day}일`);
-  });
   const checkStoryData = async () => {
-    // if (userStoryData.length > 0) {//이해를 돕기 위함.조건문은 따로 없어도 stories 배열(item)이 0이면 try문 안에의 forEach문이 돌아가지 않을 것이기에.
+    if (userStoryData.length > 0) { 
     try {
       userStoryData.forEach((item, index) => {
         if (item.year === year && item.month === month && item.day === day) {
@@ -76,17 +73,29 @@ export const Tile = ({
               color: '#fff',
               backgroundColor: '#000',
               borderRadius: '50px',
-            }); //블랙 동그라미 스타일 작성 완
+              width : '20px',
+              height : '24px',
+              textAlign: 'center',
+              paddingRight : '8%',
+              paddingTop : '10%', 
+              position : 'relative',
+              bottom : '3%'
+            }); //작성완료 (블랙 동그라미)
             setStory(item.exhibitionTitle);
             setIsStyleStyle({ color: '#000' });
-
-            //console.log(`스토리목록${index}`,item.exhibitionTitle);
           } else if (item.storyState === 'NOT_STARTED') {
             setMark({
               color: '#fff',
               backgroundColor: '#D9D9D9',
               borderRadius: '50px',
-            }); //블랙 동그라미 스타일 작성 전
+              width : '20px',
+              height : '24px',
+              textAlign: 'center',
+              paddingRight : '8%',
+              paddingTop : '10%', 
+              position : 'relative',
+              bottom : '3%'
+            }); //작성 전 (그레이 동그라미)
             setStory(item.exhibitionTitle);
             setIsStyleStyle({ color: '#D9D9D9' });
           } else if (item.storyState === 'IN_PROGRESS') {
@@ -94,9 +103,14 @@ export const Tile = ({
               backgroundColor: 'none',
               border: '3px solid #000',
               borderRadius: '50px',
-              width: '13px',
-              height: '13px',
-            }); //블랙 동그라미 스타일
+              width : '20px',
+              height : '24px',
+              textAlign: 'center',
+              paddingRight : '8%',
+              paddingTop : '10%', 
+              position : 'relative',
+              bottom : '3%'
+            }); //임시저장 동그마리 (border만 있는 동그라미)
             setStory(item.exhibitionTitle);
           }
           throw new Error('Stop!');
@@ -105,11 +119,10 @@ export const Tile = ({
     } catch (e) {
       console.log('stop!' + e);
     } finally {
-      // }
+    }
     }
   };
   useEffect(() => {
-    //checkStoryData함수 실행 전 stories의 length가 0인것을 대비해 초기화 해둠.  setMark & setStory(스토리 해당 전시제목) 포함.
     setMark({
       color: 'black',
       backgroundColor: 'transparent',
@@ -117,7 +130,7 @@ export const Tile = ({
     });
     setStory([]);
     checkStoryData();
-  }, [day, userStoryData]); //필수
+  }, [day, userStoryData]); 
 
   if (story.length > 5) {
     var result1 = story.substr(0, 6);
@@ -157,7 +170,7 @@ export const Tile = ({
       onClick={onClickTile}
       style={mouseOverStyle}
     >
-      <DateStyle style={mark}>{day}</DateStyle>
+      <DateStyle style={mark}><span>{day}</span></DateStyle>
       {isButtonOpen && (
         <AddImg src={ADD} onClick={() => handleClickAddButton(day)} />
       )}

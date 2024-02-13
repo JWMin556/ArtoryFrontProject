@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import KakaoMap from './KakaoMap';
+import NaverMap from './NaverMap'
 import { Link } from 'react-router-dom';
 
 const URL = localStorage.getItem('URL');
@@ -81,6 +82,7 @@ export default function Detail(props) {
   console.log('전시회 ID: ', props.id);
 
   useEffect(() => {
+    const token = localStorage.getItem('Token');
     const fetchData = async () => {
       try {
         const response = await axios.get(`${url}${props.id}`, {
@@ -147,10 +149,14 @@ export default function Detail(props) {
           </DetailInfo>
         </WrapInfo>
       </ImgAndInfo>
-      <KakaoMap
-        Longitude={info?.exhibitionLongitude}
-        Latitude={info?.exhibitionLatitude}
-      />
+        {info?.exhibitionLongitude === undefined && info?.exhibitionLatitude === undefined ? (
+              <p>Loading...</p> 
+            ) : ( 
+              <KakaoMap
+              Longitude={info?.exhibitionLongitude}
+              Latitude={info?.exhibitionLatitude}
+            />
+            )} 
     </WrapDetail>
     //</Container>
   );

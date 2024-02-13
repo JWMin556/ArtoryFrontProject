@@ -33,7 +33,6 @@ export default function MyStory() {
     try {
       const response = await getMystoryInfo();
       console.log('유저정보', response.data);
-
       setUserData(response.data);
       console.log('유저 스토리 정보', response.data.stories);
       setUserStoryData(response.data.stories);

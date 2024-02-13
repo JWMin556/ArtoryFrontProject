@@ -20,7 +20,8 @@ const TokenPage = () => {
           setTokenData(response.data);
           console.log('data : ', response.data);
           console.log('access Token : ', response.data.accessToken);
-          localStorage.setItem('Token', response.data.accessToken);
+          localStorage.setItem('Token', response.data.accessToken); //엑세스토큰 저장
+          localStorage.setItem('refreshToken',response.data.refreshToken)//리프레시토큰 저장
           // window.location.href = '/exhibition'; //기존의 코드
           window.location.href = '/onboarding';
         } else if (provider === 'kakao') {
@@ -31,30 +32,14 @@ const TokenPage = () => {
           console.log('data : ', response.data);
           console.log('access Token : ', response.data.accessToken);
           localStorage.setItem('Token', response.data.accessToken);
+          localStorage.setItem('refreshToken',response.data.refreshToken)//리프레시토큰 저장
           // window.location.href = '/exhibition'; //기존의 코드
           window.location.href = '/onboarding';
         } else console.log('소셜 제공자가 없습니다.');
 
         // 처리 로직 추가
       } catch (error) {
-        console.error('Error fetching data:', error.response.data);
-        if (error.response.data.errorCode === 'A-001') {
-          alert(error.response.data.message);
-        } else if (error.response.data.errorCode === 'A-002') {
-          alert(error.response.data.message);
-        } else if (error.response.data.errorCode === 'A-003') {
-          alert(error.response.data.message);
-        } else if (error.response.data.errorCode === 'A-004') {
-          alert(error.response.data.message);
-        } else if (error.response.data.errorCode === 'A-005') {
-          alert(error.response.data.message);
-        } else if (error.response.data.errorCode === 'A-006') {
-          alert(error.response.data.message);
-        } else if (error.response.data.errorCode === 'A-007') {
-          alert(error.response.data.message);
-        } else if (error.response.data.errorCode === 'A-008') {
-          alert(error.response.data.message);
-        } else if (error.response.data.errorCode === 'M-001') {
+        if (error.response.data.errorCode === 'M-001') {
           alert(error.response.data.message);
         } else if (error.response.data.errorCode === 'M-002') {
           alert(error.response.data.message);
@@ -62,6 +47,8 @@ const TokenPage = () => {
           alert(error.response.data.message);
         } else if (error.response.data.errorCode === 'M-004') {
           alert(error.response.data.message);
+        } else {
+          console.error('Error fetching data:', error.response.data);
         }
       }
     };

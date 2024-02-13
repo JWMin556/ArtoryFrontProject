@@ -79,7 +79,6 @@ export const progressSaveApi2 = async (
   keyword,
   picturesUrl
 ) => {
-  //console.log("스토리 아이디 : ", storyId)
   console.log(exhibitionId);
   console.log(data);
   console.log(title);
@@ -151,6 +150,75 @@ export const BeforeWritionSaveApi = async (id, year, month, day) => {
       }
     );
     console.log(response.data);
+  } catch (error) {
+    console.error('Error fetching data:', error.response);
+  }
+  //fetchData();
+};
+
+//수정 
+export const modifySaveApi = async (
+  storyId,
+  exhibitionId,
+  data,
+  title,
+  viewingTime,
+  companion,
+  genre1,
+  genre2,
+  genre3,
+  satisfactionLevel,
+  weather,
+  isOpen,
+  year,
+  month,
+  date,
+  keyword,
+  picturesUrl
+) => {
+  console.log("스토리 수정 api 들어옴")
+  console.log("스토리 아이디 : ", storyId)
+  console.log(exhibitionId);
+  console.log(data);
+  console.log(title);
+  console.log(companion);
+  console.log(genre1);
+  console.log(genre2);
+  console.log(genre3);
+  console.log(satisfactionLevel);
+  console.log(weather);
+  console.log(year);
+  console.log(month);
+  console.log(date);
+  try {
+    const response = await axios.patch(
+      `${url}stories/upadte/{story-id}?storyId=${storyId}`,
+      {
+        exhibitionId: exhibitionId,
+        storyTitle: title,
+        storySatisfactionLevel: satisfactionLevel,
+        storyWeather: weather,
+        storyCompanion: companion,
+        storyKeyword: keyword,
+        storyViewingTime: viewingTime,
+        year: year,
+        month: month,
+        day: date,
+        storyContext: data,
+        genre1: genre1,
+        genre2: genre2,
+        genre3: genre3,
+        isOpen: isOpen,
+        picturesUrl: picturesUrl,
+      },
+      {
+        headers: {
+          Accept: '*/*',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response);
   } catch (error) {
     console.error('Error fetching data:', error.response);
   }

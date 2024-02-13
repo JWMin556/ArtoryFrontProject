@@ -74,6 +74,7 @@ export default function StoryDelete({
   setIsDeleteModal,
   setIsNotifyModal,
   setIsProgressModal,
+  setIsModifyModal,
   saveStory,
 }) {
   const ClickedYesButton = () => {
@@ -86,6 +87,8 @@ export default function StoryDelete({
       setIsNotifyModal(false); // 저장 알림 모달 닫음
     } else if (part === 'progress') {
       setIsProgressModal(false); //임시저장 알림 모달 닫음
+    } else if (part === "modify") {
+      setIsModifyModal(false) //수정 알림 모달 닫음
     }
   };
   return (

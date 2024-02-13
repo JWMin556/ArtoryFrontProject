@@ -4,32 +4,7 @@ import moment from "moment";
 import {MiniTile} from './MiniTile';
 import PREV_BUTTON from '../../Img/MyStory/prev.svg';
 import NEXT_BUTTON from '../../Img/MyStory/next.svg';
-import Modal  from 'react-modal';
-const StyledModal = {
-    overlay: {
-        backgroundColor: " rgba(0, 0, 0, 0)",
-        width: "100%",
-        height: "100vh",
-        zIndex: "10",
-        position: "fixed",
-        top: "0",
-        left: "0",
-    },
-    content: {
-        width: "213px",
-        height: "159px",
-        zIndex: "150",
-        position: "absolute",
-        top: "50%",
-        left: "33%",
-        transform: "translate(-50%, -50%)",
-        borderRadius: "10px",
-        backgroundColor: "#ffff",
-        justifyContent: "center",
-        overflow: "auto",
-        padding : "1%"
-    },
-}
+
 const Container = styled.div`
     //border : 1px solid blue;
     box-shadow: 1px 1px 2px  rgba(0,0,0,0.3);
@@ -88,7 +63,6 @@ const Day = styled.div`
   //right : 4.3%;
   margin-bottom : 2%;
   //border : 1px solid green;
-
   & div {
     min-width: 13%;
     max-height: 5%;
@@ -143,6 +117,7 @@ const YearSelect = styled.select`
   margin-right : 5%;
 `;
 const MiniCalendar = ({
+    Month,
     setYear,
     setMonth,
     setDate,
@@ -152,18 +127,6 @@ const MiniCalendar = ({
     setDateBoxColor,
     ...props
 }) => {
-  // useEffect(() => {
-  //   document.body.style.cssText = `
-  //     position: fixed; 
-  //     top: -${window.scrollY}px;
-  //     overflow-y: scroll;
-  //     width: 100%;`;
-  //   return () => {
-  //     const scrollY = document.body.style.top;
-  //     document.body.style.cssText = '';
-  //     window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
-  //   };
-  // }, []);
   const {
     date,
 } = props;
@@ -230,6 +193,10 @@ const MiniCalendar = ({
             return (
               <MiniTile 
                 index={index} 
+                year={year}
+                setYear={setYear}
+                Month={Month}
+                setMonth={setMonth}
                 day={day} 
                 setDate={setDate}
                 selectedTile = {selectedTile}
@@ -259,7 +226,8 @@ const MiniCalendar = ({
   //console.log("month",month);
   const [year, changeYear] = useState(Number(moment(date).format("YYYY")));
   const [isButtonOpen, setIsButtonOpen] = useState(false);
-  const nextMonth = () => {
+  const nextMonth = (e) => {
+    e.stopPropagation(); 
     if (month != 11) {
       changeMonth((month) => month + 1);
     } else {
@@ -269,7 +237,8 @@ const MiniCalendar = ({
     makeCalendar(year, month);
     console.log("next!", year, month, new_month);
   };
-  const prevMonth = () => {
+  const prevMonth = (e) => {
+    e.stopPropagation(); 
     if (month != 0) {
       changeMonth((month) => month - 1);
     } else {
@@ -284,19 +253,13 @@ const MiniCalendar = ({
   setYear(year);
   setMonth(month);
   return (
-    // <Modal
-    //     isOpen={isModalOpen}
-    //     onRequestClose={()=>setIsModalOpen(false)}
-    //     style={StyledModal}
-    //     shouldCloseOnOverlayClick={true}
-    // >
       <Container>
         <Header>
-          <img src={PREV_BUTTON} onClick={prevMonth}></img>
+          <img src={PREV_BUTTON} onClick={(e)=>prevMonth(e)}></img>
           <span>
             {year}년 {monList[month-1]}월
           </span>
-          <img src={NEXT_BUTTON} onClick={nextMonth}></img>
+          <img src={NEXT_BUTTON} onClick={(e)=>nextMonth(e)}></img>
         </Header>
         <Days>
           <Day>
@@ -307,7 +270,6 @@ const MiniCalendar = ({
           {makeCalendar(year, month-1)}
         </Days>
       </Container>
-    // </Modal>
   );
 };
 export default MiniCalendar;
