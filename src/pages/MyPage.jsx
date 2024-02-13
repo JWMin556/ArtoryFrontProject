@@ -71,7 +71,6 @@ const TitleRightWrap = styled.div`
 const TitleRightWrapParagraphArea = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 5%;
 `;
 
 const TitleRightWrapParagraphTitle = styled.div`
@@ -81,7 +80,7 @@ const TitleRightWrapParagraphTitle = styled.div`
 `;
 
 const BoldSentence = styled.p`
-  color: #262626;
+  color: #5A5C62;
   font-size: 20px;
   font-family: 'Pretendard';
   font-weight: 700;
@@ -281,7 +280,7 @@ export default function MyPage() {
               style={{ display: 'inline-block', marginBottom: '10px' }}
             >
               <img
-                style={{ float: 'right' }}
+                style={{ float: 'right', marginBottom:"15%" }}
                 src="/img/setting.png"
                 alt="환경설정버튼"
                 width="8%"

@@ -121,8 +121,7 @@ const GraySentence = styled.div`
 
 const InputWrap = styled.div`
   display: flex;
-  background: #efeeee;
-  box-shadow: 1px 2px 8px #f3f3f3;
+  background: #f4f5f7;
   padding: 5px;
   margin-left: auto;
   margin-top: 8px;
@@ -140,7 +139,7 @@ const InputStyle = styled.input`
   word-wrap: break-word;
   border: none;
   outline: none;
-  background: #efeeee;
+  background: #f4f5f7;
 `;
 
 const ExamineWrap = styled.div`
@@ -426,6 +425,7 @@ export default function MyPageModify() {
           </TitleLeftWrap>
 
           <TitleRightWrap>
+            <div style={{marginBottom:"21%"}} />
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
                 <BoldSentence>이름</BoldSentence> {/*아직 서버가 미완성*/}
@@ -546,6 +546,7 @@ export default function MyPageModify() {
               onClick={saveModifiedInformations}  //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
               height="52px"
               width="70%"
+              //disabled={}
               style={{ marginTop: '40px', marginBottom: '30%' }}
             >
               수정하기

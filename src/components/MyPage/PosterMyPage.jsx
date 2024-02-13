@@ -54,7 +54,7 @@ export default function PosterMyPage(props) {
     >
         {/* <PosterStyle src={props.item.exhibitionImage}/> */}
         <PosterStyle src={props.item.storyImage} alt={props.item.storyId} />
-        {isShowTitle && <WrapTitle>{props.item.storyId}</WrapTitle>}
+        {isShowTitle && <WrapTitle>{props.item.storyTitle}</WrapTitle>}
     </div>
   )
 }

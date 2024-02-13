@@ -36,18 +36,17 @@ const ExhibitImgWrapBanner = styled.div`
   position: relative;
   width: 100%;
   height: 90vh;
-  margin-top: ${(props) => (props.isLoggedIn ? '15%' : 'none')};
   margin-bottom: 70px;
   overflow-y: hidden;
 `;
 const ExhibitImgBanner1 = styled.div`
   z-index: 5;
   position: absolute;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  top: 12%;
+  //background-color: rgba(0, 0, 0, 0.4);
   text-align: center;
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   & img {
     height: 100%;
   }
@@ -76,8 +75,6 @@ export default function Home() {
     })();
   }, []);
 
-  const isLoggedIn = localStorage.getItem('arbitaryLoginForHeader');
-
   return (
     <HomeWrap>
       <HomeLeftWrap>
@@ -91,8 +88,8 @@ export default function Home() {
       </HomeLeftWrap>
       <HomeRightWrap>
         {selectedImage && 
-          <ExhibitImgWrapBanner isLoggedIn={isLoggedIn}>
-            <img src={selectedImage} alt="" style={{ width: '100%' }} />
+          <ExhibitImgWrapBanner>
+            <img src={selectedImage} alt="" style={{ width: '100%', filter: 'blur(5px)'}} />
             <ExhibitImgBanner1 >
               <img src={selectedImage} alt="" />
             </ExhibitImgBanner1>
