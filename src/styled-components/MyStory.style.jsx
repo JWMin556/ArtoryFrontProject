@@ -9,6 +9,7 @@ export const Container = styled.div`
 export const WrapExhibition = styled.div`
     //border : 1px solid red;
     width : 60%;
+    font-weight : 900; 
 `;
 export const WrapSaveExhibition = styled.div`
     display : flex;
@@ -22,18 +23,22 @@ export const WrapPoster = styled.div`
     margin-right  : 3%;
 `;
 export const WrapCalendar = styled.div`
-    width : 76%;
-    height : 630px;
-    //border : 1px solid red;
+    width: 75vw;
+    height: 90vh;
+    // width : 76%;
+    // height : 630px;
     display : flex;
-    justify-content : center;
+    justify-content : space-between;
+    align-items : center;
     position : relative;
-    bottom : 30px;
+    bottom : 40px;
+    //border : 1px solid red;
+
 `;
 export const RecordName = styled.div`
     font-size : 30px;
     font-family: 'Pretendard';
-    font-weight : bold;
+    font-weight : 700;
     margin-top : 10%;
 `;
 

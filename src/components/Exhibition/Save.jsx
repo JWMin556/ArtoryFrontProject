@@ -13,21 +13,22 @@ export const SaveImg = styled.img`
   z-index : 10;
   margin : 6%;
 `;
-export default function Save(props) {
+export default function Save({loadUserStories,...props}) {
   //props.item.~~ 으로 호출
   const [isClickSave, setIsClickSave] = useState(props.item.scrapped); // 좋아요 누름 = true / 좋아요 안누름 = false
 
-  function handleClickSave(exhibitionId,e) {
+  const handleClickSave= async(exhibitionId,e)=> {
     e.stopPropagation()
     //Save 이미지를 누르면
     setIsClickSave((prevIsClickSave) => !prevIsClickSave);
     console.log('전시회 저장', exhibitionId);
     //api 호출
     if (isClickSave) {
-      saveCancelApi(exhibitionId);
+      await saveCancelApi(exhibitionId);
+      await loadUserStories();
     } //저장 취소
     else {
-      saveApi(exhibitionId);
+      await saveApi(exhibitionId);
     } //저장
   }
   return (

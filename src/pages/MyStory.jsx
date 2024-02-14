@@ -9,12 +9,11 @@ import SearchModal from '../components/MyStory/SearchModal1';
 import Memo from '../components/MyStory/Memo';
 import { getMystoryInfo, mystoryInfo } from '../components/API/Mystoyr_APITEST';
 import Poster from '../components/Exhibition/Poster';
-const URL = localStorage.getItem('URL');
-const url = `${URL}/api/mystory/all?page=1`;
-const token = localStorage.getItem('Token');
+
 
 export default function MyStory() {
   const [userData, setUserData] = useState([]);
+  const [userExhibitionData,setUserExhibitionData] = useState([])
   const [userStoryData, setUserStoryData] = useState([]);
   const [isButtonClick, setIsButtonClick] = useState(false);
 
@@ -32,10 +31,12 @@ export default function MyStory() {
     //유저 정보 불러오기
     try {
       const response = await getMystoryInfo();
-      console.log('유저정보', response.data);
+      //console.log('유저정보', response.data);
       setUserData(response.data);
-      console.log('유저 스토리 정보', response.data.stories);
+      //console.log('유저 스토리 정보', response.data.stories);
       setUserStoryData(response.data.stories);
+      //유저 스크랩 전시 목록
+      setUserExhibitionData(response.data.exhibitions);
     } catch (error) {
       console.error('Error fetching data:', error.response.data);
     }
@@ -44,8 +45,8 @@ export default function MyStory() {
   const loadUserStories = async () => {
     try {
       const response = await getMystoryInfo();
-      console.log('유저 스토리 정보', response.data.stories);
       setUserStoryData(response.data.stories);
+      setUserExhibitionData(response.data.exhibitions);
     } catch (error) {
       console.error('Error fetching data:', error.response.data);
     }
@@ -90,9 +91,8 @@ export default function MyStory() {
         <div
           style={{
             fontSize: '30px',
-            fontWeight: 'bold',
-            fontFamily: 'Pretendard',
-            
+            fontWeight: '700',
+            fontFamily: 'Pretendard',            
             //textAlign: 'center'
           }}
         >
@@ -103,9 +103,9 @@ export default function MyStory() {
             <p>Loading...</p>
           ) : (
             //<p>있음</p>
-            userData.exhibitions.map((item, index) => (
+            userExhibitionData.map((item, index) => (
               <S.WrapExhibitionPoster>
-                <Poster item={item} />
+                <Poster item={item} loadUserStories={loadUserStories} />
               </S.WrapExhibitionPoster>
             ))
           )}

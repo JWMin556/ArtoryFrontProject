@@ -90,18 +90,18 @@ export const createStory2 = async (
   keyword,
   picturesUrl
 ) => {
-  console.log(exhibitionId);
-  console.log(data);
-  console.log(title);
-  console.log(companion);
-  console.log(genre1);
-  console.log(genre2);
-  console.log(genre3);
-  console.log(satisfactionLevel);
-  console.log(weather);
-  console.log(year);
-  console.log(month);
-  console.log(date);
+  // console.log(exhibitionId);
+  // console.log(data);
+  // console.log(title);
+  // console.log(companion);
+  // console.log(genre1);
+  // console.log(genre2);
+  // console.log(genre3);
+  // console.log(satisfactionLevel);
+  // console.log(weather);
+  // console.log(year);
+  // console.log(month);
+  // console.log(date);
   try {
     const response = await axios.post(
       `${BASE_URL}stories/save?storyId`,
