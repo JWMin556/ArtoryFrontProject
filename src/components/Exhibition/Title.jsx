@@ -11,10 +11,10 @@ const WrapTitle = styled.div`
     // position: relative;
     // bottom : 269px;
     //z-index: 10px; 
-
     //bottom : 0%;
     //left : 0%;
     //right : 0%;
+    box-shadow: 1px 2px 8px #f3f3f3;
     display : flex ;
     justify-content : center;
     align-items : center;

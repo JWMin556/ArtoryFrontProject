@@ -3,12 +3,17 @@ import styled from 'styled-components';
 import StyledButton from '../../styled-components/StyledButton'
 import { memoSaveApi } from '../API/Memo_API';
 const Wrap = styled.div`
-    width : 269px;
-    height : 522px;
+    // width : 320px;
+    // height : 522px;
+    position : relative;
+    width: 50vw;
+    height: 88vh;
 `;
 const MemoStyle = styled.textarea`
     width: 100%;
-    height: 510.5px;
+    height: 100%;
+    width : 20vw;
+    height : 77vh;
     color: #ababab;
     font-family: 'Pretendard';
     background-color: #F4f5f7;
@@ -17,10 +22,9 @@ const MemoStyle = styled.textarea`
     padding-top : 5%;
     resize: none;
     position : relative;
-    top : 9.5%;
-    right : 28%;
+    top : 7%;
     //margin-left : 30%;
-    //margin-top : 23%;
+    //margin-top : 16%;
     &::placeholder {
         color: #ababab;
         font-family: 'Pretendard';
@@ -35,9 +39,11 @@ const SaveButton = styled.button`
     border : none;
     width : 70px;
     height : 28px;
-    position : relative;
-    top : 1%;
-    left : 46%;
+    position : absolute;
+    bottom : 0;
+    right : 0;
+    margin-bottom : 5%;
+    margin-right : 25%;
     font-family: 'Pretendard';
     font-size : 12px;
 `;
@@ -80,7 +86,8 @@ export default function Memo(props) {
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
                 placeholder={isInputClick ? "" : content}
-            />
+                >
+            </MemoStyle>
             <SaveButton onClick={clickSaveButton}>저장</SaveButton> 
         </Wrap>
     );

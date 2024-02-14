@@ -36,19 +36,18 @@ const SelectExhibition = styled.div`
     //border : 1px solid red;
     width : 100%;
     height : 359px;
-    box-shadow: 1px 2px 8px rgba(0,0,0,0.1); 
+    box-shadow: 1px 2px 8px #f3f3f3; 
     margin-bottom : 4%;
-    border-radius: 10px;
     font-size : 20px;
     font-weight : bold;
     font-family: 'Pretendard';
-    padding : 2% 0 0 2%;
+    padding : 2% 0 0 4%;
     & div {
       //margin-bottom : 4%;
     }
 `;
 const WrapSelect = styled.div`
-  height : 100%;
+    height : 100%;
     display : flex;
     justify-content : space-between;
 `;
@@ -83,7 +82,7 @@ const Time = styled.button`
   width : 72px;
   height : 19px;
   font-size : 11px;
-  //font-weight : 530;
+  font-weight : 600;
   padding-bottom : 5%;
   border : none;
   color : #ABABAB;
@@ -94,6 +93,7 @@ const BlackTime = styled.button`
   height : 19px;
   text-align : center;
   padding-bottom : 5%;
+  font-weight : 600;
   color : #fff;
   border : none;
   font-size : 11px;
@@ -110,6 +110,8 @@ const Who = styled.button`
   padding-bottom : 5%;
   border : none;
   color : #ABABAB;
+  font-weight : 600;
+
 `;
 const BlackWho = styled.button`
   background-color : #000;
@@ -119,6 +121,8 @@ const BlackWho = styled.button`
   padding-bottom : 5%;
   color : #fff;
   border : none;
+  font-weight : 600;
+
 `;
 const WrapCategory = styled.div`
   width : 75%;
@@ -133,6 +137,8 @@ const Category = styled.button`
   padding-bottom : 5%;
   color : #ababab;
   border : none;
+  font-weight : 600;
+
 `;
 const BlakcCategory = styled.button`
   margin-top : 1.2%;
@@ -143,11 +149,13 @@ const BlakcCategory = styled.button`
   font-size : 11px;
   padding-bottom : 5%;
   color : #fff;
-  border : none;`;
+  border : none;
+  font-weight : 600;
+`;
 const DateDiv = styled.div`
   background-color : #f5f5f5;
-  width : 101px;
-  height : 19px;
+  width : 110px;
+  height : 13px;
   text-align : center;
   font-size : 11px;
   padding-top : 1%;
@@ -345,7 +353,7 @@ export default function TodayExhibition ({
     },[])
   return (
     <SelectExhibition>
-            <div style={{marginBottom:'4%'}}>오늘의 전시</div>
+            <div style={{marginBottom:'4%', fontWeight:'800'}}>오늘의 전시</div>
                 <DateDiv onClick={ClickedModalOpen} style={dateBoxColor }>
                   {year}.{monList[month-1]}.{date}
                   {isModalOpen && <MiniCalendar

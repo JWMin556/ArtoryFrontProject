@@ -95,7 +95,7 @@ return (
         <PosterStyle src={props.item.exhibitionImage}/>
         <Linear />
             {isShow && <Heart item={props.item}/> }
-            {isShow && <Save item={props.item}/> }
+            {isShow && <Save item={props.item} loadUserStories={loadUserStories}/> }
         <WrapTitle>{isShowTitle && <Title title = {props.item.exhibitionTitle}/>}</WrapTitle>
     </div>
 );

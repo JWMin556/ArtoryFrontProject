@@ -15,9 +15,6 @@ const TileWrapper = styled.div`
   justify-content: space-between;
   font-size: 12px;
   font-family: Pretendard;
-  // &:hover{
-  //   background-color : #EFEEEE;
-  // }
 `;
 
 const DateStyle = styled.span`
@@ -41,10 +38,10 @@ const AddImg = styled.img`
 const Mark = styled.div`
   width: 100%;
   font-size: 11px;
-  font-weight: bold;
+  font-weight: 800;
   color: #000;
   position: relative;
-  // top : 60%;
+  bottom : 10%;
   left: 20%;
 `;
 export const Tile = ({
@@ -86,7 +83,7 @@ export const Tile = ({
           } else if (item.storyState === 'NOT_STARTED') {
             setMark({
               color: '#fff',
-              backgroundColor: '#D9D9D9',
+              backgroundColor: '#ABABAB',
               borderRadius: '50px',
               width : '20px',
               height : '24px',

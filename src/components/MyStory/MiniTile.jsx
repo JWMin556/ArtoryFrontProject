@@ -15,10 +15,10 @@ const TileWrapper = styled.div`
   font-size : 12px;
   font-family: Pretendard;
   &:hover{
-    background-color : #EFEEEE;
+    background-color : #D1D3D9;
   }
   &:focus{
-    background-color : #EFEEEE;
+    background-color : #D1D3D9;
   }
 `;
 
@@ -47,7 +47,7 @@ export const MiniTile = ({
     useEffect(()=>{
         selectedTile === day ?
         setTileColor({
-          backgroundColor : "#EFEEEE",
+          backgroundColor : "#D1D3D9",
         }) :
         setTileColor({backgroundColor : "#FFFFFF"}) 
     },[])

@@ -24,6 +24,7 @@ export const progressSaveApi1 = async (
   keyword,
   picturesUrl
 ) => {
+    console.log("이미지 저장api로 잘 들어옴",picturesUrl)
   try {
     const response = await axios.post(
       `${url}mystory/draft-save-with-storyId?storyId=${storyId}`,
@@ -62,9 +63,9 @@ export const progressSaveApi1 = async (
 
 //임시저장 (스토리 아이디 존재X)
 export const progressSaveApi2 = async (
-  exhibitionId,
-  data,
+  id, //전시회 아이디(exhibitionId)
   title,
+  data,
   viewingTime,
   companion,
   genre1,
@@ -72,30 +73,30 @@ export const progressSaveApi2 = async (
   genre3,
   satisfactionLevel,
   weather,
-  isOpen,
   year,
   month,
   date,
+  isOpen,
   keyword,
   picturesUrl
 ) => {
-  // console.log(exhibitionId);
-  // console.log(data);
-  // console.log(title);
-  // console.log(companion);
-  // console.log(genre1);
-  // console.log(genre2);
-  // console.log(genre3);
-  // console.log(satisfactionLevel);
-  // console.log(weather);
-  // console.log(year);
-  // console.log(month);
-  // console.log(date);
+  console.log(id);
+  console.log(data);
+  console.log(title);
+  console.log(companion);
+  console.log(genre1);
+  console.log(genre2);
+  console.log(genre3);
+  console.log(satisfactionLevel);
+  console.log(weather);
+  console.log("api year",year);
+  console.log("api month",month);
+  console.log("api date",date);
   try {
     const response = await axios.post(
       `${url}mystory/draft-save`,
       {
-        exhibitionId: exhibitionId,
+        exhibitionId: id,
         storyTitle: title,
         storySatisfactionLevel: satisfactionLevel,
         storyWeather: weather,
@@ -199,7 +200,7 @@ export const modifySaveApi = async (
         storySatisfactionLevel: satisfactionLevel,
         storyWeather: weather,
         storyCompanion: companion,
-        storyKeyword: keyword,
+        storyKeyword: 'keyword',
         storyViewingTime: viewingTime,
         year: year,
         month: month,
@@ -209,7 +210,7 @@ export const modifySaveApi = async (
         genre2: genre2,
         genre3: genre3,
         isOpen: isOpen,
-        picturesUrl: ['picturesUrl'],
+        picturesUrl: picturesUrl,
       },
       {
         headers: {

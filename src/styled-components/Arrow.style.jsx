@@ -9,7 +9,7 @@ export const Arrow = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    //cursor: pointer;
     transition: all 0.3s;
     z-index: 1; 
     // 화살표가 뒤에 묻히길래 z-index 주었다. 
