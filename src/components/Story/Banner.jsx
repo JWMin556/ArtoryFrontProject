@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default function Banner({ image, title }) {
   return (
     <WrapBanner>
-      <img src={image} alt="" style={{ width: '100%' }} />
+      <img src={image} alt="" style={{ width: '100%', filter: 'blur(5px)' }} />
 
       <Banner1>
         <img src={image} alt="" />

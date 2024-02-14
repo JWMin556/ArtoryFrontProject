@@ -7,7 +7,7 @@ import { userScrapped, userUnScrapped } from '../API/story_API';
 import { useNavigate } from 'react-router-dom';
 
 const PosterStyle = styled.img`
-  box-shadow: 5px 5px 8px #d9d9d9;
+  box-shadow: 1px 2px 8px #f3f3f3;
   height: 126px;
   width: 126px;
 `;

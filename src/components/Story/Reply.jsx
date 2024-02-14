@@ -36,6 +36,7 @@ function CommentListItem({ commentId, userId, item, loadComments }) {
       console.log('item', item);
       await deleteReply(commentId, item.subCommentId);
       await loadComments(); // 대댓글 삭제 후 최신 코멘트 리스트를 다시 불러와서 렌더링
+      setModal(false);
     } catch (error) {
       console.error('Error fetcing data:', error.response);
     }
@@ -103,39 +104,33 @@ function CommentListItem({ commentId, userId, item, loadComments }) {
 }
 
 const Submit = styled.button`
-  position: absolute; //상위요소를 relative로
-  bottom: 20%;
-  right: 10px; /* 여기서 10px로 설정 */
   font-family: 'Pretendard';
   font-weight: 600;
+  font-size: medium;
   border: none;
   background-color: black;
   color: white;
+  width: 95px;
   padding: 5px 15px;
-  z-index: 4;
 `;
 const Form = styled.form`
   display: flex;
-  justify-content: center;
+  align-items: center;
   position: relative;
   padding: 10px;
   background-color: #f4f5f7;
   height: 20px;
-  margin-top: 10px;
-  //margin-right: 10px;
-  /* box-shadow: 1px 2px 8px #00000025; */
-  z-index: 10;
+  /* margin-top: 10px; */
   width: 90%;
-
-  //width: 100%;
+  margin-left: 5px;
 `;
 const ReplyText = styled.textarea`
-  z-index: 3;
   resize: none;
-  color: #616161;
+  color: #28292a;
+  font-weight: 500;
   background-color: #f4f5f7;
   font-family: 'Pretendard';
-  width: 99%;
+  width: 90%;
   height: 80%;
   border: none;
   outline: none;

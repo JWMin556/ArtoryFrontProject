@@ -83,6 +83,7 @@ const WrapSaveButton = styled.div`
     background-color: #242526;
     color: #fff;
     border: none;
+    font-family: inherit;
   }
 `;
 //레코드.jsx로 넘어올 때 {state : item} 종류
@@ -123,21 +124,20 @@ export default function Record(props) {
   const [storyContent, setStoryContent] = useState([]);
   const [dateBoxColor, setDateBoxColor] = useState();
   const [keyword, setKeyword] = useState(''); //키워드
-  const [picturesUrl, setPicturesUrl] = useState([state.item.exhibitionImage]); //선택한 사진 배열 
+  const [picturesUrl, setPicturesUrl] = useState([state.item.exhibitionImage]); //선택한 사진 배열
   //console.log('state.item.exhibitionImage',state.item.exhibitionImage.toString())
   const id = state.item.exhibitionId; //전시회 아이디
   const exhibitionTitle = state.item.exhibitionTitle; //전시회 제목
   const storyId = state.item.storyId; //스토리 아이디
-  const storyState = state.item.storyState
-  useEffect(()=>{
-    if(state.year && state.month && state.day)
-    {
-      setYear(state.year)
-      setMonth(state.month)
-      setDate(state.day)
-      setTitle("제목을 직접 작성해주세요")
+  const storyState = state.item.storyState;
+  useEffect(() => {
+    if (state.year && state.month && state.day) {
+      setYear(state.year);
+      setMonth(state.month);
+      setDate(state.day);
+      setTitle('제목을 직접 작성해주세요');
     }
-  },[year,month,date])
+  }, [year, month, date]);
   useEffect(() => {
     (async () => {
       //유저 정보 불러오기(스토리 목록을 불러오기 위해)
@@ -153,7 +153,7 @@ export default function Record(props) {
         setUserStoryData(response.data.stories);
         //console.log("유저 스토리 정보",response.data.stories);
       } catch (error) {
-        console.error('Error fetching data:', error.response.data);
+        console.error('Error fetching data:', error.response);
       }
     })();
   }, []);
@@ -161,9 +161,9 @@ export default function Record(props) {
     (async () => {
       //특정 스토리 조회 , 최초로 작성한 스토리의 내용을 불러오기 위해
       //console.log("storyId",state.item.storyId)
-      if (storyId && storyState!=="NOT_STARTED" ) {
+      if (storyId && storyState !== 'NOT_STARTED') {
         try {
-              const response = await axios.get(
+          const response = await axios.get(
             `${url}stories/${state.item.storyId}`,
             {
               headers: {
@@ -191,12 +191,12 @@ export default function Record(props) {
           setCompanion(response.data.storyCompanion); //동반인
           setKeyword(response.data.storyKeyword); //키워드
           setPicturesUrl([response.data.exhibitionImage]); //사진 리스트
-          console.log("스토리정보",response.data)
+          console.log('스토리정보', response.data);
           //console.log("이미지유알엘",response.data.picturesUrl); //사진 리스트
 
           //console.log('스토리 내용 ', response.data);
         } catch (error) {
-          console.error('Error fetching data:', error.response.data);
+          console.error('Error fetching data:', error.response);
         }
       }
     })();
@@ -218,7 +218,22 @@ export default function Record(props) {
     // console.log("월",month)
     // console.log("일",date)
     //console.log("picturesUrl",picturesUrl)
-  },[title,viewingTime,companion,genre1,genre2,genre3,satisfactionLevel,weather,data,isOpen,year,month,date,picturesUrl]);
+  }, [
+    title,
+    viewingTime,
+    companion,
+    genre1,
+    genre2,
+    genre3,
+    satisfactionLevel,
+    weather,
+    data,
+    isOpen,
+    year,
+    month,
+    date,
+    picturesUrl,
+  ]);
 
   //저장 버튼 클릭 -> 동일한 전시 삭제를 물어보는 모달창 뜸
   //-> 동일한 전시 삭제 -> 새롭게 작성한 스토리 저장
@@ -250,11 +265,12 @@ export default function Record(props) {
       setStoryByDate((prevStoryByDate) => {
         for (let i = 0; i < userStoryData.length; i++) {
           for (let j = 0; j < userStoryData.length; j++) {
-            if (userStoryData[i].exhibitionTitle === exhibitionTitle && 
-                userStoryData[i].year !== year && 
-                userStoryData[i].month !== month &&
-                userStoryData[i].day !== date
-                ) {
+            if (
+              userStoryData[i].exhibitionTitle === exhibitionTitle &&
+              userStoryData[i].year !== year &&
+              userStoryData[i].month !== month &&
+              userStoryData[i].day !== date
+            ) {
               // 동일한 전시가 다른 날짜에 존재할 경우
               setIsDeleteModal(true); //모달 띄우고
               return (storyByDate[j] = userStoryData[i]); //겹치는 전시들만 모으는 배열에 넣어줌
@@ -295,7 +311,6 @@ export default function Record(props) {
     } //storyId가 존재하지 않는 경우, 작성하기 버튼 -> 새로운 스토리(storyId존재x) 저장 (실패)
     else {
       //alert("작성하기 버튼으로 들어옴")
-      console.log('사진 배열 키워드', picturesUrl, keyword);
       try {
         await progressSaveApi2(
           id, //전시회 아이디(exhibitionId)
@@ -317,7 +332,7 @@ export default function Record(props) {
         );
         //alert("새로운 스토리가 임시저장 되었습니다")
       } catch (error) {
-        console.log(error.response.data);
+        console.log(error.response);
       }
     }
     setIsProgressModal(true);
@@ -361,7 +376,7 @@ export default function Record(props) {
         //navigate(`/mystory`)
         setIsNotifyModal(true);
       } catch (error) {
-        console.log(error.response.data);
+        console.log(error.response);
       }
     } else {
       try {
@@ -498,7 +513,7 @@ export default function Record(props) {
           />{' '}
         </StoryRecord>
         <WrapSaveButton>
-          <button onClick={handleProgressSubmit}>임시저장</button>
+          <button onClick={handleProgressSubmit}>임시 저장</button>
           <button onClick={handleSubmit}>저장</button>
         </WrapSaveButton>
       </Container>

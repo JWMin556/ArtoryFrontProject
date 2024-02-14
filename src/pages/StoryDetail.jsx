@@ -239,8 +239,8 @@ const Right = styled.div`
 const BoxStyle = styled.div`
   //background-color: white;
   //box-shadow: 1px 2px 8px #f3f3f3;
-  box-shadow: 1px 2px 8px #00000025;
-
+  /* box-shadow: 1px 2px 8px #00000025; */
+  box-shadow: 1px 2px 8px #f3f3f3;
   border: none;
   // border-radius: 10px;
   font-size: small;

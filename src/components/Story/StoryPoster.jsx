@@ -10,7 +10,7 @@ const PosterStyle = styled.img`
   display: block;
   width: 186px;
   height: 268px;
-  box-shadow: 5px 5px 8px #d9d9d9;
+  box-shadow: 1px 2px 8px #f3f3f3;
   object-fit: cover;
 `;
 const WrapTitle = styled.div`

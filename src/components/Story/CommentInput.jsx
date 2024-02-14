@@ -179,7 +179,8 @@ const InputDiv = styled.div`
 `;
 const CommentText = styled.textarea`
   resize: none;
-  color: #616161;
+  color: #28292a;
+  font-weight: 500;
   background-color: #f4f5f7;
   font-family: 'Pretendard';
   width: 100%;
@@ -202,15 +203,16 @@ const CommentText = styled.textarea`
 `;
 const Submit = styled.button`
   position: absolute; //상위요소를 relative로
-  bottom: 10%;
+  bottom: 10px;
   right: 10px; /* 여기서 10px로 설정 */
   font-family: 'Pretendard';
   font-weight: 600;
+  font-size: medium;
   border: none;
   background-color: black;
   color: white;
-  //border-radius: 7px;
-  padding: 5px 30px;
+
+  padding: 5px 32px;
 `;
 
 const CommentWrap = styled.div`
@@ -221,7 +223,8 @@ const OpenBtn = styled.button`
   //height: 60px;
   //border: 1px solid black;
   border: none;
-  box-shadow: 1px 2px 8px #00000025;
+  /* box-shadow: 1px 2px 8px #00000025; */
+  box-shadow: 1px 2px 8px #f3f3f3;
 
   text-align: start;
   background-color: white;
@@ -233,7 +236,9 @@ const OpenBtn = styled.button`
 `;
 const OpenedComment = styled.div`
   border: none;
-  box-shadow: 1px 2px 8px #00000025;
+  /* box-shadow: 1px 2px 8px #00000025; */
+  box-shadow: 1px 2px 8px #f3f3f3;
+
   padding: 30px 40px;
   text-align: start;
   background-color: white;

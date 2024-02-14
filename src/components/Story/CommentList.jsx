@@ -97,6 +97,7 @@ function CommentListItem({
       console.log(item.commentId);
       await deleteComment(storyId, item.commentId);
       await loadComments(); // 댓글 삭제 후 최신 코멘트 리스트를 다시 불러와서 렌더링
+      setModal(false);
     } catch (error) {
       console.error('Error fetcing data:', error.response);
     }
@@ -116,6 +117,7 @@ function CommentListItem({
           {isPatch ? (
             <Form onSubmit={handlePatch}>
               <Emoticon
+                height={25}
                 onSelect={handleEmoticonSelection}
                 greyEmoticons={greyEmoticons}
                 emoticons={emoticons}
@@ -128,7 +130,7 @@ function CommentListItem({
                   value={values.content}
                   onChange={handleChange}
                 ></CommentText>
-                <Submit type="submit">확인</Submit>
+                <Submit type="submit">완료</Submit>
               </InputDiv>
             </Form>
           ) : (
@@ -175,11 +177,12 @@ const InputDiv = styled.div`
 `;
 const CommentText = styled.textarea`
   resize: none;
-  color: #616161;
+  color: #28292a;
+  font-weight: 500;
   background-color: #f4f5f7;
   font-family: 'Pretendard';
   width: 100%;
-  //height: 70%;
+  height: 25px;
   border: none;
   outline: none;
   padding: 10px 10px 0 0;
@@ -187,15 +190,16 @@ const CommentText = styled.textarea`
 `;
 const Submit = styled.button`
   position: absolute; //상위요소를 relative로
-  bottom: 10%;
+  bottom: 10px;
   right: 10px; /* 여기서 10px로 설정 */
   font-family: 'Pretendard';
   font-weight: 600;
+  font-size: medium;
   border: none;
   background-color: black;
   color: white;
   //border-radius: 7px;
-  padding: 5px 30px;
+  padding: 5px 32px;
 `;
 //
 
@@ -213,7 +217,9 @@ const ChangeBtn = styled.button`
 
 const Wrap = styled.div`
   border: none;
-  box-shadow: 1px 2px 8px #00000025;
+  /* box-shadow: 1px 2px 8px #00000025; */
+  box-shadow: 1px 2px 8px #f3f3f3;
+
   padding: 10px 10px 10px 40px;
   //text-align: start;
   background-color: white;

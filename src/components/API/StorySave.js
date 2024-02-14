@@ -24,7 +24,7 @@ export const progressSaveApi1 = async (
   keyword,
   picturesUrl
 ) => {
-    console.log("이미지 저장api로 잘 들어옴",picturesUrl)
+  console.log('이미지 저장api로 잘 들어옴', picturesUrl);
   try {
     const response = await axios.post(
       `${url}mystory/draft-save-with-storyId?storyId=${storyId}`,
@@ -89,9 +89,9 @@ export const progressSaveApi2 = async (
   console.log(genre3);
   console.log(satisfactionLevel);
   console.log(weather);
-  console.log("api year",year);
-  console.log("api month",month);
-  console.log("api date",date);
+  console.log('api year', year);
+  console.log('api month', month);
+  console.log('api date', date);
   try {
     const response = await axios.post(
       `${url}mystory/draft-save`,
@@ -101,7 +101,7 @@ export const progressSaveApi2 = async (
         storySatisfactionLevel: satisfactionLevel,
         storyWeather: weather,
         storyCompanion: companion,
-        storyKeyword: 'keyword',
+        storyKeyword: keyword,
         storyViewingTime: viewingTime,
         year: year,
         month: month,
@@ -111,7 +111,7 @@ export const progressSaveApi2 = async (
         genre2: genre2,
         genre3: genre3,
         isOpen: isOpen,
-        picturesUrl: ['picturesUrl'],
+        picturesUrl: picturesUrl,
       },
       {
         headers: {
@@ -200,7 +200,7 @@ export const modifySaveApi = async (
         storySatisfactionLevel: satisfactionLevel,
         storyWeather: weather,
         storyCompanion: companion,
-        storyKeyword: 'keyword',
+        storyKeyword: keyword,
         storyViewingTime: viewingTime,
         year: year,
         month: month,

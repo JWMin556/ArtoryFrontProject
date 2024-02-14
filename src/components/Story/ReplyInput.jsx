@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Reply from './Reply';
 import styled from 'styled-components';
 import downVector from '../../Img/Story/downVector_grey.png';
+import up from '../../Img/Story/up_grey.png';
+
 import { createReply } from '../API/story_API';
 const INITIAL_VALUES = {
   content: '',
@@ -11,7 +13,6 @@ export default function ReplyInput(props) {
   const [values, setValues] = useState(INITIAL_VALUES);
   const [isSubmitting, setIsSubmitting] = useState(false); //로딩처리
   const [submittingError, setSubmittingError] = useState(null); //에러처리
-  const [src, setSrc] = useState(downVector);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,11 +42,6 @@ export default function ReplyInput(props) {
     setValues(INITIAL_VALUES);
   };
 
-  const handleClick = async () => {
-    setIsReplyOpen(!isReplyOpen);
-    isReplyOpen ? setSrc(downVector) : setSrc(downVector);
-  };
-
   return (
     <>
       <Reply
@@ -54,8 +50,12 @@ export default function ReplyInput(props) {
         commentId={props.item.commentId}
         loadComments={props.loadComments}
       />
-      <ReplyButton onClick={handleClick}>
-        <img src={src} alt={src} />
+      <ReplyButton onClick={() => setIsReplyOpen(!isReplyOpen)}>
+        {isReplyOpen ? (
+          <img style={{ width: '20px' }} src={downVector} alt="down" />
+        ) : (
+          <img style={{ width: '20px' }} src={up} alt="up" />
+        )}
         <span>댓글 달기</span>
       </ReplyButton>
       {isReplyOpen && (
@@ -66,7 +66,7 @@ export default function ReplyInput(props) {
               value={values.content}
               onChange={handleChange}
               placeholder="댓글을 입력하세요"
-            ></ReplyText>
+            />
             <Submit type="submit" disabled={isSubmitting}>
               완료
             </Submit>
@@ -78,40 +78,34 @@ export default function ReplyInput(props) {
   );
 }
 const Submit = styled.button`
-  position: absolute; //상위요소를 relative로
-  bottom: 20%;
-  right: 10px; /* 여기서 10px로 설정 */
   font-family: 'Pretendard';
   font-weight: 600;
+  font-size: medium;
   border: none;
   background-color: black;
   color: white;
-
+  width: 95px;
   padding: 5px 15px;
-  z-index: 4;
 `;
 const Form = styled.form`
   display: flex;
-  justify-content: center;
+  align-items: center;
   position: relative;
   padding: 10px;
   background-color: #f4f5f7;
 
   height: 20px;
   margin-top: 10px;
-  //margin-right: 10px;
-  /* box-shadow: 1px 2px 8px #00000025; */
-  z-index: 10;
+
   width: 90%;
-  //width: 100%;
 `;
 const ReplyText = styled.textarea`
-  z-index: 3;
   resize: none;
-  color: #616161;
+  color: #28292a;
+  font-weight: 500;
   background-color: #f4f5f7;
   font-family: 'Pretendard';
-  width: 99%;
+  width: 90%;
   height: 80%;
   border: none;
   outline: none;

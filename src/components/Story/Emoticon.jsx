@@ -24,6 +24,7 @@ const blackEmoticons = [
 ];
 
 export default function Emoticon({
+  height,
   onSelect,
   greyEmoticons,
   emoticons,
@@ -50,7 +51,7 @@ export default function Emoticon({
   };
 
   return (
-    <Emoticons>
+    <Emoticons style={{ height: `${height}px` }}>
       {emoticons.map((src, index) => (
         <EmoticonImg
           key={index}
@@ -64,13 +65,14 @@ export default function Emoticon({
 }
 
 const EmoticonImg = styled.img`
-  margin-right: 20px;
-  height: 32px;
+  margin-right: 2%;
+  height: 100%;
   cursor: pointer;
 `;
 
 const Emoticons = styled.div`
   //margin-top: 20px;
+  height: 32px;
   display: flex;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 `;
