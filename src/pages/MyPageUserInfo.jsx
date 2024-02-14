@@ -6,6 +6,16 @@ import Poster from '../components/Exhibition/Poster';
 import CustomPagination from '../components/Exhibition/CustomPagination';
 import { getUserPage } from '../components/API/Mypage_API';
 import StoryPoster from '../components/Story/StoryPoster';
+import {
+  BoldSentence,
+  ImgStyled,
+  InputStyle,
+  InputWrap,
+  TitleLeftWrap,
+  TitleLeftWrapParagraph,
+  TitleRightWrapParagraphTitle,
+  TitleWrap,
+} from './MyPage';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,7 +44,17 @@ export const WrapIcon = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
+const Stories = styled.div`
+  margin: 100px 50px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  .cTClqU {
+    width: 100%;
+  }
+`;
 export default function MyPageUserInfo() {
   const [userStories, setUserStories] = useState([]);
   const [userData, setUserData] = useState([]);
@@ -64,12 +84,11 @@ export default function MyPageUserInfo() {
 
   return (
     <Container>
-      <TitleWrap>
+      <TitleWrap style={{ width: '76%' }}>
         <TitleLeftWrap>
           <TitleLeftWrapParagraph>
-            {userData.nickname}님의
-            <br />
-            마이페이지
+            <p>{userData.nickname}님의</p>
+            <p>마이페이지</p>
           </TitleLeftWrapParagraph>
           <ImgStyled src={userData.image} alt="사진첨부" />
         </TitleLeftWrap>
@@ -133,111 +152,19 @@ export default function MyPageUserInfo() {
     </Container>
   );
 }
-const Stories = styled.div`
-  margin: 100px 50px;
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
-  .cTClqU {
-    width: 100%;
-  }
-`;
-const TitleWrap = styled.div`
-  width: 70%;
-  color: black;
-  font-size: 30px;
-  font-family: 'Pretendard';
-  font-weight: 700;
-  word-wrap: break-word;
-  line-height: 39.92px;
-  letter-spacing: 1.05px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const TitleLeftWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* margin-right: 50px; */
-  min-width: 250px;
-`;
-
-const TitleLeftWrapParagraph = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const ImgStyled = styled.img`
-  display: flex;
-  flex-direction: column;
-  margin-top: 20%;
-  width: 175px;
-  height: 175px;
-  object-fit: cover;
-`;
-
+//밑에 두개 빼고 동일
 const TitleRightWrap = styled.div`
+  margin-top: 110px;
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  width: 50%;
-  min-width: fit-content;
 `;
 
 const TitleRightWrapParagraphArea = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 1%;
-  height: 60px;
-`;
-
-const TitleRightWrapParagraphTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* margin-right: 20px; */
-  width: 140px;
-`;
-
-const BoldSentence = styled.p`
-  margin-left: 0;
-  color: #5a5c62;
-  font-size: 1.6rem;
-  font-family: 'Pretendard';
-  font-weight: 700;
-  line-height: 26.61px;
-  word-wrap: break-word;
-  /* margin-right: 120px; */
-`;
-
-const InputWrap = styled.div`
-  display: flex;
-  background: #f4f5f7;
-  /* box-shadow: 1px 2px 8px #f3f3f3; */
-  /* padding: 5px; */
-  /* margin-left: auto; */
-  margin-left: 20px;
-  margin-top: 8px;
-  margin-bottom: 13px;
-  min-width: 300px;
-  width: 65%;
-  height: 40px;
-`;
-
-const InputStyle = styled.div`
-  padding: 8px;
-  color: #28292a;
-  font-size: 16px;
-  font-family: 'Pretendard';
-  font-weight: 600;
-  line-height: 21.29px;
-  letter-spacing: 0.56px;
-  word-wrap: break-word;
-  border: none;
-  outline: none;
-  background: #f4f5f7;
+  align-items: center;
+  /* height: 55px; */
 `;
 
 const ContentUserWrap = styled.div`

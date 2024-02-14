@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import Prev from '../Exhibition/Prev';
 import Next from '../Exhibition/Next';
+import ProfileImg from '../Story/ProfileImg';
 //import MyPageProfileImg from './MyPageProfileImg';
 
 export const WrapSlider = styled.div`
@@ -19,7 +20,7 @@ export const WrapSlider = styled.div`
 export default function SlideScrappedMember(props) {
   const setting = {
     arrows: true,
-    infinite: true,
+    infinite: false, //임시
     speed: 1000,
     slidesToShow: 6,
     slidesToScroll: 6,
@@ -28,19 +29,20 @@ export default function SlideScrappedMember(props) {
   };
   return (
     <WrapSlider>
-      {/* <S.StyledSlider {...setting}>
+      <S.StyledSlider {...setting}>
         {props.Dummy.map((item) => (
           <div key={item.storyId}>
             <S.WrapPoster style={{ height: '200px' }}>
-              <MyPageProfileImg item={item} w={props.width} h={props.height}  />
-              <S.WrapIcon style={{ width: '126px', marginTop: '-10px' }}>
-              <StoryHeart />
-              <StoryScrap />
-              </S.WrapIcon>
+              <ProfileImg
+                memberId={item.memberId}
+                memberNickname={item.memberNickname}
+                memberProfile={item.profile}
+                isScrapped={item.isScrapped}
+              />
             </S.WrapPoster>
           </div>
         ))}
-      </S.StyledSlider> */}
+      </S.StyledSlider>
     </WrapSlider>
-  )
+  );
 }

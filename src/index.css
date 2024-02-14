@@ -254,7 +254,8 @@ body {
 .emoji-picker__wrapper {
   z-index: 1010;
 }
-.fcvHyd {
+.fcvHyd,
+.dyIpbr {
   top: 50% !important;
 }
 #root {

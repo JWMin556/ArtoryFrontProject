@@ -20,7 +20,7 @@ export const WrapSlider = styled.div`
 export default function UserSlide(props) {
   const setting = {
     arrows: true,
-    infinite: false,
+    infinite: true,
     speed: 1000,
     slidesToShow: 6,
     slidesToScroll: 6,
@@ -34,7 +34,12 @@ export default function UserSlide(props) {
         {props.Dummy.map((item) => (
           <div key={item.storyId}>
             <S.WrapPoster style={{ height: '200px' }}>
-              <ProfileImg item={item} w={props.width} h={props.height} />
+              <ProfileImg
+                memberId={item.memberId}
+                memberNickname={item.memberNickname}
+                memberProfile={item.memberProfile}
+                isScrapped={item.isScrapped}
+              />
             </S.WrapPoster>
           </div>
         ))}
