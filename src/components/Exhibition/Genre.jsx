@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import styled from 'styled-components';
-import Title from './Title';
+import GenreTitle from './GenreTitle';
 
 const GenreStyle = styled.img`
     width : 210px;
@@ -10,9 +10,9 @@ const GenreStyle = styled.img`
 `;
 const WrapTitle = styled.div`
     position : relative;
-    bottom : 270px;
+    bottom : 302px;
 `;
-export default function Poster({exhibitionTitle,...props}) { //본래는 그냥 ...props만...
+export default function Genre({exhibitionTitle,...props}) { //본래는 그냥 ...props만...
     // 상태 초기값을 true로 설정
     const [isShowTitle, setIsShowTitle] = useState(false);
     // 마우스가 Poster 위에 올라가면 Title을 보여주도록 변경
@@ -26,13 +26,12 @@ export default function Poster({exhibitionTitle,...props}) { //본래는 그냥 
     };
 
 return (
-    <div style={{height:'268px' }}
+    <div style={{height:"302px"}}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
     >
         <GenreStyle src={props.item.exhibitionImage}/>
-        <WrapTitle>{isShowTitle && <Title title = {exhibitionTitle}/>}</WrapTitle>
-        {/* <WrapTitle>{isShowTitle && <Title title = {props.item.exhibitionTitle}/>}</WrapTitle> */}
+        <WrapTitle>{isShowTitle && <GenreTitle title = {exhibitionTitle}/>}</WrapTitle>
     </div>
 );
 }
