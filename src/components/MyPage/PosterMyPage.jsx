@@ -2,12 +2,15 @@ import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { getStoryInfo } from '../API/story_API';
+import StoryHeart from '../Story/StoryHeart';
+import StoryScrap from '../Story/StoryScrap';
 
 const PosterStyle = styled.img`
   display: block;
   width: 172px;
   height: 268px;
   box-shadow: 1px 2px 8px #f3f3f3;
+  object-fit: cover;
 `;
 const WrapTitle = styled.div`
   width: 172px;
@@ -22,6 +25,10 @@ const WrapTitle = styled.div`
   align-items: center;
   font-size: small;
   font-family: Pretendard;
+  p {
+    padding: 0 10%;
+    text-align: center;
+  }
 `;
 export default function PosterMyPage(props) {
     const navigate = useNavigate();
@@ -54,6 +61,8 @@ export default function PosterMyPage(props) {
     >
         {/* <PosterStyle src={props.item.exhibitionImage}/> */}
         <PosterStyle src={props.item.storyImage} alt={props.item.storyId} />
+        <StoryHeart id={props.item.storyId} isLiked={props.item.isLiked} />
+        <StoryScrap id={props.item.storyId} isScrapped={props.item.isScrapped} />
         {isShowTitle && <WrapTitle>{props.item.storyTitle}</WrapTitle>}
     </div>
   )

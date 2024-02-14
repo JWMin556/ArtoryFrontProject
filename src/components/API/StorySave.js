@@ -79,18 +79,18 @@ export const progressSaveApi2 = async (
   keyword,
   picturesUrl
 ) => {
-  console.log(exhibitionId);
-  console.log(data);
-  console.log(title);
-  console.log(companion);
-  console.log(genre1);
-  console.log(genre2);
-  console.log(genre3);
-  console.log(satisfactionLevel);
-  console.log(weather);
-  console.log(year);
-  console.log(month);
-  console.log(date);
+  // console.log(exhibitionId);
+  // console.log(data);
+  // console.log(title);
+  // console.log(companion);
+  // console.log(genre1);
+  // console.log(genre2);
+  // console.log(genre3);
+  // console.log(satisfactionLevel);
+  // console.log(weather);
+  // console.log(year);
+  // console.log(month);
+  // console.log(date);
   try {
     const response = await axios.post(
       `${url}mystory/draft-save`,
@@ -100,7 +100,7 @@ export const progressSaveApi2 = async (
         storySatisfactionLevel: satisfactionLevel,
         storyWeather: weather,
         storyCompanion: companion,
-        storyKeyword: keyword,
+        storyKeyword: 'keyword',
         storyViewingTime: viewingTime,
         year: year,
         month: month,
@@ -110,7 +110,7 @@ export const progressSaveApi2 = async (
         genre2: genre2,
         genre3: genre3,
         isOpen: isOpen,
-        picturesUrl: picturesUrl,
+        picturesUrl: ['picturesUrl'],
       },
       {
         headers: {
@@ -156,7 +156,7 @@ export const BeforeWritionSaveApi = async (id, year, month, day) => {
   //fetchData();
 };
 
-//수정 
+//수정
 export const modifySaveApi = async (
   storyId,
   exhibitionId,
@@ -176,20 +176,20 @@ export const modifySaveApi = async (
   keyword,
   picturesUrl
 ) => {
-  console.log("스토리 수정 api 들어옴")
-  console.log("스토리 아이디 : ", storyId)
-  console.log(exhibitionId);
-  console.log(data);
-  console.log(title);
-  console.log(companion);
-  console.log(genre1);
-  console.log(genre2);
-  console.log(genre3);
-  console.log(satisfactionLevel);
-  console.log(weather);
-  console.log(year);
-  console.log(month);
-  console.log(date);
+  // console.log("스토리 수정 api 들어옴")
+  // console.log("스토리 아이디 : ", storyId)
+  // console.log(exhibitionId);
+  // console.log(data);
+  // console.log(title);
+  // console.log(companion);
+  // console.log(genre1);
+  // console.log(genre2);
+  // console.log(genre3);
+  // console.log(satisfactionLevel);
+  // console.log(weather);
+  // console.log(year);
+  // console.log(month);
+  // console.log(date);
   try {
     const response = await axios.patch(
       `${url}stories/upadte/{story-id}?storyId=${storyId}`,
@@ -209,7 +209,7 @@ export const modifySaveApi = async (
         genre2: genre2,
         genre3: genre3,
         isOpen: isOpen,
-        picturesUrl: picturesUrl,
+        picturesUrl: ['picturesUrl'],
       },
       {
         headers: {

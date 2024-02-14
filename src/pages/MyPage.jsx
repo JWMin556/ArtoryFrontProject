@@ -32,7 +32,7 @@ const Page = styled.div`
   margin-bottom: 20px; /* 원하는 여백 값 */
 `;
 
-const TitleWrap = styled.div`
+export const TitleWrap = styled.div`
   color: black;
   font-size: 30px;
   font-family: 'Pretendard';
@@ -45,18 +45,22 @@ const TitleWrap = styled.div`
   justify-content: space-between;
 `;
 
-const TitleLeftWrap = styled.div`
+export const TitleLeftWrap = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 22%;
 `;
 
-const TitleLeftWrapParagraph = styled.div`
+export const TitleLeftWrapParagraph = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  p {
+    margin: 0;
+    width: max-content;
+  }
 `;
 
-const ImgStyled = styled.img`
+export const ImgStyled = styled.img`
   display: flex;
   flex-direction: column;
   margin-top: 20%;
@@ -73,14 +77,16 @@ const TitleRightWrapParagraphArea = styled.div`
   flex-direction: row;
 `;
 
-const TitleRightWrapParagraphTitle = styled.div`
+export const TitleRightWrapParagraphTitle = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
+  /* margin-right: 20px; */
+  width: 115px;
 `;
 
-const BoldSentence = styled.p`
-  color: #5A5C62;
+export const BoldSentence = styled.p`
+  margin-left: 0;
+  color: #5a5c62;
   font-size: 20px;
   font-family: 'Pretendard';
   font-weight: 700;
@@ -89,18 +95,22 @@ const BoldSentence = styled.p`
   /* margin-right: 120px; */
 `;
 
-const InputWrap = styled.div`
+export const InputWrap = styled.div`
   display: flex;
+  align-items: center;
+
   background: #f4f5f7;
-  padding: 5px;
+  /* padding: 5px; */
   margin-left: auto;
   margin-top: 8px;
   margin-bottom: 13px;
   width: 300px;
+  height: 30px;
 `;
 
-const InputStyle = styled.div`
-  color: #262626;
+export const InputStyle = styled.div`
+  padding-left: 10px;
+  color: #28292a;
   font-size: 16px;
   font-family: 'Pretendard';
   font-weight: 600;
@@ -186,7 +196,7 @@ const ContentUserWrap = styled.div`
 
 const URL = localStorage.getItem('URL');
 
-const url = `${URL}/api/mypage/all?page=1`;  //문제점...page가 어디까지 되는지 몰라서 접근이 어렵
+const url = `${URL}/api/mypage/all?page=1`; //문제점...page가 어디까지 되는지 몰라서 접근이 어렵
 const token = localStorage.getItem('Token');
 export default function MyPage() {
   //여기서부터 나의 스토리 버튼 ~ 저장 스토리 버튼을 위한 부분입니다.
@@ -265,8 +275,8 @@ export default function MyPage() {
         <TitleWrap>
           <TitleLeftWrap>
             <TitleLeftWrapParagraph>
-              {userData.nickname}님의<br />
-              마이페이지
+              <p>{userData.nickname}님의</p>
+              <p>마이페이지</p>
             </TitleLeftWrapParagraph>
             <ImgStyled src={userData.image} alt="사진첨부" />
           </TitleLeftWrap>
@@ -280,7 +290,7 @@ export default function MyPage() {
               style={{ display: 'inline-block', marginBottom: '10px' }}
             >
               <img
-                style={{ float: 'right', marginBottom:"15%" }}
+                style={{ float: 'right', marginBottom: '15%' }}
                 src="/img/setting.png"
                 alt="환경설정버튼"
                 width="8%"
@@ -314,7 +324,7 @@ export default function MyPage() {
             </TitleRightWrapParagraphArea>
           </TitleRightWrap>
         </TitleWrap>
-        
+
         <ContentWrap>
           <ContentBtns>
             {isMyStoryBtnClicked ? (
@@ -342,8 +352,14 @@ export default function MyPage() {
           <ContentPosters>
             {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
             {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
-            {isSavedUserBtnClicked && <SlideScrappedMember width={126} height={126} Dummy={myScrappedMembersData} />}
-            {isSaveStoryBtnClicked && <SlideScrappedStory Dummy={myScrappedStoriesData} />}
+            {/* {isSavedUserBtnClicked && <SlideScrappedMember width={126} height={126} Dummy={myScrappedMembersData} />} */}
+            {isSavedUserBtnClicked && (
+              <SlideScrappedMember Dummy={myScrappedMembersData} />
+            )}
+
+            {isSaveStoryBtnClicked && (
+              <SlideScrappedStory Dummy={myScrappedStoriesData} />
+            )}
           </ContentPosters>
         </ContentWrap>
       </Page>

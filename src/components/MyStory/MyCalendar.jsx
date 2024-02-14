@@ -191,8 +191,8 @@ const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
   //console.log("month",month);
   const [year, changeYear] = useState(Number(moment(date).format('YYYY')));
   const [isButtonOpen, setIsButtonOpen] = useState(false);
-  console.log('년도', year);
-  console.log('월', month);
+  // console.log('년도', year);
+  // console.log('월', month);
 
   //연도 관련 객체 생성
   const startYear = 2020;

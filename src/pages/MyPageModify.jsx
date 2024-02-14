@@ -100,7 +100,7 @@ const TitleRightWrapParagraphTitle = styled.div`
 `;
 
 const BoldSentence = styled.div`
-  color: #5A5C62;
+  color: #5a5c62;
   font-size: 20px;
   font-family: 'Pretendard';
   font-weight: 700;
@@ -110,7 +110,7 @@ const BoldSentence = styled.div`
 `;
 
 const GraySentence = styled.div`
-  color: #9BA0AE;
+  color: #9ba0ae;
   font-size: 10px;
   font-family: 'Pretendard';
   font-weight: 400;
@@ -164,7 +164,7 @@ export default function MyPageModify() {
   const myNickname = query.get('nickname');
   const myImage = query.get('image');
 
-  //서버에 이름, 닉네임, 한줄소개, 키워드와 이미지를 제출하기 위한 변수 및 함수입니다. 
+  //서버에 이름, 닉네임, 한줄소개, 키워드와 이미지를 제출하기 위한 변수 및 함수입니다.
   const [name, setname] = useState('');
   const [nickname, setNickname] = useState('');
   const [length, setLength] = useState(0);
@@ -193,8 +193,8 @@ export default function MyPageModify() {
   const handleNicknameChange = (e) => {
     const value = e.target.value;
     value.length > 10 ? setLength(10) : setLength(value.length);
-    if(value.length > 10) {
-      alert("닉네님은 10자까지만 해주세요");
+    if (value.length > 10) {
+      alert('닉네님은 10자까지만 해주세요');
     }
     setNickname(value);
     setNickNameValid(true);
@@ -212,7 +212,7 @@ export default function MyPageModify() {
 
   const handlePasswordsChange = (e) => {
     setChagedpPassword(e.target.value);
-  }
+  };
 
   const handleImageClick = () => {
     fileInputRef.current.click();
@@ -439,7 +439,7 @@ export default function MyPageModify() {
           </TitleLeftWrap>
 
           <TitleRightWrap>
-            <div style={{marginBottom:"21%"}} />
+            <div style={{ marginBottom: '21%' }} />
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
                 <BoldSentence>이름</BoldSentence> {/*아직 서버가 미완성*/}
@@ -515,7 +515,7 @@ export default function MyPageModify() {
                 <GraySentence>현재 비밀번호를 입력해주세요</GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap>
-                <InputStyle />  {/*onChange={handleKeywordChange}*/}
+                <InputStyle /> {/*onChange={handleKeywordChange}*/}
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
@@ -525,8 +525,8 @@ export default function MyPageModify() {
                   변경 비밀번호를 입력해주세요
                 </GraySentence>
               </TitleRightWrapParagraphTitle>
-              <InputWrap style={{width:"300px"}}>
-                <InputStyle onChange={handlePasswordsChange} />   
+              <InputWrap style={{ width: '300px' }}>
+                <InputStyle onChange={handlePasswordsChange} />
                 <StyledButton
                   //onClick={saveModifiedPassword}
                   height="23px"
@@ -543,7 +543,7 @@ export default function MyPageModify() {
                 <BoldSentence>회원탈퇴</BoldSentence>
                 <GraySentence>탈퇴사유를 입력해주세요</GraySentence>
               </TitleRightWrapParagraphTitle>
-              <InputWrap style={{width:"300px"}}>
+              <InputWrap style={{ width: '300px' }}>
                 <InputStyle />
                 <StyledButton
                   //disabled={notAllow}
@@ -555,7 +555,7 @@ export default function MyPageModify() {
                 </StyledButton>
               </InputWrap>
             </TitleRightWrapParagraphArea>
-                
+
             <StyledButton
               onClick={() => {
                 if(!nameValid || !nickNameValid || !imageValid || !introductionValid || !myKeywordValid || !genreValid){

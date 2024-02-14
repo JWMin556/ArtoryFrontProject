@@ -71,7 +71,7 @@ const IMG = styled.img`
     position : relative;
     top : 30%;
 `;
-export default function SearchModa2({isModalOpen,setIsModalOpen,year,month,day}) {
+export default function SearchModa2({loadUserStories,setIsModalOpen,year,month,day}) {
     const [isOutLine,setOutLine] = useState(); //input 박스 클릭 시 outline의 상태를 관리하기 위한 변수
     const [isInputClick,setIsInputClick] = useState(false); //ID input 박스 클릭 여부에 따라 placeholder의 상태를 관리하기 위한 변수
     const [keyword,setKeyWord] = useState(); 
@@ -130,6 +130,7 @@ return (
                                 day={day}
                                 source={"before"}
                                 setIsModalOpen={setIsModalOpen}
+                                loadUserStories={loadUserStories}
                                 />
                         </div>
                     </WrapPoster>

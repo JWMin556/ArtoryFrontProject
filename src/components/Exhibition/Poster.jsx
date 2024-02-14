@@ -38,6 +38,7 @@ export default function Poster({
     month,
     day,
     userStoryData,
+    loadUserStories,
     ...props}) {
     const [isShow, setIsShow] = useState();
 
@@ -54,7 +55,7 @@ export default function Poster({
     const [duration,setDuration] = useState();
     //console.log('전시명:',props.item.exhibitionTitle)
     const navigate = useNavigate();
-    const onClickDetail = (item) => {
+    const onClickDetail = async(item) => {
         //console.log(userStoryData)
         if(props.source=="record")//스토리를 작성 페이지로 가기 위한 포스터
         {
@@ -63,9 +64,9 @@ export default function Poster({
         }
         else if(props.source=="before")  //캘린더에 전시회를 저장하기 위한 포스터
         {
-            BeforeWritionSaveApi(item.exhibitionId,year,month,day)
+            await BeforeWritionSaveApi(item.exhibitionId,year,month,day)
             setIsModalOpen(false)
-            navigate('/mystory');
+            await loadUserStories();
         }
         else
         {

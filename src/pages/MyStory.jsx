@@ -86,15 +86,14 @@ export default function MyStory() {
             userStoryData={userStoryData}
           />
       </S.WrapCalendar>
-      <div style={{ margin: '5%' }}>
+      <S.WrapExhibition>
         <div
           style={{
             fontSize: '30px',
             fontWeight: 'bold',
             fontFamily: 'Pretendard',
-            width: '50%',
-            textAlign: 'center',
-            //marginTop: '2%',
+            
+            //textAlign: 'center'
           }}
         >
           저장한 전시
@@ -111,7 +110,7 @@ export default function MyStory() {
             ))
           )}
         </S.WrapSaveExhibition>
-      </div>
+      </S.WrapExhibition>
     </S.Container>
   );
 }

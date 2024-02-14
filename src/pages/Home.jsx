@@ -29,7 +29,7 @@ const HomeRightWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: flex-start; 
+  justify-content: flex-start;
 `;
 
 const ExhibitImgWrapBanner = styled.div`
@@ -64,7 +64,7 @@ export default function Home() {
       try {
         const response = await axios.get(url, {
           headers: {
-            Accept: '*/*'
+            Accept: '*/*',
           },
         });
         console.log(response.data);
@@ -88,14 +88,14 @@ export default function Home() {
         {/*현재는 이 버튼을 누르면 로그인 페이지로 넘어가도록 만들었습니다. 주연씨는 LogIn.jsx에서 바로 로그인 화면을 작업해주시면 될 것 같습니다. */}
       </HomeLeftWrap>
       <HomeRightWrap>
-        {selectedImage && 
+        {selectedImage && (
           <ExhibitImgWrapBanner>
             <img src={selectedImage} alt="" style={{ width: '100%', filter: 'blur(5px)'}} />
             <ExhibitImgBanner1 >
               <img src={selectedImage} alt="" />
             </ExhibitImgBanner1>
           </ExhibitImgWrapBanner>
-        }
+        )}
       </HomeRightWrap>
     </HomeWrap>
   );

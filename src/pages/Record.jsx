@@ -96,7 +96,6 @@ export default function Record(props) {
   const defaultData = ``;
 
   const { state } = useLocation();
-  console.log('state',state.item);
   const [userStoryData, setUserStoryData] = useState([]);
   const [data, setData] = useState(defaultData); //스토리 내용
   const [title, setTitle] = useState(''); //제목
@@ -122,12 +121,12 @@ export default function Record(props) {
   const [storyContent, setStoryContent] = useState([]);
   const [dateBoxColor, setDateBoxColor] = useState();
   const [keyword, setKeyword] = useState(''); //키워드
-  const [picturesUrl, setPicturesUrl] = useState([state.item.exhibitionImage]); //선택한 사진 배열 //
+  const [picturesUrl, setPicturesUrl] = useState([state.item.exhibitionImage]); //선택한 사진 배열
 
   const id = state.item.exhibitionId; //전시회 아이디
   const exhibitionTitle = state.item.exhibitionTitle; //전시회 제목
   const storyId = state.item.storyId; //스토리 아이디
-  const storyState = state.item.storyState
+  const storyState = state.item.storyState;
   useEffect(() => {
     (async () => {
       //유저 정보 불러오기(스토리 목록을 불러오기 위해)
@@ -206,9 +205,9 @@ export default function Record(props) {
   //-> 동일한 전시 삭제 -> 새롭게 작성한 스토리 저장
   const handleSubmit = async () => {
     //스토리 아이디가 존재하고 스토리의 상태가 Done 상태(저장까지 완료한 상태)이면
-    if(storyId && storyState==="DONE" )
-    {
-      modifySaveApi( //스토리 수정 
+    if (storyState === 'DONE') {
+      modifySaveApi(
+        //스토리 수정
         storyId,
         id,
         data,
@@ -226,10 +225,9 @@ export default function Record(props) {
         date,
         keyword,
         picturesUrl
-      )
-      setIsModifyModal(true)
-    }
-    else {
+      );
+      setIsModifyModal(true);
+    } else {
       setStoryByDate((prevStoryByDate) => {
         for (let i = 0; i < userStoryData.length; i++) {
           for (let j = 0; j < userStoryData.length; j++) {
@@ -274,6 +272,7 @@ export default function Record(props) {
     } //storyId가 존재하지 않는 경우, 작성하기 버튼 -> 새로운 스토리(storyId존재x) 저장 (실패)
     else {
       //alert("작성하기 버튼으로 들어옴")
+      console.log('사진 배열 키워드', picturesUrl, keyword);
       try {
         await progressSaveApi2(
           id, //전시회 아이디(exhibitionId)
@@ -312,7 +311,7 @@ export default function Record(props) {
   };
 
   //스토리 저장하는 api
-  const saveStory = async() => {
+  const saveStory = async () => {
     if (storyId) {
       try {
         //스토리 아이디 존재
@@ -363,17 +362,16 @@ export default function Record(props) {
         );
         setIsNotifyModal(true);
         //navigate(`/mystory`)
-
       } catch (error) {
         console.log(error.response.data);
       }
     }
   };
   useEffect(() => {
-    if (storyId && isOpen!==undefined) {
+    if (storyId && isOpen !== undefined) {
       setDateBoxColor({ backgroundColor: '#000', color: '#fff' });
     }
-  },[]);
+  }, []);
   return (
     <div>
       {/* 동일한 전시 삭제 모달 */}
@@ -417,15 +415,15 @@ export default function Record(props) {
       )}
       {/* 수정했음 알림 모달 */}
       {isModifyModal && (
-          <Modal
-            year={''}
-            month={''}
-            day={''}
-            messgage={'스토리가 수정 되었습니다.'}
-            part={'modify'}
-            isModal={isModifyModal}
-            setIsModifyModal={setIsModifyModal}
-          />
+        <Modal
+          year={''}
+          month={''}
+          day={''}
+          messgage={'스토리가 수정 되었습니다.'}
+          part={'modify'}
+          isModal={isModifyModal}
+          setIsModifyModal={setIsModifyModal}
+        />
       )}
       <Banner
         image={state.item.exhibitionImage}
@@ -440,9 +438,7 @@ export default function Record(props) {
             <button onClick={ClickedOpen} style={dateBoxColor}>
               공개
             </button>
-            <button onClick={ClickClosed}>
-              비공개
-            </button>
+            <button onClick={ClickClosed}>비공개</button>
           </OpenSelectButton>
           <TodayExhibition
             storyId={storyId}
