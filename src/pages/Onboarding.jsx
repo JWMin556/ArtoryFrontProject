@@ -11,7 +11,7 @@ export default function Onboarding() {
 
   //서버에 닉네임과 이미지를 제출하기 위한 변수 및 함수입니다.
   const [nickname, setNickname] = useState('');
-  const [imageSrc, setImageSrc] = useState('/Img/input_pic.png');
+  const [imageSrc, setImageSrc] = useState('/img/input_pic.png');
   const [imageSrcReal, setImageSrcReal] = useState('');
   const [imgUrl, setImgUrl] = useState('');
 
@@ -74,17 +74,19 @@ export default function Onboarding() {
 
     //2-2. AWS가 정한 양식대로 보내기
     myBucket.putObject(param).send((error) => {
-        if(error) {
-          console.log(error);
-        } else {
-          //const url = myBucket.getSignedUrl("getObject", {Key: param.Key}); 기존의 코드..그런데 이렇게 하면 짤림
-          const signedUrl = myBucket.getSignedUrl("getObject", { Key: param.Key });
-          const pureUrl = signedUrl.match(/^(https:\/\/[^?]+)/)[1];
-          console.log("awsurl: ", pureUrl);
-          setImgUrl(pureUrl);
-        }
-      });
-  }
+      if (error) {
+        console.log(error);
+      } else {
+        //const url = myBucket.getSignedUrl("getObject", {Key: param.Key}); 기존의 코드..그런데 이렇게 하면 짤림
+        const signedUrl = myBucket.getSignedUrl('getObject', {
+          Key: param.Key,
+        });
+        const pureUrl = signedUrl.match(/^(https:\/\/[^?]+)/)[1];
+        console.log('awsurl: ', pureUrl);
+        setImgUrl(pureUrl);
+      }
+    });
+  };
 
   const token = localStorage.getItem('Token');
   const URL = localStorage.getItem('URL');
@@ -119,10 +121,16 @@ export default function Onboarding() {
         <Title>사용할 이름과 프로필을 설정해주세요</Title>
       </div>
       <ContentBox>
-        <ImgStyled src={imageSrc} alt='사진첨부' onClick={handleImageClick} />
-        <input type='file' accept='image/*' ref={fileInputRef} style={{display:"none"}} onChange={handleFileChange} />
+        <ImgStyled src={imageSrc} alt="사진첨부" onClick={handleImageClick} />
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          style={{ display: 'none' }}
+          onChange={handleFileChange}
+        />
         {/* <button onClick={() => uploadFileAWS(imageSrcReal)}>aws전송</button> 그 파일을 s3로 전송 */}
-        
+
         <Nickname
           maxLength="10"
           type="text"
@@ -144,7 +152,7 @@ export default function Onboarding() {
           다음
         </StyledButton>
       </Link>
-      <img src="/Img/slidebar.svg" alt="bar" style={{ marginTop: '30px' }} />
+      <img src="/img/slidebar.svg" alt="bar" style={{ marginTop: '30px' }} />
     </Container>
   );
 }

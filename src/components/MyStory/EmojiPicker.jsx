@@ -58,7 +58,7 @@ const EmojiPicker = ({ setData, data }) => {
     <Button ref={buttonRef} id="emoji_btn">
       <img
         style={{ verticalAlign: 'middle' }}
-        src="/Img/Story/plus.svg"
+        src="/img/Story/plus.svg"
         alt="이모지추가"
       />{' '}
       <span style={{ verticalAlign: 'middle' }}>이모지</span>

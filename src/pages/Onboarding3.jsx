@@ -120,7 +120,7 @@ export default function Onboarding3() {
         ARTORY 시작하기
       </StyledButton>
 
-      <img src="/Img/slidebar3.svg" alt="bar" style={{ marginTop: '30px' }} />
+      <img src="/img/slidebar3.svg" alt="bar" style={{ marginTop: '30px' }} />
       {showSplash && <SplashScreen />}
     </Container>
   );

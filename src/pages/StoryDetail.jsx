@@ -44,8 +44,8 @@ export default function StoryDetail() {
     }
   }
 
-  const satisfactionSrc = `/Img/Story/face_b${item.storySatisfactionLevel}.svg`;
-  const weatherSrc = `/Img/MyStory/weather.b${item.storyWeather}.svg`;
+  const satisfactionSrc = `/img/Story/face_b${item.storySatisfactionLevel}.svg`;
+  const weatherSrc = `/img/MyStory/weather.b${item.storyWeather}.svg`;
 
   return (
     <WrapStory className="wrapstory">

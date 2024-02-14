@@ -51,8 +51,8 @@ const Button = styled.button`
 export default function BigImg({ images, isClick, index }) {
   const [isOpenModal, setIsOpenModal] = useState(isClick);
   const [currentImgIdx, setCurrentImgIdx] = useState(index);
-  const [left, setLeft] = useState('/Img/Mypage/left.svg');
-  const [right, setRight] = useState('/Img/Mypage/right.svg');
+  const [left, setLeft] = useState('/img/Mypage/left.svg');
+  const [right, setRight] = useState('/img/Mypage/right.svg');
 
   useEffect(() => {
     console.log('인덱스', index);
@@ -90,8 +90,8 @@ export default function BigImg({ images, isClick, index }) {
       <Container>
         <Button
           style={{ paddingLeft: '0' }}
-          onMouseEnter={() => setLeft('Img/Mypage/left_focus.svg')}
-          onMouseLeave={() => setLeft('Img/Mypage/left.svg')}
+          onMouseEnter={() => setLeft('img/Mypage/left_focus.svg')}
+          onMouseLeave={() => setLeft('img/Mypage/left.svg')}
           onClick={handlePrevImage}
         >
           <img src={left} alt="left" />
@@ -99,8 +99,8 @@ export default function BigImg({ images, isClick, index }) {
         <Image src={images[currentImgIdx].pictureUrl} alt="DetailImage" />
         <Button
           style={{ paddingRight: '0' }}
-          onMouseEnter={() => setRight('Img/Mypage/right_focus.svg')}
-          onMouseLeave={() => setRight('Img/Mypage/right.svg')}
+          onMouseEnter={() => setRight('img/Mypage/right_focus.svg')}
+          onMouseLeave={() => setRight('img/Mypage/right.svg')}
           onClick={handleNextImage}
         >
           <img src={right} alt="right" />

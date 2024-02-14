@@ -58,7 +58,7 @@ function CommentListItem({
   const INITIAL_VALUES = {
     content: item.commentContext,
   };
-  const satisfactionSrc = `/Img/Story/face_b${item.satisfactionLevel}.svg`;
+  const satisfactionSrc = `/img/Story/face_b${item.satisfactionLevel}.svg`;
   const [isPatch, setIsPatch] = useState(false);
   const [emoticons, setEmoticons] = useState(greyEmoticons);
   const [selectedEmoticonIndex, setSelectedEmoticonIndex] = useState(null);
