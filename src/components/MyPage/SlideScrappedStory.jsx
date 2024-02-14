@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Heart from '../Exhibition/Heart';
-import Save from '../Exhibition/Save';
 import Prev from '../Exhibition/Prev';
 import Next from '../Exhibition/Next';
 import PosterMyPage from './PosterMyPage';
@@ -34,26 +32,26 @@ const WrapIcon = styled.div`
 `;
 
 export default function SlideScrappedStory(props) {
+  const numItems = props.Dummy.length;
+  const slidesToShow = numItems <= 3 ? numItems : 4;
+  const slidesToScroll = numItems <= 3 ? numItems : 4;
+
   const setting = {
     arrows: true,
     infinite: true,
     speed: 1000,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: slidesToShow,
+    slidesToScroll: slidesToScroll,
     nextArrow: <Next />,
     prevArrow: <Prev />,
   };
   return (
     <WrapSlider>
         <StyledSlider {...setting}>
-            {props.Dummy.map((item, index) => (
-            <div key={index}>
+            {props.Dummy.map((item) => (
+            <div key={item.storyId}>
                 <WrapPorterAndIcon>
                 <PosterMyPage item={item}/>
-                {/* <WrapIcon>
-                    <Heart item={item}/>
-                    <Save item={item}/>
-                </WrapIcon> */}
                 </WrapPorterAndIcon>
             </div>
             ))}

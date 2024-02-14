@@ -74,7 +74,6 @@ export default function Home() {
       }
     })();
   }, []);
-
   return (
     <HomeWrap>
       <HomeLeftWrap>
