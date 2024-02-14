@@ -16,7 +16,7 @@ const PosterStyle = styled.img`
 const WrapTitle = styled.div`
   width: 186px;
   height: 268px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   color: #ffff;
   z-index: 3;
   position: absolute;
@@ -24,11 +24,11 @@ const WrapTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 800;
   font-family: Pretendard;
   p {
-    padding: 0 10%;
+    padding: 0 15px;
     text-align: center;
   }
 `;
