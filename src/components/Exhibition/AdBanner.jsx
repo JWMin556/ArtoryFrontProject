@@ -23,12 +23,12 @@ const WrapSlide = styled.div`
   }
   .swiper-pagination {
     position: relative;
-    top: 22px;
+    top: 50px;
     //z-index : 100;
 
   }
   .swiper-pagination-bullet {
-    background : #616161;
+    background : #ffffff;
     width: 10px;
     height: 10px;
   }
