@@ -7,7 +7,7 @@ const PosterStyle = styled.img`
   display: block;
   width: 172px;
   height: 268px;
-  box-shadow: 5px 5px 8px #d9d9d9;
+  box-shadow: 1px 2px 8px #f3f3f3;
 `;
 const WrapTitle = styled.div`
   width: 172px;
@@ -54,7 +54,7 @@ export default function PosterMyPage(props) {
     >
         {/* <PosterStyle src={props.item.exhibitionImage}/> */}
         <PosterStyle src={props.item.storyImage} alt={props.item.storyId} />
-        {isShowTitle && <WrapTitle>{props.item.storyId}</WrapTitle>}
+        {isShowTitle && <WrapTitle>{props.item.storyTitle}</WrapTitle>}
     </div>
   )
 }

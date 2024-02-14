@@ -43,6 +43,14 @@ export default function LogIn() {
     setPassword(e.target.value);
   }
 
+  const isLoggedIn = localStorage.getItem('arbitaryLoginForHeader');
+  useEffect(() => {
+    if(isLoggedIn){
+      window.location.href = '/'; // Home 페이지로 이동
+      alert("이미 로그인이 완료되었습니다.");
+    }
+  }, []);
+
   const URL = localStorage.getItem('URL');
   const handleLogin = async () => {
     try {

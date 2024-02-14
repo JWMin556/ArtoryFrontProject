@@ -7,7 +7,8 @@ import SEARCH_IMG from '../../Img/Search/search.svg'
 import Close from '../../Img/Calendar/close.svg'
 const Container = styled.div`
     position : absolute;
-    left : 90%;
+    right: 0;
+    top: 70%;
     display : flex;
     align-items : center;
     flex-direction : column;

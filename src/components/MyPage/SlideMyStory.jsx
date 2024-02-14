@@ -21,12 +21,16 @@ const WrapPoster = styled.div`
 const StyledSlider = styled(Slider)``;
 
 export default function SlideMyStory(props) {
+  const numItems = props.Dummy.length;
+  const slidesToShow = numItems <= 3 ? numItems : 4;
+  const slidesToScroll = numItems <= 3 ? numItems : 4;
+
   const setting = {
     arrows: true,
     infinite: true,
     speed: 1000,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: slidesToShow,
+    slidesToScroll: slidesToScroll,
     nextArrow: <Next />,
     prevArrow: <Prev />,
   };

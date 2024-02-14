@@ -71,7 +71,6 @@ const TitleRightWrap = styled.div`
 const TitleRightWrapParagraphArea = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 5%;
 `;
 
 const TitleRightWrapParagraphTitle = styled.div`
@@ -81,7 +80,7 @@ const TitleRightWrapParagraphTitle = styled.div`
 `;
 
 const BoldSentence = styled.p`
-  color: #262626;
+  color: #5A5C62;
   font-size: 20px;
   font-family: 'Pretendard';
   font-weight: 700;
@@ -92,8 +91,7 @@ const BoldSentence = styled.p`
 
 const InputWrap = styled.div`
   display: flex;
-  background: #efeeee;
-  box-shadow: 1px 2px 8px #f3f3f3;
+  background: #f4f5f7;
   padding: 5px;
   margin-left: auto;
   margin-top: 8px;
@@ -111,7 +109,7 @@ const InputStyle = styled.div`
   word-wrap: break-word;
   border: none;
   outline: none;
-  background: #efeeee;
+  background: #f4f5f7;
 `;
 
 const ContentWrap = styled.div`
@@ -137,7 +135,6 @@ const Btns1 = styled.button`
   justify-content: center;
   border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid;
   align-items: center;
-  box-shadow: 1px 2px 8px #f3f3f3;
   color: #616161;
   font-size: 14px;
   font-family: 'Pretendard';
@@ -146,7 +143,7 @@ const Btns1 = styled.button`
   letter-spacing: 0.49px;
   word-wrap: break-word;
   border: none;
-  background-color: #efeeee;
+  background-color: #f4f5f7;
   &:hover {
     background-color: black;
     color: white;
@@ -283,7 +280,7 @@ export default function MyPage() {
               style={{ display: 'inline-block', marginBottom: '10px' }}
             >
               <img
-                style={{ float: 'right' }}
+                style={{ float: 'right', marginBottom:"15%" }}
                 src="/img/setting.png"
                 alt="환경설정버튼"
                 width="8%"
@@ -317,44 +314,7 @@ export default function MyPage() {
             </TitleRightWrapParagraphArea>
           </TitleRightWrap>
         </TitleWrap>
-
-        {/* {isSavedUserClicked ? (
-          <ContentUserWrap>
-            토리토리님이 <br /> 작성하신 STORY
-          </ContentUserWrap>
-        ) : (
-          <ContentWrap>
-            <ContentBtns>
-              {isMyStoryBtnClicked ? (
-                <Btns2>나의 스토리</Btns2>
-              ) : (
-                <Btns1 onClick={handleMyStoryBtnClick}>나의 스토리</Btns1>
-              )}
-              {isMyGalaryBtnClicked ? (
-                <Btns2>나의 앨범</Btns2>
-              ) : (
-                <Btns1 onClick={handleMyGalaryBtnClick}>나의 앨범</Btns1>
-              )}
-              {isSavedUserBtnClicked ? (
-                <Btns2>저장 유저</Btns2>
-              ) : (
-                <Btns1 onClick={handleSavedUserBtnClick}>저장 유저</Btns1>
-              )}
-              {isSaveStoryBtnClicked ? (
-                <Btns2>저장 스토리</Btns2>
-              ) : (
-                <Btns1 onClick={handleSaveStoryBtnClick}>저장 스토리</Btns1>
-              )}
-            </ContentBtns>
-
-            <ContentPosters>
-              {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
-              {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
-              {isSavedUserBtnClicked && <UserSlide width={126} height={126} Dummy={myScrappedMembersData}/>}
-              {isSaveStoryBtnClicked && <SlideScrappedStory Dummy={myScrappedStoriesData} />}
-            </ContentPosters>
-        </ContentWrap>
-        )} */}
+        
         <ContentWrap>
           <ContentBtns>
             {isMyStoryBtnClicked ? (
@@ -382,8 +342,7 @@ export default function MyPage() {
           <ContentPosters>
             {isMyStoryBtnClicked && <SlideMyStory Dummy={myStoryData} />}
             {isMyGalaryBtnClicked && <SlidePictures Dummy={myPicturesData} />}
-            {isSavedUserBtnClicked && <UserSlide width={126} height={126} Dummy={myScrappedMembersData}/>}
-            {/* <SlideScrappedMember width={126} height={126} Dummy={myScrappedMembersData} /> */}
+            {isSavedUserBtnClicked && <SlideScrappedMember width={126} height={126} Dummy={myScrappedMembersData} />}
             {isSaveStoryBtnClicked && <SlideScrappedStory Dummy={myScrappedStoriesData} />}
           </ContentPosters>
         </ContentWrap>

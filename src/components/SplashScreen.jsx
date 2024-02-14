@@ -21,8 +21,8 @@ const SplashWrap = styled.div`
 `;
 
 const SplashLogoImg = styled.img`
-  width: auto;
-  height: auto;
+  width: 6.4;
+  height: 99px;
   background-color: black;
 `;
 
@@ -33,19 +33,20 @@ const SplashRightWrap = styled.div`
 `;
 
 const SplashFirstParagraph = styled.div`
-  color: #979797;
-  font-size: 20px;
+  color: #9BA0AE;
+  font-size: 24px;
+  font-weight: 600;
+  padding-top: 22px;
   font-family: 'Pretendard';
-  font-weight: 300;
-  line-height: 53.23px;
   word-wrap: break-word;
 `;
 
 const SplashSecondParagraph = styled.div`
   color: white;
-  font-size: 40px;
+  font-size: 45px;
   font-family: 'Pretendard';
-  font-weight: 500;
+  font-weight: 700;
+  padding-top: 11px;
   line-height: 53.23px;
   letter-spacing: 2.8px;
   word-wrap: break-word;
