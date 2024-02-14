@@ -17,7 +17,7 @@ export default function Banner({ image, title }) {
 const WrapBanner = styled.div`
   position: relative;
   width: 100%;
-  height: 70vh;
+  height: 550px;
   margin-bottom: 70px;
   overflow-y: hidden;
 `;

@@ -15,8 +15,6 @@ export const SaveImg = styled.img`
   z-index: 10;
 `;
 export default function StoryScrap({ id, isScrapped }) {
-  const ON_SAVE = '/Img/Story/onsave.svg';
-  const SAVE = '/Img/Story/save.svg';
   const [colorSave, setColorSave] = useState(isScrapped ? ON_SAVE : SAVE);
   async function handleClickScrap(event) {
     event.stopPropagation(); // 이벤트 전파 중단(스크랩을 클릭 시 포스터클릭으로 인식하지 않게 하기위함.)

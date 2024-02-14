@@ -157,7 +157,7 @@ export const BeforeWritionSaveApi = async (id, year, month, day) => {
   //fetchData();
 };
 
-//수정 
+//수정
 export const modifySaveApi = async (
   storyId,
   exhibitionId,

@@ -5,7 +5,7 @@ import BigImg from './BigImg';
 const PictureStyle = styled.img`
   width: 172px;
   height: 268px;
-  box-shadow: 5px 5px 8px #d9d9d9;
+  box-shadow: 1px 2px 8px #f3f3f3;
   cursor: pointer;
 `;
 

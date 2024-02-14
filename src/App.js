@@ -90,7 +90,7 @@ function App() {
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mystory/:record" element={<Record />} />
             <Route path="/mypage" element={<MyPage />} />
-            <Route path='/mypageuserinfo' element={<MyPageUserInfo />} />
+            <Route path="/mypageuser/:id" element={<MyPageUserInfo />} />
             <Route path="/mypagemodify" element={<MyPageModify />} />
             <Route path="/exhibition" element={<Exhibition />} />{' '}
             <Route path="/exhibition/genremedia" element={<GenreMedia />} />
