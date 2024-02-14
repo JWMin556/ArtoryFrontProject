@@ -47,6 +47,12 @@ export default function Onboarding() {
   //aws용
   const [myBucket, setMyBucket] = useState(null);
   useEffect(() => {
+    if(!token){
+      alert("토큰이 없습니다.");
+      window.location.href = '/'; // Home 페이지로 이동
+    } 
+
+
     //1. AWS 키 설정
     AWS.config.update({
       accessKeyId: 'AKIA4FTBI4U6A6W6RRPK',

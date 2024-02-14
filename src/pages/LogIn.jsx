@@ -74,6 +74,7 @@ export default function LogIn() {
       window.location.href = '/'; // Home 페이지로 이동
     } catch (error) {
       console.log(error.response.data);
+      alert("존재하지 않는 회원입니다. 다시 로그인해주세요!");
     }
   }
 
