@@ -108,10 +108,7 @@ const WrapMark = styled.div`
   color: #ababab;
   font-family: 'Pretendard';
   font-size: 14px;
-  // margin-top: 3%;
-  // position: relative;
-  //top: 5%;
-  left: 9.5%;
+  margin-top: 3%;
   & .before {
     width: 9%;
     margin-right: 5%;
@@ -136,7 +133,7 @@ const WrapMark = styled.div`
 const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
   const { date } = props;
 
-  const monList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const monList = [12,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   let calendarDays = [];
   let new_month = [];
@@ -220,7 +217,7 @@ const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
   );
 
   const nextMonth = () => {
-    if (month != 12) {
+    if (month != 11) {
       changeMonth((month) => month + 1);
     } else {
       changeMonth((month) => month - 11);
@@ -229,21 +226,19 @@ const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
     makeCalendar(year, month);
     console.log('next!', year, month, new_month);
   };
-  const prevMonth = async () => {
+  const prevMonth = () => {
     if (month != 0) {
       changeMonth((month) => month - 1);
     } else {
-      changeMonth((month) => month + 11);
+      changeMonth((month)=>month+11);
       changeYear((year) => year - 1);
     }
     makeCalendar(year, month);
-  };
-  const handleChangeMonth = (month) => {
-    changeMonth(month);
+    console.log('prev!', year, month, new_month);
+
   };
   return (
     <Container>
-      {/* <div style={{ width: '735px', height: '522px' }}> */}
         <WrapYearSelect>
           <SelectYear
             options={yearArray}
@@ -255,7 +250,7 @@ const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
           <Header>
               <img src={PREV_BUTTON} onClick={prevMonth}></img>
               <span>
-                {monList[month-1]}월
+                {monList[month]}월
               </span>
               <img src={NEXT_BUTTON} onClick={nextMonth}></img>
             </Header>
@@ -286,7 +281,6 @@ const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
             <span>작성 완료</span>
           </span>
         </WrapMark>
-      {/* </div> */}
     </Container>
 
   );

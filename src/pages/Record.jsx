@@ -97,6 +97,7 @@ export default function Record(props) {
   const defaultData = ``;
 
   const { state } = useLocation();
+
   const [userStoryData, setUserStoryData] = useState([]);
   const [data, setData] = useState(defaultData); //스토리 내용
   const [title, setTitle] = useState(''); //제목
@@ -128,6 +129,15 @@ export default function Record(props) {
   const exhibitionTitle = state.item.exhibitionTitle; //전시회 제목
   const storyId = state.item.storyId; //스토리 아이디
   const storyState = state.item.storyState
+  useEffect(()=>{
+    if(state.year && state.month && state.day)
+    {
+      setYear(state.year)
+      setMonth(state.month)
+      setDate(state.day)
+      setTitle("제목을 직접 작성해주세요")
+    }
+  },[year,month,date])
   useEffect(() => {
     (async () => {
       //유저 정보 불러오기(스토리 목록을 불러오기 위해)
@@ -149,11 +159,11 @@ export default function Record(props) {
   }, []);
   useEffect(() => {
     (async () => {
-      //특정 스토리 조회 , 수정할 스토리를 불러오기 위해
+      //특정 스토리 조회 , 최초로 작성한 스토리의 내용을 불러오기 위해
       //console.log("storyId",state.item.storyId)
-      if (storyId) {
+      if (storyId && storyState!=="NOT_STARTED" ) {
         try {
-          const response = await axios.get(
+              const response = await axios.get(
             `${url}stories/${state.item.storyId}`,
             {
               headers: {
@@ -166,6 +176,9 @@ export default function Record(props) {
           setGenre11(response.data?.storyGenre1); //장르1
           setGenre22(response.data?.storyGenre2); //장르2
           setGenre33(response.data?.storyGenre3); //장르3
+          setGenre1(response.data?.storyGenre1); //장르1
+          setGenre2(response.data?.storyGenre2); //장르2
+          setGenre3(response.data?.storyGenre3); //장르3
           setStoryContent(response.data);
           setData(response.data.storyContext); //스토리 내용 저장
           setTitle(response.data.storyTitle); //스토리 제목 저장
@@ -191,21 +204,21 @@ export default function Record(props) {
 
   useEffect(() => {
     //api통신할 때 보내기 위한 값들이 잘 받아와지나 확인하기 위한 콘솔
-    console.log("제목: ",title)
-    console.log("시간: ",viewingTime)
-    console.log("동반인: ",companion)
-    console.log('장르1: ', genre1);
-    console.log('장르2: ', genre2);
-    console.log('장르3: ', genre3);
-    console.log("만족도",satisfactionLevel)
-    console.log("날씨",weather)
-    console.log("내용",data)
-    console.log("공개여부",isOpen)
-    console.log("년",year)
-    console.log("월",month)
-    console.log("일",date)
+    // console.log("제목: ",title)
+    // console.log("시간: ",viewingTime)
+    // console.log("동반인: ",companion)
+    // console.log('장르1: ', genre1);
+    // console.log('장르2: ', genre2);
+    // console.log('장르3: ', genre3);
+    // console.log("만족도",satisfactionLevel)
+    // console.log("날씨",weather)
+    // console.log("내용",data)
+    // console.log("공개여부",isOpen)
+    // console.log("년",year)
+    // console.log("월",month)
+    // console.log("일",date)
     //console.log("picturesUrl",picturesUrl)
-  });
+  },[title,viewingTime,companion,genre1,genre2,genre3,satisfactionLevel,weather,data,isOpen,year,month,date,picturesUrl]);
 
   //저장 버튼 클릭 -> 동일한 전시 삭제를 물어보는 모달창 뜸
   //-> 동일한 전시 삭제 -> 새롭게 작성한 스토리 저장

@@ -74,7 +74,7 @@ export default function StoryList({ year, month, day, loadUserStories }) {
   // 동적으로 계산된 height 값
   const dynamicHeight = storyByDate.length * 50; // 각 아이템이 50px로 가정
   const clickedList = (item) => {
-    navigate(`/mystory/${item.exhibitionTitle}`, { state: { item } });
+    navigate(`/mystory/${item.exhibitionTitle}`, { state: { item ,year,month,day} });
   };
   const ClickedDelete = async (e) => {
     e.stopPropagation(); // 이벤트 전파 중단 x누르면 수정 페이지(Record.jsx)로 들어가지 않도록

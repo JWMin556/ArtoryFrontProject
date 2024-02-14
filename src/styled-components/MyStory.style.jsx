@@ -38,7 +38,7 @@ export const WrapCalendar = styled.div`
 export const RecordName = styled.div`
     font-size : 30px;
     font-family: 'Pretendard';
-    font-weight : bold;
+    font-weight : 700;
     margin-top : 10%;
 `;
 
