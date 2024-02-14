@@ -7,6 +7,8 @@ import { LogoutApi } from './API/Logout_API';
 
 const HeaderContainer = styled.div`
   width: 100%;
+  min-width: 800px;
+
   height: 40px; //전체를 감싸주는 div태그를 40xp로 맞추는 것으로 고정!!
 `; //상단바 전체를 감싸주는 스타일드 컴포넌트입니다.
 
@@ -68,9 +70,7 @@ const LogoutButton = styled.button`
   margin-bottom: 3px;
 `;
 
-
 export default function Header() {
-
   const [isMouseOverExhibition, setMouseOverExhibition] = useState(false); //마우스가 Exhibition위에 올라는지 아닌지 상태를 관리하는 변수
   const handleMouseOverExhibition = () => {
     //마우스가 Exhibition에 올라갔을 때 호출되는 함수 -> setMouseOverExhibition를 이용하여 isMouseOverExhibition가 false->true로 바뀜
@@ -80,11 +80,10 @@ export default function Header() {
     //마우스가 Exhibition에서 나갔을 때 호출되는 함수 -> setMouseOverExhibition를 이용하여 isMouseOverExhibition가 true->false로 바뀜
     setMouseOverExhibition(false);
   };
-  const logoutButtonClick = () =>
-  {
+  const logoutButtonClick = () => {
     LogoutApi();
     localStorage.removeItem('arbitaryLoginForHeader');
-  }
+  };
 
   const location = useLocation();
   const isLoggedIn = localStorage.getItem('arbitaryLoginForHeader');
@@ -166,15 +165,14 @@ export default function Header() {
             <LogoutButton onClick={logoutButtonClick}>LOGOUT</LogoutButton>
           </UnorderedList>
         </HeaderRightWrap>
-      </HeaderWrap>
-{' '}
+      </HeaderWrap>{' '}
       {/*isMouseOverExhibition가 true이면 <Navigation/>이 뜸 */}
       {isMouseOverExhibition && (
-            <Navigation
-            onmouseover = {handleMouseOverExhibition}
-            onmouseout={handleMouseOutExhibition}
-            />
-          )}
+        <Navigation
+          onmouseover={handleMouseOverExhibition}
+          onmouseout={handleMouseOutExhibition}
+        />
+      )}
     </HeaderContainer>
   );
 }

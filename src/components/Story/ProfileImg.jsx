@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Linear } from './StoryPoster';
 import { SaveImg } from './StoryScrap';
 import { userScrapped, userUnScrapped } from '../API/story_API';
+import { useNavigate } from 'react-router-dom';
 
 const PosterStyle = styled.img`
   box-shadow: 5px 5px 8px #d9d9d9;
@@ -12,9 +13,9 @@ const PosterStyle = styled.img`
 `;
 
 export default function ProfileImg({ item }) {
-  //const navigate = useNavigate();
-  const onClickDetail = (item) => {
-    //navigate(`/user/${item.title}`, { state: { item } });
+  const navigate = useNavigate();
+  const onClickDetail = (id) => {
+    navigate(`/mypageuser/${id}`, { state: { id } });
   };
   //나중에 item.title부분 유저 페이지로 변경
   //scrap
@@ -37,7 +38,7 @@ export default function ProfileImg({ item }) {
   return (
     <div
       style={{ height: '126px', width: '126px', position: 'relative' }}
-      onClick={() => onClickDetail(item)}
+      onClick={() => onClickDetail(item.memberId)}
       onMouseOver={() => setIsShowLinear(true)}
       onMouseOut={() => setIsShowLinear(false)}
     >
