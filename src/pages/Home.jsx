@@ -75,6 +75,7 @@ export default function Home() {
     })();
   }, []);
 
+  //asfdsfsdfsdfdsfsdfsadfsdfsdfdsfsdfsdfsdfsdfsdfdsfdsfsdfw주석
   return (
     <HomeWrap>
       <HomeLeftWrap>
