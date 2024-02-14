@@ -557,10 +557,16 @@ export default function MyPageModify() {
             </TitleRightWrapParagraphArea>
                 
             <StyledButton
-              onClick={saveModifiedInformations}  //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
+              onClick={() => {
+                if(!nameValid || !nickNameValid || !imageValid || !introductionValid || !myKeywordValid || !genreValid){
+                  alert("사진, 이름, 닉네임, 소개, 키워드, 관심전시를 모두 수정해주세요");
+                }else {
+                  saveModifiedInformations();
+                }
+              }}  //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
               height="52px"
               width="70%"
-              disabled={!nameValid || !nickNameValid || !imageValid || !introductionValid || !myKeywordValid || !genreValid}
+              //disabled={!nameValid || !nickNameValid || !imageValid || !introductionValid || !myKeywordValid || !genreValid}
               style={{ marginTop: '40px', marginBottom: '30%' }}
             >
               수정하기

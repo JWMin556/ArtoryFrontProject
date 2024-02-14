@@ -53,6 +53,10 @@ export default function DistanceRecommend() {
     setPage(page);
   };
   useEffect(() => {
+    if(!token){
+      alert("토큰이 없습니다.");
+      window.location.href = '/'; // Home 페이지로 이동
+    } 
     (async () => {
       // 근처 추천 전시회 API
       try {
