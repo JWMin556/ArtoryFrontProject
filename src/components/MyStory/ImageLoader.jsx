@@ -82,10 +82,10 @@ export default function ImgaeLoader({ setPicturesUrl, setData }) {
       <Btn onClick={handleImageClick}>
         <img
           style={{ verticalAlign: 'middle' }}
-          src="/Img/Story/plus.png"
+          src="/img/Story/plus.svg"
           alt="이모지추가"
         />{' '}
-        사진
+        <span style={{ verticalAlign: 'middle' }}>사진</span>
         {/* <img width="20px" src={imgUrl} alt="사진선택" />  */}
       </Btn>
       <input

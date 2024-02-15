@@ -17,7 +17,7 @@ export default function DeleteModal({ setModal, handleDelete }) {
 }
 
 const Text = styled.div`
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 600;
 `;
 const ModalWrap = styled.div`
@@ -34,8 +34,8 @@ const ModalWrap = styled.div`
 `;
 const Modal = styled.div`
   background-color: white;
-  width: 75%;
-  max-width: 770px;
+  width: 80%;
+  max-width: 800px;
   min-width: 450px;
   height: 270px;
   display: flex;
@@ -45,12 +45,12 @@ const Modal = styled.div`
 `;
 const ModalBtn = styled.button`
   font-family: 'Pretendard';
-  font-weight: 600;
-  font-size: 1.4rem;
+  font-weight: 500;
+  font-size: 1.3rem;
   border: none;
   background-color: black;
   color: white;
-  width: 127px;
-  height: 36px;
-  margin: 0 10px;
+  width: 135px;
+  height: 38px;
+  margin: 0 5px;
 `;

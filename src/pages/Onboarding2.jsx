@@ -120,7 +120,7 @@ export default function Onboarding2() {
       </Link>
 
       {/*하단 바*/}
-      <img src="/Img/slidebar2.svg" alt="bar" style={{ marginTop: '30px' }} />
+      <img src="/img/slidebar2.svg" alt="bar" style={{ marginTop: '30px' }} />
     </Container>
   );
 }

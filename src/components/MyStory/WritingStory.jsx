@@ -6,7 +6,9 @@ const WriteBox = styled.div`
   width: 820px;
   //height: 713px;
   /* height: fit-content; */
-  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.1); */
+  box-shadow: 1px 2px 8px #f3f3f3;
+
   margin-bottom: 10%;
   /* border: 1px solid yellow; */
   border: none;

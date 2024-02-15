@@ -44,8 +44,8 @@ export default function StoryDetail() {
     }
   }
 
-  const satisfactionSrc = `/Img/Story/face_b${item.storySatisfactionLevel}.svg`;
-  const weatherSrc = `/Img/MyStory/weather.b${item.storyWeather}.svg`;
+  const satisfactionSrc = `/img/Story/face_b${item.storySatisfactionLevel}.svg`;
+  const weatherSrc = `/img/MyStory/weather.b${item.storyWeather}.svg`;
 
   return (
     <WrapStory className="wrapstory">
@@ -239,8 +239,8 @@ const Right = styled.div`
 const BoxStyle = styled.div`
   //background-color: white;
   //box-shadow: 1px 2px 8px #f3f3f3;
-  box-shadow: 1px 2px 8px #00000025;
-
+  /* box-shadow: 1px 2px 8px #00000025; */
+  box-shadow: 1px 2px 8px #f3f3f3;
   border: none;
   // border-radius: 10px;
   font-size: small;
