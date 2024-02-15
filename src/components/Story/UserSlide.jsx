@@ -20,7 +20,7 @@ export const WrapSlider = styled.div`
 export default function UserSlide(props) {
   const setting = {
     arrows: true,
-    infinite: true,
+    infinite: false,
     speed: 1000,
     slidesToShow: 6,
     slidesToScroll: 6,
