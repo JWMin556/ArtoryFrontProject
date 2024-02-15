@@ -37,6 +37,9 @@ import GenreSpecialExhibition from './pages/GenreSpecialExhibition';
 import Record from './pages/Record';
 import Footer from './components/Footer';
 import MyPageUserInfo from './pages/MyPageUserInfo';
+import axios from 'axios';
+import { tokenReissueApi } from './components/API/tokenReissue_API';
+
 const Root = styled.div`
   position: absolute;
   top: 0;
@@ -46,6 +49,41 @@ const Root = styled.div`
 
 function App() {
   const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    //토큰 만료시 처리 로직 
+    const errorHandling = async () => {
+      const URL = localStorage.getItem('URL');
+      const url = `${URL}/api`;
+      const token = localStorage.getItem('Token');
+      try {
+        await axios.get(
+          `${url}/member/info`,
+          {
+            headers: {
+              Accept: '*/*',
+              Authorization: `Bearer ${token}`,
+              'content-type': 'application/json',
+            },
+          }
+        );
+      } catch (error) {
+        if (error.response.data.errorCode === 'A-001') {
+          //토큰 만료
+          //alert(error.response.data.message);
+          await tokenReissueApi(); //토큰 재발급
+        } else if (error.response.data.errorCode === 'A-006') {
+          //리프레시 토큰 만료
+          alert(error.response.data.errorMessage);
+          localStorage.removeItem('Token');
+          window.location.href = '/login';
+        }
+        console.log(error.response.data);
+      }
+    }
+    //15분마다 요청 
+    const intervalRequest = setInterval(errorHandling,15*60*1000)
+    return () => clearInterval(intervalRequest)
+  },[]);
 
   useEffect(() => {
     // 로컬 스토리지에 URL 저장
@@ -55,7 +93,6 @@ function App() {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1500);
-
     return () => clearTimeout(timer);
   }, []);
 

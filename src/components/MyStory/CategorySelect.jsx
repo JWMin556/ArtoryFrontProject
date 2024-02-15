@@ -14,6 +14,7 @@ const genres = [
   'ARTIST_EXHIBITION',
 ];
 export default function CategorySelect({
+  storyId,
   onSelect,
   greyBox,
   box,
@@ -34,55 +35,59 @@ export default function CategorySelect({
   const [genre3Index, setGenre3Index] = useState();
 
   useEffect(() => {
-    genres.forEach((item, index) => {
-      //genres(영어)배열에서 genre11의 값과 같은 값 찾기
-      if (item === genre11) {
-        setGenre1Index(index);
-      }
-    });
-    genres.forEach((item, index) => {
-      if (item === genre22) {
-        setGenre2Index(index);
-      }
-    });
-    genres.forEach((item, index) => {
-      if (item === genre33) {
-        setGenre3Index(index);
-      }
-    });
+    if(storyId){
+      genres.forEach((item, index) => {
+        //genres(영어)배열에서 genre11의 값과 같은 값 찾기
+        if (item === genre11) {
+          setGenre1Index(index);
+        }
+      });
+      genres.forEach((item, index) => {
+        if (item === genre22) {
+          setGenre2Index(index);
+        }
+      });
+      genres.forEach((item, index) => {
+        if (item === genre33) {
+          setGenre3Index(index);
+        }
+      });
+    }
   }, [genre11, genre22, genre33, genre1Index, genre2Index, genre3Index]);
 
   useEffect(() => {
-    setBox((prevBox) => {
-      const newBox = [...prevBox];
-      greyBox.forEach((genre1, index1) => {
-        greyBox.forEach((genre2, index2) => {
-          greyBox.forEach((genre3, index3) => {
-            if (
-              genre1 === greyBox[genre1Index] &&
-              genre2 === greyBox[genre2Index] &&
-              genre3 === greyBox[genre3Index]
-            ) {
-                console.log(1);
-                newBox[index1] = blackBox[index1];
+    if(storyId)
+    {
+      setBox((prevBox) => {
+        const newBox = [...prevBox];
+        greyBox.forEach((genre1, index1) => {
+          greyBox.forEach((genre2, index2) => {
+            greyBox.forEach((genre3, index3) => {
+              if (genre1 === greyBox[genre1Index]) {
+                  newBox[index1] = blackBox[index1];
+                  selectedTopics.push(greyBox[index1].props.children);
+                  selectedIndex.push(index1);
+              }
+              if(genre2 === greyBox[genre2Index])
+              {
                 newBox[index2] = blackBox[index2];
-                newBox[index3] = blackBox[index3];
-                selectedTopics.push(greyBox[index1].props.children);
                 selectedTopics.push(greyBox[index2].props.children);
-                selectedTopics.push(greyBox[index3].props.children);
-                selectedIndex.push(index1);
                 selectedIndex.push(index2);
+              }
+              if(genre3 === greyBox[genre3Index])
+              {
+                newBox[index3] = blackBox[index3];
+                selectedTopics.push(greyBox[index3].props.children);
                 selectedIndex.push(index3);
-                setPrevIdx(index3);
-            }
+              }
+              setPrevIdx(index3);
+            });
           });
         });
+        return newBox;
       });
-      return newBox;
-    });
+    }
   }, [genre1Index, genre2Index, genre3Index, greyBox, setBox]);
-
-  useEffect(() => {}, [genre1Index, genre2Index, genre3Index]);
 
   const toggleBox = (index) => {
     setBox((prevBox) => {

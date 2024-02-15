@@ -48,6 +48,11 @@ export default function ProfileImg({
       onMouseOut={() => setIsShowLinear(false)}
     >
       <PosterStyle src={memberProfile} alt={memberId} />
+      {/* <Linear>
+        <p> {memberNickname}</p>
+
+        <SaveImg src={colorSave} onClick={handleClickScrap}></SaveImg>
+      </Linear> */}
       {isShowLinear && (
         <Linear>
           <p> {memberNickname}</p>

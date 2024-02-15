@@ -423,6 +423,7 @@ export default function TodayExhibition({
           </WrapWho>
           <WrapCategory>
             <CategorySelect
+              storyId={storyId}
               onSelect={handleCategorySelection}
               greyBox={category}
               box={Category}

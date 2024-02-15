@@ -266,10 +266,10 @@ export default function Record(props) {
         for (let i = 0; i < userStoryData.length; i++) {
           for (let j = 0; j < userStoryData.length; j++) {
             if (
-              userStoryData[i].exhibitionTitle === exhibitionTitle &&
-              userStoryData[i].year !== year &&
-              userStoryData[i].month !== month &&
-              userStoryData[i].day !== date
+              userStoryData[i].exhibitionTitle === exhibitionTitle //&&
+              //userStoryData[i].year !== year &&
+              //userStoryData[i].month !== month &&
+              //userStoryData[i].day !== date
             ) {
               // 동일한 전시가 다른 날짜에 존재할 경우
               setIsDeleteModal(true); //모달 띄우고
