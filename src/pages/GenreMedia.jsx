@@ -128,6 +128,12 @@ export default function GenreMedia() {
     fetchData(currentPage);
   }, [currentPage]);
 
+  useEffect(() => {
+    if(!token){
+        alert("토큰이 없습니다.");
+        window.location.href = '/'; // Home 페이지로 이동
+    } 
+  });
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

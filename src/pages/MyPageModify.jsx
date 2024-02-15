@@ -368,6 +368,13 @@ export default function MyPageModify() {
 
   const URL = localStorage.getItem('URL');
   const token = localStorage.getItem('Token');
+    useEffect(() => {
+        if(!token){
+            alert("토큰이 없습니다.");
+            window.location.href = '/'; // Home 페이지로 이동
+        } 
+    });
+
   const saveModifiedInformations = async () => {
     try {
       await handleSubmitGenre(); //전시정보 먼저 저장

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import StyledButton from '../styled-components/StyledButton';
@@ -8,6 +8,16 @@ import { getMemberInfo, saveGenre } from '../components/API/member_API';
 import { useNavigate } from 'react-router-dom';
 import SplashScreen from '../components/SplashScreen';
 export default function Onboarding3() {
+
+  const token = localStorage.getItem('Token');
+  useEffect(() => {
+      if(!token){
+          alert("토큰이 없습니다.");
+          window.location.href = '/'; // Home 페이지로 이동
+      } 
+  });
+
+
   //은향씨가 작업해주실 Onboarding 페이지입니다
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState([]);
