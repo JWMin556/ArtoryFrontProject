@@ -19,6 +19,11 @@ export default function MyStory() {
 
   const profileIMG = userData.image;
   const { state } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [state]);
+
   console.log(state);
   const handleClickStoryBotton = () => {
     if (isButtonClick) {

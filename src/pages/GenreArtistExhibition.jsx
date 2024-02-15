@@ -93,6 +93,15 @@ const PaginationBox = styled.div`
     }
 `;
 
+const GenreParagraph = styled.div`
+  margin-top: 4%;
+  position: relative;
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-size: 1.6em;
+  word-spacing: 1px;
+`;
+
 export default function GenreArtistExhibition() {
   const url = `${URL}/api/cagegory/artistExhibition`
   const [artistExhibitionData, setArtistExhibitionData] = useState([]);
@@ -116,6 +125,7 @@ export default function GenreArtistExhibition() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData(currentPage);
   }, [currentPage]);
 
@@ -126,6 +136,9 @@ export default function GenreArtistExhibition() {
 
   return (
     <Container>
+      <GenreParagraph>
+        작가전
+      </GenreParagraph>
       <WrapResult>
         {artistExhibitionData.map((item, index) => (
           <WrapPoster key={index}>

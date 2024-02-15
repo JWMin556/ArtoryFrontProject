@@ -93,6 +93,15 @@ const PaginationBox = styled.div`
     }
 `;
 
+const GenreParagraph = styled.div`
+  margin-top: 4%;
+  position: relative;
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-size: 1.6em;
+  word-spacing: 1px;
+`;
+
 export default function GenreSculpture() {
   const url = `${URL}/api/cagegory/sculpture`;
   const [sculptureData, setSculptureData] = useState([]);
@@ -116,6 +125,7 @@ export default function GenreSculpture() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData(currentPage);
   }, [currentPage]);
 
@@ -126,6 +136,9 @@ export default function GenreSculpture() {
 
   return (
     <Container>
+      <GenreParagraph>
+        조각
+      </GenreParagraph>
       <WrapResult>
         {sculptureData.map((item, index) => (
           <WrapPoster key={index}>

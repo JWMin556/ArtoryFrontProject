@@ -35,6 +35,7 @@ export default function Exhibition() {
   const token = localStorage.getItem('Token');
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     (async () => {
       //인기, 최근, 추천, 유사 전시회 API
       try {
@@ -183,19 +184,19 @@ export default function Exhibition() {
             <Link style={{marginTop: "170px"}} to="/exhibition/genresculpture">
               <Genre item={sculptureData} exhibitionTitle="조각" />
             </Link>
-            <Link style={{marginTop: "50px"}} to="/exhibition/genreplanexhibition">
+            <Link style={{marginTop: "18px"}} to="/exhibition/genreplanexhibition">
               <Genre item={planData} exhibitionTitle="기획전" /> 
             </Link>
           </S.GenreWrapRow>
 
           <S.GenreWrapRow>
-            <Link style={{marginTop: "50px"}} to="/exhibition/genreinstallationart">
+            <Link style={{marginTop: "18px"}} to="/exhibition/genreinstallationart">
               <Genre item={installationData} exhibitionTitle="설치미술" />
             </Link>
-            <Link style={{marginTop: "50px"}} to="/exhibition/genrepainting">
+            <Link style={{marginTop: "18px"}} to="/exhibition/genrepainting">
               <Genre item={paintingsData} exhibitionTitle="회화" />
             </Link>
-            <Link style={{marginTop: "50px"}} to="/exhibition/genreartistexhibition">
+            <Link style={{marginTop: "18px"}} to="/exhibition/genreartistexhibition">
               <Genre item={artistData} exhibitionTitle="작가전" />
             </Link>
           </S.GenreWrapRow>
@@ -204,7 +205,7 @@ export default function Exhibition() {
             <Link style={{marginTop: "170px"}} to="/exhibition/genrepicture">
               <Genre item={pictureData} exhibitionTitle="사진" />
             </Link>
-            <Link style={{marginTop: "50px"}} to="/exhibition/genrespecialexhibition">
+            <Link style={{marginTop: "18px"}} to="/exhibition/genrespecialexhibition">
               <Genre item={specialData} exhibitionTitle="특별전시" />
             </Link>
           </S.GenreWrapRow>

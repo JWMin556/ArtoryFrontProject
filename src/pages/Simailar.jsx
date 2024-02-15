@@ -53,6 +53,7 @@ export default function Simailar() {
     setPage(page);
   };
   useEffect(() => {
+    window.scrollTo(0, 0);
     (async () => {
       // 유사 전시회 API
       try {

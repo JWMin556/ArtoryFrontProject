@@ -93,6 +93,15 @@ const PaginationBox = styled.div`
     }
 `;
 
+const GenreParagraph = styled.div`
+  margin-top: 4%;
+  position: relative;
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-size: 1.6em;
+  word-spacing: 1px;
+`;
+
 export default function GenreCraft() {
   const url = `${URL}/api/cagegory/craft`;
   const [craftData, setCraftData] = useState([]);
@@ -116,6 +125,7 @@ export default function GenreCraft() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData(currentPage);
   }, [currentPage]);
 
@@ -126,6 +136,9 @@ export default function GenreCraft() {
 
   return (
     <Container>
+      <GenreParagraph>
+        공예
+      </GenreParagraph>
       <WrapResult>
         {craftData.map((item, index) => (
           <WrapPoster key={index}>
