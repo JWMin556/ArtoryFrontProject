@@ -98,6 +98,9 @@ export default function Record(props) {
   const defaultData = ``;
 
   const { state } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [state]);
 
   const [userStoryData, setUserStoryData] = useState([]);
   const [data, setData] = useState(defaultData); //스토리 내용

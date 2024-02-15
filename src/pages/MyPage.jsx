@@ -244,6 +244,7 @@ export default function MyPage() {
   //서버연결을 위한 부분입니다.
   const [userData, setUserData] = useState([]);
   useEffect(() => {
+    window.scrollTo(0, 0);
     (async () => {
       //유저 정보 불러오기
       try {

@@ -7,6 +7,7 @@ import Save from '../components/Exhibition/Save';
 import Search2 from '../components/Exhibition/Search2';
 import CustomPagination from '../components/Exhibition/CustomPagination';
 import Search from '../components/Exhibition/Search';
+import { useLocation } from 'react-router';
 
 const Container = styled.div`
   display: flex;
@@ -52,6 +53,12 @@ export default function Popularity() {
   const handlePageChange = (page) => {
     setPage(page);
   };
+
+  const { state } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [state]);
+
   useEffect(() => {
     (async () => {
       //최근 전시회 API

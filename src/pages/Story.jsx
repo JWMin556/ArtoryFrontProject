@@ -35,6 +35,7 @@ export default function Story(props) {
     }
   };
   useEffect(() => {
+    window.scrollTo(0, 0);
     loadStories();
   }, []);
 

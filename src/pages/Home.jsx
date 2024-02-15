@@ -60,6 +60,7 @@ export default function Home() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     (async () => {
       try {
         const response = await axios.get(url, {

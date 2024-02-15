@@ -13,6 +13,9 @@ export default function LogIn() {
   //주연씨가 작업해주실 LogIn페이지입니다.
   const [ID, setID] = useState('');
   const [Password, setPassword] = useState('');
+  const [idValid, setIDValid] = useState(false);
+  const [passwordValid, setPasswordValid] = useState(false);
+
   const [isIDInputClick, setIsIDInputClick] = useState(false); //ID input 박스 클릭 여부에 따라 placeholder의 상태를 관리하기 위한 변수
   const [isPWInputClick, setIsPWInputClick] = useState(false); //Password input 박스 클릭 여부에 따라 placeholder의 상태를 관리하기 위한 변수
   const [isOutLine, setOutLine] = useState(); //input 박스 클릭 시 outline의 상태를 관리하기 위한 변수
@@ -37,14 +40,17 @@ export default function LogIn() {
 
   const onChangeId = (e) => {
     setID(e.target.value);
+    setIDValid(true);
   }
 
   const onChangePasswords = (e) => {
     setPassword(e.target.value);
+    setPasswordValid(true);
   }
 
   const isLoggedIn = localStorage.getItem('arbitaryLoginForHeader');
   useEffect(() => {
+    window.scrollTo(0, 0);
     if(isLoggedIn){
       window.location.href = '/'; // Home 페이지로 이동
       alert("이미 로그인이 완료되었습니다.");
@@ -78,12 +84,16 @@ export default function LogIn() {
     }
   }
 
-  // function handleLogin() {
-  //   localStorage.setItem('Token','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDczNzMzNzksImV4cCI6MTcwNzQ2MzM3OSwibWVtYmVySWQiOjMsInJvbGUiOiJVU0VSIn0.TL4gJHsj-KfaVEtfFsILKW1VKO0-23cSaEWsI2M5SyTEM24CwpqsOYWFuR57f83uy4_aFqmVKlnoFAcOssnZFA')
-  //   localStorage.setItem('arbitaryLoginForHeader2', true);
-  //   //localStorage.setItem('Token','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBQ0NFU1MiLCJpYXQiOjE3MDczOTczMjQsImV4cCI6MTcwNzQ4NzMyNCwibWVtYmVySWQiOjEzLCJyb2xlIjoiVVNFUiJ9.AVpOV_T7F2L6saBDgQpg2t_K9e122P0bxjobI5P0rqYqTa1lzFXsNnJbvTeODZqROF2tXNOVUOZJdyn13JmUYw')
-  //   window.location.href = '/'; // Home 페이지로 이동
-  // }
+  const handleOnKeyPress  = (e) => {
+    if(e.key === 'Enter'){
+      if(!idValid || !passwordValid){
+        alert("이메일과 비밀번호를 모두 입력해주세요");
+        window.location.href = '/login'; 
+      } else {
+        handleLogin();
+      }
+    }
+  }
 
   return (
     <S.HomeWrap>
@@ -116,6 +126,7 @@ export default function LogIn() {
             onBlur={handlePWInputBlur} //input박스에서 나갔을 때
             placeholder={isPWInputClick ? '' : '비밀번호를 입력해주세요'}
             style={isOutLine}
+            onKeyPress={handleOnKeyPress} //엔터키 눌러도 로그인 가능하게
           />
           <span>
             <S.LockStyle src={LOCK} />
@@ -126,7 +137,14 @@ export default function LogIn() {
             height="52px"
             width="345px"
             style={{ marginTop: '20px' }}
-            onClick={handleLogin}
+            onClick={() => {
+              if(!idValid || !passwordValid) {
+                alert("이메일과 비밀번호를 모두 입력해주세요");
+                window.location.href = '/login'; 
+              } else {
+                handleLogin();
+              }
+            }}
           >
             로그인
           </StyledButton>
