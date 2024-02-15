@@ -6,6 +6,7 @@ const Wrap = styled.div`
     // width : 320px;
     // height : 522px;
     position : relative;
+    //bottom : 2.7%;
     width: 50vw;
     height: 88vh;
 `;

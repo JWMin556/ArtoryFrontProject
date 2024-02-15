@@ -65,26 +65,6 @@ export default function Exhibition() {
         );
         setSimlarExhibitionData(response?.data.similarExhibitionDtoList);
       } catch (error) {
-        if (error.response.data.errorCode === 'A-001') { //토큰 만료
-          //alert(error.response.data.message);
-          tokenReissueApi(); //토큰 재발급 
-        } else if (error.response.data.errorCode === 'A-002') {
-          alert(error.response.data.errorMessage);
-        } else if (error.response.data.errorCode === 'A-003') {
-          alert(error.response.data.errorMessage);
-        } else if (error.response.data.errorCode === 'A-004') {
-          alert(error.response.data.errorMessage);
-        } else if (error.response.data.errorCode === 'A-005') {
-          alert(error.response.data.errorMessage);
-        } else if (error.response.data.errorCode === 'A-006') { //리프레시 토큰 만료
-          alert(error.response.data.errorMessage);
-          localStorage.removeItem('Token')
-          window.location.href = '/login'
-        } else if (error.response.data.errorCode === 'A-007') {
-          alert(error.response.data.errorMessage);
-        } else if (error.response.data.errorCode === 'A-008') {
-          alert(error.response.data.errorMessage);
-        }
         console.log(error.response.data);
       }
     })();

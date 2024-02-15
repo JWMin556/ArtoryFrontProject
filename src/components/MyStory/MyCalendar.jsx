@@ -12,15 +12,15 @@ import SelectYear from './SelectYear';
 const Container = styled.div`
   //border : 1px solid green;
   width: 100vw;
-  height: 90vh;
+  height: 93vh;
   align-items: center;
   flex-direction: column;
   //justify-content : center;
   display: flex;
   font-size: 20px;
   //padding: 0 5% 0 5%;
-  //position: relative;
-  //top: 4%;
+  position: relative;
+  top: 2%;
 `;
 const WrapHeaderAndTile = styled.div`
   width : 100%;

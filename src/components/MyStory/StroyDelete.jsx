@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import { StoryDeleteApi } from '../API/Delete_API';
+import { useNavigate } from 'react-router-dom';
+
 //요기 조금 수정했어요 . texteditor내용이 zindex 더 높은 것 같아서(너무 css를 얼레벌레 해놓은 저의 잘못으롴ㅎㅋㅎ)!
 const StyledModal = {
   overlay: {
@@ -77,18 +78,24 @@ export default function StoryDelete({
   setIsModifyModal,
   saveStory,
 }) {
+  const navigate = useNavigate();
   const ClickedYesButton = () => {
     //예 버튼을 눌렀을 때
     if (part === 'delete') {
       setIsDeleteModal(false); //모달 닫침
       StoryDeleteApi(storyByDate.storyId); //동일한 전시 스토리 삭제
       saveStory(); //스토리 저장하는 함수로 이동
+
     } else if (part === 'notify') {
       setIsNotifyModal(false); // 저장 알림 모달 닫음
+      navigate(`/mystory`)
     } else if (part === 'progress') {
       setIsProgressModal(false); //임시저장 알림 모달 닫음
+      navigate(`/mystory`)
     } else if (part === "modify") {
       setIsModifyModal(false) //수정 알림 모달 닫음
+      navigate(`/mystory`)
+
     }
   };
   return (

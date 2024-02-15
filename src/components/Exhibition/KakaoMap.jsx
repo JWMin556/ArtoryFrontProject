@@ -1,7 +1,23 @@
-import React, { useEffect } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components';
+const Map = styled.div`
+    width : 1012px;
+    height : 405.94px;
+    margin : 8% 0 1% 0;
+    box-shadow: 1px 2px 8px #f3f3f3; 
+`;
+const Address = styled.div`
+    font-size : 16px;
+    font-weight : 800;
+    color : #4D4D4D;
+    & span {
+        font-weight : 500;
+    }
+`;
 const { kakao } = window; //함수형 컴포넌트에 인지시킴
 function Kakao({Longitude,Latitude}) {
+    const [address,setAddress] = useState()
+    const [building,setBuilding] = useState()
     console.log("경도",Longitude);
     console.log("위도",Latitude);
     useEffect(() => {
@@ -22,19 +38,33 @@ function Kakao({Longitude,Latitude}) {
         });
         // 마커를 지도 위에 표시
         marker.setMap(map);
-
-        //let geocoder =new kakao.maps.services.Geocoder();
-        //geocoder.coord2Address(x, y, callback, options)
+        map.setDraggable(false) 
         }, [])
+    useEffect(()=>{
+        function getAddr(Longitude,Latitude){
+            let geocoder = new kakao.maps.services.Geocoder();
+        
+            let coord = new kakao.maps.LatLng(Longitude, Latitude);
+            let callback = function(result, status) {
+                if (status === kakao.maps.services.Status.OK) {
+                    console.log(result[0]);
+                    setAddress(result[0].road_address.address_name)
+                    setBuilding(result[0].road_address.building_name)
+                }
+            }
+            geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+        }
+        getAddr(Longitude,Latitude)
+    },[])
 
 return (
-    <div id="map" style={{
-        width : '1012px',
-        height : '405.94px',
-        margin : "8% 0 8% 0",
-    }}>   
+    <div>
+        <Map id="map">   
+        </Map>
+        <Address>
+            위치: <span>{address}{' '}{building}</span>
+        </Address>
     </div>
 )
 }
-
 export default Kakao;
