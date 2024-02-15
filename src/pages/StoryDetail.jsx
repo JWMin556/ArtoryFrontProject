@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -30,6 +30,11 @@ const genres__kor = [
 ];
 export default function StoryDetail() {
   const { state } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [state]);
+
   console.log(state.item);
   const item = state.item;
   const selectedIndex = [];

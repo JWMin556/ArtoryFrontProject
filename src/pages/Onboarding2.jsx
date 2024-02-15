@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import StyledButton from '../styled-components/StyledButton';
@@ -42,6 +42,13 @@ export default function Onboarding2() {
   const URL = localStorage.getItem('URL');
 
   const token = localStorage.getItem('Token');
+  useEffect(() => {
+      if(!token){
+          alert("토큰이 없습니다.");
+          window.location.href = '/'; // Home 페이지로 이동
+      } 
+  });
+
   //api관련 함수
   const saveAgeAndGender = async () => {
     try {

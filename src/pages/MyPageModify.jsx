@@ -156,6 +156,14 @@ const ExamineContentBox = styled.div`
 `;
 
 export default function MyPageModify() {
+
+  //맨처음 페이지 이동시 위로 고정한다
+  const {pathname} = useLocation();
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [pathname]);
+
+
   //MyPage에서 받아온 이름과 사진을 위해서 사용
   const location = useLocation();
   const query = new URLSearchParams(location.search);
@@ -175,7 +183,7 @@ export default function MyPageModify() {
   const [introduction, setIntroduction] = useState('');
   const [myKeyword, setMyKeyword] = useState('');
   const [imgUrl, setImgUrl] = useState('');
-  const [chagedpPassword, setChagedpPassword] = useState('');
+  //const [chagedpPassword, setChagedpPassword] = useState('');
 
   //버튼활성화를 위한 유효성 검사
   const [nameValid, setNameValid] = useState(false);
@@ -185,9 +193,16 @@ export default function MyPageModify() {
   const [myKeywordValid, setMyKeywordValid] = useState(false);
   const [genreValid, setGenreValid] = useState(false);
 
+  //const [changedPasswordValid, setChangedPasswordValid] = useState(false);
+  const [deleteMemberValid, setDeleteMemberValid] = useState(false);
+
   const handleNameChange = (e) => {
     setname(e.target.value);
-    setNameValid(true);
+    if (e.target.value.trim() === '') {
+      setNameValid(false);
+    } else {
+      setNameValid(true);
+    }
   };
 
   const handleNicknameChange = (e) => {
@@ -197,21 +212,29 @@ export default function MyPageModify() {
       alert('닉네님은 10자까지만 해주세요');
     }
     setNickname(value);
-    setNickNameValid(true);
+    if (value.trim() === '') {
+      setNickNameValid(false);
+    } else {
+      setNickNameValid(true);
+    }
   };
 
   const handleIntroductionChange = (e) => {
     setIntroduction(e.target.value);
-    setIntroductionValid(true);
+    if (e.target.value.trim() === '') {
+      setIntroductionValid(false);
+    } else {
+      setIntroductionValid(true);
+    }
   };
 
   const handleKeywordChange = (e) => {
     setMyKeyword(e.target.value);
-    setMyKeywordValid(true);
-  };
-
-  const handlePasswordsChange = (e) => {
-    setChagedpPassword(e.target.value);
+    if (e.target.value.trim() === '') {
+      setMyKeywordValid(false);
+    } else {
+      setMyKeywordValid(true);
+    }
   };
 
   const handleImageClick = () => {
@@ -345,6 +368,13 @@ export default function MyPageModify() {
 
   const URL = localStorage.getItem('URL');
   const token = localStorage.getItem('Token');
+    useEffect(() => {
+        if(!token){
+            alert("토큰이 없습니다.");
+            window.location.href = '/'; // Home 페이지로 이동
+        } 
+    });
+
   const saveModifiedInformations = async () => {
     try {
       await handleSubmitGenre(); //전시정보 먼저 저장
@@ -375,13 +405,62 @@ export default function MyPageModify() {
     }
   };
 
+  // const handlePasswordsChange = (e) => {
+  //   setChagedpPassword(e.target.value);
+  // };
+
+  const handleDeleteReasonChange = (e) => {
+    if (e.target.value.trim() === '') {
+      setDeleteMemberValid(false);
+    } else {
+      setDeleteMemberValid(true);
+    }
+  }
+  
+  const deleteUser = async () => {
+    try {
+      const userInfoResponse = await axios.get(`${URL}/api/member/info`, {
+        headers: {
+          Accept: '*/*',
+          Authorization: `Bearer ${token}`,
+        }
+      });
+      const userData = userInfoResponse.data
+      const memberIdToDelete = userData.memberId;
+      // console.log("니 멤버아이디", memberIdToDelete);
+      const deleteResponse = await axios.delete(
+        `${URL}/api/member/delete-member?memberId=${memberIdToDelete}`,
+        {
+          headers: {
+            Accept: '*/*',
+            Authorization: `Bearer ${token}`,
+          }
+        }
+      );
+      console.log('사용자가 성공적으로 삭제되었습니다.', deleteResponse);
+      alert('사용자가 성공적으로 삭제되었습니다.');
+      window.location.href = '/';
+      localStorage.removeItem('arbitaryLoginForHeader');
+    } catch (error) {
+      console.log("에러났음", error.response.data);
+    }
+  }
+
   // const saveModifiedPassword = async () => { //이거 하기전에 먼저 사용자 전체정보를 불러왔어야 함 ㅠㅠ
   //   try {
-  //     const baseUrl = `${URL}/api/member/save/pwchange`;
+  //     //불러온것
+  //     const userInfoResponse = await axios.get(`${URL}/api/member/info`, {
+  //       headers: {
+  //         Accept: '*/*',
+  //         Authorization: `Bearer ${token}`,
+  //       }
+  //     });
+  //     console.log(userInfoResponse.data);
+  //     const baseUrl = `${URL}/api/member/save/pwchange`
   //     const response = await axios.post(
   //       baseUrl,
   //       {
-  //         chagedpPassword
+  //         "password": chagedpPassword
   //       },
   //       {
   //         headers: {
@@ -391,7 +470,7 @@ export default function MyPageModify() {
   //         },
   //       }
   //     );
-  //     console.log('비밀번호가 성공적으로 수정되었습니다.');
+  //     console.log('비밀번호가 성공적으로 수정되었습니다.', response.data);
   //     alert('비밀번호가 성공적으로 수정되었습니다.');
   //   } catch (error) {
   //     console.log(error.response.data);
@@ -507,15 +586,13 @@ export default function MyPageModify() {
               </ExamineContentBox>
             </ExamineWrap>
 
-            <TitleRightWrapParagraphArea
-              style={{ marginTop: '10%', marginBottom: '1px' }}
-            >
+            <TitleRightWrapParagraphArea style={{ marginTop: '10%', marginBottom: '1px' }}>
               <TitleRightWrapParagraphTitle>
                 <BoldSentence>비밀번호 변경</BoldSentence>
                 <GraySentence>현재 비밀번호를 입력해주세요</GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap>
-                <InputStyle /> {/*onChange={handleKeywordChange}*/}
+                <InputStyle />
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
@@ -526,12 +603,13 @@ export default function MyPageModify() {
                 </GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap style={{ width: '300px' }}>
-                <InputStyle onChange={handlePasswordsChange} />
+                <InputStyle /> {/* <InputStyle onChange={handlePasswordsChange} />  */}
                 <StyledButton
-                  //onClick={saveModifiedPassword}
+                  //onClick={saveModifiedPassword}    
                   height="23px"
                   width="30%"
                   fontSize="10px"
+                  disabled={true}
                 >
                   비밀번호 변경
                 </StyledButton>
@@ -544,9 +622,10 @@ export default function MyPageModify() {
                 <GraySentence>탈퇴사유를 입력해주세요</GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap style={{ width: '300px' }}>
-                <InputStyle />
+                <InputStyle onChange={handleDeleteReasonChange} />
                 <StyledButton
-                  //disabled={notAllow}
+                  disabled={!deleteMemberValid}
+                  onClick={deleteUser}
                   height="23px"
                   width="30%"
                   fontSize="10px"

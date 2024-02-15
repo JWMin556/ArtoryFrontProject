@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Heart from '../components/Exhibition/Heart';
-import Save from '../components/Exhibition/Save';
 import Poster from '../components/Exhibition/Poster';
 import Pagination from 'react-js-pagination';
 import PREV from '../Img/Pagination/prev.svg'
@@ -16,6 +14,16 @@ const Container = styled.div`
   //margin-top : 10%;
   margin-left: 19%;
 `;
+
+const GenreParagraph = styled.div`
+  margin-top: 4%;
+  position: relative;
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-size: 1.6em;
+  word-spacing: 1px;
+`;
+
 const WrapResult = styled.div`
   display: flex;
   flex-direction: row;
@@ -116,9 +124,16 @@ export default function GenreMedia() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData(currentPage);
   }, [currentPage]);
 
+  useEffect(() => {
+    if(!token){
+        alert("토큰이 없습니다.");
+        window.location.href = '/'; // Home 페이지로 이동
+    } 
+  });
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -126,6 +141,9 @@ export default function GenreMedia() {
 
   return (
     <Container>
+      <GenreParagraph>
+        미디어
+      </GenreParagraph>
       <WrapResult>
         {mediaData.map((item, index) => (
           <WrapPoster key={index}>
@@ -156,99 +174,3 @@ export default function GenreMedia() {
     </Container>
   );
 }
-
-// import axios from 'axios';
-// import React, { useEffect, useState } from 'react'
-// import styled from 'styled-components';
-// import Heart from '../components/Exhibition/Heart';
-// import Save from '../components/Exhibition/Save';
-// import Poster from '../components/Exhibition/Poster';
-// import Search2 from '../components/Exhibition/Search2'
-// import CustomPagination from '../components/Exhibition/CustomPagination'
-
-// const Container = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   // justify-content : center;
-//   // align-items : center;
-//   //margin-top : 10%;
-//   margin-left: 19%;
-// `;
-// const WrapResult = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   flex-wrap: wrap;
-//   margin-top : 4%;
-//   // justify-content : center;
-//   // align-items : center;
-// `;
-// const WrapPoster = styled.div`
-//   margin-right: 5%;
-//   margin-bottom: 3%;
-// `;
-// const WrapIcon = styled.div`
-//   width: 175px;
-//   position: relative;
-//   top: 3%;
-//   left: 3%;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: flex-end;
-// `;
-
-// export default function GenreMedia() {
-//   const url = 'http://3.39.39.6:8080/api/cagegory/media?page=1'
-//   const [mediaData, setMediaData] = useState([]);
-//   const token = localStorage.getItem('Token');
-//   const [page, setPage] = useState(1);
-//   const [exhibition , setExhibition] = useState(10);
-//   const handlePageChange = (page) => {
-//     setPage(page);
-//   };
-//   useEffect(() => {
-//     (async () => {
-//       try{
-//         const response = await axios.get(url,
-//           {
-//             headers : {
-//               Accept: '*/*',
-//               Authorization: `Bearer ${token}`,
-//             },
-//           }
-//         );
-//         setMediaData(response.data);
-//         console.log(response.data);
-//       } catch(error) {
-//         console.error('Error fetching data:', error.response.data);
-//       }
-//     })();
-//   }, []);
-
-//   return (
-//     <Container>
-//       {/* <Search2/> 미디어가 아닌 다른 exhibition을 찾고 */}
-//       <WrapResult>
-//         {mediaData.slice(
-//            exhibition*(page-1),
-//            exhibition*(page-1)+exhibition
-//         ).map((item, index) => (
-//           <WrapPoster key={index}>
-//             <div>
-//               <Poster item={item} />
-//             </div>
-//             <WrapIcon>
-//               <Heart item={item} />
-//               <Save item={item}/>
-//             </WrapIcon>
-//           </WrapPoster>
-//         ))}
-//       </WrapResult>
-//       <CustomPagination
-//           page={page}
-//           exhibition={exhibition}
-//           data={mediaData}
-//           handlePageChange={handlePageChange}
-//       />
-//     </Container>
-//   );
-// }

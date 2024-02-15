@@ -90,6 +90,14 @@ const WrapSaveButton = styled.div`
 // 1. 스토리 작성하기 버튼 : item -> exhibitionTitle,exhibitionId,exhibitionImage
 // 2. 캘린더에서 작성 전 스토리 클릭 : item -> exhibitionTitle,exhibitionId,exhibitionImage,storyId,year,month,dat,storyState
 export default function Record(props) {
+
+    useEffect(() => {
+        if(!token){
+            alert("토큰이 없습니다.");
+            window.location.href = '/'; // Home 페이지로 이동
+        } 
+    });
+
   const navigate = useNavigate();
   const today = new Date();
   const getYear = moment(today).format('YYYY');
@@ -98,6 +106,9 @@ export default function Record(props) {
   const defaultData = ``;
 
   const { state } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [state]);
 
   const [userStoryData, setUserStoryData] = useState([]);
   const [data, setData] = useState(defaultData); //스토리 내용

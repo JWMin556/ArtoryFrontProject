@@ -46,6 +46,12 @@ export default function Recommend() {
   const url = `${URL}/api/exhibitions/ParticularRecommend?page=1`;
   const [recommendExhibitionData, setRecommedExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
+    useEffect(() => {
+        if(!token){
+            alert("토큰이 없습니다.");
+            window.location.href = '/'; // Home 페이지로 이동
+        } 
+    });
   const [page, setPage] = useState(1);
   const [exhibition, setExhibition] = useState(20);
   const handlePageChange = (page) => {

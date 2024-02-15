@@ -93,6 +93,15 @@ const PaginationBox = styled.div`
     }
 `;
 
+const GenreParagraph = styled.div`
+  margin-top: 4%;
+  position: relative;
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-size: 1.6em;
+  word-spacing: 1px;
+`;
+
 export default function GenrePainting() {
   const url = `${URL}/api/cagegory/painting`;
   const [paintingData, setPaintingData] = useState([]);
@@ -116,6 +125,14 @@ export default function GenrePainting() {
   };
 
   useEffect(() => {
+    if(!token){
+        alert("토큰이 없습니다.");
+        window.location.href = '/'; // Home 페이지로 이동
+    }   
+  });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData(currentPage);
   }, [currentPage]);
 
@@ -126,6 +143,9 @@ export default function GenrePainting() {
 
   return (
     <Container>
+      <GenreParagraph>
+        회화
+      </GenreParagraph>
       <WrapResult>
         {paintingData.map((item, index) => (
           <WrapPoster key={index}>

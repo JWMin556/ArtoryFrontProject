@@ -93,6 +93,15 @@ const PaginationBox = styled.div`
     }
 `;
 
+const GenreParagraph = styled.div`
+  margin-top: 4%;
+  position: relative;
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-size: 1.6em;
+  word-spacing: 1px;
+`;
+
 export default function GenreDesign() {
   const url = `${URL}/api/cagegory/design`;
   const [designData, setDesignData] = useState([]);
@@ -116,9 +125,16 @@ export default function GenreDesign() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData(currentPage);
   }, [currentPage]);
 
+  useEffect(() => {
+    if(!token){
+        alert("토큰이 없습니다.");
+        window.location.href = '/'; // Home 페이지로 이동
+    } 
+  });
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -126,6 +142,9 @@ export default function GenreDesign() {
 
   return (
     <Container>
+      <GenreParagraph>
+        디자인
+      </GenreParagraph>
       <WrapResult>
         {designData.map((item, index) => (
           <WrapPoster key={index}>
