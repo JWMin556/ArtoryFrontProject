@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import KakaoMap from './KakaoMap';
-import NaverMap from './NaverMap'
 import { Link } from 'react-router-dom';
 
 const URL = localStorage.getItem('URL');

@@ -12,17 +12,21 @@ function Kakao({Longitude,Latitude}) {
         };
         const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
          //마커가 표시 될 위치
-    let markerPosition = new kakao.maps.LatLng(
-        Longitude,
-        Latitude
-    );
+        let markerPosition = new kakao.maps.LatLng(
+            Longitude,
+            Latitude
+        );
         // 마커를 생성
         let marker = new kakao.maps.Marker({
             position: markerPosition,
         });
         // 마커를 지도 위에 표시
         marker.setMap(map);
+
+        //let geocoder =new kakao.maps.services.Geocoder();
+        //geocoder.coord2Address(x, y, callback, options)
         }, [])
+
 return (
     <div id="map" style={{
         width : '1012px',

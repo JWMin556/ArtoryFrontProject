@@ -155,10 +155,10 @@ const BlakcCategory = styled.button`
 const DateDiv = styled.div`
   background-color : #f5f5f5;
   width : 110px;
-  height : 13px;
+  height : 14px;
   text-align : center;
   font-size : 11px;
-  padding-top : 1%;
+  padding-top : 0.5%;
   color : #ababab;
   border : none;
   margin-bottom : 3%;

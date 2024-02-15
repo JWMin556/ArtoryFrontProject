@@ -101,7 +101,7 @@ export const progressSaveApi2 = async (
         storySatisfactionLevel: satisfactionLevel,
         storyWeather: weather,
         storyCompanion: companion,
-        storyKeyword: 'keyword',
+        storyKeyword: keyword,
         storyViewingTime: viewingTime,
         year: year,
         month: month,
@@ -111,7 +111,7 @@ export const progressSaveApi2 = async (
         genre2: genre2,
         genre3: genre3,
         isOpen: isOpen,
-        picturesUrl: ['picturesUrl'],
+        picturesUrl: picturesUrl,
       },
       {
         headers: {
@@ -200,7 +200,7 @@ export const modifySaveApi = async (
         storySatisfactionLevel: satisfactionLevel,
         storyWeather: weather,
         storyCompanion: companion,
-        storyKeyword: 'keyword',
+        storyKeyword: keyword,
         storyViewingTime: viewingTime,
         year: year,
         month: month,

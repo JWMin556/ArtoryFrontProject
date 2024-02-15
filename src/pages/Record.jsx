@@ -207,9 +207,9 @@ export default function Record(props) {
     // console.log("제목: ",title)
     // console.log("시간: ",viewingTime)
     // console.log("동반인: ",companion)
-    // console.log('장르1: ', genre1);
-    // console.log('장르2: ', genre2);
-    // console.log('장르3: ', genre3);
+    console.log('장르1: ', genre1);
+    console.log('장르2: ', genre2);
+    console.log('장르3: ', genre3);
     // console.log("만족도",satisfactionLevel)
     // console.log("날씨",weather)
     // console.log("내용",data)
@@ -315,7 +315,6 @@ export default function Record(props) {
           keyword,
           picturesUrl
         );
-        //alert("새로운 스토리가 임시저장 되었습니다")
       } catch (error) {
         console.log(error.response.data);
       }
