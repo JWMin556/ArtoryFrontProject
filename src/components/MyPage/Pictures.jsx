@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import BigImg from './BigImg';
 
 const PictureStyle = styled.img`
-  width: 172px;
+  /* width: 172px; */
+  width: 186px;
   height: 268px;
   box-shadow: 1px 2px 8px #f3f3f3;
   cursor: pointer;
@@ -21,7 +22,7 @@ export default function Pictures({ items, item, index }) {
     }
   };
   return (
-    <div style={{ height: '268px' }}>
+    <div style={{ height: '268px', width: '186px' }}>
       <PictureStyle
         src={item.pictureUrl}
         alt={item.storyPictureId}

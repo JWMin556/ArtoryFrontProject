@@ -23,7 +23,8 @@ const PageContainer = styled.div`
 
 const Page = styled.div`
   /* position: relative; */
-  width: 76%;
+  width: 900px;
+
   /* max-width: 800px; */
   padding: 0 20px;
   position: absolute;
@@ -34,6 +35,7 @@ const Page = styled.div`
 
 export const TitleWrap = styled.div`
   /* width: 65%; */
+  width: 100%;
   color: black;
   font-size: 30px;
   font-family: 'Pretendard';
@@ -125,30 +127,33 @@ export const InputStyle = styled.div`
 `;
 
 const ContentWrap = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-top: 20%;
-  margin-left: 3%;
-  margin-right: 3%;
+  /* margin-left: 3%;
+  margin-right: 3%; */
   /* background-color: red; */
 `;
 
 const ContentBtns = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const Btns1 = styled.button`
-  height: 35px;
-  width: 19%;
+  height: 37px;
+  width: 22%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px rgba(170.71, 170.71, 170.71, 0.02) solid;
   align-items: center;
   color: #616161;
-  font-size: 14px;
+  font-size: 0.9rem;
   font-family: 'Pretendard';
   font-weight: 600;
   line-height: 18.63px;
@@ -163,8 +168,8 @@ const Btns1 = styled.button`
 `;
 
 const Btns2 = styled.button`
-  height: 35px;
-  width: 19%;
+  height: 37px;
+  width: 22%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,7 +177,7 @@ const Btns2 = styled.button`
   align-items: center;
   box-shadow: 1px 2px 8px #f3f3f3;
   color: #f3f3f3;
-  font-size: 14px;
+  font-size: 0.9rem;
   font-family: 'Pretendard';
   font-weight: 600;
   line-height: 18.63px;
@@ -184,7 +189,8 @@ const Btns2 = styled.button`
 
 const ContentPosters = styled.div`
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  /* width: fit-content; */
 `;
 
 const ContentUserWrap = styled.div`

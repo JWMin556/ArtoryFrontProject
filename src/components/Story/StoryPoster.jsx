@@ -70,7 +70,7 @@ export default function StoryPoster(props) {
 
   return (
     <div
-      style={{ height: '268px', position: 'relative' }}
+      style={{ height: '268px', width: '186px', position: 'relative' }}
       onMouseOver={handleMouseOverImg}
       onMouseOut={handleMouseOutImg}
       onClick={() => onClickDetail(props.item.storyId)}

@@ -6,19 +6,24 @@ import 'slick-carousel/slick/slick-theme.css';
 import Prev from '../Exhibition/Prev';
 import Next from '../Exhibition/Next';
 import Pictures from './Pictures';
+import * as S from '../../styled-components/Slide.style';
 
-const WrapSlider = styled.div`
-  width: auto;
-  margin-bottom: 10%;
+export const WrapSlider = styled.div`
+  width: 940px;
+  height: fit-content;
+  /* margin-bottom: 10%; */
+  .hkkcyC {
+    top: 50%;
+  }
 `;
-const WrapPoster = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 350px;
-  justify-content: space-around;
-`;
-const StyledSlider = styled(Slider)``;
+// const WrapPoster = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 350px;
+//   justify-content: space-around;
+// `;
+// const StyledSlider = styled(Slider)``;
 
 export default function SlidePictures(props) {
   const numItems = props.Dummy.length;
@@ -27,24 +32,26 @@ export default function SlidePictures(props) {
 
   const setting = {
     arrows: true,
-    infinite: true,
+    infinite: false, //임시
     speed: 1000,
-    slidesToShow: slidesToShow,
-    slidesToScroll: slidesToScroll,
+    // slidesToShow: slidesToShow,
+    // slidesToScroll: slidesToScroll,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     nextArrow: <Next />,
     prevArrow: <Prev />,
   };
   return (
     <WrapSlider>
-      <StyledSlider {...setting}>
+      <S.StyledSlider {...setting}>
         {props.Dummy.map((item, index) => (
           <div key={index}>
-            <WrapPoster>
+            <S.WrapPoster>
               <Pictures items={props.Dummy} item={item} index={index} />
-            </WrapPoster>
+            </S.WrapPoster>
           </div>
         ))}
-      </StyledSlider>
+      </S.StyledSlider>
     </WrapSlider>
   );
 }

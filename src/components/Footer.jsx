@@ -55,18 +55,20 @@ export default function Footer() {
     <FooterBox>
       <Content>
         <div>
-          <button>공지사항&FAQ</button> | <button>약관 및 정책</button>
+          {/* <button>공지사항&FAQ</button> | <button>약관 및 정책</button> */}
+          5th UMC
         </div>
         <Bottom>
           <h1>ARTORY</h1>
-          <p>
+          <p>SQUARE 지부</p>
+          {/* <p>
             <span>상호명: ARTORY</span>
             <span>사업자등록번호: 130-85-45655</span>
             <span>통신판매업 신고번호: 2024-서울성북-1525</span>
           </p>
           <p>주소: 서울시 마포구 백범로 36길 21, 서울허브 20층</p>
           <p>전시회 홍보 지원 광고 문의: 070-2165-8742</p>
-          <p>이메일: ARTORY@ad-com.kr</p>
+          <p>이메일: ARTORY@ad-com.kr</p> */}
         </Bottom>
       </Content>
     </FooterBox>

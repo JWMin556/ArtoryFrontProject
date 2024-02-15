@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -6,10 +6,15 @@ import 'slick-carousel/slick/slick-theme.css';
 import Prev from '../Exhibition/Prev';
 import Next from '../Exhibition/Next';
 import PosterMyPage from './PosterMyPage';
+import * as S from '../../styled-components/Slide.style';
 
-const WrapSlider = styled.div`
-  width: auto;
-  margin-bottom: 10%;
+export const WrapSlider = styled.div`
+  width: 940px;
+  height: fit-content;
+  /* margin-bottom: 10%; */
+  .hkkcyC {
+    top: 50%;
+  }
 `;
 
 const WrapPorterAndIcon = styled.div`
@@ -40,22 +45,24 @@ export default function SlideScrappedStory(props) {
     arrows: true,
     infinite: true,
     speed: 1000,
-    slidesToShow: slidesToShow,
-    slidesToScroll: slidesToScroll,
+    // slidesToShow: slidesToShow,
+    // slidesToScroll: slidesToScroll,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     nextArrow: <Next />,
     prevArrow: <Prev />,
   };
   return (
     <WrapSlider>
-        <StyledSlider {...setting}>
-            {props.Dummy.map((item) => (
-            <div key={item.storyId}>
-                <WrapPorterAndIcon>
-                <PosterMyPage item={item}/>
-                </WrapPorterAndIcon>
-            </div>
-            ))}
-        </StyledSlider>
+      <S.StyledSlider {...setting}>
+        {props.Dummy.map((item) => (
+          <div key={item.storyId}>
+            <WrapPorterAndIcon>
+              <PosterMyPage item={item} type="scrap" />
+            </WrapPorterAndIcon>
+          </div>
+        ))}
+      </S.StyledSlider>
     </WrapSlider>
-  )
+  );
 }

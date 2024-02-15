@@ -84,7 +84,7 @@ export default function MyPageUserInfo() {
 
   return (
     <Container>
-      <TitleWrap style={{ width: '65%' }}>
+      <TitleWrap style={{ width: '900px' }}>
         <TitleLeftWrap>
           <TitleLeftWrapParagraph>
             <p>{userData.nickname}님의</p>
@@ -126,11 +126,11 @@ export default function MyPageUserInfo() {
       {/* 스토리 */}
       <Stories>
         <TitleWrap style={{ width: '100%' }}>
-          <spa style={{ padding: '20px' }}>
+          <span style={{ padding: '20px' }}>
             {' '}
             {userData.nickname}님이 <br />
             작성하신 STORY
-          </spa>
+          </span>
         </TitleWrap>
         <WrapResult>
           {userStories
