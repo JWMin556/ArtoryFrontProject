@@ -80,14 +80,15 @@ export default function MyPageUserInfo() {
   };
 
   const token = localStorage.getItem('Token');
-    useEffect(() => {
-        if(!token){
-            alert("토큰이 없습니다.");
-            window.location.href = '/'; // Home 페이지로 이동
-        } 
-    });
+  useEffect(() => {
+    if (!token) {
+      alert('토큰이 없습니다.');
+      window.location.href = '/'; // Home 페이지로 이동
+    }
+  });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     loadUserPage();
   }, []);
 
