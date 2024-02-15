@@ -56,6 +56,15 @@ export default function MyStory() {
       console.error('Error fetching data:', error.response.data);
     }
   };
+
+  const token = localStorage.getItem('Token');
+    useEffect(() => {
+        if(!token){
+            alert("토큰이 없습니다.");
+            window.location.href = '/'; // Home 페이지로 이동
+        } 
+    });
+
   useEffect(() => {
     userInfo();
   }, []);
