@@ -46,6 +46,8 @@ export default function StoryList({ year, month, day, loadUserStories }) {
   const navigate = useNavigate();
   const [storyByDate, setStoryByDate] = useState([]);
   const [isModal, setIsModal] = useState(false);
+  const [selectedStoryId,setSelectedStoryId]=useState();
+  const [selectedExhibitionTitle,setSelectedExhibitionTitle]=useState();
 
   const fetchData = async () => {
     try {
@@ -76,8 +78,11 @@ export default function StoryList({ year, month, day, loadUserStories }) {
   const clickedList = (item) => {
     navigate(`/mystory/${item.exhibitionTitle}`, { state: { item ,year,month,day} });
   };
-  const ClickedDelete = async (e) => {
+  const ClickedDelete = async (e,item) => {
     e.stopPropagation(); // 이벤트 전파 중단 x누르면 수정 페이지(Record.jsx)로 들어가지 않도록
+    console.log(item.storyId)
+    setSelectedStoryId(item.storyId)
+    setSelectedExhibitionTitle(item.exhibitionTitle)
     setIsModal(true);
   };
 
@@ -105,12 +110,12 @@ export default function StoryList({ year, month, day, loadUserStories }) {
               <img
                 src={Delete}
                 alt={'story 삭제'}
-                onClick={(e) => ClickedDelete(e)}
+                onClick={(e) => ClickedDelete(e,item)}
               />
               {isModal && (
                 <MyStoryDeleteModal
-                  title={item.exhibitionTitle}
-                  storyId = {item.storyId}
+                  title={selectedExhibitionTitle}
+                  storyId = {selectedStoryId}
                   isModal={isModal}
                   setModal={setIsModal}
                   deleteStory={deleteStory}

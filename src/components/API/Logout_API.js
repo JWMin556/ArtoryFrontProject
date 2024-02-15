@@ -15,6 +15,7 @@ export const LogoutApi = async () => {
     });
     console.log('로그아웃', response.data);
     localStorage.removeItem('Token')
+    alert("로그아웃 되었습니다.")
     window.location.href='/'
   } catch (error) {
     console.error('Error fetching data:', error.response.data);
