@@ -38,15 +38,13 @@ const WrapIcon = styled.div`
 
 export default function SlideScrappedStory(props) {
   const numItems = props.Dummy.length;
-  const slidesToShow = numItems <= 3 ? numItems : 4;
-  const slidesToScroll = numItems <= 3 ? numItems : 4;
 
+  const infinite = numItems < 4 ? false : true;
   const setting = {
     arrows: true,
-    infinite: true,
+    infinite: infinite,
     speed: 1000,
-    // slidesToShow: slidesToShow,
-    // slidesToScroll: slidesToScroll,
+
     slidesToShow: 4,
     slidesToScroll: 4,
     nextArrow: <Next />,

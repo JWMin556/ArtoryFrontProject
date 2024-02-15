@@ -8,10 +8,14 @@ import StoryPoster from './StoryPoster';
 import styled from 'styled-components';
 
 export default function StorySlide(props) {
+  const numItems = props.Dummy.length;
+
+  const infinite = numItems < 4 ? false : true;
   const setting = {
     arrows: true,
-    infinite: true,
+    infinite: infinite,
     speed: 1000,
+
     slidesToShow: 4,
     slidesToScroll: 4,
     nextArrow: <Next />,

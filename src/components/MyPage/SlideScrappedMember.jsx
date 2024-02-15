@@ -18,10 +18,13 @@ export const WrapSlider = styled.div`
 `;
 
 export default function SlideScrappedMember(props) {
+  const numItems = props.Dummy.length;
+  const infinite = numItems <= 5 ? false : true;
   const setting = {
     arrows: true,
-    infinite: false, //임시
+    infinite: infinite,
     speed: 1000,
+
     slidesToShow: 6,
     slidesToScroll: 6,
     nextArrow: <Next />,
