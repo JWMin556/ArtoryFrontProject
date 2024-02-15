@@ -118,14 +118,14 @@ export default function StoryDetail() {
                       {' '}
                       <img
                         src={satisfactionSrc}
-                        alt="response 표정 임티"
+                        alt="표정"
                         style={{ height: '35px' }}
                       />
                     </td>
                     <td>
                       <img
                         src={weatherSrc}
-                        alt="response 날씨 임티"
+                        alt="날씨"
                         style={{ height: '37px' }}
                       />
                     </td>

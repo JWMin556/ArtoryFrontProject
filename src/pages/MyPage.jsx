@@ -33,6 +33,7 @@ const Page = styled.div`
 `;
 
 export const TitleWrap = styled.div`
+  /* width: 65%; */
   color: black;
   font-size: 30px;
   font-family: 'Pretendard';
@@ -64,7 +65,8 @@ export const ImgStyled = styled.img`
   display: flex;
   flex-direction: column;
   margin-top: 20%;
-  width: 130px;
+  width: 170px;
+  height: 170px;
 `;
 
 const TitleRightWrap = styled.div`
