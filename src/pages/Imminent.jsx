@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Poster from '../components/Exhibition/Poster';
-import Heart from '../components/Exhibition/Heart';
-import Save from '../components/Exhibition/Save';
-import Search2 from '../components/Exhibition/Search2';
 import CustomPagination from '../components/Exhibition/CustomPagination';
 import Search from '../components/Exhibition/Search';
 
@@ -43,16 +40,16 @@ export const WrapIcon = styled.div`
 `;
 const URL = localStorage.getItem('URL');
 
-export default function Simailar() {
-  const url = `${URL}/api/exhibitions/ParticularSimilar?page=1`;
-  const [simailarExhibitionData, setSimailarExhibitionData] = useState([]);
+export default function Imminent() {
+  const url = `${URL}/api/exhibitions/ParticularImminent?page=1`;
+  const [imminentExhibitionData, setImminentExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
-    // useEffect(() => {
-    //     if(!token){
-    //         alert("토큰이 없습니다.");
-    //         window.location.href = '/'; // Home 페이지로 이동
-    //     } 
-    // });
+  // useEffect(() => {
+  //     if(!token){
+  //         alert("토큰이 없습니다.");
+  //         window.location.href = '/'; // Home 페이지로 이동
+  //     }
+  // });
   const [page, setPage] = useState(1);
   const [exhibition, setExhibition] = useState(20);
   const handlePageChange = (page) => {
@@ -70,7 +67,7 @@ export default function Simailar() {
           },
         });
         console.log(response.data);
-        setSimailarExhibitionData(response.data);
+        setImminentExhibitionData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -80,10 +77,10 @@ export default function Simailar() {
   return (
     <Container>
       <WrapSearch>
-        <Search/>
+        <Search />
       </WrapSearch>
       <WrapResult>
-        {simailarExhibitionData
+        {imminentExhibitionData
           .slice(exhibition * (page - 1), exhibition * (page - 1) + exhibition)
           .map((item, index) => (
             <WrapPoster key={index}>
@@ -96,7 +93,7 @@ export default function Simailar() {
       <CustomPagination
         page={page}
         exhibition={exhibition}
-        data={simailarExhibitionData}
+        data={imminentExhibitionData}
         handlePageChange={handlePageChange}
       />
     </Container>
