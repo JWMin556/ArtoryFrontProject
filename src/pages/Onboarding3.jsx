@@ -9,13 +9,13 @@ import { useNavigate } from 'react-router-dom';
 import SplashScreen from '../components/SplashScreen';
 export default function Onboarding3() {
 
-  const token = localStorage.getItem('Token');
-  useEffect(() => {
-      if(!token){
-          alert("토큰이 없습니다.");
-          window.location.href = '/'; // Home 페이지로 이동
-      } 
-  });
+  // const token = localStorage.getItem('Token');
+  // useEffect(() => {
+  //     if(!token){
+  //         alert("토큰이 없습니다.");
+  //         window.location.href = '/'; // Home 페이지로 이동
+  //     } 
+  // });
 
 
   //은향씨가 작업해주실 Onboarding 페이지입니다
