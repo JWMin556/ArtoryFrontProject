@@ -62,7 +62,7 @@ export default function Exhibition() {
         console.log('추천전시', response?.data.recommendExhibitionDtoList);
         setRecommedExhibitionData(response?.data.recommendExhibitionDtoList);
         console.log(
-          '최근 본 전시와 유사한 전시',
+          '임박한 전시',
           response?.data.imminentExhibitionDtoList
         );
         setSimlarExhibitionData(response?.data.imminentExhibitionDtoList);

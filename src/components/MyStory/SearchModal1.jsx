@@ -94,13 +94,13 @@ export default function SearchModal({userStoryData,...props}) {
     } 
 
 const handleKeyPress = async(e) => {
-    console.log('검색 키워드', keyword)
+    //console.log('검색 키워드', keyword)
     if(e.key === "Enter"){
         try{
             isShowResult ? setIsShowResult(false) : setIsShowResult(true)
             const result = await searchExhibition(keyword);
             setResultData(result);
-            console.log(result);
+            //console.log(result);
         }
         catch (error){
             console.error('Error fetching weather data:', error.response.data);

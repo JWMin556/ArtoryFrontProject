@@ -122,8 +122,8 @@ export default function CategorySelect({
         //이미 3개의 주제 선택
         alert('최대 3개의 주제만 선택할 수 있습니다.');
       }
-      console.log('selectedTopics', selectedTopics);
-      console.log('selectedIndex', selectedIndex);
+      //console.log('selectedTopics', selectedTopics);
+      //console.log('selectedIndex', selectedIndex);
 
       // 이 부분에서 선택된 인덱스를 상위 컴포넌트로 전달합니다.
       onSelect(

@@ -18,8 +18,8 @@ const { kakao } = window; //함수형 컴포넌트에 인지시킴
 function Kakao({Longitude,Latitude}) {
     const [address,setAddress] = useState()
     const [building,setBuilding] = useState()
-    console.log("경도",Longitude);
-    console.log("위도",Latitude);
+    //console.log("경도",Longitude);
+    //console.log("위도",Latitude);
     useEffect(() => {
         const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
         const options = {
@@ -47,7 +47,7 @@ function Kakao({Longitude,Latitude}) {
             let coord = new kakao.maps.LatLng(Longitude, Latitude);
             let callback = function(result, status) {
                 if (status === kakao.maps.services.Status.OK) {
-                    console.log(result[0]);
+                    //console.log(result[0]);
                     setAddress(result[0].road_address.address_name)
                     setBuilding(result[0].road_address.building_name)
                 }

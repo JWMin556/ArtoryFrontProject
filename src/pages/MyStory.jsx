@@ -24,7 +24,6 @@ export default function MyStory() {
     window.scrollTo(0, 0);
   }, [state]);
 
-  console.log(state);
   const handleClickStoryBotton = () => {
     if (isButtonClick) {
       setIsButtonClick(false);
