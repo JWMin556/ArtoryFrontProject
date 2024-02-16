@@ -91,12 +91,12 @@ const WrapSaveButton = styled.div`
 // 2. 캘린더에서 작성 전 스토리 클릭 : item -> exhibitionTitle,exhibitionId,exhibitionImage,storyId,year,month,dat,storyState
 export default function Record(props) {
 
-    useEffect(() => {
-        if(!token){
-            alert("토큰이 없습니다.");
-            window.location.href = '/'; // Home 페이지로 이동
-        } 
-    });
+    // useEffect(() => {
+    //     if(!token){
+    //         alert("토큰이 없습니다.");
+    //         window.location.href = '/'; // Home 페이지로 이동
+    //     } 
+    // });
 
   const navigate = useNavigate();
   const today = new Date();

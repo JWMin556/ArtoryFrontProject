@@ -252,12 +252,12 @@ export default function MyPage() {
   //서버연결을 위한 부분입니다.
   const [userData, setUserData] = useState([]);
 
-  useEffect(() => {
-      if(!token){
-          alert("토큰이 없습니다.");
-          window.location.href = '/'; // Home 페이지로 이동
-      } 
-  });
+  // useEffect(() => {
+  //     if(!token){
+  //         alert("토큰이 없습니다.");
+  //         window.location.href = '/'; // Home 페이지로 이동
+  //     } 
+  // });
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -254,7 +254,7 @@ export default function MyPageModify() {
       reader.onload = (event) => {
         // 이미지의 src를 선택한 파일의 내용으로 대체합니다.
         setImageSrc(event.target.result);
-        uploadFileAWS(file);
+        uploadFileAWS(file);   //잠시만 지웠다가 다시 해보장
       };
       reader.readAsDataURL(file);
     }
@@ -346,7 +346,7 @@ export default function MyPageModify() {
       //ContentType: "image/png",  //일단 주석처리함
       Body: file,
       Bucket: 'artory-s3-arbitary',
-      Key: `upload/${imageSrcReal.name}`,
+      Key: "upload/" + file.name, //`upload/${imageSrcReal.name}`,
     };
 
     //2-2. AWS가 정한 양식대로 보내기
@@ -368,12 +368,12 @@ export default function MyPageModify() {
 
   const URL = localStorage.getItem('URL');
   const token = localStorage.getItem('Token');
-    useEffect(() => {
-        if(!token){
-            alert("토큰이 없습니다.");
-            window.location.href = '/'; // Home 페이지로 이동
-        } 
-    });
+    // useEffect(() => {
+    //     if(!token){
+    //         alert("토큰이 없습니다.");
+    //         window.location.href = '/'; // Home 페이지로 이동
+    //     } 
+    // });
 
   const saveModifiedInformations = async () => {
     try {

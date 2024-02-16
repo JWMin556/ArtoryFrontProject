@@ -54,10 +54,10 @@ export default function DistanceRecommend() {
   };
   useEffect(() => {
     window.scrollTo(0, 0);
-    if(!token){
-      alert("토큰이 없습니다.");
-      window.location.href = '/'; // Home 페이지로 이동
-    } 
+    // if(!token){
+    //   alert("토큰이 없습니다.");
+    //   window.location.href = '/'; // Home 페이지로 이동
+    // } 
     (async () => {
       // 근처 추천 전시회 API
       try {

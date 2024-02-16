@@ -47,12 +47,12 @@ export default function Simailar() {
   const url = `${URL}/api/exhibitions/ParticularSimilar?page=1`;
   const [simailarExhibitionData, setSimailarExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
-    useEffect(() => {
-        if(!token){
-            alert("토큰이 없습니다.");
-            window.location.href = '/'; // Home 페이지로 이동
-        } 
-    });
+    // useEffect(() => {
+    //     if(!token){
+    //         alert("토큰이 없습니다.");
+    //         window.location.href = '/'; // Home 페이지로 이동
+    //     } 
+    // });
   const [page, setPage] = useState(1);
   const [exhibition, setExhibition] = useState(20);
   const handlePageChange = (page) => {
