@@ -382,7 +382,7 @@ export default function MyPageModify() {
       const response = await axios.post(
         baseUrl,
         {
-          userName: name,
+          memberName: name,
           introduction: introduction,
           myKeyword: myKeyword,
           nickname: nickname,
