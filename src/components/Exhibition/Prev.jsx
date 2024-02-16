@@ -15,7 +15,7 @@ export default function Prev(props) {
   }
   return (
     <S.Arrow
-      style={{ top: `${props.top}px` }}
+      style={{ top: `${props.top}%` }}
       className="left"
       onClick={onClick}
     >

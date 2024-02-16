@@ -14,7 +14,7 @@ export default function Next(props) {
   }
   return (
     <S.Arrow
-      style={{ top: `${props.top}px` }}
+      style={{ top: `${props.top}%` }}
       className="right"
       onClick={onClick}
     >
