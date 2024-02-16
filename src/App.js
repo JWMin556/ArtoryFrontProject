@@ -20,7 +20,6 @@ import Popularity from './pages/Popularity';
 import Recent from './pages/Recent';
 import Recommend from './pages/Recommend';
 import DistanceRecommend from './pages/DistanceRecommend';
-import Simailar from './pages/Simailar';
 import TokenPage from './pages/TokenPage';
 import StoryDetail from './pages/StoryDetail';
 import StorySearch from './pages/StorySearch';
@@ -39,6 +38,7 @@ import Footer from './components/Footer';
 import MyPageUserInfo from './pages/MyPageUserInfo';
 import axios from 'axios';
 import { tokenReissueApi } from './components/API/tokenReissue_API';
+import Imminent from './pages/Imminent';
 
 const Root = styled.div`
   position: absolute;
@@ -50,22 +50,19 @@ const Root = styled.div`
 function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    //토큰 만료시 처리 로직 
+    //토큰 만료시 처리 로직
     const errorHandling = async () => {
       const URL = localStorage.getItem('URL');
       const url = `${URL}/api`;
       const token = localStorage.getItem('Token');
       try {
-        await axios.get(
-          `${url}/member/info`,
-          {
-            headers: {
-              Accept: '*/*',
-              Authorization: `Bearer ${token}`,
-              'content-type': 'application/json',
-            },
-          }
-        );
+        await axios.get(`${url}/member/info`, {
+          headers: {
+            Accept: '*/*',
+            Authorization: `Bearer ${token}`,
+            'content-type': 'application/json',
+          },
+        });
       } catch (error) {
         if (error.response.data.errorCode === 'A-001') {
           //토큰 만료
@@ -79,11 +76,11 @@ function App() {
         }
         console.log(error.response.data);
       }
-    }
-    //15분마다 요청 
-    const intervalRequest = setInterval(errorHandling,15*60*1000)
-    return () => clearInterval(intervalRequest)
-  },[]);
+    };
+    //15분마다 요청
+    const intervalRequest = setInterval(errorHandling, 15 * 60 * 1000);
+    return () => clearInterval(intervalRequest);
+  }, []);
 
   useEffect(() => {
     // 로컬 스토리지에 URL 저장
@@ -123,7 +120,7 @@ function App() {
               path="/exhibition/distancerecommend"
               element={<DistanceRecommend />}
             />
-            <Route path="/exhibition/simailar" element={<Simailar />} />
+            <Route path="/exhibition/imminent" element={<Imminent />} />
             <Route path="/mystory" element={<MyStory />} />
             <Route path="/mystory/:record" element={<Record />} />
             <Route path="/mypage" element={<MyPage />} />

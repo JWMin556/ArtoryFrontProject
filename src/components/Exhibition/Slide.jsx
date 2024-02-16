@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import * as S from '../../styled-components/Slide.style';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Heart from './Heart';
-import Save from './Save';
 import Prev from './Prev';
 import Next from './Next';
 import Poster from './Poster';
@@ -22,28 +20,28 @@ export default function Slide(props) {
     nextArrow: <Next />,
     prevArrow: <Prev />,
   };
-  const categoryClick = (source) =>{
-    console.log(props.source)
+  const categoryClick = (source) => {
+    console.log(props.source);
 
-    source==="popularity" ?
-    navigate(`/exhibition/popularity`):
-    //console.log("눌림") :
-    source==="recent" ?
-    navigate(`/exhibition/recent`) :
-    source==="recommend" ?
-    navigate(`/exhibition/recommend`) :
-    props.source==="distanceRecommend" ?
-    navigate(`/exhibition/distancerecommend`) :
-    props.source==="simailar" ?
-    navigate(`/exhibition/simailar`) :
-    console.log(2)
-  
-  }
-  
+    source === 'popularity'
+      ? navigate(`/exhibition/popularity`)
+      : //console.log("눌림") :
+      source === 'recent'
+      ? navigate(`/exhibition/recent`)
+      : source === 'recommend'
+      ? navigate(`/exhibition/recommend`)
+      : props.source === 'distanceRecommend'
+      ? navigate(`/exhibition/distancerecommend`)
+      : props.source === 'imminent'
+      ? navigate(`/exhibition/imminent`)
+      : console.log(2);
+  };
 
   return (
     <S.WrapSlider>
-      <S.Category onClick={() => categoryClick(props.source)}>{props.title}</S.Category>
+      <S.Category onClick={() => categoryClick(props.source)}>
+        {props.title}
+      </S.Category>
       <S.StyledSlider {...setting}>
         {props.Dummy.map((item, index) => (
           <div key={index}>
