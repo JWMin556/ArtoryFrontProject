@@ -27,8 +27,8 @@ export default function UserSlide(props) {
 
     slidesToShow: 6,
     slidesToScroll: 6,
-    nextArrow: <Next top={50} />,
-    prevArrow: <Prev top={50} />,
+    nextArrow: <Next top={40} />,
+    prevArrow: <Prev top={40} />,
   };
   return (
     <WrapSlider>
