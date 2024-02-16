@@ -13,7 +13,7 @@ export const SaveImg = styled.img`
   z-index : 10;
   margin : 6%;
 `;
-export default function Save({loadUserStories,...props}) {
+export default function Save({loadUserStories,part,...props}) {
   //props.item.~~ 으로 호출
   const [isClickSave, setIsClickSave] = useState(props.item.scrapped); // 좋아요 누름 = true / 좋아요 안누름 = false
 
@@ -25,7 +25,10 @@ export default function Save({loadUserStories,...props}) {
     //api 호출
     if (isClickSave) {
       await saveCancelApi(exhibitionId);
-      await loadUserStories();
+      if(part==='mystory')
+      {
+        await loadUserStories();
+      }
     } //저장 취소
     else {
       await saveApi(exhibitionId);

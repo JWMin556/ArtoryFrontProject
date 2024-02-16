@@ -114,7 +114,7 @@ export const Tile = ({
         }
       });
     } catch (e) {
-      console.log('stop!' + e);
+      //console.log('stop!' + e);
     } finally {
     }
     }

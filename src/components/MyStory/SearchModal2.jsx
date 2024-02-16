@@ -95,7 +95,7 @@ const handleKeyPress = async(e) => {
             isShowResult ? setIsShowResult(false) : setIsShowResult(true)
             const result = await searchExhibition(keyword);
             setResult(result);
-            console.log(`${keyword}키워드 검색 결과`,result);
+            //console.log(`${keyword}키워드 검색 결과`,result);
         }
         catch (error){
             console.error('Error fetching weather data:', error);

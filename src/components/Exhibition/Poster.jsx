@@ -14,8 +14,8 @@ const PosterStyle = styled.img`
     object-fit: cover;
 `;
 const WrapTitle = styled.div`
-    position : relative;
-    bottom : 270px;
+    position : absolute;
+    bottom : 0;
 `;
 export const Linear = styled.div`
     position: absolute;
@@ -39,6 +39,7 @@ export default function Poster({
     day,
     userStoryData,
     loadUserStories,
+    part,
     ...props}) {
     const [isShow, setIsShow] = useState();
 
@@ -95,7 +96,7 @@ return (
         <PosterStyle src={props.item.exhibitionImage}/>
         <Linear />
             {isShow && <Heart item={props.item}/> }
-            {isShow && <Save item={props.item} loadUserStories={loadUserStories}/> }
+            {isShow && <Save item={props.item} loadUserStories={loadUserStories} part={part}/> }
         <WrapTitle>{isShowTitle && <Title title = {props.item.exhibitionTitle}/>}</WrapTitle>
     </div>
 );

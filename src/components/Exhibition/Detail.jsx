@@ -77,9 +77,6 @@ export const ImgAndInfo = styled.div`
 export default function Detail(props) {
   const [info, setInfo] = useState(null);
   const token = localStorage.getItem('Token');
-
-  console.log('전시회 ID: ', props.id);
-
   useEffect(() => {
     const token = localStorage.getItem('Token');
     const fetchData = async () => {
@@ -101,8 +98,6 @@ export default function Detail(props) {
     fetchData();
   }, [props.id, token]);
   const link = info?.exhibitionUrl;
-  console.log('링크정보', link);
-
   return (
     //<Container>
     <WrapDetail>

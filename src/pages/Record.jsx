@@ -159,7 +159,7 @@ export default function Record(props) {
         });
         //console.log("UserStoryData",response.data.stories)
         setUserStoryData(response.data.stories);
-        console.log("유저 스토리 정보",response.data.stories);
+        //console.log("유저 스토리 정보",response.data.stories);
       } catch (error) {
         console.error('Error fetching data:', error.response);
       }
@@ -220,7 +220,7 @@ export default function Record(props) {
     // console.log("만족도",satisfactionLevel)
     // console.log("날씨",weather)
     // console.log("내용",data)
-    console.log("공개여부",isOpen)
+    //console.log("공개여부",isOpen)
     // console.log("년",year)
     // console.log("월",month)
     // console.log("일",date)
@@ -349,7 +349,7 @@ export default function Record(props) {
 
   //공개버튼 클릭 : 공개->블랙 / 비공개 -> 그레이
   const ClickedOpen = () => {
-    console.log("공개클릭")
+    //console.log("공개클릭")
     setOpenBoxColor({backgroundColor:'#000',color:'#fff'}) 
     setNotOpenBoxColor({backgroundColor: '#f3f3f3', color: '#979797'})
     setIsOpen(true);
@@ -357,7 +357,7 @@ export default function Record(props) {
 
   //비공개버튼 클릭 : 공개->그레이 / 비공개 -> 블랙
   const ClickClosed = () => {
-    console.log("비공개클릭")
+    //console.log("비공개클릭")
     setOpenBoxColor({backgroundColor:'#f3f3f3',color:'#979797'}) 
     setNotOpenBoxColor({backgroundColor: '#000', color: '#fff'})
     setIsOpen(false);

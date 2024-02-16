@@ -32,8 +32,8 @@ export default function Select({
       const newBox = [...prevBox];
       //newBox[timeIndex] = greyBox[timeIndex]
       if (prevIdx !== index) { //전에 선택했던 인덱스와 새롭게 선택한 인덱스가 같지 않으면
-        console.log("prevIdx",prevIdx)
-        console.log("index",index)
+        //console.log("prevIdx",prevIdx)
+        //console.log("index",index)
         newBox[prevIdx] = greyBox[prevIdx]; //기존에 선택된 박스 색 원래대로 (블랙->그레이)
       }
       setPrevIdx(index); //누른 박스의 인덱스로 변경
