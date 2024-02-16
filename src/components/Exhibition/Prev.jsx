@@ -14,7 +14,11 @@ export default function Prev(props) {
     setArrowColor(PREV_ARROW);
   }
   return (
-    <S.Arrow className="left" onClick={onClick}>
+    <S.Arrow
+      style={{ top: `${props.top}px` }}
+      className="left"
+      onClick={onClick}
+    >
       <img
         src={arrowColor}
         onMouseOver={handleMouseOverNext}
