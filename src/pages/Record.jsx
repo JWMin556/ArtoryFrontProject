@@ -66,10 +66,6 @@ const OpenSelectButton = styled.div`
     width: 83px;
     height: 30px;
     border: none;
-    &:focus {
-      background-color: #000;
-      color: #fff;
-    }
   }
 `;
 const WrapSaveButton = styled.div`
@@ -88,7 +84,7 @@ const WrapSaveButton = styled.div`
 `;
 //레코드.jsx로 넘어올 때 {state : item} 종류
 // 1. 스토리 작성하기 버튼 : item -> exhibitionTitle,exhibitionId,exhibitionImage
-// 2. 캘린더에서 작성 전 스토리 클릭 : item -> exhibitionTitle,exhibitionId,exhibitionImage,storyId,year,month,dat,storyState
+// 2. 캘린더에서 스토리 클릭 : item -> exhibitionTitle,exhibitionId,exhibitionImage,storyId,year,month,day,storyState
 export default function Record(props) {
 
     useEffect(() => {
@@ -133,7 +129,8 @@ export default function Record(props) {
   const [isModifyModal, setIsModifyModal] = useState(false); //수정 모달
   const [storyByDate, setStoryByDate] = useState([]);
   const [storyContent, setStoryContent] = useState([]);
-  const [dateBoxColor, setDateBoxColor] = useState();
+  const [openBoxColor, setOpenBoxColor] = useState();
+  const [notOpenBoxColor, setNotOpenBoxColor] = useState();
   const [keyword, setKeyword] = useState(''); //키워드
   const [picturesUrl, setPicturesUrl] = useState([state.item.exhibitionImage]); //선택한 사진 배열
   //console.log('state.item.exhibitionImage',state.item.exhibitionImage.toString())
@@ -162,7 +159,7 @@ export default function Record(props) {
         });
         //console.log("UserStoryData",response.data.stories)
         setUserStoryData(response.data.stories);
-        //console.log("유저 스토리 정보",response.data.stories);
+        console.log("유저 스토리 정보",response.data.stories);
       } catch (error) {
         console.error('Error fetching data:', error.response);
       }
@@ -204,7 +201,6 @@ export default function Record(props) {
           setPicturesUrl([response.data.exhibitionImage]); //사진 리스트
           console.log('스토리정보', response.data);
           //console.log("이미지유알엘",response.data.picturesUrl); //사진 리스트
-
           //console.log('스토리 내용 ', response.data);
         } catch (error) {
           console.error('Error fetching data:', error.response);
@@ -218,13 +214,13 @@ export default function Record(props) {
     // console.log("제목: ",title)
     // console.log("시간: ",viewingTime)
     // console.log("동반인: ",companion)
-    console.log('장르1: ', genre1);
-    console.log('장르2: ', genre2);
-    console.log('장르3: ', genre3);
+    // console.log('장르1: ', genre1);
+    // console.log('장르2: ', genre2);
+    // console.log('장르3: ', genre3);
     // console.log("만족도",satisfactionLevel)
     // console.log("날씨",weather)
     // console.log("내용",data)
-    // console.log("공개여부",isOpen)
+    console.log("공개여부",isOpen)
     // console.log("년",year)
     // console.log("월",month)
     // console.log("일",date)
@@ -276,22 +272,24 @@ export default function Record(props) {
       setStoryByDate((prevStoryByDate) => {
         for (let i = 0; i < userStoryData.length; i++) {
           for (let j = 0; j < userStoryData.length; j++) {
-            if (
-              userStoryData[i].exhibitionTitle === exhibitionTitle //&&
-              //userStoryData[i].year !== year &&
-              //userStoryData[i].month !== month &&
-              //userStoryData[i].day !== date
-            ) {
-              // 동일한 전시가 다른 날짜에 존재할 경우
-              setIsDeleteModal(true); //모달 띄우고
-              return (storyByDate[j] = userStoryData[i]); //겹치는 전시들만 모으는 배열에 넣어줌
+            // 동일한 전시가 다른 날짜에 존재할 경우(다른날짜에 동일한 전시가 있음)
+            if (userStoryData[i].exhibitionTitle === exhibitionTitle) {
+              if( userStoryData[i].year !== year ||
+                  userStoryData[i].month !== month ||
+                  userStoryData[i].day !== date)
+                  {
+                      setIsDeleteModal(true); //모달 띄우고
+                      return (storyByDate[j] = userStoryData[i]); //겹치는 전시들만 모으는 배열에 넣어줌
+                  }
             }
           }
         }
+        console.log('storyByDate',storyByDate)
         saveStory();
       });
     }
   };
+
   //임시저장 버튼 클릭
   const handleProgressSubmit = async () => {
     if (storyId) {
@@ -349,13 +347,19 @@ export default function Record(props) {
     //navigate('/mystory')
   };
 
-  //미니달력모달열기
+  //공개버튼 클릭 : 공개->블랙 / 비공개 -> 그레이
   const ClickedOpen = () => {
+    console.log("공개클릭")
+    setOpenBoxColor({backgroundColor:'#000',color:'#fff'}) 
+    setNotOpenBoxColor({backgroundColor: '#f3f3f3', color: '#979797'})
     setIsOpen(true);
   };
 
-  //미니달력모달닫기
+  //비공개버튼 클릭 : 공개->그레이 / 비공개 -> 블랙
   const ClickClosed = () => {
+    console.log("비공개클릭")
+    setOpenBoxColor({backgroundColor:'#f3f3f3',color:'#979797'}) 
+    setNotOpenBoxColor({backgroundColor: '#000', color: '#fff'})
     setIsOpen(false);
   };
 
@@ -417,9 +421,17 @@ export default function Record(props) {
     }
   };
   useEffect(() => {
-    if (storyId && isOpen !== undefined) {
-      setDateBoxColor({ backgroundColor: '#000', color: '#fff' });
+    if (storyId && isOpen) {
+      setOpenBoxColor({ backgroundColor: '#000', color: '#fff' });
     }
+    else if(storyId && !isOpen)
+    {
+      setNotOpenBoxColor({backgroundColor: '#000', color: '#fff'})
+    }
+    // if(storyId && isOpen) //true (공개)
+    // {
+
+    // }
   }, []);
   return (
     <div>
@@ -484,10 +496,8 @@ export default function Record(props) {
           <Story2>나만의 스토리를 작성해보세요</Story2>
           <StoryTitle stroyId={storyId} Title={title} SetTitle={setTitle} />
           <OpenSelectButton>
-            <button onClick={ClickedOpen} style={dateBoxColor}>
-              공개
-            </button>
-            <button onClick={ClickClosed}>비공개</button>
+            <button onClick={ClickedOpen} style={openBoxColor}>공개</button>
+            <button onClick={ClickClosed} style={notOpenBoxColor}>비공개</button>
           </OpenSelectButton>
           <TodayExhibition
             storyId={storyId}

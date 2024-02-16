@@ -85,7 +85,6 @@ export default function StoryDelete({
       setIsDeleteModal(false); //모달 닫침
       StoryDeleteApi(storyByDate.storyId); //동일한 전시 스토리 삭제
       saveStory(); //스토리 저장하는 함수로 이동
-
     } else if (part === 'notify') {
       setIsNotifyModal(false); // 저장 알림 모달 닫음
       navigate(`/mystory`)
