@@ -23,7 +23,7 @@ const PageContainer = styled.div`
 
 const Page = styled.div`
   /* position: relative; */
-  width: 900px;
+  width: 940px;
 
   /* max-width: 800px; */
   padding: 0 20px;
@@ -36,6 +36,7 @@ const Page = styled.div`
 export const TitleWrap = styled.div`
   /* width: 65%; */
   width: 100%;
+  max-width: 900px;
   color: black;
   font-size: 30px;
   font-family: 'Pretendard';
@@ -142,6 +143,7 @@ const ContentBtns = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  max-width: 900px;
 `;
 
 const Btns1 = styled.button`
@@ -256,7 +258,7 @@ export default function MyPage() {
   //     if(!token){
   //         alert("토큰이 없습니다.");
   //         window.location.href = '/'; // Home 페이지로 이동
-  //     } 
+  //     }
   // });
 
   useEffect(() => {
