@@ -8,6 +8,7 @@ const PictureStyle = styled.img`
   height: 268px;
   box-shadow: 1px 2px 8px #f3f3f3;
   cursor: pointer;
+  object-fit: cover;
 `;
 
 export default function Pictures({ items, item, index }) {

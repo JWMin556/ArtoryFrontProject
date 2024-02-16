@@ -68,8 +68,9 @@ export const ImgStyled = styled.img`
   display: flex;
   flex-direction: column;
   margin-top: 20%;
-  width: 170px;
-  height: 170px;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
 `;
 
 const TitleRightWrap = styled.div`

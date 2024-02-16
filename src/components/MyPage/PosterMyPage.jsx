@@ -11,7 +11,7 @@ const PosterStyle = styled.img`
   width: 186px;
   height: 268px;
   box-shadow: 1px 2px 8px #f3f3f3;
-  /* object-fit: cover; */
+  object-fit: cover;
 `;
 const WrapTitle = styled.div`
   width: 186px;
@@ -74,7 +74,11 @@ export default function PosterMyPage(props) {
         </>
       )}
 
-      {isShowTitle && <WrapTitle>{props.item.storyTitle}</WrapTitle>}
+      {isShowTitle && (
+        <WrapTitle>
+          <p>{props.item.storyTitle}</p>
+        </WrapTitle>
+      )}
     </div>
   );
 }

@@ -156,13 +156,11 @@ const ExamineContentBox = styled.div`
 `;
 
 export default function MyPageModify() {
-
   //맨처음 페이지 이동시 위로 고정한다
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, [pathname]);
-
 
   //MyPage에서 받아온 이름과 사진을 위해서 사용
   const location = useLocation();
@@ -254,7 +252,7 @@ export default function MyPageModify() {
       reader.onload = (event) => {
         // 이미지의 src를 선택한 파일의 내용으로 대체합니다.
         setImageSrc(event.target.result);
-        uploadFileAWS(file);   //잠시만 지웠다가 다시 해보장
+        uploadFileAWS(file); //잠시만 지웠다가 다시 해보장
       };
       reader.readAsDataURL(file);
     }
@@ -313,11 +311,13 @@ export default function MyPageModify() {
     setGenreValid(true);
   };
   const handleSubmitGenre = async () => {
-    await saveGenre(
-      genres[selectedIndex[0]],
-      genres[selectedIndex[1]],
-      genres[selectedIndex[2]]
-    );
+    const genre = [3];
+    for (let i = 0; i < 3; i++) {
+      genre[i] = genres[selectedIndex[i]] ? genres[selectedIndex[i]] : 'NONE';
+    }
+    // console.log(genre);
+    // console.log(selectedIndex);
+    await saveGenre(genre);
   };
   //여기까지가 나의 전시조사 수정하기 위한 부분입니다.
 
@@ -346,7 +346,7 @@ export default function MyPageModify() {
       //ContentType: "image/png",  //일단 주석처리함
       Body: file,
       Bucket: 'artory-s3-arbitary',
-      Key: "upload/" + file.name, //`upload/${imageSrcReal.name}`,
+      Key: 'upload/' + file.name, //`upload/${imageSrcReal.name}`,
     };
 
     //2-2. AWS가 정한 양식대로 보내기
@@ -368,12 +368,12 @@ export default function MyPageModify() {
 
   const URL = localStorage.getItem('URL');
   const token = localStorage.getItem('Token');
-    // useEffect(() => {
-    //     if(!token){
-    //         alert("토큰이 없습니다.");
-    //         window.location.href = '/'; // Home 페이지로 이동
-    //     } 
-    // });
+  // useEffect(() => {
+  //     if(!token){
+  //         alert("토큰이 없습니다.");
+  //         window.location.href = '/'; // Home 페이지로 이동
+  //     }
+  // });
 
   const saveModifiedInformations = async () => {
     try {
@@ -415,17 +415,17 @@ export default function MyPageModify() {
     } else {
       setDeleteMemberValid(true);
     }
-  }
-  
+  };
+
   const deleteUser = async () => {
     try {
       const userInfoResponse = await axios.get(`${URL}/api/member/info`, {
         headers: {
           Accept: '*/*',
           Authorization: `Bearer ${token}`,
-        }
+        },
       });
-      const userData = userInfoResponse.data
+      const userData = userInfoResponse.data;
       const memberIdToDelete = userData.memberId;
       // console.log("니 멤버아이디", memberIdToDelete);
       const deleteResponse = await axios.delete(
@@ -434,7 +434,7 @@ export default function MyPageModify() {
           headers: {
             Accept: '*/*',
             Authorization: `Bearer ${token}`,
-          }
+          },
         }
       );
       console.log('사용자가 성공적으로 삭제되었습니다.', deleteResponse);
@@ -442,9 +442,9 @@ export default function MyPageModify() {
       window.location.href = '/';
       localStorage.removeItem('arbitaryLoginForHeader');
     } catch (error) {
-      console.log("에러났음", error.response.data);
+      console.log('에러났음', error.response.data);
     }
-  }
+  };
 
   // const saveModifiedPassword = async () => { //이거 하기전에 먼저 사용자 전체정보를 불러왔어야 함 ㅠㅠ
   //   try {
@@ -586,7 +586,9 @@ export default function MyPageModify() {
               </ExamineContentBox>
             </ExamineWrap>
 
-            <TitleRightWrapParagraphArea style={{ marginTop: '10%', marginBottom: '1px' }}>
+            <TitleRightWrapParagraphArea
+              style={{ marginTop: '10%', marginBottom: '1px' }}
+            >
               <TitleRightWrapParagraphTitle>
                 <BoldSentence>비밀번호 변경</BoldSentence>
                 <GraySentence>현재 비밀번호를 입력해주세요</GraySentence>
@@ -603,9 +605,10 @@ export default function MyPageModify() {
                 </GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap style={{ width: '300px' }}>
-                <InputStyle /> {/* <InputStyle onChange={handlePasswordsChange} />  */}
+                <InputStyle />{' '}
+                {/* <InputStyle onChange={handlePasswordsChange} />  */}
                 <StyledButton
-                  //onClick={saveModifiedPassword}    
+                  //onClick={saveModifiedPassword}
                   height="23px"
                   width="30%"
                   fontSize="10px"
@@ -637,12 +640,21 @@ export default function MyPageModify() {
 
             <StyledButton
               onClick={() => {
-                if(!nameValid || !nickNameValid || !imageValid || !introductionValid || !myKeywordValid || !genreValid){
-                  alert("사진, 이름, 닉네임, 소개, 키워드, 관심전시를 모두 수정해주세요");
-                }else {
+                if (
+                  !nameValid ||
+                  !nickNameValid ||
+                  !imageValid ||
+                  !introductionValid ||
+                  !myKeywordValid ||
+                  !genreValid
+                ) {
+                  alert(
+                    '사진, 이름, 닉네임, 소개, 키워드, 관심전시를 모두 수정해주세요'
+                  );
+                } else {
                   saveModifiedInformations();
                 }
-              }}  //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
+              }} //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
               height="52px"
               width="70%"
               //disabled={!nameValid || !nickNameValid || !imageValid || !introductionValid || !myKeywordValid || !genreValid}

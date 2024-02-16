@@ -35,7 +35,7 @@ export default function CategorySelect({
   const [genre3Index, setGenre3Index] = useState();
 
   useEffect(() => {
-    if(storyId){
+    if (storyId) {
       genres.forEach((item, index) => {
         //genres(영어)배열에서 genre11의 값과 같은 값 찾기
         if (item === genre11) {
@@ -56,34 +56,33 @@ export default function CategorySelect({
   }, [genre11, genre22, genre33, genre1Index, genre2Index, genre3Index]);
 
   useEffect(() => {
-    if(storyId)
-    {
+    if (storyId) {
       setBox((prevBox) => {
         const newBox = [...prevBox];
         greyBox.forEach((genre1, index1) => {
-          greyBox.forEach((genre2, index2) => {
-            greyBox.forEach((genre3, index3) => {
-              if (genre1 === greyBox[genre1Index]) {
-                  newBox[index1] = blackBox[index1];
-                  selectedTopics.push(greyBox[index1].props.children);
-                  selectedIndex.push(index1);
-              }
-              if(genre2 === greyBox[genre2Index])
-              {
-                newBox[index2] = blackBox[index2];
-                selectedTopics.push(greyBox[index2].props.children);
-                selectedIndex.push(index2);
-              }
-              if(genre3 === greyBox[genre3Index])
-              {
-                newBox[index3] = blackBox[index3];
-                selectedTopics.push(greyBox[index3].props.children);
-                selectedIndex.push(index3);
-              }
-              setPrevIdx(index3);
-            });
-          });
+          if (genre1 === greyBox[genre1Index]) {
+            newBox[index1] = blackBox[index1];
+            selectedTopics.push(greyBox[index1].props.children);
+            selectedIndex.push(index1);
+          }
         });
+        greyBox.forEach((genre2, index2) => {
+          if (genre2 === greyBox[genre2Index]) {
+            newBox[index2] = blackBox[index2];
+            selectedTopics.push(greyBox[index2].props.children);
+            selectedIndex.push(index2);
+          }
+        });
+
+        greyBox.forEach((genre3, index3) => {
+          if (genre3 === greyBox[genre3Index]) {
+            newBox[index3] = blackBox[index3];
+            selectedTopics.push(greyBox[index3].props.children);
+            selectedIndex.push(index3);
+          }
+          setPrevIdx(index3);
+        });
+
         return newBox;
       });
     }
@@ -122,8 +121,8 @@ export default function CategorySelect({
         //이미 3개의 주제 선택
         alert('최대 3개의 주제만 선택할 수 있습니다.');
       }
-      console.log('selectedTopics', selectedTopics);
-      console.log('selectedIndex', selectedIndex);
+      //console.log('selectedTopics', selectedTopics);
+      //console.log('selectedIndex', selectedIndex);
 
       // 이 부분에서 선택된 인덱스를 상위 컴포넌트로 전달합니다.
       onSelect(
@@ -131,15 +130,15 @@ export default function CategorySelect({
           ? index
           : -1
       );
-      setEngGenre()
+      setEngGenre();
       return newBox;
     });
   };
-  const setEngGenre = () =>{
+  const setEngGenre = () => {
     setGenre1(genres[selectedIndex[0]]);
     setGenre2(genres[selectedIndex[1]]);
     setGenre3(genres[selectedIndex[2]]);
-  }
+  };
   return (
     <WrapBox>
       {box.map((src, index) => (
