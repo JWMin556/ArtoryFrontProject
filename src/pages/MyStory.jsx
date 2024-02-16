@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import MyCalendar from '../components/MyStory/MyCalendar';
 import * as S from '../styled-components/MyStory.style';
-import SaveExhibition from '../components/MyStory/SaveExhibition';
 import StyledButton from '../styled-components/StyledButton';
 import SearchModal from '../components/MyStory/SearchModal1';
 import Memo from '../components/MyStory/Memo';
@@ -118,7 +117,7 @@ export default function MyStory() {
             //<p>있음</p>
             userExhibitionData.map((item, index) => (
               <S.WrapExhibitionPoster>
-                <Poster item={item} loadUserStories={loadUserStories} />
+                <Poster item={item} loadUserStories={loadUserStories} part={'mystory'} />
               </S.WrapExhibitionPoster>
             ))
           )}
