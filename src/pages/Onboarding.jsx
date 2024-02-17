@@ -32,7 +32,7 @@ export default function Onboarding() {
       reader.onload = (event) => {
         // 이미지의 src를 선택한 파일의 내용으로 대체합니다.
         setImageSrc(event.target.result);
-        uploadFileAWS(file);  //이거 하나가 더 추가됨
+        uploadFileAWS(file); //이거 하나가 더 추가됨
       };
       reader.readAsDataURL(file);
     }
@@ -50,8 +50,7 @@ export default function Onboarding() {
     // if(!token){
     //   alert("토큰이 없습니다.");
     //   window.location.href = '/'; // Home 페이지로 이동
-    // } 
-
+    // }
 
     //1. AWS 키 설정
     AWS.config.update({
@@ -75,7 +74,7 @@ export default function Onboarding() {
       //ContentType: "image/png",  //일단 주석처리함
       Body: file,
       Bucket: 'artory-s3-arbitary',
-      Key: "upload/" + file.name, //`upload/${imageSrcReal.name}`,
+      Key: 'upload/' + file.name, //`upload/${imageSrcReal.name}`,
     };
 
     //2-2. AWS가 정한 양식대로 보내기
@@ -173,6 +172,8 @@ const Count = styled.div`
   margin: 0;
 `;
 const Container = styled.div`
+  min-height: 100vh; //footer 때문에 받아주셔야 합니다ㅜ
+
   margin: 100px auto;
   margin-bottom: 0;
   display: flex;

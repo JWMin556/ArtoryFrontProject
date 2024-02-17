@@ -46,7 +46,7 @@ export default function Onboarding2() {
   //     if(!token){
   //         alert("토큰이 없습니다.");
   //         window.location.href = '/'; // Home 페이지로 이동
-  //     } 
+  //     }
   // });
 
   //api관련 함수
@@ -56,8 +56,8 @@ export default function Onboarding2() {
       const response = await axios.post(
         baseUrl,
         {
-          "gender": gender,
-          "age": age,
+          gender: gender,
+          age: age,
         },
         {
           headers: {
@@ -169,6 +169,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 460px;
+  min-height: 100vh; //footer 때문에 받아주셔야 합니다ㅜ
+
   //height: 670px;
 `;
 const Title = styled.div`

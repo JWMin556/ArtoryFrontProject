@@ -9,6 +9,8 @@ import CustomPagination from '../components/Exhibition/CustomPagination';
 import Search from '../components/Exhibition/Search';
 
 const Container = styled.div`
+  min-height: 100vh; //footer 때문에 받아주셔야 합니다ㅜ
+
   display: flex;
   flex-direction: column;
   // justify-content : center;
@@ -46,12 +48,12 @@ export default function Recommend() {
   const url = `${URL}/api/exhibitions/ParticularRecommend?page=1`;
   const [recommendExhibitionData, setRecommedExhibitionData] = useState([]);
   const token = localStorage.getItem('Token');
-    // useEffect(() => {
-    //     if(!token){
-    //         alert("토큰이 없습니다.");
-    //         window.location.href = '/'; // Home 페이지로 이동
-    //     } 
-    // });
+  // useEffect(() => {
+  //     if(!token){
+  //         alert("토큰이 없습니다.");
+  //         window.location.href = '/'; // Home 페이지로 이동
+  //     }
+  // });
   const [page, setPage] = useState(1);
   const [exhibition, setExhibition] = useState(20);
   const handlePageChange = (page) => {
@@ -78,7 +80,7 @@ export default function Recommend() {
   return (
     <Container>
       <WrapSearch>
-        <Search/>
+        <Search />
       </WrapSearch>
       <WrapResult>
         {recommendExhibitionData
