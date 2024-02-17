@@ -80,10 +80,14 @@ export default function Home() {
         console.error('Error fetching data:', error);
       }
     };
-  
     fetchData();
   }, [url]); // 의존성 배열에 url 추가
 
+  useEffect(() => { //이게 있어야 새로고침 없이도 이미지가 잘 출력됨
+    // 이미지가 변경될 때마다 화면을 다시 그립니다.
+    // 이전 이미지가 사라지고 새로운 이미지가 보여집니다.
+    window.scrollTo(0, 0);
+  }, [selectedImage]);
 
   // useEffect(() => {
   //   window.scrollTo(0, 0);
