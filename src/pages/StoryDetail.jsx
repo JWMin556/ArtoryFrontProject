@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import CommentInput from '../components/Story/CommentInput';
 import Banner from '../components/Story/Banner';
+import { getMemberInfo } from '../components/API/member_API';
 const genres = [
   'MEDIA',
   'CRAFT',
@@ -30,14 +31,18 @@ const genres__kor = [
 ];
 export default function StoryDetail() {
   const { state } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [state]);
-
+  const navigate = useNavigate();
   console.log(state.item);
   const item = state.item;
   const selectedIndex = [];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [state]);
+  //계정 소유 유저 id get
+  const id = item.memberId;
+  const onClickDetail = () => {
+    navigate(`/mypageuser/${id}`, { state: { id } });
+  };
 
   for (var i = 0; i < genres.length; i++) {
     if (
@@ -70,14 +75,21 @@ export default function StoryDetail() {
             marginBottom: '40px',
           }}
         >
-          <Profile src={item.memberProfile} alt="프로필 이미지" />
+          <Profile
+            onClick={() => onClickDetail()}
+            src={item.memberProfile}
+            alt="프로필 이미지"
+          />
           <div>
             <span
               style={{ fontSize: 'small', fontWeight: '300', color: '#9BA0AE' }}
             >
               작성자
             </span>
-            <p style={{ color: '#717276', marginTop: '3px' }}>
+            <p
+              onClick={() => onClickDetail()}
+              style={{ color: '#717276', marginTop: '3px' }}
+            >
               {item.memberNickname}
             </p>
           </div>

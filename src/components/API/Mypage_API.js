@@ -22,6 +22,6 @@ export const getUserPage = async (id) => {
 
     return response.data;
   } catch (error) {
-    console.error('Error fetching data:', error.response.data);
+    console.error('Error fetching data:', error.response);
   }
 };
