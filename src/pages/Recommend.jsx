@@ -9,29 +9,33 @@ import CustomPagination from '../components/Exhibition/CustomPagination';
 import Search from '../components/Exhibition/Search';
 
 const Container = styled.div`
-  min-height: 100vh; //footer 때문에 받아주셔야 합니다ㅜ
-
+  width: fit-content;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
   // justify-content : center;
   // align-items : center;
   //margin-top : 10%;
-  margin-left: 19%;
+  /* margin-left: 19%; */
 `;
 const WrapResult = styled.div`
-  margin-top: 4%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-top: 4%; */
   // justify-content : center;
   // align-items : center;
 `;
 const WrapSearch = styled.div`
-  margin-top: 5%;
+  width: 100%;
+  margin-top: 7%;
+  margin-bottom: 5%;
 `;
 const WrapPoster = styled.div`
-  margin-right: 5%;
-  margin-bottom: 3%;
+  margin: 20px;
 `;
 export const WrapIcon = styled.div`
   width: 175px;
@@ -78,27 +82,32 @@ export default function Recommend() {
     })();
   }, []);
   return (
-    <Container>
-      <WrapSearch>
-        <Search />
-      </WrapSearch>
-      <WrapResult>
-        {recommendExhibitionData
-          .slice(exhibition * (page - 1), exhibition * (page - 1) + exhibition)
-          .map((item, index) => (
-            <WrapPoster key={index}>
-              <div>
-                <Poster item={item} />
-              </div>
-            </WrapPoster>
-          ))}
-      </WrapResult>
-      <CustomPagination
-        page={page}
-        exhibition={exhibition}
-        data={recommendExhibitionData}
-        handlePageChange={handlePageChange}
-      />
-    </Container>
+    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <Container>
+        <WrapSearch>
+          <Search />
+        </WrapSearch>
+        <WrapResult>
+          {recommendExhibitionData
+            .slice(
+              exhibition * (page - 1),
+              exhibition * (page - 1) + exhibition
+            )
+            .map((item, index) => (
+              <WrapPoster key={index}>
+                <div>
+                  <Poster item={item} />
+                </div>
+              </WrapPoster>
+            ))}
+        </WrapResult>
+        <CustomPagination
+          page={page}
+          exhibition={exhibition}
+          data={recommendExhibitionData}
+          handlePageChange={handlePageChange}
+        />
+      </Container>
+    </div>
   );
 }
