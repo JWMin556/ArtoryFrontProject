@@ -7,7 +7,6 @@ const HeartUrl = `${URL}/api/like-exhibition/`;
 
 //전시회 스크랩
 export const saveApi = async (exhibitionId) => {
-  console.log('saveApi 함수로 들어옴 ', exhibitionId);
   try {
     const response = await axios.post(
       `${SaveUrl}exhibition-scrapped?exhibitionId=${exhibitionId}`,
@@ -31,7 +30,6 @@ export const saveApi = async (exhibitionId) => {
 
 //전시회 스크랩 취소
 export const saveCancelApi = async (exhibitionId) => {
-  console.log('saveCancelApi 함수로 들어옴 ', exhibitionId);
   try {
     const response = await axios.post(
       `${SaveUrl}exhibition-disScrapped?exhibitionId=${exhibitionId}`,

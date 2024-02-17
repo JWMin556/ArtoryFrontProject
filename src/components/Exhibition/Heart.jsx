@@ -18,7 +18,6 @@ export default function Heart(props) {
     e.stopPropagation()
     //Save 이미지를 누르면
     setIsClickHeart((prevIsClickHeart) => !prevIsClickHeart); //isClickSave false <-> true
-    console.log('전시회 좋아요 : ', exhibitionId);
     //api 호출
     if (isClickHeart) {
       heartCancelApi(exhibitionId);

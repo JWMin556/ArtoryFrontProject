@@ -16,12 +16,11 @@ export const SaveImg = styled.img`
 export default function Save({loadUserStories,part,...props}) {
   //props.item.~~ 으로 호출
   const [isClickSave, setIsClickSave] = useState(props.item.scrapped); // 좋아요 누름 = true / 좋아요 안누름 = false
-
+  
   const handleClickSave= async(exhibitionId,e)=> {
     e.stopPropagation()
     //Save 이미지를 누르면
     setIsClickSave((prevIsClickSave) => !prevIsClickSave);
-    console.log('전시회 저장', exhibitionId);
     //api 호출
     if (isClickSave) {
       await saveCancelApi(exhibitionId);

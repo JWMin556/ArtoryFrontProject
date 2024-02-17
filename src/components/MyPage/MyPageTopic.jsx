@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components';
 
 export default function MyPageTopic(props) {
@@ -12,7 +12,11 @@ export default function MyPageTopic(props) {
     }
   };
   return (
-    <Button className={isClicked ? 'clicked' : ''} onClick={handleClick}>
+    <Button 
+      className={isClicked ? 'clicked' : ''} 
+      onClick={handleClick}
+      style={props.selected ? { backgroundColor: "#000", color: "#fff" } : {}}
+      >
       {props.genre}
     </Button>
   );
@@ -33,8 +37,5 @@ const Button = styled.button`
   font-family: 'Pretendard';
   font-weight: 500;
   word-wrap: break-word;
-  &.clicked {
-    background-color: black;
-    color: white;
-  }
 `;
+

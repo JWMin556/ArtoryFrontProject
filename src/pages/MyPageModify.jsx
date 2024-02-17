@@ -6,7 +6,7 @@ import StyledButton from '../styled-components/StyledButton';
 import { saveGenre } from '../components/API/member_API';
 import axios from 'axios';
 import AWS from 'aws-sdk';
-
+import { getMemberInfo } from '../components/API/member_API';
 //PageContainer & Page 스타일 수정한 거 변경하시면 안됩니다!footer랑 겹치는 문제가 있어서..ㅜ
 const PageContainer = styled.div`
   position: relative;
@@ -210,6 +210,9 @@ export default function MyPageModify() {
   const [introduction, setIntroduction] = useState('');
   const [myKeyword, setMyKeyword] = useState('');
   const [imgUrl, setImgUrl] = useState('');
+  const [genre1,setGenre1] = useState()
+  const [genre2,setGenre2] = useState()
+  const [genre3,setGenre3] = useState()
 
   //버튼활성화를 위한 유효성 검사
   const [nameValid, setNameValid] = useState(false);
@@ -346,7 +349,6 @@ export default function MyPageModify() {
     );
   };
   //여기까지가 나의 전시조사 수정하기 위한 부분입니다.
-
   //aws용
   const [myBucket, setMyBucket] = useState(null);
   useEffect(() => {
@@ -494,6 +496,26 @@ export default function MyPageModify() {
       setChangedPasswordNotAllow(true);
     }
   };
+  const loadInfo = async () => {
+    try {
+      const response = await getMemberInfo();
+      console.log("getMemberInfo",response);
+      setname(response.memberName);
+      setNickname(response.nickname);
+      setImageSrc(response.image);
+      setIntroduction(response.introduction);
+      setMyKeyword(response.myKeyword);
+      setGenre1(response.genre1)
+      setGenre2(response.genre2)
+      setGenre3(response.genre3)
+      //introduction은 어디에?
+    } catch (error) {
+      console.error('Error loading comments:', error.response.data);
+    }
+  };
+  useEffect(() => {
+    loadInfo();
+  }, []);
 
   const saveModifiedPassword = async () => { //이거 하기전에 먼저 사용자 전체정보를 불러왔어야 함 ㅠㅠ
     try {
@@ -534,7 +556,29 @@ export default function MyPageModify() {
       console.log(error.response.data);
     }
   }
-
+  useEffect(() => {
+    const setGenreIndex = () => {
+      if (genre1 && genre2 && genre3) {
+        genres.forEach((defaultGenre1, index1) => {
+          genres.forEach((defaultGenre2, index2) => {
+            genres.forEach((defaultGenre3, index3) => {
+              if (
+                defaultGenre1 === genre1 &&
+                defaultGenre2 === genre2 &&
+                defaultGenre3 === genre3
+              ) {
+                setSelectedTopics([defaultGenre1, defaultGenre2, defaultGenre3]);
+                setSelectedIndex([index1, index2, index3]);
+              }
+            });
+          });
+        });
+      }
+    };
+    setGenreIndex();
+    console.log("setSelectedTopics",selectedTopics)
+    console.log("setSelectedIndex",selectedIndex)
+  }, [genre1, genre2, genre3]);
   return (
     <PageContainer>
       <Page>
@@ -629,17 +673,18 @@ export default function MyPageModify() {
             </BoldSentence>
             <ExamineWrap style={{ marginTop: '3%' }}>
               <ExamineContentBox>
-                {genres__kor.map((genre, index) => {
+                {genres.map((genre, index) => {
                   return (
                     <MyPageTopic
-                      key={index}
-                      genre={genre}
+                      index={index}
+                      genre={genres__kor[index]}
                       selectable={
                         selectedTopics.length < 3 ||
                         selectedTopics.includes(genre)
                       }
+                      selected={selectedTopics.includes(genre)}                    
                       onClick={() => handleTopicClick(genre, index)}
-                    />
+                      />
                   );
                 })}
               </ExamineContentBox>
