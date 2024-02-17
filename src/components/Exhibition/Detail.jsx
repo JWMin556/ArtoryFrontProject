@@ -9,6 +9,8 @@ const URL = localStorage.getItem('URL');
 const url = `${URL}/api/exhibitions/`;
 
 export const WrapDetail = styled.div`
+  min-height: 100vh; //footer 때문에 받아주셔야 합니다ㅜ
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -143,14 +145,15 @@ export default function Detail(props) {
           </DetailInfo>
         </WrapInfo>
       </ImgAndInfo>
-        {info?.exhibitionLongitude === undefined && info?.exhibitionLatitude === undefined ? (
-              <p>Loading...</p> 
-            ) : ( 
-              <KakaoMap
-              Longitude={info?.exhibitionLongitude}
-              Latitude={info?.exhibitionLatitude}
-            />
-            )} 
+      {info?.exhibitionLongitude === undefined &&
+      info?.exhibitionLatitude === undefined ? (
+        <p>Loading...</p>
+      ) : (
+        <KakaoMap
+          Longitude={info?.exhibitionLongitude}
+          Latitude={info?.exhibitionLatitude}
+        />
+      )}
     </WrapDetail>
     //</Container>
   );

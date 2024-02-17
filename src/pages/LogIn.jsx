@@ -41,19 +41,19 @@ export default function LogIn() {
   const onChangeId = (e) => {
     setID(e.target.value);
     setIDValid(true);
-  }
+  };
 
   const onChangePasswords = (e) => {
     setPassword(e.target.value);
     setPasswordValid(true);
-  }
+  };
 
   const isLoggedIn = localStorage.getItem('arbitaryLoginForHeader');
   useEffect(() => {
     window.scrollTo(0, 0);
-    if(isLoggedIn){
+    if (isLoggedIn) {
       window.location.href = '/'; // Home 페이지로 이동
-      alert("이미 로그인이 완료되었습니다.");
+      alert('이미 로그인이 완료되었습니다.');
     }
   }, []);
 
@@ -64,36 +64,36 @@ export default function LogIn() {
       const response = await axios.post(
         baseUrl,
         {
-          "email": ID,
-          "password": Password,
+          email: ID,
+          password: Password,
         },
         {
           headers: {
-            'Accept': '*/*',
+            Accept: '*/*',
             'Content-Type': 'application/json',
-          }
-        },
+          },
+        }
       );
-      console.log('사용자 정보가 성공적으로 보내졌습니다.',response.data);
+      console.log('사용자 정보가 성공적으로 보내졌습니다.', response.data);
       localStorage.setItem('Token', response.data.accessToken);
-      localStorage.setItem('arbitaryLoginForHeader',true);
+      localStorage.setItem('arbitaryLoginForHeader', true);
       window.location.href = '/'; // Home 페이지로 이동
     } catch (error) {
       console.log(error.response.data);
-      alert("존재하지 않는 회원입니다. 다시 로그인해주세요!");
+      alert('존재하지 않는 회원입니다. 다시 로그인해주세요!');
     }
-  }
+  };
 
-  const handleOnKeyPress  = (e) => {
-    if(e.key === 'Enter'){
-      if(!idValid || !passwordValid){
-        alert("이메일과 비밀번호를 모두 입력해주세요");
-        window.location.href = '/login'; 
+  const handleOnKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      if (!idValid || !passwordValid) {
+        alert('이메일과 비밀번호를 모두 입력해주세요');
+        window.location.href = '/login';
       } else {
         handleLogin();
       }
     }
-  }
+  };
 
   return (
     <S.HomeWrap>
@@ -138,9 +138,9 @@ export default function LogIn() {
             width="345px"
             style={{ marginTop: '20px' }}
             onClick={() => {
-              if(!idValid || !passwordValid) {
-                alert("이메일과 비밀번호를 모두 입력해주세요");
-                window.location.href = '/login'; 
+              if (!idValid || !passwordValid) {
+                alert('이메일과 비밀번호를 모두 입력해주세요');
+                window.location.href = '/login';
               } else {
                 handleLogin();
               }

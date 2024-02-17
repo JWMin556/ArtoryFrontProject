@@ -150,6 +150,8 @@ const divStyle = {
 };
 //스타일 컴포넌트
 const Container = styled.div`
+  min-height: 100vh; //footer 때문에 받아주셔야 합니다ㅜ
+
   margin-bottom: 0;
   margin: 100px auto;
   display: flex;

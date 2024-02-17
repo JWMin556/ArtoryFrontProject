@@ -17,6 +17,8 @@ import {
   TitleWrap,
 } from './MyPage';
 const Container = styled.div`
+  min-height: 100vh; //footer 때문에 받아주셔야 합니다ㅜ
+
   display: flex;
   flex-direction: column;
   align-items: center;
