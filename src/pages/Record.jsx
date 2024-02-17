@@ -198,6 +198,7 @@ export default function Record(props) {
           setWeather(response.data.storyWeather); //날씨 저장
           setCompanion(response.data.storyCompanion); //동반인
           setKeyword(response.data.storyKeyword); //키워드
+          setIsOpen(response.data.isOpen); //공개여부
           setPicturesUrl([response.data.exhibitionImage]); //사진 리스트
           console.log('스토리정보', response.data);
           //console.log("이미지유알엘",response.data.picturesUrl); //사진 리스트
@@ -349,17 +350,11 @@ export default function Record(props) {
 
   //공개버튼 클릭 : 공개->블랙 / 비공개 -> 그레이
   const ClickedOpen = () => {
-    //console.log("공개클릭")
-    setOpenBoxColor({backgroundColor:'#000',color:'#fff'}) 
-    setNotOpenBoxColor({backgroundColor: '#f3f3f3', color: '#979797'})
     setIsOpen(true);
   };
 
   //비공개버튼 클릭 : 공개->그레이 / 비공개 -> 블랙
   const ClickClosed = () => {
-    //console.log("비공개클릭")
-    setOpenBoxColor({backgroundColor:'#f3f3f3',color:'#979797'}) 
-    setNotOpenBoxColor({backgroundColor: '#000', color: '#fff'})
     setIsOpen(false);
   };
 
@@ -420,19 +415,6 @@ export default function Record(props) {
       }
     }
   };
-  useEffect(() => {
-    if (storyId && isOpen) {
-      setOpenBoxColor({ backgroundColor: '#000', color: '#fff' });
-    }
-    else if(storyId && !isOpen)
-    {
-      setNotOpenBoxColor({backgroundColor: '#000', color: '#fff'})
-    }
-    // if(storyId && isOpen) //true (공개)
-    // {
-
-    // }
-  }, []);
   return (
     <div>
       {/* 동일한 전시 삭제 모달 */}
@@ -496,8 +478,8 @@ export default function Record(props) {
           <Story2>나만의 스토리를 작성해보세요</Story2>
           <StoryTitle stroyId={storyId} Title={title} SetTitle={setTitle} />
           <OpenSelectButton>
-            <button onClick={ClickedOpen} style={openBoxColor}>공개</button>
-            <button onClick={ClickClosed} style={notOpenBoxColor}>비공개</button>
+            <button onClick={ClickedOpen} style={isOpen?{backgroundColor:'#000',color:'#fff'}:{}}>공개</button>
+            <button onClick={ClickClosed} style={isOpen?{}:{backgroundColor:'#000',color:'#fff'}}>비공개</button>
           </OpenSelectButton>
           <TodayExhibition
             storyId={storyId}
