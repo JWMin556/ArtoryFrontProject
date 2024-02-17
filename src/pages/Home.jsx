@@ -33,23 +33,28 @@ const HomeRightWrap = styled.div`
 `;
 
 const ExhibitImgWrapBanner = styled.div`
-  position: relative;
-  width: 100%;
-  height: 90vh;
-  margin-bottom: 70px;
+  position: absolute;
+  width: 50%;
+  height: 100%;
   overflow-y: hidden;
 `;
 const ExhibitImgBanner1 = styled.div`
   z-index: 5;
+  /* display: flex; */
   position: absolute;
-  top: 12%;
-
-  //background-color: rgba(0, 0, 0, 0.4);
+  /* margin-left: 18%; */
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.4);
   text-align: center;
-  width: 80%;
-  height: 80%;
-  & img {
-    height: 100%;
+
+  width: 100%;
+  height: 100%;
+  & > img {
+    height: 65%;
+    position: absolute; /* 부모 요소를 기준으로 위치 지정 */
+    top: 50%; /* 부모 요소의 세로 중앙 정렬을 위해 top 50% */
+    left: 50%; /* 부모 요소의 가로 중앙 정렬을 위해 left 50% */
+    transform: translate(-50%, -50%); /* 이미지의 중앙을 부모 요소의 중앙에 맞춤 */
   }
 `;
 
@@ -62,7 +67,7 @@ export default function Home() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    (async () => {
+    const fetchData = async () => {
       try {
         const response = await axios.get(url, {
           headers: {
@@ -72,10 +77,30 @@ export default function Home() {
         console.log(response.data);
         setSelectedImage(response.data.exhibitionImage);
       } catch (error) {
-        console.log(error.response.data);
+        console.error('Error fetching data:', error);
       }
-    })();
-  }, []);
+    };
+  
+    fetchData();
+  }, [url]); // 의존성 배열에 url 추가
+
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  //   (async () => {
+  //     try {
+  //       const response = await axios.get(url, {
+  //         headers: {
+  //           Accept: '*/*',
+  //         },
+  //       });
+  //       console.log(response.data);
+  //       setSelectedImage(response.data.exhibitionImage);
+  //     } catch (error) {
+  //       console.log(error.response.data);
+  //     }
+  //   })();
+  // }, []);
   return (
     <HomeWrap>
       <HomeLeftWrap>
@@ -100,16 +125,6 @@ export default function Home() {
               alt=""
               style={{ width: '100%', filter: 'blur(5px)', zIndex: 1 }}
             />
-            {/* <div
-              style={{
-                width: '100%',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                backgroundColor: 'rgba(0, 0, 0, 0.4)',
-                zIndex: 2,
-              }}
-            ></div> */}
             <ExhibitImgBanner1>
               <img src={selectedImage} alt="" />
             </ExhibitImgBanner1>

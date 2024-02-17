@@ -13,7 +13,7 @@ const WrapNavigation = styled.div`
   justify-content: space-evenly;
   align-items: center;
   font-family: 'Pretendard';
-  z-index : 1;
+  z-index : 10;
 `;
 const Navigation1 = styled.span`
   color: #595959;
