@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router';
 import MyPageTopic from '../components/MyPage/MyPageTopic';
 import StyledButton from '../styled-components/StyledButton';
-import { saveGenre } from '../components/API/member_API';
+import { getMemberInfo, saveGenre } from '../components/API/member_API';
 import axios from 'axios';
 import AWS from 'aws-sdk';
-import { getMemberInfo } from '../components/API/member_API';
 //PageContainer & Page 스타일 수정한 거 변경하시면 안됩니다!footer랑 겹치는 문제가 있어서..ㅜ
 const PageContainer = styled.div`
   position: relative;
@@ -164,9 +163,9 @@ const ErrorMessageWrap = styled.div`
 
 export default function MyPageModify() {
   //맨처음 페이지 이동시 위로 고정한다
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   // const [defaultName, setDefaultName] = useState('');
@@ -190,7 +189,6 @@ export default function MyPageModify() {
   //   })();
   // }, []);
 
-
   //MyPage에서 받아온 이름과 사진을 위해서 사용
   const location = useLocation();
   const query = new URLSearchParams(location.search);
@@ -204,7 +202,7 @@ export default function MyPageModify() {
   const [nickname, setNickname] = useState('');
   const [length, setLength] = useState(0);
   const fileInputRef = useRef(null);
-  const [imageSrc, setImageSrc] = useState(myImage);
+  const [imageSrc, setImageSrc] = useState('');
   const [isHovered, setIsHovered] = useState(false); //이미지 암영효과를 위해서
   const [imageSrcReal, setImageSrcReal] = useState('');
   const [introduction, setIntroduction] = useState('');
@@ -222,8 +220,30 @@ export default function MyPageModify() {
   const [myKeywordValid, setMyKeywordValid] = useState(false);
   const [genreValid, setGenreValid] = useState(false);
 
-
   const [deleteMemberValid, setDeleteMemberValid] = useState(false);
+
+  //코멘트 리스트를 다시 불러오는 함수를 정의
+  const loadInfo = async () => {
+    try {
+      const response = await getMemberInfo();
+      console.log(response);
+      setname(response.memberName);
+      setNickname(response.nickname);
+      setImageSrc(response.image);
+      setImgUrl(response.image);
+      setIntroduction(response.introduction);
+      setMyKeyword(response.myKeyword);
+      setGenre1(response.genre1)
+      setGenre2(response.genre2)
+      setGenre3(response.genre3)
+      //introduction은 어디에?
+    } catch (error) {
+      console.error('Error loading comments:', error.response.data);
+    }
+  };
+  useEffect(() => {
+    loadInfo();
+  }, []);
 
   const handleNameChange = (e) => {
     setname(e.target.value);
@@ -283,7 +303,7 @@ export default function MyPageModify() {
       reader.onload = (event) => {
         // 이미지의 src를 선택한 파일의 내용으로 대체합니다.
         setImageSrc(event.target.result);
-        uploadFileAWS(file);   //잠시만 지웠다가 다시 해보장
+        uploadFileAWS(file); //잠시만 지웠다가 다시 해보장
       };
       reader.readAsDataURL(file);
     }
@@ -342,11 +362,13 @@ export default function MyPageModify() {
     setGenreValid(true);
   };
   const handleSubmitGenre = async () => {
-    await saveGenre(
-      genres[selectedIndex[0]],
-      genres[selectedIndex[1]],
-      genres[selectedIndex[2]]
-    );
+    const genre = [3];
+    for (let i = 0; i < 3; i++) {
+      genre[i] = genres[selectedIndex[i]] ? genres[selectedIndex[i]] : 'NONE';
+    }
+    // console.log(genre);
+    // console.log(selectedIndex);
+    await saveGenre(genre);
   };
   //여기까지가 나의 전시조사 수정하기 위한 부분입니다.
   //aws용
@@ -374,7 +396,7 @@ export default function MyPageModify() {
       //ContentType: "image/png",  //일단 주석처리함
       Body: file,
       Bucket: 'artory-s3-arbitary',
-      Key: "upload/" + file.name, //`upload/${imageSrcReal.name}`,
+      Key: 'upload/' + file.name, //`upload/${imageSrcReal.name}`,
     };
 
     //2-2. AWS가 정한 양식대로 보내기
@@ -396,12 +418,12 @@ export default function MyPageModify() {
 
   const URL = localStorage.getItem('URL');
   const token = localStorage.getItem('Token');
-    // useEffect(() => {
-    //     if(!token){
-    //         alert("토큰이 없습니다.");
-    //         window.location.href = '/'; // Home 페이지로 이동
-    //     } 
-    // });
+  // useEffect(() => {
+  //     if(!token){
+  //         alert("토큰이 없습니다.");
+  //         window.location.href = '/'; // Home 페이지로 이동
+  //     }
+  // });
 
   const saveModifiedInformations = async () => {
     try {
@@ -439,27 +461,27 @@ export default function MyPageModify() {
     } else {
       setDeleteMemberValid(true);
     }
-  }
-  
+  };
+
   const deleteUser = async () => {
     try {
       const userInfoResponse = await axios.get(`${URL}/api/member/info`, {
         headers: {
           Accept: '*/*',
           Authorization: `Bearer ${token}`,
-        }
+        },
       });
-      const userData = userInfoResponse.data
+      const userData = userInfoResponse.data;
       const memberIdToDelete = userData.memberId;
-      console.log(userData)
-      console.log("니 멤버아이디", memberIdToDelete);
+      console.log(userData);
+      //console.log('니 멤버아이디', memberIdToDelete);
       const deleteResponse = await axios.delete(
         `${URL}/api/member/delete-member?memberId=${memberIdToDelete}`,
         {
           headers: {
             Accept: '*/*',
             Authorization: `Bearer ${token}`,
-          }
+          },
         }
       );
       console.log('사용자가 성공적으로 삭제되었습니다.', deleteResponse);
@@ -467,14 +489,13 @@ export default function MyPageModify() {
       window.location.href = '/';
       localStorage.removeItem('arbitaryLoginForHeader');
     } catch (error) {
-      console.log("에러났음", error.response.data);
+      console.log('에러났음', error.response.data);
     }
-  }
-
+  };
 
   //비밀번호 수정
   const [chagedpPassword, setChagedpPassword] = useState(''); //바꾸고자 하는 비번
-  const [isPassword, setIsPassword] = useState(false);  //정규식을 위한 유효성검사
+  const [isPassword, setIsPassword] = useState(false); //정규식을 위한 유효성검사
   const handlePasswordChange = (e) => {
     setChagedpPassword(e.target.value);
     const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[#*?!]).{8,}$/;
@@ -483,54 +504,35 @@ export default function MyPageModify() {
     } else {
       setIsPassword(false);
     }
-  }
-  
+  };
+
   const [passwordConfirm, setPasswordConfirm] = useState(''); //바꾸고자 하는 비번확인
   const [changedPasswordNotAllow, setChangedPasswordNotAllow] = useState(true); //비번 바꾸는 버튼 유효하게 만들기
-  
+
   const handlePasswordConfirmChange = (e) => {
     setPasswordConfirm(e.target.value);
-    if(isPassword && e.target.value === chagedpPassword){
+    if (isPassword && e.target.value === chagedpPassword) {
       setChangedPasswordNotAllow(false);
     } else {
       setChangedPasswordNotAllow(true);
     }
   };
-  const loadInfo = async () => {
-    try {
-      const response = await getMemberInfo();
-      console.log("getMemberInfo",response);
-      setname(response.memberName);
-      setNickname(response.nickname);
-      setImageSrc(response.image);
-      setIntroduction(response.introduction);
-      setMyKeyword(response.myKeyword);
-      setGenre1(response.genre1)
-      setGenre2(response.genre2)
-      setGenre3(response.genre3)
-      //introduction은 어디에?
-    } catch (error) {
-      console.error('Error loading comments:', error.response.data);
-    }
-  };
-  useEffect(() => {
-    loadInfo();
-  }, []);
 
-  const saveModifiedPassword = async () => { //이거 하기전에 먼저 사용자 전체정보를 불러왔어야 함 ㅠㅠ
+  const saveModifiedPassword = async () => {
+    //이거 하기전에 먼저 사용자 전체정보를 불러왔어야 함 ㅠㅠ
     try {
       //불러온것
       const userInfoResponse = await axios.get(`${URL}/api/member/info`, {
         headers: {
           Accept: '*/*',
           Authorization: `Bearer ${token}`,
-        }
+        },
       });
       console.log(userInfoResponse.data.memberType);
 
-      if(userInfoResponse.data.memberType === 'FORM') {
-        console.log("당신은 form유저입니다");
-        const baseUrl = `${URL}/api/member/save/pwchange`
+      if (userInfoResponse.data.memberType === 'FORM') {
+        console.log('당신은 form유저입니다');
+        const baseUrl = `${URL}/api/member/save/pwchange`;
         const response = await axios.post(
           baseUrl,
           {
@@ -544,13 +546,13 @@ export default function MyPageModify() {
             },
           }
         );
-        console.log("너가 변경한 비번", passwordConfirm);
+        console.log('너가 변경한 비번', passwordConfirm);
         console.log('비밀번호가 성공적으로 수정되었습니다.', response.data);
         alert('비밀번호가 성공적으로 수정되었습니다.');
         window.location.href = '/mypage';
       } else {
-        console.log("소셜로그인 사용자는 비밀번호를 바꿀 수 없습니다.");
-        alert("소셜로그인 사용자는 비밀번호를 바꿀 수 없습니다.");
+        console.log('소셜로그인 사용자는 비밀번호를 바꿀 수 없습니다.');
+        alert('소셜로그인 사용자는 비밀번호를 바꿀 수 없습니다.');
       }
     } catch (error) {
       console.log(error.response.data);
@@ -585,7 +587,7 @@ export default function MyPageModify() {
         <TitleWrap>
           <TitleLeftWrap>
             <TitleLeftWrapParagraph>
-              {myNickname}님의
+              {nickname}님의
               <br />
               마이페이지
             </TitleLeftWrapParagraph>
@@ -623,12 +625,12 @@ export default function MyPageModify() {
             <div style={{ marginBottom: '21%' }} />
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
-                <BoldSentence>이름</BoldSentence> 
+                <BoldSentence>이름</BoldSentence>
                 <GraySentence />
               </TitleRightWrapParagraphTitle>
               <InputWrap>
                 {/* <InputStyle onChange={handleNameChange} placeholder={defaultName} /> */}
-                <InputStyle onChange={handleNameChange} />
+                <InputStyle onChange={handleNameChange} value={name} />
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
@@ -640,7 +642,7 @@ export default function MyPageModify() {
                 </GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap>
-                <InputStyle onChange={handleNicknameChange} />
+                <InputStyle onChange={handleNicknameChange} value={nickname} />
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
@@ -652,7 +654,10 @@ export default function MyPageModify() {
                 </GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap>
-                <InputStyle onChange={handleIntroductionChange} />
+                <InputStyle
+                  onChange={handleIntroductionChange}
+                  value={introduction}
+                />
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
@@ -664,7 +669,7 @@ export default function MyPageModify() {
                 </GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap>
-                <InputStyle onChange={handleKeywordChange} />
+                <InputStyle onChange={handleKeywordChange} value={myKeyword} />
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
@@ -690,7 +695,9 @@ export default function MyPageModify() {
               </ExamineContentBox>
             </ExamineWrap>
 
-            <TitleRightWrapParagraphArea style={{ marginTop: '10%', marginBottom: '1px' }}>
+            <TitleRightWrapParagraphArea
+              style={{ marginTop: '10%', marginBottom: '1px' }}
+            >
               <TitleRightWrapParagraphTitle>
                 <BoldSentence>비밀번호 변경</BoldSentence>
                 <GraySentence>변경 비밀번호를 입력해주세요</GraySentence>
@@ -699,12 +706,15 @@ export default function MyPageModify() {
                 <InputStyle type="password" onChange={handlePasswordChange} />
               </InputWrap>
             </TitleRightWrapParagraphArea>
-            <div style={{marginLeft:"auto"}}>
-                <ErrorMessageWrap>
-                      {!isPassword && chagedpPassword.length > 0 && (
-                        <div>최소 8자리 이상 / 대문자, 소문자, 숫자, 특수문자(# * ? !)를 각 하나 이상 포함</div>
-                      )}
-                </ErrorMessageWrap>
+            <div style={{ marginLeft: 'auto' }}>
+              <ErrorMessageWrap>
+                {!isPassword && chagedpPassword.length > 0 && (
+                  <div>
+                    최소 8자리 이상 / 대문자, 소문자, 숫자, 특수문자(# * ? !)를
+                    각 하나 이상 포함
+                  </div>
+                )}
+              </ErrorMessageWrap>
             </div>
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
@@ -713,10 +723,13 @@ export default function MyPageModify() {
                 </GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap style={{ width: '300px' }}>
-                <InputStyle type="password" onChange={handlePasswordConfirmChange} /> 
+                <InputStyle
+                  type="password"
+                  onChange={handlePasswordConfirmChange}
+                />
                 {/* <InputStyle />  */}
                 <StyledButton
-                  onClick={saveModifiedPassword}    
+                  onClick={saveModifiedPassword}
                   height="23px"
                   width="30%"
                   fontSize="10px"
@@ -747,13 +760,23 @@ export default function MyPageModify() {
             </TitleRightWrapParagraphArea>
 
             <StyledButton
-              onClick={() => {
-                if(!nameValid || !nickNameValid || !imageValid || !introductionValid || !myKeywordValid || !genreValid){
-                  alert("사진, 이름, 닉네임, 소개, 키워드, 관심전시를 모두 수정해주세요");
-                }else {
-                  saveModifiedInformations();
-                }
-              }}  //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
+              onClick={() => saveModifiedInformations()}
+              //   {
+              //   if (
+              //     !nameValid ||
+              //     !nickNameValid ||
+              //     !imageValid ||
+              //     !introductionValid ||
+              //     !myKeywordValid ||
+              //     !genreValid
+              //   ) {
+              //     alert(
+              //       '사진, 이름, 닉네임, 소개, 키워드, 관심전시를 모두 수정해주세요'
+              //     );
+              //   } else {
+              //     saveModifiedInformations();
+              //   }
+              // }} //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
               height="52px"
               width="70%"
               //disabled={!nameValid || !nickNameValid || !imageValid || !introductionValid || !myKeywordValid || !genreValid}

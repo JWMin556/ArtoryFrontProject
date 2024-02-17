@@ -58,7 +58,8 @@ const PaginationBox = styled.div`
         display: flex; 
         justify-content: space-between; 
         margin-top: 15px; 
-        width : 100px;
+        margin-left: 100px;
+        width : 500px;
         height : 18px;
     }
     ul { 

@@ -29,19 +29,20 @@ export const getMemberInfo = async () => {
 };
 
 //장르 저장
-export const saveGenre = async (genre1, genre2, genre3) => {
+export const saveGenre = async (genre) => {
+  const tokentest = localStorage.getItem('Token');
   try {
     const response = await axios.post(
       `${BASE_URL}/save/genre`,
       {
-        genre1: genre1,
-        genre2: genre2,
-        genre3: genre3,
+        genre1: genre[0],
+        genre2: genre[1],
+        genre3: genre[2],
       },
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${tokentest}`,
         },
       }
     );

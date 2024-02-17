@@ -18,14 +18,14 @@ export default function Onboarding2() {
   const handleButton1Click = () => {
     setIsButton1Clicked(true);
     setIsButton2Clicked(false);
-    setGender('MALE');
+    setGender('FEMALE');
     // console.log(gender);
   };
   // 버튼2 클릭 이벤트 핸들러
   const handleButton2Click = () => {
     setIsButton2Clicked(true);
     setIsButton1Clicked(false);
-    setGender('FEMALE');
+    setGender('MALE');
     // console.log(gender);
   };
 
@@ -52,12 +52,12 @@ export default function Onboarding2() {
   //api관련 함수
   const saveAgeAndGender = async () => {
     try {
-      const baseUrl = `${URL}/api/member/save/age-gender?gender=${gender}&age=${age}`;
+      const baseUrl = `${URL}/api/member/save/age-gender`;
       const response = await axios.post(
         baseUrl,
         {
-          // "gender": gender,
-          // "age": age
+          "gender": gender,
+          "age": age,
         },
         {
           headers: {
