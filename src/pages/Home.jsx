@@ -43,6 +43,7 @@ const ExhibitImgBanner1 = styled.div`
   z-index: 5;
   position: absolute;
   top: 12%;
+
   //background-color: rgba(0, 0, 0, 0.4);
   text-align: center;
   width: 80%;
@@ -83,15 +84,33 @@ export default function Home() {
         <P.ThirdParagraph>ARTORY</P.ThirdParagraph>
         <Link to="/login">
           {/* <LogInBtn src="/img/button.png"></LogInBtn> */}
-          <img src="/img/button.png" alt="로그인하기" style={{marginTop:"100px", width:"195px", height:"48px"}} />
+          <img
+            src="/img/button.png"
+            alt="로그인하기"
+            style={{ marginTop: '100px', width: '195px', height: '48px' }}
+          />
         </Link>{' '}
         {/*현재는 이 버튼을 누르면 로그인 페이지로 넘어가도록 만들었습니다. 주연씨는 LogIn.jsx에서 바로 로그인 화면을 작업해주시면 될 것 같습니다. */}
       </HomeLeftWrap>
       <HomeRightWrap>
         {selectedImage && (
           <ExhibitImgWrapBanner>
-            <img src={selectedImage} alt="" style={{ width: '100%', filter: 'blur(5px)'}} />
-            <ExhibitImgBanner1 >
+            <img
+              src={selectedImage}
+              alt=""
+              style={{ width: '100%', filter: 'blur(5px)', zIndex: 1 }}
+            />
+            {/* <div
+              style={{
+                width: '100%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                zIndex: 2,
+              }}
+            ></div> */}
+            <ExhibitImgBanner1>
               <img src={selectedImage} alt="" />
             </ExhibitImgBanner1>
           </ExhibitImgWrapBanner>

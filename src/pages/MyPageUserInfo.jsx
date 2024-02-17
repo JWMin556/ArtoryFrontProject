@@ -75,7 +75,7 @@ export default function MyPageUserInfo() {
       setUserData(response);
       // setMyScrappedMembersData(response?.data.scrappedMembers);
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response);
     }
   };
 

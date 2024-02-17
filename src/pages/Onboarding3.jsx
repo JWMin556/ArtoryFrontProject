@@ -86,7 +86,7 @@ export default function Onboarding3() {
     setTimeout(() => {
       setShowSplash(false);
       // 페이지 이동 로직 추가
-      navigate(`/exhibition`);
+      navigate(`/login`);
       alert(
         '회원가입이 완료되었습니다. 소셜계정이 아닌 경우, 재로그인을 해주세요'
       );
