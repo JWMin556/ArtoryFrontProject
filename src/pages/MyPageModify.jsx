@@ -470,7 +470,7 @@ export default function MyPageModify() {
       const userData = userInfoResponse.data;
       const memberIdToDelete = userData.memberId;
       console.log(userData);
-      console.log('니 멤버아이디', memberIdToDelete);
+      //console.log('니 멤버아이디', memberIdToDelete);
       const deleteResponse = await axios.delete(
         `${URL}/api/member/delete-member?memberId=${memberIdToDelete}`,
         {
