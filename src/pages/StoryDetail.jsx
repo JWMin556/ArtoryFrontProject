@@ -201,10 +201,10 @@ const Table = styled.table`
     width: fit-content;
     padding-top: 5px;
     vertical-align: middle;
-    padding-right: 10px;
+    padding-right: 20px;
   }
   th {
-    padding-right: 10px;
+    padding-right: 20px;
 
     width: fit-content;
 

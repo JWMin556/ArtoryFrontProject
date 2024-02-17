@@ -35,9 +35,9 @@ const ModalWrap = styled.div`
 const Modal = styled.div`
   background-color: white;
   width: 80%;
-  max-width: 800px;
+  max-width: 600px;
   min-width: 450px;
-  height: 270px;
+  height: 210px;
   display: flex;
   flex-direction: column;
   align-items: center;

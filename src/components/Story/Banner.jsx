@@ -49,7 +49,7 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   p {
-    width: 640px;
+    width: 820px;
     line-height: normal;
   }
 `;
