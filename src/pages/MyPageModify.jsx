@@ -155,12 +155,40 @@ const ExamineContentBox = styled.div`
   justify-content: space-around;
 `;
 
+const ErrorMessageWrap = styled.div`
+  position: relative;
+  bottom: 15px;
+  color: red;
+  font-size: 7px;
+`;
+
 export default function MyPageModify() {
   //맨처음 페이지 이동시 위로 고정한다
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  // const [defaultName, setDefaultName] = useState('');
+  // const [defaultNickName, setDefaultNickName] = useState('');
+  // const [defaultIntroduce, setDefaultIntroduce] = useState('');
+  // const [defaultKeywords, setDefaultKeywords] = useState('');
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const response = await axios.get(`${URL}/api/member/info`, {
+  //         headers: {
+  //           Accept: '*/*',
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       });
+  //       console.log(response.data);
+  //       setDefaultName(response.data.memberName);
+  //     } catch (error) {
+  //       console.log(error.response.data);
+  //     }
+  //   })();
+  // }, []);
 
   //MyPage에서 받아온 이름과 사진을 위해서 사용
   const location = useLocation();
@@ -181,7 +209,6 @@ export default function MyPageModify() {
   const [introduction, setIntroduction] = useState('');
   const [myKeyword, setMyKeyword] = useState('');
   const [imgUrl, setImgUrl] = useState('');
-  //const [chagedpPassword, setChagedpPassword] = useState('');
 
   //버튼활성화를 위한 유효성 검사
   const [nameValid, setNameValid] = useState(false);
@@ -191,7 +218,6 @@ export default function MyPageModify() {
   const [myKeywordValid, setMyKeywordValid] = useState(false);
   const [genreValid, setGenreValid] = useState(false);
 
-  //const [changedPasswordValid, setChangedPasswordValid] = useState(false);
   const [deleteMemberValid, setDeleteMemberValid] = useState(false);
 
   const handleNameChange = (e) => {
@@ -405,10 +431,6 @@ export default function MyPageModify() {
     }
   };
 
-  // const handlePasswordsChange = (e) => {
-  //   setChagedpPassword(e.target.value);
-  // };
-
   const handleDeleteReasonChange = (e) => {
     if (e.target.value.trim() === '') {
       setDeleteMemberValid(false);
@@ -427,7 +449,8 @@ export default function MyPageModify() {
       });
       const userData = userInfoResponse.data;
       const memberIdToDelete = userData.memberId;
-      // console.log("니 멤버아이디", memberIdToDelete);
+      console.log(userData);
+      console.log('니 멤버아이디', memberIdToDelete);
       const deleteResponse = await axios.delete(
         `${URL}/api/member/delete-member?memberId=${memberIdToDelete}`,
         {
@@ -446,36 +469,71 @@ export default function MyPageModify() {
     }
   };
 
-  // const saveModifiedPassword = async () => { //이거 하기전에 먼저 사용자 전체정보를 불러왔어야 함 ㅠㅠ
-  //   try {
-  //     //불러온것
-  //     const userInfoResponse = await axios.get(`${URL}/api/member/info`, {
-  //       headers: {
-  //         Accept: '*/*',
-  //         Authorization: `Bearer ${token}`,
-  //       }
-  //     });
-  //     console.log(userInfoResponse.data);
-  //     const baseUrl = `${URL}/api/member/save/pwchange`
-  //     const response = await axios.post(
-  //       baseUrl,
-  //       {
-  //         "password": chagedpPassword
-  //       },
-  //       {
-  //         headers: {
-  //           Accept: '*/*',
-  //           'Content-Type': 'application/json',
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     console.log('비밀번호가 성공적으로 수정되었습니다.', response.data);
-  //     alert('비밀번호가 성공적으로 수정되었습니다.');
-  //   } catch (error) {
-  //     console.log(error.response.data);
-  //   }
-  // }
+  //비밀번호 수정
+  const [chagedpPassword, setChagedpPassword] = useState(''); //바꾸고자 하는 비번
+  const [isPassword, setIsPassword] = useState(false); //정규식을 위한 유효성검사
+  const handlePasswordChange = (e) => {
+    setChagedpPassword(e.target.value);
+    const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[#*?!]).{8,}$/;
+    if (regex.test(e.target.value)) {
+      setIsPassword(true);
+    } else {
+      setIsPassword(false);
+    }
+  };
+
+  const [passwordConfirm, setPasswordConfirm] = useState(''); //바꾸고자 하는 비번확인
+  const [changedPasswordNotAllow, setChangedPasswordNotAllow] = useState(true); //비번 바꾸는 버튼 유효하게 만들기
+
+  const handlePasswordConfirmChange = (e) => {
+    setPasswordConfirm(e.target.value);
+    if (isPassword && e.target.value === chagedpPassword) {
+      setChangedPasswordNotAllow(false);
+    } else {
+      setChangedPasswordNotAllow(true);
+    }
+  };
+
+  const saveModifiedPassword = async () => {
+    //이거 하기전에 먼저 사용자 전체정보를 불러왔어야 함 ㅠㅠ
+    try {
+      //불러온것
+      const userInfoResponse = await axios.get(`${URL}/api/member/info`, {
+        headers: {
+          Accept: '*/*',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(userInfoResponse.data.memberType);
+
+      if (userInfoResponse.data.memberType === 'FORM') {
+        console.log('당신은 form유저입니다');
+        const baseUrl = `${URL}/api/member/save/pwchange`;
+        const response = await axios.post(
+          baseUrl,
+          {
+            password: passwordConfirm,
+          },
+          {
+            headers: {
+              Accept: '*/*',
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log('너가 변경한 비번', passwordConfirm);
+        console.log('비밀번호가 성공적으로 수정되었습니다.', response.data);
+        alert('비밀번호가 성공적으로 수정되었습니다.');
+        window.location.href = '/mypage';
+      } else {
+        console.log('소셜로그인 사용자는 비밀번호를 바꿀 수 없습니다.');
+        alert('소셜로그인 사용자는 비밀번호를 바꿀 수 없습니다.');
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 
   return (
     <PageContainer>
@@ -521,10 +579,11 @@ export default function MyPageModify() {
             <div style={{ marginBottom: '21%' }} />
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
-                <BoldSentence>이름</BoldSentence> {/*아직 서버가 미완성*/}
+                <BoldSentence>이름</BoldSentence>
                 <GraySentence />
               </TitleRightWrapParagraphTitle>
               <InputWrap>
+                {/* <InputStyle onChange={handleNameChange} placeholder={defaultName} /> */}
                 <InputStyle onChange={handleNameChange} />
               </InputWrap>
             </TitleRightWrapParagraphArea>
@@ -591,28 +650,40 @@ export default function MyPageModify() {
             >
               <TitleRightWrapParagraphTitle>
                 <BoldSentence>비밀번호 변경</BoldSentence>
-                <GraySentence>현재 비밀번호를 입력해주세요</GraySentence>
+                <GraySentence>변경 비밀번호를 입력해주세요</GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap>
-                <InputStyle />
+                <InputStyle type="password" onChange={handlePasswordChange} />
               </InputWrap>
             </TitleRightWrapParagraphArea>
-
+            <div style={{ marginLeft: 'auto' }}>
+              <ErrorMessageWrap>
+                {!isPassword && chagedpPassword.length > 0 && (
+                  <div>
+                    최소 8자리 이상 / 대문자, 소문자, 숫자, 특수문자(# * ? !)를
+                    각 하나 이상 포함
+                  </div>
+                )}
+              </ErrorMessageWrap>
+            </div>
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
                 <GraySentence style={{ marginTop: '20%' }}>
-                  변경 비밀번호를 입력해주세요
+                  변경 비밀번호를 다시 입력해주세요
                 </GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap style={{ width: '300px' }}>
-                <InputStyle />{' '}
-                {/* <InputStyle onChange={handlePasswordsChange} />  */}
+                <InputStyle
+                  type="password"
+                  onChange={handlePasswordConfirmChange}
+                />
+                {/* <InputStyle />  */}
                 <StyledButton
-                  //onClick={saveModifiedPassword}
+                  onClick={saveModifiedPassword}
                   height="23px"
                   width="30%"
                   fontSize="10px"
-                  disabled={true}
+                  disabled={changedPasswordNotAllow}
                 >
                   비밀번호 변경
                 </StyledButton>
