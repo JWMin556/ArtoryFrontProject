@@ -30,6 +30,7 @@ const Page = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-bottom: 20px; /* 원하는 여백 값 */
 `;
 

@@ -96,7 +96,7 @@ export default function MyPageUserInfo() {
 
   return (
     <Container>
-      <TitleWrap style={{ width: '900px' }}>
+      <TitleWrap style={{ width: '860px' }}>
         <TitleLeftWrap>
           <TitleLeftWrapParagraph>
             <p>{userData.nickname}님의</p>

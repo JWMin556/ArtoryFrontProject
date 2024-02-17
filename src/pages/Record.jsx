@@ -70,12 +70,16 @@ const OpenSelectButton = styled.div`
 `;
 const WrapSaveButton = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 19%;
+  justify-content: center;
+  width: 100%;
   margin-bottom: 10%;
   & button {
+    /* font-family: inherit; */
     width: 123px;
     height: 40px;
+    margin: 0 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
     background-color: #242526;
     color: #fff;
     border: none;
@@ -86,13 +90,12 @@ const WrapSaveButton = styled.div`
 // 1. 스토리 작성하기 버튼 : item -> exhibitionTitle,exhibitionId,exhibitionImage
 // 2. 캘린더에서 스토리 클릭 : item -> exhibitionTitle,exhibitionId,exhibitionImage,storyId,year,month,day,storyState
 export default function Record(props) {
-
-    // useEffect(() => {
-    //     if(!token){
-    //         alert("토큰이 없습니다.");
-    //         window.location.href = '/'; // Home 페이지로 이동
-    //     } 
-    // });
+  // useEffect(() => {
+  //     if(!token){
+  //         alert("토큰이 없습니다.");
+  //         window.location.href = '/'; // Home 페이지로 이동
+  //     }
+  // });
 
   const navigate = useNavigate();
   const today = new Date();
@@ -275,17 +278,18 @@ export default function Record(props) {
           for (let j = 0; j < userStoryData.length; j++) {
             // 동일한 전시가 다른 날짜에 존재할 경우(다른날짜에 동일한 전시가 있음)
             if (userStoryData[i].exhibitionTitle === exhibitionTitle) {
-              if( userStoryData[i].year !== year ||
-                  userStoryData[i].month !== month ||
-                  userStoryData[i].day !== date)
-                  {
-                      setIsDeleteModal(true); //모달 띄우고
-                      return (storyByDate[j] = userStoryData[i]); //겹치는 전시들만 모으는 배열에 넣어줌
-                  }
+              if (
+                userStoryData[i].year !== year ||
+                userStoryData[i].month !== month ||
+                userStoryData[i].day !== date
+              ) {
+                setIsDeleteModal(true); //모달 띄우고
+                return (storyByDate[j] = userStoryData[i]); //겹치는 전시들만 모으는 배열에 넣어줌
+              }
             }
           }
         }
-        console.log('storyByDate',storyByDate)
+        console.log('storyByDate', storyByDate);
         saveStory();
       });
     }
@@ -478,8 +482,18 @@ export default function Record(props) {
           <Story2>나만의 스토리를 작성해보세요</Story2>
           <StoryTitle stroyId={storyId} Title={title} SetTitle={setTitle} />
           <OpenSelectButton>
-            <button onClick={ClickedOpen} style={isOpen?{backgroundColor:'#000',color:'#fff'}:{}}>공개</button>
-            <button onClick={ClickClosed} style={isOpen?{}:{backgroundColor:'#000',color:'#fff'}}>비공개</button>
+            <button
+              onClick={ClickedOpen}
+              style={isOpen ? { backgroundColor: '#000', color: '#fff' } : {}}
+            >
+              공개
+            </button>
+            <button
+              onClick={ClickClosed}
+              style={isOpen ? {} : { backgroundColor: '#000', color: '#fff' }}
+            >
+              비공개
+            </button>
           </OpenSelectButton>
           <TodayExhibition
             storyId={storyId}

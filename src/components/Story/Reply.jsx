@@ -164,9 +164,9 @@ const Comments = styled.div`
   background-color: white;
   font-family: 'Pretendard';
   font-weight: 400;
-  //margin-bottom: 30px;
   font-size: small;
   width: 90%;
+  margin-top: 10px;
   //스크롤 관련
   overflow: auto;
   &::-webkit-scrollbar {
