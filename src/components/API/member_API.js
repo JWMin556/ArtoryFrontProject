@@ -30,6 +30,7 @@ export const getMemberInfo = async () => {
 
 //장르 저장
 export const saveGenre = async (genre) => {
+  const tokentest = localStorage.getItem('Token');
   try {
     const response = await axios.post(
       `${BASE_URL}/save/genre`,
@@ -41,7 +42,7 @@ export const saveGenre = async (genre) => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${tokentest}`,
         },
       }
     );

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router';
 import MyPageTopic from '../components/MyPage/MyPageTopic';
 import StyledButton from '../styled-components/StyledButton';
-import { saveGenre } from '../components/API/member_API';
+import { getMemberInfo, saveGenre } from '../components/API/member_API';
 import axios from 'axios';
 import AWS from 'aws-sdk';
 
@@ -203,7 +203,7 @@ export default function MyPageModify() {
   const [nickname, setNickname] = useState('');
   const [length, setLength] = useState(0);
   const fileInputRef = useRef(null);
-  const [imageSrc, setImageSrc] = useState(myImage);
+  const [imageSrc, setImageSrc] = useState('');
   const [isHovered, setIsHovered] = useState(false); //이미지 암영효과를 위해서
   const [imageSrcReal, setImageSrcReal] = useState('');
   const [introduction, setIntroduction] = useState('');
@@ -219,6 +219,26 @@ export default function MyPageModify() {
   const [genreValid, setGenreValid] = useState(false);
 
   const [deleteMemberValid, setDeleteMemberValid] = useState(false);
+
+  //코멘트 리스트를 다시 불러오는 함수를 정의
+  const loadInfo = async () => {
+    try {
+      const response = await getMemberInfo();
+      console.log(response);
+      setname(response.memberName);
+      setNickname(response.nickname);
+      setImageSrc(response.image);
+      setImgUrl(response.image);
+      setIntroduction(response.introduction);
+      setMyKeyword(response.myKeyword);
+      //introduction은 어디에?
+    } catch (error) {
+      console.error('Error loading comments:', error.response.data);
+    }
+  };
+  useEffect(() => {
+    loadInfo();
+  }, []);
 
   const handleNameChange = (e) => {
     setname(e.target.value);
@@ -541,7 +561,7 @@ export default function MyPageModify() {
         <TitleWrap>
           <TitleLeftWrap>
             <TitleLeftWrapParagraph>
-              {myNickname}님의
+              {nickname}님의
               <br />
               마이페이지
             </TitleLeftWrapParagraph>
@@ -584,7 +604,7 @@ export default function MyPageModify() {
               </TitleRightWrapParagraphTitle>
               <InputWrap>
                 {/* <InputStyle onChange={handleNameChange} placeholder={defaultName} /> */}
-                <InputStyle onChange={handleNameChange} />
+                <InputStyle onChange={handleNameChange} value={name} />
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
@@ -596,7 +616,7 @@ export default function MyPageModify() {
                 </GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap>
-                <InputStyle onChange={handleNicknameChange} />
+                <InputStyle onChange={handleNicknameChange} value={nickname} />
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
@@ -608,7 +628,10 @@ export default function MyPageModify() {
                 </GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap>
-                <InputStyle onChange={handleIntroductionChange} />
+                <InputStyle
+                  onChange={handleIntroductionChange}
+                  value={introduction}
+                />
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
@@ -620,7 +643,7 @@ export default function MyPageModify() {
                 </GraySentence>
               </TitleRightWrapParagraphTitle>
               <InputWrap>
-                <InputStyle onChange={handleKeywordChange} />
+                <InputStyle onChange={handleKeywordChange} value={myKeyword} />
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
@@ -710,22 +733,23 @@ export default function MyPageModify() {
             </TitleRightWrapParagraphArea>
 
             <StyledButton
-              onClick={() => {
-                if (
-                  !nameValid ||
-                  !nickNameValid ||
-                  !imageValid ||
-                  !introductionValid ||
-                  !myKeywordValid ||
-                  !genreValid
-                ) {
-                  alert(
-                    '사진, 이름, 닉네임, 소개, 키워드, 관심전시를 모두 수정해주세요'
-                  );
-                } else {
-                  saveModifiedInformations();
-                }
-              }} //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
+              onClick={() => saveModifiedInformations()}
+              //   {
+              //   if (
+              //     !nameValid ||
+              //     !nickNameValid ||
+              //     !imageValid ||
+              //     !introductionValid ||
+              //     !myKeywordValid ||
+              //     !genreValid
+              //   ) {
+              //     alert(
+              //       '사진, 이름, 닉네임, 소개, 키워드, 관심전시를 모두 수정해주세요'
+              //     );
+              //   } else {
+              //     saveModifiedInformations();
+              //   }
+              // }} //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
               height="52px"
               width="70%"
               //disabled={!nameValid || !nickNameValid || !imageValid || !introductionValid || !myKeywordValid || !genreValid}
