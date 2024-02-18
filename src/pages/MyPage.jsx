@@ -48,12 +48,15 @@ export const TitleWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: end;
+  margin-bottom: 10%;
 `;
 
 export const TitleLeftWrap = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 22%;
+  margin-bottom: 2%;
 `;
 
 export const TitleLeftWrapParagraph = styled.div`
@@ -82,6 +85,8 @@ const TitleRightWrap = styled.div`
 const TitleRightWrapParagraphArea = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 1.5%;
+  margin-top: 1.5%;
 `;
 
 export const TitleRightWrapParagraphTitle = styled.div`
@@ -134,7 +139,6 @@ const ContentWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20%;
   /* margin-left: 3%;
   margin-right: 3%; */
   /* background-color: red; */
@@ -311,7 +315,7 @@ export default function MyPage() {
               style={{ display: 'inline-block', marginBottom: '10px' }}
             >
               <img
-                style={{ float: 'right', marginBottom: '15%' }}
+                style={{ float: 'right' ,marginBottom:"7%" }}
                 src="/img/setting.png"
                 alt="환경설정버튼"
                 width="8%"
@@ -326,7 +330,7 @@ export default function MyPage() {
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
-            <TitleRightWrapParagraphArea>
+            <TitleRightWrapParagraphArea >
               <TitleRightWrapParagraphTitle>
                 <BoldSentence>한 줄 소개</BoldSentence>
               </TitleRightWrapParagraphTitle>
@@ -335,7 +339,7 @@ export default function MyPage() {
               </InputWrap>
             </TitleRightWrapParagraphArea>
 
-            <TitleRightWrapParagraphArea>
+            <TitleRightWrapParagraphArea> 
               <TitleRightWrapParagraphTitle>
                 <BoldSentence>나의 키워드</BoldSentence>
               </TitleRightWrapParagraphTitle>
