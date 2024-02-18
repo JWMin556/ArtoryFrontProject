@@ -8,6 +8,7 @@ import SearchModal from '../components/MyStory/SearchModal1';
 import Memo from '../components/MyStory/Memo';
 import { getMystoryInfo, mystoryInfo } from '../components/API/Mystoyr_APITEST';
 import Poster from '../components/Exhibition/Poster';
+import CustomPagination from '../components/Exhibition/CustomPagination';
 
 
 export default function MyStory() {
@@ -18,7 +19,11 @@ export default function MyStory() {
 
   const profileIMG = userData.image;
   const { state } = useLocation();
-
+  const [page, setPage] = useState(1);
+  const [exhibition, setExhibition] = useState(12);
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [state]);
@@ -115,12 +120,23 @@ export default function MyStory() {
             <p>Loading...</p>
           ) : (
             //<p>있음</p>
-            userExhibitionData.map((item, index) => (
+            userExhibitionData.slice(
+              exhibition * (page - 1),
+              exhibition * (page - 1) + exhibition
+            ).map((item, index) => (
               <S.WrapExhibitionPoster>
                 <Poster item={item} loadUserStories={loadUserStories} part={'mystory'} />
               </S.WrapExhibitionPoster>
             ))
           )}
+          {/* <S.WrapPagination> */}
+            <CustomPagination
+              page={page}
+              exhibition={exhibition}
+              data={userExhibitionData}
+              handlePageChange={handlePageChange}
+            />
+          {/* </S.WrapPagination> */}
         </S.WrapSaveExhibition>
       </S.WrapExhibition>
     </S.Container>

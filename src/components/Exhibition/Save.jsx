@@ -24,10 +24,10 @@ export default function Save({loadUserStories,part,...props}) {
     //api 호출
     if (isClickSave) {
       await saveCancelApi(exhibitionId);
-      if(part==='mystory')
-      {
-        await loadUserStories();
-      }
+      // if(part==='mystory')
+      // {
+      //   await loadUserStories();
+      // }
     } //저장 취소
     else {
       await saveApi(exhibitionId);

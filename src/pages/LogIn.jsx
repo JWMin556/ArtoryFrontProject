@@ -19,6 +19,7 @@ export default function LogIn() {
   const [isIDInputClick, setIsIDInputClick] = useState(false); //ID input 박스 클릭 여부에 따라 placeholder의 상태를 관리하기 위한 변수
   const [isPWInputClick, setIsPWInputClick] = useState(false); //Password input 박스 클릭 여부에 따라 placeholder의 상태를 관리하기 위한 변수
   const [isOutLine, setOutLine] = useState(); //input 박스 클릭 시 outline의 상태를 관리하기 위한 변수
+  //const [isCheckedId,setIsCheckedId] = useState(false);
   function handleIDInputFocus() {
     //ID input박스에 들어오면 true(placeholder 텍스트 안보임), outline이 안보이도록 바꿔줌
     setIsIDInputClick(true);
@@ -40,12 +41,24 @@ export default function LogIn() {
 
   const onChangeId = (e) => {
     setID(e.target.value);
-    setIDValid(true);
+    const regex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/; //이메일 표준 정규식
+    if(regex.test(e.target.value))
+    {
+      setIDValid(true);
+    }
+    else{
+      setIDValid(false);
+    }
   };
 
   const onChangePasswords = (e) => {
-    setPassword(e.target.value);
-    setPasswordValid(true);
+    setPassword(e.target.value)
+    const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[#*?!]).{8,}$/;
+    if (regex.test(e.target.value)) {
+      setPasswordValid(true);
+    } else {
+      setPasswordValid(false);
+    }
   };
 
   const isLoggedIn = localStorage.getItem('arbitaryLoginForHeader');
@@ -111,10 +124,10 @@ export default function LogIn() {
             onFocus={handleIDInputFocus} //input박스에 들어올 때
             onBlur={handleIDInputBlur} //input박스에서 나갔을 때
             placeholder={isIDInputClick ? '' : '아이디를 입력해주세요'}
-            style={isOutLine}
+            style={idValid ? {color : '#28292A'} : {}}
           />
           <span>
-            <S.LockStyle src={OPENLOCK} />
+            <S.LockStyle src={idValid?LOCK:OPENLOCK} />
           </span>
         </div>
         <div>
@@ -125,11 +138,11 @@ export default function LogIn() {
             onFocus={handlePWInputFocus} //input박스에 들어올 때
             onBlur={handlePWInputBlur} //input박스에서 나갔을 때
             placeholder={isPWInputClick ? '' : '비밀번호를 입력해주세요'}
-            style={isOutLine}
+            style={passwordValid ? {color:'#28292A'} : {}}
             onKeyPress={handleOnKeyPress} //엔터키 눌러도 로그인 가능하게
           />
           <span>
-            <S.LockStyle src={LOCK} />
+            <S.LockStyle src={passwordValid?LOCK:OPENLOCK} />
           </span>
         </div>
         <Link to="/">

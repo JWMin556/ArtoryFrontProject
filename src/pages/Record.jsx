@@ -51,10 +51,11 @@ const Story2 = styled.div`
 `;
 const OpenSelectButton = styled.div`
   //border : 1px solid red;
-  width: 100%;
+  width: 104%;
   //text-align : end;
   margin-bottom: 5%;
   margin-top: 1%;
+
   display: flex;
   justify-content: end;
   & button {

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const WrapTitle = styled.div`
     width : 210px;
     height: 302px;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0.8);
     color : #ffff;
     box-shadow: 1px 2px 8px #f3f3f3;
     display : flex ;

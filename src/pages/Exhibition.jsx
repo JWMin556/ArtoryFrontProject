@@ -55,16 +55,13 @@ export default function Exhibition() {
           }
         );
         //console.log(response.data);
-        console.log('인기전시', response?.data.popluarExhibitionDtoList);
+        //console.log('인기전시', response?.data.popluarExhibitionDtoList);
         setPopularityExhibitionData(response?.data.popluarExhibitionDtoList);
-        console.log('최근전시', response?.data.recentExhibitionDtoList);
+        //console.log('최근전시', response?.data.recentExhibitionDtoList);
         setRecentExhibitionData(response?.data.recentExhibitionDtoList);
-        console.log('추천전시', response?.data.recommendExhibitionDtoList);
+        //console.log('추천전시', response?.data.recommendExhibitionDtoList);
         setRecommedExhibitionData(response?.data.recommendExhibitionDtoList);
-        console.log(
-          '임박한 전시',
-          response?.data.imminentExhibitionDtoList
-        );
+        //console.log('임박한 전시',response?.data.imminentExhibitionDtoList);
         setSimlarExhibitionData(response?.data.imminentExhibitionDtoList);
       } catch (error) {
         console.log(error.response.data);
@@ -161,7 +158,7 @@ export default function Exhibition() {
         source={'distanceRecommend'}
       />
       <Slide
-        title={'임박한 전시'}
+        title={'곧 종료될 전시'}
         Dummy={simailarExhibitionData}
         source={'imminent'}
       />

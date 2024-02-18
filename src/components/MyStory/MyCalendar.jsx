@@ -10,9 +10,11 @@ import one3 from '../../Img/Calendar/one3.svg'; //임시저장 원
 import SelectMonth from './SelectMonth';
 import SelectYear from './SelectYear';
 const Container = styled.div`
-  //border : 1px solid green;
-  width: 100vw;
+  //margin-top : 5%;
+  width: 50vw;
   height: 93vh;
+  // width: 900px;
+  // height: 550px;
   align-items: center;
   flex-direction: column;
   //justify-content : center;
@@ -99,6 +101,8 @@ const WrapYearSelect = styled.div`
   width : 97.5%;
   display: flex;
   justify-content: end;
+  position : relative;
+  bottom : 23px;
 `;
 const WrapMark = styled.div`
   width: 100%;
@@ -238,51 +242,52 @@ const MyCalendar = ({ loadUserStories, userStoryData, ...props }) => {
 
   };
   return (
-    <Container>
-        <WrapYearSelect>
-          <SelectYear
-            options={yearArray}
-            defaultValue={year}
-            onSelect={changeYear}
-          />
-        </WrapYearSelect>
-        <WrapHeaderAndTile>
-          <Header>
-              <img src={PREV_BUTTON} onClick={prevMonth}></img>
-              <span>
-                {monList[month]}월
-              </span>
-              <img src={NEXT_BUTTON} onClick={nextMonth}></img>
-            </Header>
-            <Days>
-              <Day>
-                <div style={{ color: '#f85835' }}>일</div>
-                <div>월</div>
-                <div>화</div>
-                <div>수</div>
-                <div>목</div>
-                <div>금</div>
-                <div>토</div>
-              </Day>
-              {makeCalendar(year, month - 1)}
-            </Days>
-        </WrapHeaderAndTile>
-        <WrapMark>
-          <span className="before">
-            <img src={one1} />
-            <span>작성 전</span>
-          </span>
-          <span className="progress">
-            <img src={one3} />
-            <span>임시저장</span>
-          </span>
-          <span className="after">
-            <img src={one2} />
-            <span>작성 완료</span>
-          </span>
-        </WrapMark>
-    </Container>
-
+    <div>
+      <WrapYearSelect>
+        <SelectYear
+          options={yearArray}
+          defaultValue={year}
+          onSelect={changeYear}
+        />
+      </WrapYearSelect>
+      <Container>
+          <WrapHeaderAndTile>
+            <Header>
+                <img src={PREV_BUTTON} onClick={prevMonth}></img>
+                <span>
+                  {monList[month]}월
+                </span>
+                <img src={NEXT_BUTTON} onClick={nextMonth}></img>
+              </Header>
+              <Days>
+                <Day>
+                  <div style={{ color: '#f85835' }}>일</div>
+                  <div>월</div>
+                  <div>화</div>
+                  <div>수</div>
+                  <div>목</div>
+                  <div>금</div>
+                  <div>토</div>
+                </Day>
+                {makeCalendar(year, month - 1)}
+              </Days>
+          </WrapHeaderAndTile>
+          <WrapMark>
+            <span className="before">
+              <img src={one1} />
+              <span>작성 전</span>
+            </span>
+            <span className="progress">
+              <img src={one3} />
+              <span>임시저장</span>
+            </span>
+            <span className="after">
+              <img src={one2} />
+              <span>작성 완료</span>
+            </span>
+          </WrapMark>
+      </Container>
+    </div>
   );
 };
 export default MyCalendar;

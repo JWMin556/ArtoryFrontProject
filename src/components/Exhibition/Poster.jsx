@@ -43,7 +43,10 @@ export default function Poster({
   ...props
 }) {
   const [isShow, setIsShow] = useState();
+    // 상태 초기값을 true로 설정
+    const [isShowTitle, setIsShowTitle] = useState(false);
 
+  //마이스토리 캘린더에서는 좋아요와 스크랩이 뜨지 않도록 하기 위해서 
   useEffect(() => {
     if (props.source == 'record' || props.source === 'before') {
       setIsShow(false);
@@ -51,6 +54,15 @@ export default function Poster({
       setIsShow(true);
     }
   }, [isShow]);
+
+  useEffect(() => {
+    if(part === 'genre') {
+
+      setIsShowTitle(true)
+      console.log(part)
+    } 
+  }, []);
+
   const [duration, setDuration] = useState();
   //console.log('전시명:',props.item.exhibitionTitle)
   const navigate = useNavigate();
@@ -74,8 +86,7 @@ export default function Poster({
       });
     }
   };
-  // 상태 초기값을 true로 설정
-  const [isShowTitle, setIsShowTitle] = useState(false);
+
   // 마우스가 Poster 위에 올라가면 Title을 보여주도록 변경
   const handleMouseEnter = () => {
     setIsShowTitle(true);

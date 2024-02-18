@@ -29,10 +29,16 @@ const WrapResult = styled.div`
   // justify-content : center;
   // align-items : center;
 `;
-const WrapSearch = styled.div`
+const WrapCategory = styled.div`
   width: 100%;
   margin-top: 7%;
   margin-bottom: 5%;
+  font-size : 30px;
+  font-weight : 800;
+  font-family: 'Pretendard';
+  margin-left : 30px;
+  position : relative;
+  top : 1%;
 `;
 const WrapPoster = styled.div`
   margin: 20px;
@@ -84,9 +90,9 @@ export default function Recommend() {
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <Container>
-        <WrapSearch>
-          <Search />
-        </WrapSearch>
+          <WrapCategory>
+            추천전시
+          </WrapCategory>
         <WrapResult>
           {recommendExhibitionData
             .slice(

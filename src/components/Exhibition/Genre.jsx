@@ -9,8 +9,10 @@ const GenreStyle = styled.img`
     box-shadow: 1px 2px 8px #f3f3f3;
 `;
 const WrapTitle = styled.div`
-    position : relative;
-    bottom : 302px;
+    position : absolute;
+    top : 0;
+    //bottom : 0;
+    //z-index : 50;
 `;
 export default function Genre({exhibitionTitle,...props}) { //본래는 그냥 ...props만...
     // 상태 초기값을 true로 설정
@@ -26,12 +28,12 @@ export default function Genre({exhibitionTitle,...props}) { //본래는 그냥 .
     };
 
 return (
-    <div style={{height:"302px"}}
+    <div style={{height:"302px", position:'relative'}}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
     >
         <GenreStyle src={props.item.exhibitionImage}/>
-        <WrapTitle>{isShowTitle && <GenreTitle title = {exhibitionTitle}/>}</WrapTitle>
+        <WrapTitle><GenreTitle title = {exhibitionTitle}/></WrapTitle>
     </div>
 );
 }

@@ -68,6 +68,7 @@ const WrapValue = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-right : 15%;
   & div {
     color: #ababab;
     font-family: 'Pretendard';
@@ -75,7 +76,7 @@ const WrapValue = styled.div`
   }
 `;
 const WrapTime = styled.div`
-  width: 78%;
+  width: 90%;
 `;
 const Time = styled.button`
   background-color: #f5f5f5;
@@ -83,7 +84,6 @@ const Time = styled.button`
   height: 19px;
   font-size: 11px;
   font-weight: 600;
-  padding-bottom: 5%;
   border: none;
   color: #ababab;
   font-family: inherit;
@@ -94,7 +94,6 @@ const BlackTime = styled.button`
   width: 72px;
   height: 19px;
   text-align: center;
-  padding-bottom: 5%;
   font-weight: 600;
   color: #fff;
   border: none;
@@ -102,13 +101,14 @@ const BlackTime = styled.button`
 `;
 const WrapWho = styled.div`
   width: 40%;
-`;
+  position : relative;
+  top : 2%;
+  `;
 const Who = styled.button`
   background-color: #f5f5f5;
   width: 41px;
   height: 19px;
   font-size: 11px;
-  padding-bottom: 5%;
   border: none;
   color: #ababab;
   font-weight: 600;
@@ -119,14 +119,13 @@ const BlackWho = styled.button`
   width: 41px;
   height: 19px;
   font-size: 11px;
-  padding-bottom: 5%;
   color: #fff;
   border: none;
   font-weight: 600;
   font-family: inherit;
 `;
 const WrapCategory = styled.div`
-  width: 75%;
+  width: 90%;
 `;
 const Category = styled.button`
   margin-top: 1.2%;
@@ -135,7 +134,6 @@ const Category = styled.button`
   height: 19px;
   text-align: center;
   font-size: 11px;
-  padding-bottom: 5%;
   color: #ababab;
   border: none;
   font-weight: 600;
@@ -148,7 +146,6 @@ const BlakcCategory = styled.button`
   height: 19px;
   text-align: center;
   font-size: 11px;
-  padding-bottom: 5%;
   color: #fff;
   border: none;
   font-weight: 600;
@@ -380,7 +377,17 @@ export default function TodayExhibition({
           <div>만족도</div>
           <div>날씨</div>
           <div>동행인</div>
-          <div>카테고리</div>
+          <div>카테고리 
+            <div style={{color:'#979797',
+              fontSize:'11px',
+              fontWeight:'400',
+              marginLeft:'3%',
+              position:'relative',
+              top:'3px'
+          }}>
+              중복가능
+            </div>
+          </div>
         </WrapKey>
         <WrapValue>
           <WrapTime>

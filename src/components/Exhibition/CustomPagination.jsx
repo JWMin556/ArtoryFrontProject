@@ -7,6 +7,7 @@ import NEXT from '../../Img/Pagination/next.svg'
 const Wrap = styled.div`
     //border: 1px solid red;
     margin-top : 5%;
+    margin-left : 1%;
     width : 75%;
     display : flex;
     justify-content : center;

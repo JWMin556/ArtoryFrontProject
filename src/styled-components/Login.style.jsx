@@ -22,7 +22,7 @@ export const HomeWrap = styled.div`
 
 export const HomeLeftWrap = styled.div`
   display: block;
-  margin-left: 12%;
+  margin-left: 17%;
   margin-top: 10%;
   /* display: block;
     margin-top : 2%; */
@@ -87,7 +87,7 @@ export const ThirdParagraph = styled.div`
 export const WrapLogin = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 12%;
+  margin-right: 16%;
   margin-top: 10%;
   &:focus {
     outline: none;
@@ -104,6 +104,9 @@ export const Input = styled.input`
   height: 50px;
   box-shadow: 1px 2px 8px #f3f3f3;
   color: #ababab;
+  &:focus {
+    outline : none;
+  }
   @media screen and (max-width: 500px) {
     width: 308px;
     height: 47.24px;

@@ -10,7 +10,6 @@ const url = `${URL}/api/exhibitions/`;
 
 export const WrapDetail = styled.div`
   min-height: 100vh; //footer 때문에 받아주셔야 합니다ㅜ
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,8 +42,9 @@ export const WrapImg = styled.div``;
 export const Title = styled.div`
   font-size: 30px;
   font-weight: bold;
-  width: 100%;
-  text-align: center;
+  width: 110%;
+  text-align: start;
+  margin-left : 15px;
 `;
 export const DetailInfo = styled.div`
   width: 100%;
@@ -66,6 +66,13 @@ export const Value = styled.span`
   margin-left: 30%;
   font-size: 12px;
   color: #616161;
+`;
+export const UndefinedValue = styled.span`
+  width: 20%;
+  height : 22px;
+  margin-right: 32%;
+  background-color : #F4f5f7;
+  //color: #616161;
 `;
 export const ImgAndInfo = styled.div`
   margin-top: 5%;
@@ -111,37 +118,61 @@ export default function Detail(props) {
           <Title>{props.title}</Title>
           <DetailInfo>
             <Key>장소</Key>
-            <Value>
-              {info?.exhibitionPlace === ''
-                ? '정보가 제공되지 않음'
-                : info?.exhibitionPlace}
-            </Value>
+            {
+              info?.exhibitionPlace === null ?
+              <UndefinedValue></UndefinedValue> :
+              <Value>{info?.exhibitionPlace}</Value> 
+            }  
           </DetailInfo>
           <DetailInfo>
             <Key>주소</Key>
-            <Value>{info?.exhibitionAddress}</Value>
+            {
+              info?.exhibitionAddress === null ?
+              <UndefinedValue></UndefinedValue> :
+              <Value>{info?.exhibitionAddress}</Value> 
+            }          
           </DetailInfo>
           <DetailInfo>
             <Key>기간</Key>
-            <Value>{info?.exhibitionDuration}</Value>
+            {
+              info?.exhibitionDuration === null ?
+              <UndefinedValue></UndefinedValue> :
+              <Value>{info?.exhibitionDuration}</Value> 
+            }      
           </DetailInfo>
           <DetailInfo>
             <Key>시간</Key>
-            <Value>{info?.exhibitionViewingTime}</Value>
+            {
+              info?.exhibitionViewingTime === null ?
+              <UndefinedValue></UndefinedValue> :
+              <Value>{info?.exhibitionViewingTime}</Value> 
+            }      
           </DetailInfo>
           <DetailInfo>
             <Key>관람연령</Key>
-            <Value>{info?.exhibitionViewingAge}</Value>
+            {
+              info?.exhibitionViewingAge === null ?
+              <UndefinedValue></UndefinedValue> :
+              <Value>{info?.exhibitionViewingAge}</Value> 
+            }    
           </DetailInfo>
           <DetailInfo>
             <Key>가격</Key>
-            <Value>{info?.exhibitionPrice}</Value>
+            {
+              info?.exhibitionPrice === null ?
+              <UndefinedValue></UndefinedValue> :
+              <Value>{info?.exhibitionPrice}</Value> 
+            }
           </DetailInfo>
           <DetailInfo>
             <Key>사이트</Key>
-            <Value style={{ width: '53%' }}>
-              <Link to={link}>{info?.exhibitionUrl}</Link>
-            </Value>
+            {
+              info?.exhibitionUrl === null ?
+              <Value></Value> :
+              <Value style={{ width: '53%' }}>
+                <Link to={link}>{info?.exhibitionUrl}</Link>
+              </Value>            
+            }
           </DetailInfo>
         </WrapInfo>
       </ImgAndInfo>

@@ -7,14 +7,14 @@ const Wrap = styled.div`
     // height : 522px;
     position : relative;
     //bottom : 2.7%;
-    width: 50vw;
-    height: 88vh;
+    width: 20vw;
+    height: 83vh;
 `;
 const MemoStyle = styled.textarea`
-    width: 100%;
-    height: 100%;
-    width : 20vw;
-    height : 77vh;
+    // width: 100%;
+    // height: 100%;
+    width : 100%;
+    height : 100%;
     color: #ababab;
     font-family: 'Pretendard';
     background-color: #F4f5f7;
@@ -23,7 +23,7 @@ const MemoStyle = styled.textarea`
     padding-top : 5%;
     resize: none;
     position : relative;
-    top : 7%;
+    top : 1%;
     //margin-left : 30%;
     //margin-top : 16%;
     &::placeholder {
@@ -43,8 +43,8 @@ const SaveButton = styled.button`
     position : absolute;
     bottom : 0;
     right : 0;
-    margin-bottom : 5%;
-    margin-right : 25%;
+    // margin-bottom : 8%;
+    margin-right : 7px;
     font-family: 'Pretendard';
     font-size : 12px;
 `;
@@ -79,7 +79,7 @@ export default function Memo(props) {
         memoSaveApi(content);
     }
     return (
-        <Wrap>
+        <Wrap style={{position:'relative'}}>
             <MemoStyle
                 value={content}
                 defaultValue={props.content}
