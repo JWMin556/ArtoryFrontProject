@@ -68,6 +68,7 @@ const LogoutButton = styled.button`
   font-size: 10px;
   font-family: 'Pretendard';
   margin-bottom: 3px;
+  cursor: pointer;
 `;
 
 export default function Header() {
