@@ -36,12 +36,13 @@ export const saveGenre = async (genre) => {
     const response = await axios.post(
       `${BASE_URL}/save/genre`,
       {
-        genre1: genre[0],
-        genre2: genre[1],
-        genre3: genre[2],
+        "genre1": genre[0],
+        "genre2": genre[1],
+        "genre3": genre[2],
       },
       {
         headers: {
+          Accept: '*/*',
           'Content-Type': 'application/json',
           Authorization: `Bearer ${tokentest}`,
         },
