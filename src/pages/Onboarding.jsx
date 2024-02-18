@@ -188,8 +188,9 @@ const Title = styled.p`
 
 const Nickname = styled.input`
   &::placeholder {
-    color: #a6a9af;
+    color: #a6a9af; /*  */
   }
+  color: #28292a;
   margin-top: 40px;
   padding-left: 20px;
   /* border-radius: 10px; */
@@ -197,7 +198,6 @@ const Nickname = styled.input`
   box-shadow: 1px 2px 8px #f3f3f3;
   width: 65%;
   min-height: 50px;
-  color: #ababab; //닉네임 입력 후 글자 색
   font-weight: 500;
   font-family: 'Pretendard';
   outline: none; //border가 아니라 outline을 없애야 클릭 시에도 border(or outline이 안보임)

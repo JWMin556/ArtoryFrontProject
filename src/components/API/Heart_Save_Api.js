@@ -1,18 +1,16 @@
 import axios from 'axios';
-import { useEffect } from 'react';
-const token = localStorage.getItem('Token');
+
 const URL = localStorage.getItem('URL');
 const SaveUrl = `${URL}/api/scrap-exhibition/`;
 const HeartUrl = `${URL}/api/like-exhibition/`;
 
 //전시회 스크랩
 export const saveApi = async (exhibitionId) => {
+  const token = localStorage.getItem('Token'); // 함수 내부에서 토큰을 가져옴
   try {
     const response = await axios.post(
       `${SaveUrl}exhibition-scrapped?exhibitionId=${exhibitionId}`,
-      {
-        //  exhibitionId: exhibitionId.item
-      },
+      {},
       {
         headers: {
           Accept: '*/*',
@@ -25,17 +23,15 @@ export const saveApi = async (exhibitionId) => {
   } catch (error) {
     console.error('Error fetching data:', error.response);
   }
-  //fetchData();
 };
 
 //전시회 스크랩 취소
 export const saveCancelApi = async (exhibitionId) => {
+  const token = localStorage.getItem('Token'); // 함수 내부에서 토큰을 가져옴
   try {
     const response = await axios.post(
       `${SaveUrl}exhibition-disScrapped?exhibitionId=${exhibitionId}`,
-      {
-        //  exhibitionId: exhibitionId.item
-      },
+      {},
       {
         headers: {
           Accept: '*/*',
@@ -48,18 +44,16 @@ export const saveCancelApi = async (exhibitionId) => {
   } catch (error) {
     console.error('Error fetching data:', error.response);
   }
-  //fetchData();
 };
 
 //전시회 좋아요
 export const heartApi = async (exhibitionId) => {
+  const token = localStorage.getItem('Token'); // 함수 내부에서 토큰을 가져옴
   console.log('heartApi 함수로 들어옴 ', exhibitionId);
   try {
     const response = await axios.post(
       `${HeartUrl}exhibition-liked?exhibitionId=${exhibitionId}`,
-      {
-        //exhibitionId: exhibitionId
-      },
+      {},
       {
         headers: {
           Accept: '*/*',
@@ -72,18 +66,16 @@ export const heartApi = async (exhibitionId) => {
   } catch (error) {
     console.error('Error fetching data:', error.response.data);
   }
-  //fetchData();
 };
 
 //전시회 좋아요 취소
 export const heartCancelApi = async (exhibitionId) => {
+  const token = localStorage.getItem('Token'); // 함수 내부에서 토큰을 가져옴
   console.log('heartCancelApi 함수로 들어옴 ', exhibitionId);
   try {
     const response = await axios.post(
       `${HeartUrl}exhibition-disliked?exhibitionId=${exhibitionId}`,
-      {
-        //exhibitionId: exhibitionId
-      },
+      {},
       {
         headers: {
           Accept: '*/*',
@@ -96,5 +88,4 @@ export const heartCancelApi = async (exhibitionId) => {
   } catch (error) {
     console.error('Error fetching data:', error.response.data);
   }
-  //fetchData();
 };

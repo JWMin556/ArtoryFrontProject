@@ -3,9 +3,10 @@ import axios from 'axios';
 const URL = localStorage.getItem('URL');
 
 const BASE_URL = `${URL}/api/`;
-const token = localStorage.getItem('Token');
 
 export const getStoryInfo = async (id) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.get(`${BASE_URL}/stories/${id}`, {
       headers: {
@@ -24,6 +25,8 @@ export const getStoryInfo = async (id) => {
 };
 
 export const searchStory = async (keyword) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.get(
       `${BASE_URL}/stories/search?page=1&title=${keyword}`,
@@ -43,6 +46,8 @@ export const searchStory = async (keyword) => {
 //유저 스크랩 관리
 
 export const userScrapped = async (id) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.post(
       `${BASE_URL}/scrap-member/member-scrapped?toMemberId=${id}`,
@@ -61,6 +66,8 @@ export const userScrapped = async (id) => {
   }
 };
 export const userUnScrapped = async (id) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.post(
       `${BASE_URL}/scrap-member/member-unscrapped?toMemberId=${id}`,
@@ -81,6 +88,8 @@ export const userUnScrapped = async (id) => {
 //스토리 스크랩 관리
 
 export const storyScrapped = async (id) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.get(
       `${BASE_URL}/scrap-story/story-scrapped?storyId=${id}`,
@@ -98,6 +107,8 @@ export const storyScrapped = async (id) => {
   }
 };
 export const storyUnScrapped = async (id) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.get(
       `${BASE_URL}/scrap-story/story-unscrapped?storyId=${id}`,
@@ -116,6 +127,8 @@ export const storyUnScrapped = async (id) => {
 };
 //스토리 좋아요 관리
 export const storyLiked = async (id) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.get(
       `${BASE_URL}/like-story/story-liked?storyId=${id}`,
@@ -133,6 +146,8 @@ export const storyLiked = async (id) => {
   }
 };
 export const storyUnLiked = async (id) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.get(
       `${BASE_URL}/like-story/story-unliked?storyId=${id}`,
@@ -152,6 +167,8 @@ export const storyUnLiked = async (id) => {
 
 //댓글 관리
 export const getComments = async (storyId) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.get(`${BASE_URL}stories/comment/${storyId}`, {
       headers: {
@@ -171,6 +188,8 @@ export const createComment = async (
   commentSatisfactionLevel,
   commentContext
 ) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.post(
       `${BASE_URL}/comments/save/{story-id}?storyId=${storyId}`,
@@ -197,6 +216,8 @@ export const patchComment = async (
   commentSatisfactionLevel,
   commentContext
 ) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.patch(
       `${BASE_URL}comments/update/${storyId}`,
@@ -220,6 +241,8 @@ export const patchComment = async (
 };
 
 export const deleteComment = async (storyId, commentId) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.delete(
       `${BASE_URL}comments/delete/${storyId}?commentId=${commentId}`,
@@ -241,6 +264,8 @@ export const deleteComment = async (storyId, commentId) => {
 //대댓글 추가
 
 export const createReply = async (commentId, commentContext) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.post(
       `${BASE_URL}/subcomments/save/{comment-id}?commentId=${commentId}`,
@@ -261,6 +286,8 @@ export const createReply = async (commentId, commentContext) => {
   }
 };
 export const deleteReply = async (commentId, subCommentId) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.delete(
       `${BASE_URL}subcomments/delete/${commentId}?subCommentId=${subCommentId}`,
@@ -280,6 +307,8 @@ export const deleteReply = async (commentId, subCommentId) => {
 };
 //대댓글 수정
 export const patchReply = async (commentId, subCommentId, commentContext) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.patch(
       `${BASE_URL}subcomments/update/${commentId}`,

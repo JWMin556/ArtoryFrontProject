@@ -78,7 +78,7 @@ function App() {
       }
     };
     //15분마다 요청
-    const intervalRequest = setInterval(errorHandling, 15 * 60 * 1000);
+    const intervalRequest = setInterval(errorHandling, 15 * 60 * 1000); //
     return () => clearInterval(intervalRequest);
   }, []);
 

@@ -25,6 +25,8 @@ export const progressSaveApi1 = async (
   picturesUrl
 ) => {
   console.log('이미지 저장api로 잘 들어옴', picturesUrl);
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.post(
       `${url}mystory/draft-save-with-storyId?storyId=${storyId}`,
@@ -92,6 +94,8 @@ export const progressSaveApi2 = async (
   console.log('api year', year);
   console.log('api month', month);
   console.log('api date', date);
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.post(
       `${url}mystory/draft-save`,
@@ -133,6 +137,8 @@ export const BeforeWritionSaveApi = async (id, year, month, day) => {
   console.log('BeforeWritionSaveApi 함수로 들어옴 ', year);
   console.log('BeforeWritionSaveApi 함수로 들어옴 ', month);
   console.log('BeforeWritionSaveApi 함수로 들어옴 ', day);
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.post(
       `${url}mystory/not-started-save`,
@@ -191,6 +197,8 @@ export const modifySaveApi = async (
   // console.log(year);
   // console.log(month);
   // console.log(date);
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.patch(
       `${url}stories/upadte/{story-id}?storyId=${storyId}`,
