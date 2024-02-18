@@ -54,16 +54,17 @@ const InputWrap = styled.div`
   display: flex;
   background: white;
   box-shadow: 1px 2px 8px #f3f3f3;
-  padding: 16px;
+  /* padding: 16px; */
   margin-top: 8px;
   margin-bottom: 13px;
+  height: 50px;
 `;
 
 const InputStyle = styled.input`
   width: 100%;
   outline: none;
   border: none;
-  color: #505154;
+  color: #28292a;
   font-size: 12px;
   font-family: 'Pretendard';
   font-weight: 400;
@@ -332,7 +333,7 @@ export default function SignUp() {
             ) : (
                 <button onClick={handleVerification}>인증</button>
             )} */}
-            <StyledButton disabled={notAllowEmail} onClick={handleVerification} color="#9BA0AE" height="25px" width="20%" fontSize="13px">인증하기</StyledButton>
+            <StyledButton style={{marginTop:"2.5%", marginRight:"1%"}} disabled={notAllowEmail} onClick={handleVerification} height="27px" width="20%" fontSize="13px">인증하기</StyledButton>
           </InputWrap>
         </SuperTitle>
 
@@ -345,7 +346,7 @@ export default function SignUp() {
               onChange={onChangeCertificateNumber}
               />
             {/*value와 onchange 추가해야 함*/}
-            <StyledButton disabled={notAllowCertificateNumber} onClick={checkCertificateNumber} color="#9BA0AE" height="25px" width="20%" fontSize="13px">인증완료</StyledButton>
+            <StyledButton style={{marginTop:"2.5%", marginRight:"1%"}} disabled={notAllowCertificateNumber} onClick={checkCertificateNumber} height="27px" width="20%" fontSize="13px">인증완료</StyledButton>
           </InputWrap>
         </SuperTitle>
 
@@ -402,7 +403,7 @@ export default function SignUp() {
         </SuperTitle>
 
         <InputCheckBoxTitle>
-          <ul style={{listStyleType:"none"}}>
+          <ul style={{listStyleType:"none", paddingLeft: 0}}>
             <li>
               <input
                 type="checkbox"

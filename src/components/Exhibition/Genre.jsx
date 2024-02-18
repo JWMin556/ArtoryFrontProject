@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import GenreTitle from './GenreTitle';
 
 const GenreStyle = styled.img`
-    width : 210px;
+    width : 200px;
     height: 302px;
     //border-radius : 10px; 
     box-shadow: 1px 2px 8px #f3f3f3;
