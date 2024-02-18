@@ -37,6 +37,8 @@ export const createStory1 = async (
   // console.log(month);
   // console.log(date);
   console.log('선택된 사진', picturesUrl);
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.post(
       `${BASE_URL}stories/save?storyId=${storyId}`,
@@ -102,6 +104,8 @@ export const createStory2 = async (
   // console.log(year);
   // console.log(month);
   // console.log(date);
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.post(
       `${BASE_URL}stories/save?storyId`,
@@ -138,6 +142,8 @@ export const createStory2 = async (
 };
 export const getMystoryInfo = async () => {
   //유저 정보 불러오기
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.get(`${BASE_URL}mystory/all?page=1`, {
       headers: {

@@ -106,7 +106,7 @@ function CommentListItem({
     setSelectedEmoticonIndex(selectedIdx);
   };
   return (
-    <>
+    <div id="commentBox">
       {' '}
       <div style={{ display: 'flex' }}>
         {/* 댓글 작성자 아이디 & 프사 => 수정필요 */}
@@ -155,7 +155,7 @@ function CommentListItem({
       {modal === true ? (
         <DeleteModal setModal={setModal} handleDelete={handleDelete} />
       ) : null}
-    </>
+    </div>
   );
 }
 //;
@@ -240,7 +240,7 @@ const UserNickName = styled.p`
   padding: 2px 0 10px;
 `;
 const CommentStyled = styled.div`
-  margin: 30px 0;
+  margin: 40px 0;
   position: relative;
 `;
 const Comments = styled.div`

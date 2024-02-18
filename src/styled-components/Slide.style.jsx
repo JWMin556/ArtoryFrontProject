@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 export const WrapSlider = styled.div`
   width: 885px;
   height: 350px;
-  margin-bottom: 4%;
+  margin-bottom: 5%;
 `;
 export const Category = styled.button`
   position: relative;

@@ -2,9 +2,10 @@ import axios from 'axios';
 const URL = localStorage.getItem('URL');
 
 const BASE_URL = `${URL}/api/`;
-const token = localStorage.getItem('Token');
 
 export const getUserPage = async (id) => {
+  const token = localStorage.getItem('Token');
+
   try {
     const response = await axios.post(
       `${BASE_URL}/mypage/member`,

@@ -88,7 +88,7 @@ export default function StoryDetail() {
             </span>
             <p
               onClick={() => onClickDetail()}
-              style={{ color: '#717276', marginTop: '3px' }}
+              style={{ color: '#717276', marginTop: '3px', cursor: 'pointer' }}
             >
               {item.memberNickname}
             </p>
@@ -285,4 +285,5 @@ const Profile = styled.img`
   height: 60px;
   margin-right: 10px;
   object-fit: cover; //이렇게 할 건지 안 할 건지
+  cursor: pointer;
 `;

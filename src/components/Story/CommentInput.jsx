@@ -102,14 +102,18 @@ export default function CommentInput(props) {
         {!commentIsOpen ? (
           <OpenBtn onClick={openComment}>
             <H5>댓글 작성</H5>{' '}
-            <img style={{ width: '17px' }} src={close} alt="화살표" />
+            <img
+              style={{ width: '17px', verticalAlign: 'middle' }}
+              src={open}
+              alt="화살표"
+            />
           </OpenBtn>
         ) : (
           <OpenedComment>
             <div>
               <div style={{ cursor: 'pointer' }} onClick={openComment}>
                 <H5>댓글 작성</H5>{' '}
-                <img style={{ width: '17px' }} src={open} alt="아래화살표" />
+                <img style={{ width: '17px' }} src={close} alt="아래화살표" />
               </div>
               <p
                 style={{
@@ -157,6 +161,7 @@ export default function CommentInput(props) {
   );
 }
 const H5 = styled.span`
+  vertical-align: middle;
   font-size: 1.35rem;
   font-weight: 800;
   margin-bottom: 15px;

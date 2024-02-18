@@ -10,6 +10,7 @@ const PosterStyle = styled.img`
   box-shadow: 1px 2px 8px #f3f3f3;
   height: 126px;
   width: 126px;
+  object-fit: cover;
 `;
 
 export default function ProfileImg({

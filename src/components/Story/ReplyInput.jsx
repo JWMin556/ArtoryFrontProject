@@ -51,12 +51,12 @@ export default function ReplyInput(props) {
         loadComments={props.loadComments}
       />
       <ReplyButton onClick={() => setIsReplyOpen(!isReplyOpen)}>
+        <span style={{ marginRight: '3px' }}>댓글 달기</span>
         {isReplyOpen ? (
-          <img style={{ width: '20px' }} src={downVector} alt="down" />
-        ) : (
           <img style={{ width: '20px' }} src={up} alt="up" />
+        ) : (
+          <img style={{ width: '20px' }} src={downVector} alt="down" />
         )}
-        <span>댓글 달기</span>
       </ReplyButton>
       {isReplyOpen && (
         <>
@@ -121,7 +121,7 @@ const ReplyButton = styled.button`
   font-family: 'Pretendard';
   font-size: bigger;
   font-weight: 600;
-  margin-top: 15px;
+  margin-top: 8px;
   span {
     vertical-align: middle; /* span의 기준선을 중앙에 맞춤 */
   }
