@@ -119,7 +119,7 @@ export default function Detail(props) {
           <DetailInfo>
             <Key>장소</Key>
             {
-              info?.exhibitionPlace === null ?
+              info?.exhibitionPlace === null || info?.exhibitionPlace === "" ?
               <UndefinedValue></UndefinedValue> :
               <Value>{info?.exhibitionPlace}</Value> 
             }  
@@ -127,7 +127,7 @@ export default function Detail(props) {
           <DetailInfo>
             <Key>주소</Key>
             {
-              info?.exhibitionAddress === null ?
+              info?.exhibitionAddress === null || info?.exhibitionAddress === "" ?
               <UndefinedValue></UndefinedValue> :
               <Value>{info?.exhibitionAddress}</Value> 
             }          
@@ -135,7 +135,7 @@ export default function Detail(props) {
           <DetailInfo>
             <Key>기간</Key>
             {
-              info?.exhibitionDuration === null ?
+              info?.exhibitionDuration === null || info?.exhibitionDuration === "" ?
               <UndefinedValue></UndefinedValue> :
               <Value>{info?.exhibitionDuration}</Value> 
             }      
@@ -143,15 +143,15 @@ export default function Detail(props) {
           <DetailInfo>
             <Key>시간</Key>
             {
-              info?.exhibitionViewingTime === null ?
+              info?.exhibitionDuration === null || info?.exhibitionDuration === "" ?
               <UndefinedValue></UndefinedValue> :
-              <Value>{info?.exhibitionViewingTime}</Value> 
+              <Value>{info?.exhibitionDuration}</Value> 
             }      
           </DetailInfo>
           <DetailInfo>
             <Key>관람연령</Key>
             {
-              info?.exhibitionViewingAge === null ?
+              info?.exhibitionViewingAge === null || info?.exhibitionViewingAge === "" ?
               <UndefinedValue></UndefinedValue> :
               <Value>{info?.exhibitionViewingAge}</Value> 
             }    
@@ -159,7 +159,7 @@ export default function Detail(props) {
           <DetailInfo>
             <Key>가격</Key>
             {
-              info?.exhibitionPrice === null ?
+              info?.exhibitionPrice === null || info?.exhibitionPrice === "" ?
               <UndefinedValue></UndefinedValue> :
               <Value>{info?.exhibitionPrice}</Value> 
             }
@@ -167,8 +167,8 @@ export default function Detail(props) {
           <DetailInfo>
             <Key>사이트</Key>
             {
-              info?.exhibitionUrl === null ?
-              <Value></Value> :
+              info?.exhibitionUrl === null || info?.exhibitionUrl === "" ?
+              <UndefinedValue></UndefinedValue> :
               <Value style={{ width: '53%' }}>
                 <Link to={link}>{info?.exhibitionUrl}</Link>
               </Value>            
