@@ -109,8 +109,8 @@ export default function MyStory() {
           style={{
             fontSize: '30px',
             fontWeight: '700',
-            fontFamily: 'Pretendard',            
-            //textAlign: 'center'
+            fontFamily: 'Pretendard',   
+            marginLeft:'20px'         
           }}
         >
           저장한 전시
@@ -129,15 +129,15 @@ export default function MyStory() {
               </S.WrapExhibitionPoster>
             ))
           )}
-          {/* <S.WrapPagination> */}
-            <CustomPagination
+        </S.WrapSaveExhibition>
+            <S.WrapPagination>
+                  <CustomPagination
               page={page}
               exhibition={exhibition}
               data={userExhibitionData}
               handlePageChange={handlePageChange}
             />
-          {/* </S.WrapPagination> */}
-        </S.WrapSaveExhibition>
+          </S.WrapPagination>
       </S.WrapExhibition>
     </S.Container>
   );

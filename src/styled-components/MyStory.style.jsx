@@ -7,18 +7,29 @@ export const Container = styled.div`
     align-items: center;
 `;
 export const WrapExhibition = styled.div`
-    //border : 1px solid red;
-    width : 60%;
+    width: fit-content;
     font-weight : 900; 
     margin-top : 5%;
+    display : flex;
+    flex-direction : column;
+`;
+export const WrapPagination = styled.div`
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    position : relative;
+    left :2%;
+
 `;
 export const WrapSaveExhibition = styled.div`
-    display : flex;
-    flex-direction : row;
-    flex-wrap : wrap;
+    //display : flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    // flex-direction : row;
+    // flex-wrap : wrap;
     margin-top : 2%;
-    justify-content: space-between;
-    align-items: center;
+    // justify-content: space-between;
+    // align-items: center;
 `;
 export const WrapPoster = styled.div`
     margin-right  : 3%;
@@ -50,8 +61,8 @@ export const WrapProfile = styled.div`
 `;
 
 export const WrapExhibitionPoster = styled.div`
-    //margin-right : 5%;
-    margin-bottom : 5%;
+    margin-left : 20px;
+    margin-bottom : 20px;
 `;
 
 export const WrapProfileAndButton = styled.div`
@@ -59,7 +70,4 @@ export const WrapProfileAndButton = styled.div`
     display : flex;
     justify-content: space-between;
     margin-top : 6%;
-`;
-export const WrapPagination = styled.div`
-
 `;
