@@ -162,7 +162,7 @@ export default function Exhibition() {
         Dummy={simailarExhibitionData}
         source={'imminent'}
       />
-      <div style={{ width: '885px', height: '100%', marginBottom: '10%' }}>
+      <div style={{ width: '900px', height: '100%', marginBottom: '10%' }}>
         <S.GenreParagraph>전시 카테고리</S.GenreParagraph>
         <S.GenreWrap>
           <S.GenreWrapRow>

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const WrapTitle = styled.div`
-    width : 210px;
+    width : 200px;
     height: 302px;
     background-color: rgba(0,0,0,0.8);
     color : #ffff;

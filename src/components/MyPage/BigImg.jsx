@@ -33,7 +33,8 @@ const Container = styled.div`
 `;
 
 const Image = styled.img`
-  width: 490px;
+  width: 460px;
+  height: 500px;
   /* max-height: 80%; */
   object-fit: contain;
 `;

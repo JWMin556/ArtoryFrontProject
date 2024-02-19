@@ -61,10 +61,10 @@ export default function ExhibitionSearch(props) {
             <div>
               <Poster item={item} />
             </div>
-            <WrapIcon>
+            {/* <WrapIcon>
               <Heart item={item}/>
               <Save item={item}/>
-            </WrapIcon>
+            </WrapIcon> */}
           </WrapPoster>
         ))}
       </WrapResult>

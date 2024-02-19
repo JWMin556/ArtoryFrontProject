@@ -5,7 +5,7 @@ const StyledButton = styled.button`
   width: ${(props) => props.width || '123px'};
   font-size: ${(props) => props.fontSize || '20px'};
   background-color: ${(props) => (props.disabled ? '#dadada' : '#121212')};
-  color: ${(props) => props.color || 'white'};
+  color: ${(props) => (props.disabled ? '#9BA0AE' : 'white')};
   border: none;
   font-weight: 600;
   word-wrap: break-word;
