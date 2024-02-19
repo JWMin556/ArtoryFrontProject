@@ -20,7 +20,7 @@ const PageContainer = styled.div`
 
 const Page = styled.div`
   /* position: relative; */
-  width: 76%;
+  width: 70%;
   /* max-width: 800px; */
   padding: 0 20px;
   position: absolute;
@@ -622,7 +622,7 @@ export default function MyPageModify() {
           </TitleLeftWrap>
 
           <TitleRightWrap>
-            <div style={{ marginBottom: '21%' }} />
+            <div style={{ marginBottom: '20%' }} />
             <TitleRightWrapParagraphArea>
               <TitleRightWrapParagraphTitle>
                 <BoldSentence>이름</BoldSentence>
@@ -778,9 +778,9 @@ export default function MyPageModify() {
               //   }
               // }} //이름, 닉네임, 소개, 키워드, 사진, 전시정보가 있어야 활성화
               height="52px"
-              width="70%"
+              width="40%"
               //disabled={!nameValid || !nickNameValid || !imageValid || !introductionValid || !myKeywordValid || !genreValid}
-              style={{ marginTop: '40px', marginBottom: '30%' }}
+              style={{marginLeft:'65px', marginTop: '15%', marginBottom: '30%' }}
             >
               수정하기
             </StyledButton>

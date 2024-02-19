@@ -6,7 +6,7 @@ const token = localStorage.getItem('Token');
 
 export const getMemberInfo = async () => {
   //사용자 전체 정보
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('Token');
 
   try {
     const response = await axios.get(`${BASE_URL}/info`, {
@@ -25,7 +25,8 @@ export const getMemberInfo = async () => {
     //alert(data);
     //return response;
   } catch (error) {
-    console.error('Error fetching data:', error);
+    // console.error('Error fetching data:', error);
+    console.log('getMemberInfo메 api', error.response.data);
   }
 };
 
