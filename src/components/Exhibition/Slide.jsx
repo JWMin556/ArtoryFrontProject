@@ -20,6 +20,7 @@ export default function Slide(props) {
   //   nextArrow: <Next />,
   //   prevArrow: <Prev />,
   // };
+  const numItems = props.Dummy.length;
   const infinite = numItems < 4 ? false : true;
   const setting = {
     arrows: true,
