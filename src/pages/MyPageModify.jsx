@@ -319,7 +319,7 @@ export default function MyPageModify() {
     'PICTURE',
     'SPECIAL_EXHIBITION',
     'SCULPTURE',
-    'PLANEXHIBITION',
+    'PLAN_EXHIBITION',
     'INSTALLATION_ART',
     'PAINTING',
     'ARTIST_EXHIBITION',

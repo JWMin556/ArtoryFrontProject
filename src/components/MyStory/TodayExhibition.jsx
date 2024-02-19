@@ -139,7 +139,7 @@ const Category = styled.button`
   font-weight: 600;
   font-family: inherit;
 `;
-const BlakcCategory = styled.button`
+const BlackCategory = styled.button`
   margin-top: 1.2%;
   background-color: #000;
   width: 85px;
@@ -242,16 +242,16 @@ const category = [
   <Category>작가전시</Category>,
 ];
 const blackCategory = [
-  <BlakcCategory>미디어</BlakcCategory>,
-  <BlakcCategory>공예</BlakcCategory>,
-  <BlakcCategory>디자인</BlakcCategory>,
-  <BlakcCategory>사진</BlakcCategory>,
-  <BlakcCategory>특별전시</BlakcCategory>,
-  <BlakcCategory>조각</BlakcCategory>,
-  <BlakcCategory>기획전</BlakcCategory>,
-  <BlakcCategory>설치미술</BlakcCategory>,
-  <BlakcCategory>회화</BlakcCategory>,
-  <BlakcCategory>작가전시</BlakcCategory>,
+  <BlackCategory>미디어</BlackCategory>,
+  <BlackCategory>공예</BlackCategory>,
+  <BlackCategory>디자인</BlackCategory>,
+  <BlackCategory>사진</BlackCategory>,
+  <BlackCategory>특별전시</BlackCategory>,
+  <BlackCategory>조각</BlackCategory>,
+  <BlackCategory>기획전</BlackCategory>,
+  <BlackCategory>설치미술</BlackCategory>,
+  <BlackCategory>회화</BlackCategory>,
+  <BlackCategory>작가전시</BlackCategory>,
 ];
 export default function TodayExhibition({
   storyId,
@@ -340,7 +340,7 @@ export default function TodayExhibition({
   const handleCategorySelection = (selectedIdx) => {
     //선택된 카테고리 인덱스값 셋팅
     setSelectedCategoryIndex(selectedIdx);
-    setGenre1(category[selectedIdx].props.children); //선택된 카테고리를 Record.jsx로 보내줌
+    //setGenre1(category[selectedIdx].props.children); //선택된 카테고리를 Record.jsx로 보내줌
     // console.log("카테고리",category[selectedIdx].props.children)
   };
   const [isModalOpen, setIsModalOpen] = useState(false);

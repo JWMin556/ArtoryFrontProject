@@ -31,7 +31,7 @@ export default function Onboarding3() {
     'PICTURE',
     'SPECIAL_EXHIBITION',
     'SCULPTURE',
-    'PLANEXHIBITION',
+    'PLAN_EXHIBITION',
     'INSTALLATION_ART',
     'PAINTING',
     'ARTIST_EXHIBITION',
