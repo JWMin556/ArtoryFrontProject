@@ -71,6 +71,7 @@ export default function MyPageUserInfo() {
   };
 
   const loadUserPage = async () => {
+    console.log(id);
     try {
       const response = await getUserPage(id);
       setUserStories(response.stories);
@@ -96,7 +97,7 @@ export default function MyPageUserInfo() {
 
   return (
     <Container>
-      <TitleWrap style={{ width: '860px' }}>
+      <TitleWrap style={{ width: '860px', marginBottom: '0' }}>
         <TitleLeftWrap>
           <TitleLeftWrapParagraph>
             <p>{userData.nickname}님의</p>
@@ -137,7 +138,7 @@ export default function MyPageUserInfo() {
 
       {/* 스토리 */}
       <Stories>
-        <TitleWrap style={{ width: '100%' }}>
+        <TitleWrap style={{ width: '100%', marginBottom: '0' }}>
           <span style={{ padding: '20px' }}>
             {' '}
             {userData.nickname}님이 <br />
