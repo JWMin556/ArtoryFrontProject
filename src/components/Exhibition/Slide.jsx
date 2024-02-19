@@ -10,11 +10,22 @@ import { useNavigate } from 'react-router-dom';
 export default function Slide(props) {
   const navigate = useNavigate();
 
-  //console.log("슬라이드 페이지", props.Dummy)
+  // //console.log("슬라이드 페이지", props.Dummy)
+  // const setting = {
+  //   arrows: true,
+  //   infinite: true,
+  //   speed: 1000,
+  //   slidesToShow: 4,
+  //   slidesToScroll: 4,
+  //   nextArrow: <Next />,
+  //   prevArrow: <Prev />,
+  // };
+  const infinite = numItems < 4 ? false : true;
   const setting = {
     arrows: true,
-    infinite: true,
+    infinite: infinite,
     speed: 1000,
+
     slidesToShow: 4,
     slidesToScroll: 4,
     nextArrow: <Next />,
